@@ -31,6 +31,9 @@ What we're working with:
 * Starting the backend:
 	-from root, rails s
 
+* Stopping the back end
+	-ctrl + c	
+
 * Test out the API from Postman:
 	-Post to database: 	POST localhost:3000/api/records?utf8=%E2%9C%93&type=url&inputfile=&q=https://www.yahoo.com/tv/kevin-meaney-veteran-stand-comic-dies-60-025911832.html&commit=An alyze" for 54.244.95.60 at 2016-10-20 22:20:32 +0000
 		-modify the input with type= text or url (whichever you want) after &q just paste in either a url or a text body
