@@ -9,7 +9,7 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
 require "action_cable/engine"
-require_relative "../vendor/alchemyapi_ruby/alchemyapi"
+require_relative "../lib/alchemyapi_ruby/alchemyapi"
 
 # require "sprockets/railtie"
 # require "rails/test_unit/railtie"
