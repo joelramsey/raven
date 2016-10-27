@@ -6,6 +6,15 @@
   <a routerLink="projects" routerLinkActive="active">PROJECTS</a>
 
   <span class="wide-nav"></span>
+  <button md-icon-button [md-menu-trigger-for]="menu">
+    <md-icon>more_vert</md-icon>
+  </button>
+
+  <md-menu #menu="mdMenu" x-position="before">
+    <button md-menu-item> Refresh </button>
+    <button md-menu-item> Help </button>
+    <button md-menu-item disabled> Sign Out </button>
+  </md-menu>
 
 </md-toolbar>
 

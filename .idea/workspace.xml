@@ -4,15 +4,7 @@
     <list default="true" id="c7f32926-a226-413e-b59b-ea3e670580ea" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/app/app.component.html" afterPath="$PROJECT_DIR$/ui/src/app/app.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/app/app.component.scss" afterPath="$PROJECT_DIR$/ui/src/app/app.component.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/app/project/project.component.html" afterPath="$PROJECT_DIR$/ui/src/app/project/project.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/app/shared/models/source.interface.ts" afterPath="$PROJECT_DIR$/ui/src/app/shared/models/source.interface.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/app/shared/source-pill/source-pill.component.html" afterPath="$PROJECT_DIR$/ui/src/app/shared/source-pill/source-pill.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/app/shared/source-pill/source-pill.component.scss" afterPath="$PROJECT_DIR$/ui/src/app/shared/source-pill/source-pill.component.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/app/shared/source-pill/source-pill.component.ts" afterPath="$PROJECT_DIR$/ui/src/app/shared/source-pill/source-pill.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/app/shared/sources-list/sources-list.component.html" afterPath="$PROJECT_DIR$/ui/src/app/shared/sources-list/sources-list.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/app/shared/sources-list/sources-list.component.scss" afterPath="$PROJECT_DIR$/ui/src/app/shared/sources-list/sources-list.component.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/app/shared/sources-list/sources-list.component.ts" afterPath="$PROJECT_DIR$/ui/src/app/shared/sources-list/sources-list.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/app/app.component.ts" afterPath="$PROJECT_DIR$/ui/src/app/app.component.ts" />
     </list>
     <ignored path="raven.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,11 +26,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="app.component.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ui/src/app/app.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="sources-list.component.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ui/src/app/shared/sources-list/sources-list.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+            <state relative-caret-position="252">
+              <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
               <folding>
                 <element signature="e#0#101#0" expanded="true" />
               </folding>
@@ -46,34 +48,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sources-list.component.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ui/src/app/shared/sources-list/sources-list.component.html">
+      <file leaf-file-name="app.component.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ui/src/app/app.component.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+            <state relative-caret-position="304">
+              <caret line="47" column="30" selection-start-line="47" selection-start-column="30" selection-end-line="47" selection-end-column="30" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="source-pill.component.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ui/src/app/shared/source-pill/source-pill.component.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="47" selection-start-line="0" selection-start-column="47" selection-end-line="0" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="source-pill.component.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ui/src/app/shared/source-pill/source-pill.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#79#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -114,19 +94,21 @@
         <option value="$PROJECT_DIR$/ui/src/app/shared/source-pill/source-pill.interface.ts" />
         <option value="$PROJECT_DIR$/ui/src/app/project/project.module.ts" />
         <option value="$PROJECT_DIR$/ui/src/app/shared/sources-list/sources-list.module.ts" />
-        <option value="$PROJECT_DIR$/ui/src/app/shared/shared.module.ts" />
-        <option value="$PROJECT_DIR$/ui/src/app/app.module.ts" />
         <option value="$PROJECT_DIR$/ui/src/app/project/project.component.html" />
         <option value="$PROJECT_DIR$/ui/src/app/shared/sources-list/sources-list.component.scss" />
         <option value="$PROJECT_DIR$/ui/src/app/project/project.component.scss" />
-        <option value="$PROJECT_DIR$/ui/src/app/app.component.html" />
-        <option value="$PROJECT_DIR$/ui/src/app/app.component.scss" />
         <option value="$PROJECT_DIR$/ui/src/app/shared/source-pill/source-pill.component.scss" />
         <option value="$PROJECT_DIR$/ui/src/app/shared/models/source.interface.ts" />
         <option value="$PROJECT_DIR$/ui/src/app/shared/sources-list/sources-list.component.ts" />
         <option value="$PROJECT_DIR$/ui/src/app/shared/sources-list/sources-list.component.html" />
         <option value="$PROJECT_DIR$/ui/src/app/shared/source-pill/source-pill.component.ts" />
         <option value="$PROJECT_DIR$/ui/src/app/shared/source-pill/source-pill.component.html" />
+        <option value="$PROJECT_DIR$/ui/src/app/shared/settings-menu/settings-menu.component.scss" />
+        <option value="$PROJECT_DIR$/ui/src/app/app.component.ts" />
+        <option value="$PROJECT_DIR$/ui/src/app/app.component.scss" />
+        <option value="$PROJECT_DIR$/ui/src/app/shared/shared.module.ts" />
+        <option value="$PROJECT_DIR$/ui/src/app/app.module.ts" />
+        <option value="$PROJECT_DIR$/ui/src/app/app.component.html" />
       </list>
     </option>
   </component>
@@ -955,12 +937,12 @@
       <workItem from="1477515734514" duration="4721000" />
       <workItem from="1477520524717" duration="1893000" />
       <workItem from="1477588015495" duration="6000" />
-      <workItem from="1477589784234" duration="6596000" />
+      <workItem from="1477589784234" duration="9423000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13216000" />
+    <option name="totallyTimeSpent" value="16043000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
@@ -974,7 +956,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32821918" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2612903" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25913978" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45483872" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
@@ -1223,32 +1205,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ui/src/app/app.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="30" column="21" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ui/src/app/shared/shared.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ui/src/app/shared/sources-list/sources-list.component.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="13" column="2" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ui/src/app/app.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1265,14 +1225,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ui/src/app/app.component.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="52" column="8" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="8" />
           <folding />
         </state>
       </provider>
@@ -1301,16 +1253,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ui/src/app/shared/sources-list/sources-list.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#101#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ui/src/app/shared/source-pill/source-pill.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -1321,18 +1263,86 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ui/src/app/shared/sources-list/sources-list.component.html">
+    <entry file="file://$PROJECT_DIR$/ui/src/app/shared/source-pill/source-pill.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+        <state relative-caret-position="54">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ui/src/app/shared/source-pill/source-pill.component.html">
+    <entry file="file://$PROJECT_DIR$/ui/src/app/shared/sources-list/sources-list.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/src/app/shared/settings-menu/settings-menu.component.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="47" selection-start-line="0" selection-start-column="47" selection-end-line="0" selection-end-column="47" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/src/app/shared/shared.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/src/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="22" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/src/app/shared/settings-menu/settings-menu.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/src/app/app.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/src/app/shared/sources-list/sources-list.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#101#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/src/app/app.component.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="47" column="30" selection-start-line="47" selection-start-column="30" selection-end-line="47" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/src/app/app.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
           <folding />
         </state>
       </provider>
