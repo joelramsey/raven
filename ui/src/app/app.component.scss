@@ -54,10 +54,18 @@ md-toolbar {
     }
 }
 
-.wide-nav {
-    flex: 1 1 auto;
+div {
+    &.router-outlet-wrapper {
+        margin-top: 15px;
+    }
 }
 
-.toolbar-title {
-    margin: 0 15px 0 10px;
+span {
+    &.wide-nav {
+        flex: 1 1 auto;
+    }
+
+    &.toolbar-title {
+        margin: 0 15px 0 10px;
+    }
 }

@@ -9,6 +9,8 @@ div {
 
   &.pill-wrapper {
     margin: 5px;
+    max-width: 120px;
+    display: inline-block
   }
 }
 
