@@ -1,0 +1,19 @@
+:host {
+  width: 100%;
+}
+
+div {
+  &.sources-container {
+    width: 100%;
+  }
+
+  &.pill-wrapper {
+    margin: 5px;
+  }
+}
+
+md-icon {
+  &:hover {
+    cursor: pointer;
+  }
+}

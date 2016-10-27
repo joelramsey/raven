@@ -1,0 +1,10 @@
+md-card {
+  height: 20px;
+  padding: 10px;
+}
+
+md-card-subtitle {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

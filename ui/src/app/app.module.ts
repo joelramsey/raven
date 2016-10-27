@@ -12,13 +12,17 @@ import { ProjectComponent } from './project/project.component';
 import { ProjectsRoutes } from './projects/projects.routes';
 import { SourcesRoutes } from './sources/sources.routes';
 import { ProjectRoute } from './project/project.route';
+import { SourcesListComponent } from './shared/sources-list/sources-list.component';
+import { SourcePillComponent } from './shared/source-pill/source-pill.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProjectsComponent,
     SourcesComponent,
-    ProjectComponent
+    ProjectComponent,
+    SourcesListComponent,
+    SourcePillComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-sources',
+  selector: 'rvn-sources',
   templateUrl: './sources.component.html',
   styleUrls: ['./sources.component.scss']
 })
