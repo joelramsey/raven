@@ -1,0 +1,32 @@
+$file-over-color: forestgreen;
+
+md-card {
+  max-width: 600px;
+}
+
+span {
+
+  &.submit-wrapper {
+
+    button {
+      margin-left: 10px;
+    }
+  }
+
+}
+
+span {
+  &.push-right {
+    flex: 1 1 auto;
+  }
+}
+
+textarea {
+  width: 100%;
+  height: 400px;
+  border: dotted 3px lightgray;
+
+  &.new-source-file-over {
+    border: dotted 3px $file-over-color;
+  }
+}

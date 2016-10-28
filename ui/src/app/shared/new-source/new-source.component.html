@@ -1,0 +1,20 @@
+<md-card>
+
+    <p class="source-prompt">
+        Use the area below to add some sources - you can copy links (each on a separate line), paste plain text, or
+        even drag files to upload them. Don't worry - we'll confirm each source with you before sending it to the
+        text analytics engine.
+    </p>
+
+    <div class="sources-wrapper" ng2FileDrop
+         (fileOver)="fileOverBase($event)"
+         [uploader]="uploader">
+
+        <textarea [(ngModel)]="rawSources" [ngClass]="{'new-source-file-over': fileOver}"></textarea>
+    </div>
+
+    <span class="submit-wrapper">
+        <button md-raised-button color="primary">Add Sources</button>
+        <button md-raised-button (click)="cancelled.emit()">Cancel</button>
+    </span>
+</md-card>

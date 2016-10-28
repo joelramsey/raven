@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
@@ -14,7 +14,8 @@ import { SourcesRoutes } from './sources/sources.routes';
 import { ProjectRoute } from './project/project.route';
 import { SourcesListComponent } from './shared/sources-list/sources-list.component';
 import { SourcePillComponent } from './shared/source-pill/source-pill.component';
-import { NewUrlSourceComponent } from './shared/new-source/index';
+import { NewSourceComponent } from './shared/new-source/index';
+import {FileDropDirective} from 'ng2-file-upload/ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -24,12 +25,12 @@ import { NewUrlSourceComponent } from './shared/new-source/index';
     ProjectComponent,
     SourcesListComponent,
     SourcePillComponent,
-    NewUrlSourceComponent
+    NewSourceComponent,
+    FileDropDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule,
     RouterModule.forRoot([
       ...ProjectRoute,
       ...ProjectsRoutes,
