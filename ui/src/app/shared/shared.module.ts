@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SourcesListComponent } from './sources-list/sources-list.component';
 import { SourcePillComponent } from './source-pill/source-pill.component';
+import { NewUrlSourceComponent } from './new-source/index';
 
 @NgModule({
   imports: [
@@ -10,11 +11,13 @@ import { SourcePillComponent } from './source-pill/source-pill.component';
   ],
   declarations: [
     SourcesListComponent,
-    SourcePillComponent
+    SourcePillComponent,
+    NewUrlSourceComponent
   ],
   exports: [
     SourcesListComponent,
-    SourcePillComponent
+    SourcePillComponent,
+    NewUrlSourceComponent
   ]
 })
 export class SharedModule { }

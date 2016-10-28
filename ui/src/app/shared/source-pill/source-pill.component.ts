@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { Source } from '../models/source.interface';
+import { Source } from '../models/index';
 
 @Component({
   selector: 'rvn-source-pill',

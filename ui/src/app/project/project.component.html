@@ -1,1 +1,7 @@
-<rvn-sources-list></rvn-sources-list>
+<rvn-sources-list [sources]="project?.sources"
+                  (addSourceClicked)="showNewSource()"></rvn-sources-list>
+
+<rvn-new-url-source
+        *ngIf="newSourceVisible"
+        (created)="addSource($event)"
+        (cancelled)="hideNewSource()"></rvn-new-url-source>

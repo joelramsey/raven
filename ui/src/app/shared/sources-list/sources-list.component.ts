@@ -1,6 +1,17 @@
-import { Component, OnInit, style, animate, state, transition, trigger, group } from '@angular/core';
-
-import { Source } from '../models/source.interface';
+import {
+  Component,
+  OnInit,
+  style,
+  animate,
+  state,
+  transition,
+  trigger,
+  group,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core';
+import { Source } from '../models/index';
 
 @Component({
   selector: 'rvn-sources-list',
@@ -37,27 +48,12 @@ import { Source } from '../models/source.interface';
 })
 export class SourcesListComponent implements OnInit {
 
-  public sources: Array<Source> = [
-    {
-      type: 'url',
-      title: 'Source 1'
-    },
-    {
-      type: 'document',
-      title: 'Intro to Differential Equations',
-      disabled: true
-    }
-  ];
-  
-  constructor() { }
+  @Input() public sources:Array<Source>;
+  @Output() public addSourceClicked:EventEmitter<any> = new EventEmitter<any>();
 
-  ngOnInit() {
+  constructor() {
   }
 
-  addSource() {
-    this.sources.push({
-      type: 'url',
-      title: 'New source'
-    });
+  ngOnInit() {
   }
 }
