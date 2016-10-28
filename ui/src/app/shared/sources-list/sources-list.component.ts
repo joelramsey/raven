@@ -11,7 +11,8 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
-import { Source } from '../models/index';
+
+import { Source, SourcePillClickEvent } from '../models/index';
 
 @Component({
   selector: 'rvn-sources-list',
@@ -49,11 +50,20 @@ import { Source } from '../models/index';
 export class SourcesListComponent implements OnInit {
 
   @Input() public sources:Array<Source>;
+  @Input() public showAdd: boolean;
   @Output() public addSourceClicked:EventEmitter<any> = new EventEmitter<any>();
+  @Output() public pillClickEventEmitter:EventEmitter<SourcePillClickEvent> = new EventEmitter<SourcePillClickEvent>();
 
   constructor() {
   }
 
   ngOnInit() {
+  }
+  
+  pillClicked($source: Source, $i: number) {
+    this.pillClickEventEmitter.emit({
+      source: $source,
+      index: $i
+    });
   }
 }

@@ -1,23 +1,23 @@
+
 $file-over-color: forestgreen;
 
 md-card {
   max-width: 600px;
 }
 
-span {
+div {
 
   &.submit-wrapper {
 
+    margin-top: 15px;
+
     button {
-      margin-left: 10px;
+      margin-right: 10px;
     }
   }
 
-}
-
-span {
-  &.push-right {
-    flex: 1 1 auto;
+  &.sources-wrapper {
+    margin-bottom: 10px;
   }
 }
 

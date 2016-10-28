@@ -1,25 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SourcesListComponent } from './sources-list/sources-list.component';
-import { SourcePillComponent } from './source-pill/source-pill.component';
-import { NewSourceComponent } from './new-source/index';
-import {FileDropDirective} from 'ng2-file-upload/ng2-file-upload';
+import { NewSourceModule } from './new-source/new-source.module';
+import { SourcesListModule } from './sources-list/sources-list.module';
+import { SourcePillModule } from './source-pill/source-pill.module';
 
 @NgModule({
   imports: [
-    CommonModule
-  ],
-  declarations: [
-    SourcesListComponent,
-    SourcePillComponent,
-    NewSourceComponent,
-    FileDropDirective
-  ],
-  exports: [
-    SourcesListComponent,
-    SourcePillComponent,
-    NewSourceComponent
+    CommonModule,
+    NewSourceModule,
+    SourcesListModule,
+    SourcePillModule
   ]
 })
 export class SharedModule { }

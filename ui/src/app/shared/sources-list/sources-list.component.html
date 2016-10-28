@@ -1,10 +1,10 @@
 <div class="sources-container">
-  <button md-mini-fab (click)="addSourceClicked.emit()">
+  <button *ngIf="showAdd" md-mini-fab (click)="addSourceClicked.emit()">
     <md-icon class="md-24">add</md-icon>
   </button>
 
-  <div *ngFor="let source of sources" class="pill-wrapper" @sourceInOut>
-    <rvn-source-pill [source]="source"></rvn-source-pill>
+  <div *ngFor="let source of sources; let i = index" class="pill-wrapper" @sourceInOut>
+    <rvn-source-pill [source]="source" (pillClickEventEmitter)="pillClicked(source, i)"></rvn-source-pill>
   </div>
 
 </div>

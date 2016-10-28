@@ -1,36 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { ProjectsComponent } from './projects/projects.component';
-import { SourcesComponent } from './sources/sources.component';
-import { ProjectComponent } from './project/project.component';
 import { ProjectsRoutes } from './projects/projects.routes';
 import { SourcesRoutes } from './sources/sources.routes';
 import { ProjectRoute } from './project/project.route';
-import { SourcesListComponent } from './shared/sources-list/sources-list.component';
-import { SourcePillComponent } from './shared/source-pill/source-pill.component';
-import { NewSourceComponent } from './shared/new-source/index';
-import {FileDropDirective} from 'ng2-file-upload/ng2-file-upload';
+import { ProjectModule } from './project/project.module';
+import { SourcesModule } from './sources/sources.module';
+import { ProjectsModule } from './projects/projects.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ProjectsComponent,
-    SourcesComponent,
-    ProjectComponent,
-    SourcesListComponent,
-    SourcePillComponent,
-    NewSourceComponent,
-    FileDropDirective
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    MaterialModule.forRoot(),
     RouterModule.forRoot([
       ...ProjectRoute,
       ...ProjectsRoutes,
@@ -42,7 +31,9 @@ import {FileDropDirective} from 'ng2-file-upload/ng2-file-upload';
       },
     ]),
     HttpModule,
-    MaterialModule.forRoot()
+    ProjectModule,
+    ProjectsModule,
+    SourcesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 export interface Source {
   type: string;
   title: string;
-  content: string;
+  content: any;
   disabled?: boolean;
 }

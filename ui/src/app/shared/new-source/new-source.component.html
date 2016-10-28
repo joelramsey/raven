@@ -10,11 +10,27 @@
          (fileOver)="fileOverBase($event)"
          [uploader]="uploader">
 
-        <textarea [(ngModel)]="rawSources" [ngClass]="{'new-source-file-over': fileOver}"></textarea>
+        <textarea [formControl]="rawSourcesControl"
+                  [ngClass]="{'new-source-file-over': fileOver}"></textarea>
     </div>
 
-    <span class="submit-wrapper">
+    <h2>Files</h2>
+    <span *ngIf="!fileSources.length">(empty)</span>
+    <rvn-sources-list [sources]="fileSources"
+                      (pillClickEventEmitter)="removeFile($event)"></rvn-sources-list>
+
+    <h2>Links</h2>
+    <span *ngIf="!linkSources.length">(empty)</span>
+    <rvn-sources-list [sources]="linkSources"
+                      (pillClickEventEmitter)="removeLink($event)"></rvn-sources-list>
+
+    <h2>Plain Text</h2>
+    <span *ngIf="!textSources.length">(empty)</span>
+    <rvn-sources-list [sources]="textSources"
+                      (pillClickEventEmitter)="removeText($event)"></rvn-sources-list>
+
+    <div class="submit-wrapper">
         <button md-raised-button color="primary">Add Sources</button>
         <button md-raised-button (click)="cancelled.emit()">Cancel</button>
-    </span>
+    </div>
 </md-card>
