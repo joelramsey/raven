@@ -5,19 +5,9 @@ md-card {
   max-width: 600px;
 }
 
-div {
-
-  &.submit-wrapper {
-
-    margin-top: 15px;
-
-    button {
-      margin-right: 10px;
-    }
-  }
-
-  &.sources-wrapper {
-    margin-bottom: 10px;
+md-card-actions {
+  button {
+    margin-left: 10px;
   }
 }
 

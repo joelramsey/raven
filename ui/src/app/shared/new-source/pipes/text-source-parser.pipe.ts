@@ -28,20 +28,18 @@ export class TextSourceParserPipe implements PipeTransform {
     
     // Edge case (text at beginning)
     //
-    if (!linkLines.length) {
+    if (!linkLines.length && value.length) {
       
       // Get either entire document, or until the first URL
       //
       let content = lines.slice(0, lines.length);
-      
-      textSources.push({
-        title: content[0],
-        type: 'text',
-        content: content.join('\n')
-      });
+
+      // Create if applicable
+      //
+      this._createTextSource(content, textSources);
     }
 
-    // Handle main cases (e.g., URL at beginning or end
+    // Handle main cases (e.g., URL at beginning or end)
     //
     linkLines.reduce((previousIndex:number, currentIndex:number) => {
       
@@ -49,14 +47,12 @@ export class TextSourceParserPipe implements PipeTransform {
         
         let content = lines.slice(
           previousIndex === 0 ? 0 : previousIndex + 1,
-          previousIndex === 0 ? currentIndex + 1 : currentIndex
+          currentIndex
         );
-        
-        textSources.push({
-          title: content[0],
-          type: 'text',
-          content: content.join('\n')
-        });
+   
+        // Create if applicable
+        //
+        this._createTextSource(content, textSources);
       }
       
       linkSources.push({
@@ -72,15 +68,13 @@ export class TextSourceParserPipe implements PipeTransform {
     //
     if (linkLines.length && linkLines[linkLines.length - 1] < lines.length - 1) {
 
-      // Get either entire document, or until the first URL
+      // Get last bit of document
       //
       let content = lines.slice(linkLines[linkLines.length - 1] + 1, lines.length);
 
-      textSources.push({
-        title: content[0],
-        type: 'text',
-        content: content.join('\n')
-      });
+      // Create if applicable
+      //
+      this._createTextSource(content, textSources);
     }
     
     return {
@@ -107,5 +101,32 @@ export class TextSourceParserPipe implements PipeTransform {
     domain = domain.split(':')[0];
 
     return domain;
+  }
+  
+  private _createTextSource(content: Array<string>, textSources: Array<Source>) {
+    
+    // Check if we have content
+    //
+    let text:string = content.join('\n').trim();
+
+    if (text.length > 0) {
+
+      let title: string;
+
+      content.some((line: string) => {
+        if (line.trim() === '') {
+          return false;
+        }
+
+        title = line;
+        return true;
+      });
+
+      textSources.push({
+        title: title,
+        type: 'text',
+        content: text
+      });
+    }
   }
 }

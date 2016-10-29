@@ -1,12 +1,13 @@
 <md-card>
+  <md-card-content>
 
-    <p class="source-prompt">
-        Use the area below to add some sources - you can copy links (each on a separate line), paste plain text, or
-        even drag files to upload them. Don't worry - we'll confirm each source with you before sending it to the
-        text analytics engine.
+    <p>
+      Use the area below to add some sources - you can copy links (each on a separate line), paste plain text, or
+      even drag files to upload them. Don't worry - we'll confirm each source with you before sending it to the
+      text analytics engine.
     </p>
 
-    <div class="sources-wrapper" ng2FileDrop
+    <div ng2FileDrop
          (fileOver)="fileOverBase($event)"
          [uploader]="uploader">
 
@@ -28,9 +29,10 @@
     <span *ngIf="!textSources.length">(empty)</span>
     <rvn-sources-list [sources]="textSources"
                       (pillClickEventEmitter)="removeText($event)"></rvn-sources-list>
+  </md-card-content>
 
-    <div class="submit-wrapper">
-        <button md-raised-button color="primary">Add Sources</button>
-        <button md-raised-button (click)="cancelled.emit()">Cancel</button>
-    </div>
+  <md-card-actions align="end">
+    <button md-button color="primary">Add Sources</button>
+    <button md-button (click)="cancelled.emit()">Cancel</button>
+  </md-card-actions>
 </md-card>
