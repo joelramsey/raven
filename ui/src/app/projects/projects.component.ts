@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectDaoService } from '../shared/services/index';
+import { Project } from '../shared/models/index';
 
 @Component({
   selector: 'rvn-projects',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectsComponent implements OnInit {
 
-  constructor() { }
+  public projects: Array<Project> = [];
+  
+  constructor(private _projectDaoService: ProjectDaoService) { }
 
   ngOnInit() {
+    this._projectDaoService.getProjects().subscribe((projects: Array<Project>) => {
+      this.projects = projects;
+    });
   }
-
 }

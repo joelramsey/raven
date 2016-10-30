@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MdCardModule } from '@angular/material';
 
 import { ProjectsComponent } from './projects.component';
+import { ProjectCardComponent } from './project-card/project-card.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    MdCardModule
   ],
   declarations: [
-    ProjectsComponent
+    ProjectsComponent,
+    ProjectCardComponent
   ],
   exports: [
     ProjectsComponent

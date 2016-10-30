@@ -1,11 +1,14 @@
 <md-toolbar [color]="primary">
   <span class="toolbar-title">RAVEN</span>
 
-  <a routerLink="project" routerLinkActive="active">{{project}}</a>
+  <a *ngFor="let project of projects"
+     [routerLink]="['project', project.id]"
+     routerLinkActive="active">{{project.name}}</a>
+
+  <span class="wide-nav"></span>
   <a routerLink="sources" routerLinkActive="active">SOURCES</a>
   <a routerLink="projects" routerLinkActive="active">PROJECTS</a>
 
-  <span class="wide-nav"></span>
   <button md-icon-button [md-menu-trigger-for]="menu">
     <md-icon>more_vert</md-icon>
   </button>

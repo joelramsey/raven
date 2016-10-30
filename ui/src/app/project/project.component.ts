@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Project, Source } from '../shared/models/index';
+import { ProjectDaoService } from '../shared/services/index';
 
 @Component({
   selector: 'rvn-project',
@@ -9,31 +11,30 @@ import { Project, Source } from '../shared/models/index';
 export class ProjectComponent implements OnInit {
 
   /**
-   * Current project.
+   * Current project. Initializes to empty.
    */
-  @Input() project:Project;
+  project:Project = {
+    id: null,
+    name: 'New Project',
+    description: 'This is a default project template.',
+    sources: []
+  };
 
   newSourceVisible: boolean;
 
-  constructor() {
-    this.project = {
-      sources: [
-        {
-          type: 'url',
-          title: 'Source 1',
-          content: ''
-        },
-        {
-          type: 'document',
-          title: 'Intro to Differential Equations',
-          content: '',
-          disabled: true
-        }
-      ]
-    }
+  constructor(private _activatedRoute: ActivatedRoute, private _projectDaoService: ProjectDaoService) {
   }
 
   ngOnInit() {
+    this._activatedRoute.params.forEach((params: Params) => {
+     
+      // Get project from service, if it exists.
+      //
+      if (params['id']) {
+        let id = +params['id'];
+        this._projectDaoService.getProject(id).subscribe(project => this.project = project);
+      }
+    });
   }
   
   showNewSource() {

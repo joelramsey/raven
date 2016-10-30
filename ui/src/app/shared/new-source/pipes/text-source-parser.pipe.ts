@@ -63,6 +63,7 @@ export class TextSourceParserPipe implements PipeTransform {
       }
       
       linkSources.push({
+        id: null,
         type: 'url',
         content: lines[currentIndex],
         title: this._extractDomain(lines[currentIndex])
@@ -130,6 +131,7 @@ export class TextSourceParserPipe implements PipeTransform {
       });
 
       textSources.push({
+        id: null,
         title: title,
         type: 'text',
         content: text

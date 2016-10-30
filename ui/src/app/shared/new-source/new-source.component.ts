@@ -3,8 +3,9 @@ import { FormControl } from '@angular/forms';
 import { FileUploader, ParsedResponseHeaders } from 'ng2-file-upload/ng2-file-upload';
 import 'rxjs/add/operator/debounceTime';
 
-import { Source, SourcePillClickEvent, SourceUploadState, Project } from '../models/index';
 import { TextSourceParserPipe } from './pipes/text-source-parser.pipe';
+import { Source, SourcePillClickEvent, SourceUploadState, Project } from '../models/index';
+import { SourceDaoService } from '../services/source-dao.service';
 
 const URL:string = '/api/fribble';
 
@@ -45,6 +46,7 @@ export class NewSourceComponent implements OnInit {
   public fileOver:boolean = false;
   public rawSourcesControl:FormControl = new FormControl();
   public state: SourceUploadState = this.UPLOAD_STATES.NEW;
+  public sourceUploadProgress: number = 0;
 
   // Sources
   //
@@ -53,7 +55,9 @@ export class NewSourceComponent implements OnInit {
 
   private _cachedFileObjects:Array<Source> = [];
 
-  constructor(private _textSourceParserService:TextSourceParserPipe, private _renderer: Renderer) {
+  constructor(private _textSourceParserService:TextSourceParserPipe,
+              private _renderer: Renderer,
+              private _sourceDaoService: SourceDaoService) {
   }
 
   ngOnInit() {
@@ -96,8 +100,48 @@ export class NewSourceComponent implements OnInit {
   addTextAndUrlSources() {
     this.state = this.UPLOAD_STATES.ADDING_SOURCES;
     
-    // TODO: Next commit: Add service call to upload sources.
+    let totalLength = this.linkSources.length + this.textSources.length;
+   
+    this._sourceDaoService.createSources(this.textSources.concat(this.linkSources), this.project)
+      .subscribe((source: Source) => {
+        this.incrementSourceUploadProgress(source, totalLength);
+      }, (source: Source) => {
+        this.incrementSourceUploadProgress(source, totalLength);
+      });
+  }
+
+  /**
+   * This function serves two purposes; the first is to update the source
+   * upload progress. In addition to that, it pops sources off the list
+   * which have been uploaded. Upon completion, it clears out and re-enables
+   * the raw text textarea.
+   * 
+   * @param source
+   * @param totalLength
+   */
+  incrementSourceUploadProgress(source: Source, totalLength: number) {
+
+    let completed = this.sourceUploadProgress / 100 * totalLength + 1;
+    let linkSourceIdx = this.linkSources.indexOf(source);
+    let textSourceIdx = this.textSources.indexOf(source);
+   
+    // Remove from current set
     //
+    if (textSourceIdx > -1) {
+      this.textSources.splice(textSourceIdx, 1);
+    } else if (linkSourceIdx > -1) {
+      this.linkSources.splice(linkSourceIdx, 1);
+    }
+   
+    if (completed === totalLength) {
+      this.state = this.UPLOAD_STATES.DONE;
+
+      this.rawSourcesControl.setValue('');
+      this.rawSourcesControl.enable();
+      this.done.emit(true);
+    } else {
+      this.sourceUploadProgress = completed / totalLength * 100;
+    }
   }
 
   /**
@@ -135,6 +179,7 @@ export class NewSourceComponent implements OnInit {
     if (this.uploader.queue.length !== this._cachedFileObjects.length) {
       this._cachedFileObjects = this.uploader.queue.reduce((sources:Array<Source>, fileObject:any) => {
         sources.push({
+          id: null,
           type: 'file',
           title: fileObject.file.name,
           content: fileObject

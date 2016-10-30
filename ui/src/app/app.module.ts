@@ -1,17 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
-import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { ProjectsRoutes } from './projects/projects.routes';
-import { SourcesRoutes } from './sources/sources.routes';
-import { ProjectRoute } from './project/project.route';
 import { ProjectModule } from './project/project.module';
 import { SourcesModule } from './sources/sources.module';
 import { ProjectsModule } from './projects/projects.module';
+import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,22 +17,13 @@ import { ProjectsModule } from './projects/projects.module';
   imports: [
     BrowserModule,
     MaterialModule.forRoot(),
-    RouterModule.forRoot([
-      ...ProjectRoute,
-      ...ProjectsRoutes,
-      ...SourcesRoutes,
-      {
-        path: '',
-        redirectTo: '/project',
-        pathMatch: 'full'
-      },
-    ]),
     HttpModule,
+    AppRoutingModule,
     ProjectModule,
     ProjectsModule,
-    SourcesModule
+    SourcesModule,
+    SharedModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

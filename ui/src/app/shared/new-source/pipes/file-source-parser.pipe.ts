@@ -16,6 +16,7 @@ export class FileSourceParserPipe implements PipeTransform {
     return args.reduce((sources: Array<Source>, file: any) => {
       debugger;
       sources.push({
+        id: null,
         type: 'file',
         title: file.alias,
         content: file

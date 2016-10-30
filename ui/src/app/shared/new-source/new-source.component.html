@@ -3,8 +3,8 @@
 
     <p>
       Use the area below to add some sources - you can copy links (each on a separate line), paste plain text, or
-      even drag files to upload them. Don't worry - we'll confirm each source with you before sending it to the
-      text analytics engine.
+      even drag files to upload them. Don't worry - you can see what sources you'll be uploading below before we deduct
+      credits from your balance.
     </p>
 
     <div ng2FileDrop
@@ -55,6 +55,10 @@
       <md-progress-bar *ngSwitchCase="UPLOAD_STATES.ADDING_SOURCES"
                        mode="determinate"
                        value="sourceUploadProgress"></md-progress-bar>
+
+      <md-progress-bar *ngSwitchCase="UPLOAD_STATES.DONE"
+                       mode="determinate"
+                       value="100"></md-progress-bar>
     </div>
   </md-card-content>
 

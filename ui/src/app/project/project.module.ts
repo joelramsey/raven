@@ -8,10 +8,7 @@ import { SourcesListModule } from '../shared/sources-list/sources-list.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    SharedModule,
-    NewSourceModule,
-    SourcesListModule
+    SharedModule
   ],
   declarations: [
     ProjectComponent
