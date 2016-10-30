@@ -11,6 +11,13 @@ export class TextSourceParserPipe implements PipeTransform {
 
 
   transform(value:string, args?:any):{ linkSources: Array<Source>, textSources: Array<Source> } {
+   
+    if (!value || !value.length) {
+      return {
+        linkSources: [],
+        textSources: []
+      };
+    }
     
     let lines:Array<string> = value.split('\n');
     let linkLines:Array<number> = [];

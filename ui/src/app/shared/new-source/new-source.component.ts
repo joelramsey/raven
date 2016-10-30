@@ -1,12 +1,13 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { FileUploader, ParsedResponseHeaders } from 'ng2-file-upload/ng2-file-upload';
 import 'rxjs/add/operator/debounceTime';
 
-import { Source, SourcePillClickEvent } from '../models/index';
+import { Source, SourcePillClickEvent, SourceUploadState, Project } from '../models/index';
 import { TextSourceParserPipe } from './pipes/text-source-parser.pipe';
 
 const URL:string = '/api/fribble';
+
 
 @Component({
   selector: 'rvn-new-source',
@@ -15,13 +16,35 @@ const URL:string = '/api/fribble';
 })
 export class NewSourceComponent implements OnInit {
 
+  @Input() public project:Project;
   @Output() public created:EventEmitter<Source> = new EventEmitter<Source>();
   @Output() public done:EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() public cancelled:EventEmitter<any> = new EventEmitter<any>();
+  @ViewChild('fileInput') fileInput: ElementRef;
+  
+  public UPLOAD_STATES = {
+    NEW: {
+      key: 'new',
+      message: ''
+    },
+    UPLOADING_FILES: {
+      key: 'uploadingFiles',
+      message: 'Uploading files...'
+    },
+    ADDING_SOURCES: {
+      key: 'addingSources',
+      message: 'Adding sources...'
+    },
+    DONE: {
+      key: 'done',
+      message: 'Done!'
+    }
+  };
 
   public uploader:FileUploader = new FileUploader({url: URL});
   public fileOver:boolean = false;
   public rawSourcesControl:FormControl = new FormControl();
+  public state: SourceUploadState = this.UPLOAD_STATES.NEW;
 
   // Sources
   //
@@ -30,7 +53,7 @@ export class NewSourceComponent implements OnInit {
 
   private _cachedFileObjects:Array<Source> = [];
 
-  constructor(private _textSourceParserService:TextSourceParserPipe) {
+  constructor(private _textSourceParserService:TextSourceParserPipe, private _renderer: Renderer) {
   }
 
   ngOnInit() {
@@ -42,9 +65,60 @@ export class NewSourceComponent implements OnInit {
         
         this.textSources = parsedSources.textSources;
         this.linkSources = parsedSources.linkSources;
-        
-        console.log(this.textSources);
       });
+    
+    this.uploader.onCompleteAll = this.addTextAndUrlSources.bind(this);
+    this.uploader.onErrorItem = this.fileUploadFailed.bind(this);
+  }
+
+  /**
+   * Adds sources. Triggers file upload, which passes control to #{@link addTextAndUrlSources}
+   * upon completion of file upload. If there are no files to upload, it calls #{@link addTextAndUrlSources}
+   * immediately.
+   */
+  addSources() {
+    this.rawSourcesControl.disable();
+   
+    // Upload if applicable; otherwise proceed straight
+    // to source upload.
+    //
+    if (this.uploader.queue.length) {
+      this.state = this.UPLOAD_STATES.UPLOADING_FILES;
+      this.uploader.uploadAll();
+    } else {
+      this.addTextAndUrlSources();
+    }
+  }
+
+  /**
+   * Adds
+   */
+  addTextAndUrlSources() {
+    this.state = this.UPLOAD_STATES.ADDING_SOURCES;
+    
+    // TODO: Next commit: Add service call to upload sources.
+    //
+  }
+
+  /**
+   * Cancels any in-progress uploads.
+   */
+  cancel() {
+    this.uploader.clearQueue();
+    this.cancelled.emit();
+  }
+
+  /**
+   * Handles file upload failure.
+   * 
+   * @param item
+   * @param response
+   * @param status
+   * @param headers
+   */
+  fileUploadFailed(item: any, response: string, status: number, headers: ParsedResponseHeaders) {
+    console.log('Failed to upload file: ');
+    console.log(item);
   }
 
   /**
@@ -72,6 +146,23 @@ export class NewSourceComponent implements OnInit {
 
     return this._cachedFileObjects;
   }
+
+  /**
+   * Returns a boolean value indicating whether any sources are ready for upload.
+   * @returns {boolean}
+   */
+  get sourcesPending():boolean {
+    return this.fileSources.length + this.textSources.length + this.linkSources.length > 0;
+  }
+
+  /**
+   * Returns a boolean value indicating whether an async process (e.g., file upload) is running.
+   * @returns {boolean}
+   */
+  get busy():boolean {
+      return (this.state !== this.UPLOAD_STATES.NEW && this.state !== this.UPLOAD_STATES.DONE);
+  }
+  
 
   /**
    * Removes a file from both the file upload queue and the cached
@@ -115,5 +206,16 @@ export class NewSourceComponent implements OnInit {
    */
   fileOverBase($event:boolean) {
     this.fileOver = $event;
+  }
+
+  /**
+   * Manually triggers a click event on the file upload input.
+   * We do this in order to mock a Material file upload button,
+   * as they aren't natively supported.
+   */
+  openFileDialog() {
+    let mouseEvent = new MouseEvent('click', { bubbles: true });
+    
+    this._renderer.invokeElementMethod(this.fileInput.nativeElement, 'dispatchEvent', [mouseEvent]);
   }
 }

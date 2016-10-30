@@ -20,3 +20,32 @@ textarea {
     border: dotted 3px $file-over-color;
   }
 }
+
+div {
+
+   &.source-list {
+
+     span {
+       display: block
+     }
+
+     h2 {
+       display: inline-block;
+     }
+
+     button {
+       float: right;
+       margin-top: 10px;
+     }
+   }
+
+  &.progress-indicator {
+    margin-top: 30px;
+  }
+}
+
+input {
+  &[type='file'] {
+    display: none;
+  }
+}

@@ -15,24 +15,58 @@
                   [ngClass]="{'new-source-file-over': fileOver}"></textarea>
     </div>
 
-    <h2>Files</h2>
-    <span *ngIf="!fileSources.length">(empty)</span>
-    <rvn-sources-list [sources]="fileSources"
-                      (pillClickEventEmitter)="removeFile($event)"></rvn-sources-list>
+    <!-- Files -->
+    <div class="source-list">
 
-    <h2>Links</h2>
-    <span *ngIf="!linkSources.length">(empty)</span>
-    <rvn-sources-list [sources]="linkSources"
-                      (pillClickEventEmitter)="removeLink($event)"></rvn-sources-list>
+      <h2>Files</h2>
+      <input #fileInput name="file" type="file" ng2FileSelect [uploader]="uploader" multiple>
+      <button md-raised-button (click)="openFileDialog()" [disabled]="busy">Choose Files</button>
 
-    <h2>Plain Text</h2>
-    <span *ngIf="!textSources.length">(empty)</span>
-    <rvn-sources-list [sources]="textSources"
-                      (pillClickEventEmitter)="removeText($event)"></rvn-sources-list>
+      <span *ngIf="!fileSources.length">(empty)</span>
+      <rvn-sources-list [sources]="fileSources"
+                        (pillClickEventEmitter)="removeFile($event)"></rvn-sources-list>
+    </div>
+
+    <!-- Links -->
+    <div class="source-list">
+
+      <h2>Links</h2>
+      <span *ngIf="!linkSources.length">(empty)</span>
+      <rvn-sources-list [sources]="linkSources"
+                        (pillClickEventEmitter)="removeLink($event)"></rvn-sources-list>
+    </div>
+
+    <!-- Sources -->
+    <div class="source-list">
+
+      <h2>Plain Text</h2>
+      <span *ngIf="!textSources.length">(empty)</span>
+      <rvn-sources-list [sources]="textSources"
+                        (pillClickEventEmitter)="removeText($event)"></rvn-sources-list>
+    </div>
+
+    <!-- Progress indicator -->
+    <div [ngSwitch]="state" class="progress-indicator">
+      {{state.message}}
+      <md-progress-bar *ngSwitchCase="UPLOAD_STATES.UPLOADING_FILES"
+                       mode="determinate"
+                       value="uploader.progress"></md-progress-bar>
+
+      <md-progress-bar *ngSwitchCase="UPLOAD_STATES.ADDING_SOURCES"
+                       mode="determinate"
+                       value="sourceUploadProgress"></md-progress-bar>
+    </div>
   </md-card-content>
 
   <md-card-actions align="end">
-    <button md-button color="primary">Add Sources</button>
-    <button md-button (click)="cancelled.emit()">Cancel</button>
+
+    <button md-button
+            color="primary"
+            (click)="addSources()"
+            [disabled]="busy || !sourcesPending">Add Sources</button>
+
+    <button md-button
+            (click)="cancel()">Cancel</button>
+
   </md-card-actions>
 </md-card>
