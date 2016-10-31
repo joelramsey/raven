@@ -17,5 +17,5 @@
 .byebug_history
 
 # Editor
-.idea/
+\.idea
 *.iml
