@@ -12,6 +12,10 @@ gem 'active_model_serializers', '~> 0.10.0'
 
 gem 'rack-cors'
 
+# both for document upload support
+gem 'carrierwave'
+gem 'jbuilder', '~> 2.0'
+
 # authentication related gems
 gem 'devise_token_auth'
 gem 'omniauth'
