@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MdCardModule } from '@angular/material';
+import { MdCardModule, MdInputModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
 
 import { ProjectsComponent } from './projects.component';
 import { ProjectCardComponent } from './project-card/project-card.component';
@@ -8,7 +9,9 @@ import { ProjectCardComponent } from './project-card/project-card.component';
 @NgModule({
   imports: [
     CommonModule,
-    MdCardModule
+    MdCardModule,
+    MdInputModule,
+    FormsModule
   ],
   declarations: [
     ProjectsComponent,

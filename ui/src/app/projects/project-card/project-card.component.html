@@ -1,20 +1,35 @@
 <md-card>
-  <md-card-title>{{project.name}}</md-card-title>
-  <md-card-subtitle>
-    <p>{{project.description}}</p>
-  </md-card-subtitle>
+    <md-card-title>
+      <span *ngIf="!editing">{{project.name}}</span>
+      <md-input *ngIf="editing"
+                required
+                name="name"
+                [(ngModel)]="project.name"
+                placeholder="Project Name"></md-input>
 
-  <md-card-actions align="end">
-    <button *ngIf="canEdit && editing" md-button
-            (click)="save()">Save</button>
+    </md-card-title>
+    <md-card-subtitle>
+      <p *ngIf="!editing">{{project.description}}</p>
+      <md-input *ngIf="editing"
+                name="name"
+                [(ngModel)]="project.description"
+                placeholder="Description"></md-input>
 
-    <button *ngIf="canEdit && editing" md-button
-            (click)="cancel()">Cancel</button>
+    </md-card-subtitle>
 
-    <button *ngIf="canEdit && !editing" md-button
-            (click)="edit()">Edit</button>
+    <md-card-actions align="end">
+      <button *ngIf="canEdit && editing" md-button
+              color="primary"
+              (click)="save()" type="submit">Save</button>
 
-    <button *ngIf="canDelete" md-button
-            (click)="destroy()">Delete</button>
-  </md-card-actions>
+      <button *ngIf="canEdit && editing" md-button
+              (click)="cancel()" type="button">Cancel</button>
+
+      <button *ngIf="canEdit && !editing" md-button
+              color="primary"
+              (click)="edit()" type="button">Edit</button>
+
+      <button *ngIf="canDelete && !editing" md-button
+              (click)="destroy()" type="button">Delete</button>
+    </md-card-actions>
 </md-card>
