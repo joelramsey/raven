@@ -2,9 +2,14 @@
                   [showAdd]="true"
                   (addSourceClicked)="showNewSource()"></rvn-sources-list>
 
+<div class="project-view-wrapper">
+    <rvn-project-view [project]="project"></rvn-project-view>
+</div>
+
 <rvn-new-source
         *ngIf="newSourceVisible"
         [project]="project"
         (created)="addSource($event)"
         (done)="hideNewSource()"
         (cancelled)="hideNewSource()"></rvn-new-source>
+

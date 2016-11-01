@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MdCardModule, MdInputModule } from '@angular/material';
+import { MdCardModule, MdInputModule, MdButtonModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
 import { ProjectsComponent } from './projects.component';
@@ -10,6 +10,7 @@ import { ProjectCardComponent } from './project-card/project-card.component';
   imports: [
     CommonModule,
     MdCardModule,
+    MdButtonModule,
     MdInputModule,
     FormsModule
   ],

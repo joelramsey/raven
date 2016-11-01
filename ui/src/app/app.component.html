@@ -1,26 +1,67 @@
-<md-toolbar [color]="primary">
-  <span class="toolbar-title">RAVEN</span>
+<md-sidenav-layout>
+    <div class="project-open-area" (mouseover)="start.open()"></div>
 
-  <a *ngFor="let project of projects"
-     [routerLink]="['project', project.id]"
-     routerLinkActive="active">{{project.name}}</a>
+    <md-sidenav #start (mouseleave)="start.close()">
+        <div class="md-nav-wrapper">
 
-  <span class="wide-nav"></span>
-  <a routerLink="sources" routerLinkActive="active">SOURCES</a>
-  <a routerLink="projects" routerLinkActive="active">PROJECTS</a>
+            <div class="md-nav-item navbar-title sm-show">
+                <span>RAVEN</span>
+            </div>
 
-  <button md-icon-button [md-menu-trigger-for]="menu">
-    <md-icon>more_vert</md-icon>
-  </button>
+            <div class="md-nav-item sm-show">
+                <a class="lg-link"
+                   (click)="start.close()"
+                   routerLink="sources"
+                   routerLinkActive="active">SOURCES</a>
+            </div>
 
-  <md-menu #menu="mdMenu" x-position="before">
-    <button md-menu-item> Refresh </button>
-    <button md-menu-item> Help </button>
-    <button md-menu-item disabled> Sign Out </button>
-  </md-menu>
+            <div class="md-nav-item sm-show">
+                <a class="lg-link"
+                   (click)="start.close()"
+                   routerLink="projects"
+                   routerLinkActive="active">PROJECTS</a>
+            </div>
 
-</md-toolbar>
+            <div class="md-nav-item navbar-title">
+                <span>RECENT</span>
+            </div>
 
-<div class="router-outlet-wrapper">
-  <router-outlet></router-outlet>
-</div>
+            <div *ngFor="let project of projects" class="md-nav-item">
+                <a [routerLink]="['project', project.id]"
+                   (click)="start.close()"
+                   routerLinkActive="active">{{project.name}}</a>
+            </div>
+        </div>
+
+    </md-sidenav>
+
+    <md-toolbar [color]="primary">
+
+        <button md-icon-button (click)="start.open()">
+            <md-icon>menu</md-icon>
+        </button>
+
+        <span class="toolbar-title">RAVEN</span>
+
+        <span class="wide-nav"></span>
+
+        <a class="lg-show" routerLink="sources" routerLinkActive="active">SOURCES</a>
+        <a class="lg-show" routerLink="projects" routerLinkActive="active">PROJECTS</a>
+
+        <button md-icon-button [md-menu-trigger-for]="menu">
+            <md-icon>more_vert</md-icon>
+        </button>
+
+        <md-menu #menu="mdMenu" x-position="before">
+            <button md-menu-item> Refresh</button>
+            <button md-menu-item> Help</button>
+            <button md-menu-item disabled> Sign Out</button>
+        </md-menu>
+
+    </md-toolbar>
+
+    <div class="router-outlet-wrapper">
+        <router-outlet></router-outlet>
+    </div>
+
+</md-sidenav-layout>

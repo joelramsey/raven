@@ -1,7 +1,9 @@
-md-card {
-  width: 100%;
-  max-width: 350px;
-  min-width: 100px;
-  margin: 0 10px 10px;
-  display: inline-block;
+div {
+  &.project-card-wrapper {
+    width: 100%;
+    max-width: 350px;
+    min-width: 100px;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
 }
