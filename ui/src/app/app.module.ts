@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
+import { SimpleNotificationsModule } from 'angular2-notifications/components';
 
 import { AppComponent } from './app.component';
 import { ProjectModule } from './project/project.module';
@@ -18,6 +19,7 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     MaterialModule.forRoot(),
     HttpModule,
+    SimpleNotificationsModule,
     AppRoutingModule,
     ProjectModule,
     ProjectsModule,

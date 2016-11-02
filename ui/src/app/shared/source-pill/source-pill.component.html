@@ -1,3 +1,3 @@
 <md-card (click)="pillClicked()" [md-tooltip]="source?.title" tooltip-position="below">
-    <md-card-subtitle>{{source?.title}}</md-card-subtitle>
+    <md-card-subtitle><md-icon *ngIf="showIcon">{{sourceIcon}}</md-icon>{{source?.title}}</md-card-subtitle>
 </md-card>

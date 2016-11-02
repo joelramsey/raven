@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { NewSourceModule } from './new-source/new-source.module';
 import { SourcesListModule } from './sources-list/sources-list.module';
 import { SourcePillModule } from './source-pill/source-pill.module';
-import { ProjectDaoService, SourceDaoService } from './services/index';
+import { ProjectDaoService, SourceDaoService, ObservableResultHandlerService } from './services/index';
 
 @NgModule({
   imports: [
@@ -21,7 +21,8 @@ import { ProjectDaoService, SourceDaoService } from './services/index';
   ],
   providers: [
     ProjectDaoService,
-    SourceDaoService
+    SourceDaoService,
+    ObservableResultHandlerService
   ]
 })
 export class SharedModule { }

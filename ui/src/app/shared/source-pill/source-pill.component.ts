@@ -11,6 +11,7 @@ import { MdTooltip } from '@angular/material';
 export class SourcePillComponent {
 
   @Input() source:Source;
+  @Input() showIcon:boolean;
   @Output() pillClickEventEmitter: EventEmitter<Source> = new EventEmitter<Source>();
   @ViewChild(MdTooltip) tooltip:MdTooltip;
   
@@ -24,5 +25,26 @@ export class SourcePillComponent {
       //
       this.tooltip.hide();
     }
+  }
+  
+  get sourceIcon() {
+    
+    let icon = '';
+    
+    switch (this.source.type) {
+      case 'file':
+        icon = 'insert_drive_file';
+        break;
+      case 'url':
+        icon = 'link';
+        break;
+      case 'text':
+        icon = 'text_fields';
+        break;
+      default:
+        icon = '';
+    }
+    
+    return icon;
   }
 }

@@ -18,4 +18,12 @@ export class ProjectsComponent implements OnInit {
       this.projects = projects;
     });
   }
+  
+  removeProject(project: Project) {
+    let projectIdx = this.projects.indexOf(project);
+    
+    if (projectIdx > -1) {
+      this.projects.splice(projectIdx, 1);
+    }
+  }
 }

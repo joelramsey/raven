@@ -8,7 +8,11 @@ import { ProjectDaoService } from './shared/services/project-dao.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  projects: Array<Project> = [];
+  public projects: Array<Project> = [];
+  public options = {
+    timeOut: 1500,
+    lastOnBottom: true
+  };
   
   constructor(private _projectDaoService: ProjectDaoService) {
     

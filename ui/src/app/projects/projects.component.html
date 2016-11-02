@@ -1,2 +1,2 @@
 <rvn-project-card *ngFor="let project of projects"
-                  [project]="project"></rvn-project-card>
+                  [project]="project" (deleted)="removeProject($event)"></rvn-project-card>

@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MdCardModule, MdTooltipModule, MdIconModule } from '@angular/material';
 import { SourcePillComponent } from './source-pill.component';
-import { MdCardModule, MdTooltipModule } from '@angular/material';
 
 @NgModule({
   imports: [
     MdCardModule,
     MdTooltipModule,
+    MdIconModule,
     CommonModule
   ],
   declarations: [
