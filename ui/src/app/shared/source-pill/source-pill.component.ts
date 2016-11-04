@@ -12,14 +12,15 @@ export class SourcePillComponent {
 
   @Input() source:Source;
   @Input() showIcon:boolean;
-  @Output() pillClickEventEmitter: EventEmitter<Source> = new EventEmitter<Source>();
+  @Input() showVisibilityIcon:boolean;
+  @Output() pillClicked: EventEmitter<Source> = new EventEmitter<Source>();
   @ViewChild(MdTooltip) tooltip:MdTooltip;
   
   constructor() { }
   
-  pillClicked() {
+  handlePillClick() {
     if (this.source && !this.source.disabled) {
-      this.pillClickEventEmitter.emit(this.source);
+      this.pillClicked.emit(this.source);
 
       // TODO: Remove this once https://github.com/angular/material2/pull/1470 is merged.
       //

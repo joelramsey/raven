@@ -6,7 +6,8 @@
   <div *ngFor="let source of sources; let i = index" class="pill-wrapper" @sourceInOut>
     <rvn-source-pill [source]="source"
                      [showIcon]="showIcons"
-                     (pillClickEventEmitter)="pillClicked(source, i)"></rvn-source-pill>
+                     [showVisibilityIcon]="showVisibilityIcons"
+                     (pillClicked)="handlePillClick(source, i)"></rvn-source-pill>
   </div>
 
 </div>

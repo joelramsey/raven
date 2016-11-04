@@ -2,14 +2,25 @@ md-card {
   height: 20px;
   padding: 10px;
   cursor: pointer;
-}
-
-md-card-subtitle {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  min-width: 150px;
 }
 
 md-icon {
   font-size: initial;
+  text-align: center;
+
+  &.visibility-icon {
+    float: right;
+    position: absolute;
+  }
+}
+
+div {
+  &.source-title {
+    max-width: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block
+  }
 }

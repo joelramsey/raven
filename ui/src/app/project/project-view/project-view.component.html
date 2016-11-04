@@ -1,5 +1,37 @@
-<md-card>
-  <p>
-    project-view works!
-  </p>
-</md-card>
+<div class="col double-col">
+  <div class="card-wrapper row">
+    <md-card>
+      <md-card-title>Tree Map</md-card-title>
+      <p>
+        insert tree-map here
+      </p>
+    </md-card>
+  </div>
+
+  <div class="card-wrapper row">
+    <md-card>
+      <md-card-title>Link Diagram</md-card-title>
+      <p>
+        insert link diagram here
+      </p>
+    </md-card>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card-wrapper">
+    <md-card>
+      <md-card-title>Project Notes</md-card-title>
+      <textarea placeholder="Add some workspace notes here!" [(ngModel)]="workspaceText"></textarea>
+    </md-card>
+  </div>
+</div>
+
+<div class="col triple-col">
+
+  <div class="card-wrapper">
+    <rvn-data-table [rows]="visibleSources | tabulateSources"></rvn-data-table>
+  </div>
+
+</div>
+

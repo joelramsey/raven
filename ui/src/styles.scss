@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/core/theming/prebuilt/deeppurple-amber.scss';
+@import '../node_modules/angular2-data-table/release/datatable.css';
+@import '../node_modules/angular2-data-table/release/material.css';
 
 [md-mini-fab] {
   background-color: black;
@@ -14,3 +16,62 @@ html, body, .viewport {
   height: 100%;
   margin: 0;
 }
+
+span {
+  &.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+
+    &.icon-up {
+      &:before {
+        content: 'keyboard_arrow_up';
+      }
+    }
+
+    &.icon-down {
+      &:before {
+        content: 'keyboard_arrow_down';
+      }
+    }
+  }
+}
+
+i {
+  &.icon-left {
+    &:before {
+      content: 'keyboard_arrow_left';
+    }
+  }
+
+  &.icon-right {
+    &:before {
+      content: 'keyboard_arrow_right';
+    }
+  }
+
+  &.icon-up {
+    &:before {
+      content: 'keyboard_arrow_up';
+    }
+  }
+
+  &.icon-down {
+    &:before {
+      content: 'keyboard_arrow_down';
+    }
+  }
+
+  &.icon-prev {
+    &:before {
+      content: 'first_page';
+    }
+  }
+
+  &.icon-skip {
+    &:before {
+      content: 'last_page';
+    }
+  }
+}
+

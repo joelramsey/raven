@@ -1,0 +1,9 @@
+:host {
+  font-family: Roboto, "Helvetica Neue", sans-serif
+}
+
+md-icon {
+  &.clickable-icon {
+    cursor: pointer;
+  }
+}

@@ -24,7 +24,7 @@
 
       <span *ngIf="!fileSources.length">(empty)</span>
       <rvn-sources-list [sources]="fileSources"
-                        (pillClickEventEmitter)="removeFile($event)"></rvn-sources-list>
+                        (pillClicked)="removeFile($event)"></rvn-sources-list>
     </div>
 
     <!-- Links -->
@@ -33,7 +33,7 @@
       <h2>Links</h2>
       <span *ngIf="!linkSources.length">(empty)</span>
       <rvn-sources-list [sources]="linkSources"
-                        (pillClickEventEmitter)="removeLink($event)"></rvn-sources-list>
+                        (pillClicked)="removeLink($event)"></rvn-sources-list>
     </div>
 
     <!-- Sources -->
@@ -42,7 +42,7 @@
       <h2>Plain Text</h2>
       <span *ngIf="!textSources.length">(empty)</span>
       <rvn-sources-list [sources]="textSources"
-                        (pillClickEventEmitter)="removeText($event)"></rvn-sources-list>
+                        (pillClicked)="removeText($event)"></rvn-sources-list>
     </div>
 
     <!-- Progress indicator -->

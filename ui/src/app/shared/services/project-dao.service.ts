@@ -15,26 +15,7 @@ export class ProjectDaoService {
     return Observable.of({
       id: id,
       name: 'Sample Project',
-      sources: [
-        {
-          id: 1,
-          type: 'url',
-          title: 'google.com',
-          content: 'https://google.com'
-        },
-        {
-          id: 2,
-          type: 'file',
-          title: 'Test File',
-          content: 'fribble'
-        },
-        {
-          id: 3,
-          type: 'text',
-          title: 'Spongebob Transcript',
-          content: 'I\'M READYYYYY'
-        }
-      ]
+      sources: []
     });
   }
 
@@ -44,76 +25,19 @@ export class ProjectDaoService {
         id: 1,
         name: 'Biology 101',
         description: 'Lorem ipsum',
-        sources: [
-          {
-            id: 1,
-            type: 'url',
-            title: 'google.com',
-            content: 'https://google.com'
-          },
-          {
-            id: 2,
-            type: 'file',
-            title: 'Test File',
-            content: 'fribble'
-          },
-          {
-            id: 3,
-            type: 'text',
-            title: 'Spongebob Transcript',
-            content: 'I\'M READYYYYY'
-          }
-        ]
+        sources: []
       },
       {
         id: 2,
         name: 'English 101',
         description: 'Lorem ipsum',
-        sources: [
-          {
-            id: 1,
-            type: 'url',
-            title: 'google.com',
-            content: 'https://google.com'
-          },
-          {
-            id: 2,
-            type: 'file',
-            title: 'Test File',
-            content: 'fribble'
-          },
-          {
-            id: 3,
-            type: 'text',
-            title: 'Spongebob Transcript',
-            content: 'I\'M READYYYYY'
-          }
-        ]
+        sources: []
       },
       {
         id: 3,
         name: 'Calculus 101',
         description: 'Lorem ipsum',
-        sources: [
-          {
-            id: 1,
-            type: 'url',
-            title: 'google.com',
-            content: 'https://google.com'
-          },
-          {
-            id: 2,
-            type: 'file',
-            title: 'Test File',
-            content: 'fribble'
-          },
-          {
-            id: 3,
-            type: 'text',
-            title: 'Spongebob Transcript',
-            content: 'I\'M READYYYYY'
-          }
-        ]
+        sources: []
       }
     ]);
   }

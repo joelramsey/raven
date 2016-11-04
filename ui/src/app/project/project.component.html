@@ -1,10 +1,13 @@
-<rvn-sources-list [sources]="project?.sources"
+<rvn-sources-list [sources]="project.sources"
                   [showAdd]="true"
                   [showIcons]="true"
+                  [showVisibilityIcons]="true"
+                  (pillClicked)="toggleVisibility($event)"
                   (addSourceClicked)="showNewSource()"></rvn-sources-list>
 
 <div class="project-view-wrapper">
-    <rvn-project-view [project]="project"></rvn-project-view>
+    <rvn-project-view [project]="project"
+                      [visibleSources]="visibleSources"></rvn-project-view>
 </div>
 
 <rvn-new-source

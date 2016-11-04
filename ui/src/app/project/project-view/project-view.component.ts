@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Project } from '../../shared/models/index';
+import { Project, Source } from '../../shared/models/index';
 
 @Component({
   selector: 'rvn-project-view',
@@ -9,6 +9,8 @@ import { Project } from '../../shared/models/index';
 export class ProjectViewComponent implements OnInit {
 
   @Input() project: Project;
+  @Input() visibleSources: Array<Source>;
+  workspaceText: string = '';
   
   constructor() { }
 

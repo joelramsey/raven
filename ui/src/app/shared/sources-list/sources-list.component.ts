@@ -52,8 +52,9 @@ export class SourcesListComponent implements OnInit {
   @Input() public sources:Array<Source>;
   @Input() public showAdd: boolean;
   @Input() public showIcons: boolean;
+  @Input() public showVisibilityIcons: boolean;
   @Output() public addSourceClicked:EventEmitter<any> = new EventEmitter<any>();
-  @Output() public pillClickEventEmitter:EventEmitter<SourcePillClickEvent> = new EventEmitter<SourcePillClickEvent>();
+  @Output() public pillClicked:EventEmitter<SourcePillClickEvent> = new EventEmitter<SourcePillClickEvent>();
 
   constructor() {
   }
@@ -61,8 +62,8 @@ export class SourcesListComponent implements OnInit {
   ngOnInit() {
   }
   
-  pillClicked($source: Source, $i: number) {
-    this.pillClickEventEmitter.emit({
+  handlePillClick($source: Source, $i: number) {
+    this.pillClicked.emit({
       source: $source,
       index: $i
     });
