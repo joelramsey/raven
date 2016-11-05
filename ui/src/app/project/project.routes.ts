@@ -3,7 +3,7 @@ import { ProjectComponent } from './project.component';
 
 export const ProjectRoutes:Route[] = [
   {
-    path: 'project',
+    path: 'project/new',
     component: ProjectComponent
   },
   {

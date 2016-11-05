@@ -1,0 +1,30 @@
+button {
+  display: block;
+  margin-bottom: 10px;
+}
+
+div {
+  &.project-cards-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}
+
+rvn-project-card {
+  width: 32%;
+  min-width: 200px;
+}
+
+
+@media(max-width: 620px) {
+  rvn-project-card {
+    width: 48%;
+  }
+}
+
+@media(max-width: 450px) {
+  rvn-project-card {
+    width: 100%;
+  }
+}

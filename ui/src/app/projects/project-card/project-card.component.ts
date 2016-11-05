@@ -14,6 +14,8 @@ export class ProjectCardComponent implements OnInit {
   @Input() canEdit:boolean = true;
   @Input() canDelete:boolean = true;
   @Output() deleted:EventEmitter<Project> = new EventEmitter<Project>();
+  @Output() saved:EventEmitter<Project> = new EventEmitter<Project>();
+  @Output() created:EventEmitter<Project> = new EventEmitter<Project>();
 
   constructor(private _projectDaoService:ProjectDaoService) {
   }
@@ -23,10 +25,20 @@ export class ProjectCardComponent implements OnInit {
 
   save() {
     this.editing = false;
-    this._projectDaoService.saveProject(this.project)
-      .subscribe((project:Project) => {
-        this.project = project;
-      });
+    
+    if  (this.project.id) {
+      this._projectDaoService.saveProject(this.project)
+        .subscribe((project:Project) => {
+          this.project = project;
+          this.saved.emit(this.project);
+        });
+    } else  {
+      this._projectDaoService.createProject(this.project)
+        .subscribe((project:Project) => {
+          this.project = project;
+          this.created.emit(this.project);
+        });
+    }
   }
 
   cancel() {

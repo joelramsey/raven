@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { ProjectsRoutes } from './projects/projects.routes';
 import { SourcesRoutes } from './sources/sources.routes';
 import { ProjectRoutes } from './project/project.routes';
+import { AppComponent } from './app.component';
 
 @NgModule({
   imports: [
@@ -13,8 +14,7 @@ import { ProjectRoutes } from './project/project.routes';
       ...SourcesRoutes,
       {
         path: '',
-        redirectTo: '/project',
-        pathMatch: 'full'
+        component: AppComponent
       },
     ])
   ],

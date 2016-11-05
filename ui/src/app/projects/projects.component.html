@@ -1,2 +1,14 @@
-<rvn-project-card *ngFor="let project of projects"
-                  [project]="project" (deleted)="removeProject($event)"></rvn-project-card>
+<button md-mini-fab (click)="addNewProject()">
+  <md-icon class="md-24">add</md-icon>
+</button>
+
+<div class="project-cards-wrapper">
+  <rvn-project-card *ngFor="let project of projects"
+                    [project]="project" (deleted)="removeProject($event)"></rvn-project-card>
+
+  <rvn-project-card *ngIf="newProject"
+                    [project]="newProject"
+                    [editing]="true"
+                    (created)="addProject($event)"
+                    (deleted)="newProject = null"></rvn-project-card>
+</div>

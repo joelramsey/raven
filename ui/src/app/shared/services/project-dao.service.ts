@@ -47,6 +47,12 @@ export class ProjectDaoService {
     return Observable.of(project);
   }
 
+  public createProject(project:Project):Observable<Project> {
+    this._observableResultHandlerService.success('Project mockfully created!');
+    project.id = Math.floor(Math.random() * 1000);
+    return Observable.of(project);
+  }
+  
   public deleteProject(project:Project):Observable<Project> {
     this._observableResultHandlerService.success('Project mockfully deleted!');
     return Observable.of(project);
