@@ -12,6 +12,8 @@ gem 'active_model_serializers', '~> 0.10.0'
 
 gem 'rack-cors'
 
+gem 'pdf-reader'
+
 # both for document upload support
 gem 'carrierwave'
 gem 'jbuilder', '~> 2.0'
@@ -25,6 +27,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :development do

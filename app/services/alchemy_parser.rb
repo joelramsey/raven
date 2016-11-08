@@ -1,3 +1,7 @@
+require 'rubygems'
+require 'pdf-reader'
+
+
 class AlchemyParser
 
   attr_reader :type, :q
@@ -17,7 +21,24 @@ class AlchemyParser
 
   def make_request_to_alchemy
     alchemyapi = AlchemyAPI.new()
-    @response = alchemyapi.combined(@params[:type], @params[:q],  {'extract'=>'page-image, title, author, concept, doc-sentiment, doc-emotion, entity, typed-rels','sentiment'=>1, 'knowledgeGraph'=>1, 'showSourceText'=>1  })
+
+    if type == 'file'
+      path = 'app/samples/' # where do we want to keep the files? temp, if so, rake task to kill them after
+      doc = 'pdf.pdf' # need to variable out to this item's location
+      body = ''
+      puts path+doc
+
+      reader = PDF::Reader.open(path+doc) do |reader|
+        reader.pages.each do |page|
+          body += page.text
+        end
+        #just for verification
+        puts body
+      end
+      type = 'text'
+    end
+
+    @response = alchemyapi.combined(@params[:type], @params[:q],  {'extract'=>'page-image, title, concept, doc-sentiment, doc-emotion, entity, typed-rels','sentiment'=>1, 'knowledgeGraph'=>1, 'showSourceText'=>1  })
   end
 
   def save_document
