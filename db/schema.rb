@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031152437) do
+ActiveRecord::Schema.define(version: 20161108200328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,15 +26,29 @@ ActiveRecord::Schema.define(version: 20161031152437) do
   create_table "items", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
+    t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "document"
+    t.index ["user_id"], name: "index_items_on_user_id", using: :btree
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "name",  null: false
+    t.string   "description",  null: false
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["user_id"], name: "index_projects_on_user_id", using: :btree
   end
 
   create_table "records", force: :cascade do |t|
+    t.string   "title", null: false
     t.string   "result",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "project_id"
+    t.index ["project_id"], name: "index_records_on_project_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -66,4 +80,6 @@ ActiveRecord::Schema.define(version: 20161031152437) do
   end
 
   add_foreign_key "documents", "items"
+  add_foreign_key "projects", "users"
+  add_foreign_key "records", "projects"
 end
