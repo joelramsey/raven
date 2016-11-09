@@ -10,4 +10,6 @@
                      (pillClicked)="handlePillClick(source, i)"></rvn-source-pill>
   </div>
 
+  <span *ngIf="showNoSourcesMessage">It looks like you haven't added any sources to this project yet. <a (click)="addSourceClicked.emit()">Click here to change that.</a></span>
+
 </div>

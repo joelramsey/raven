@@ -2,6 +2,7 @@
                   [showAdd]="true"
                   [showIcons]="true"
                   [showVisibilityIcons]="true"
+                  [showNoSourcesMessage]="showNoSourcesMessage && !project.sources?.length"
                   (pillClicked)="toggleVisibility($event)"
                   (addSourceClicked)="showNewSource()"></rvn-sources-list>
 

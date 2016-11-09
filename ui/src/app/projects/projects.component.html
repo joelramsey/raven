@@ -4,7 +4,9 @@
 
 <div class="project-cards-wrapper">
   <rvn-project-card *ngFor="let project of projects"
-                    [project]="project" (deleted)="removeProject($event)"></rvn-project-card>
+                    [project]="project"
+                    (saved)="updateProjectReference($event)"
+                    (deleted)="removeProject($event)"></rvn-project-card>
 
   <rvn-project-card *ngIf="newProject"
                     [project]="newProject"

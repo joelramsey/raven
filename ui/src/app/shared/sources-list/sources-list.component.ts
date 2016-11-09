@@ -53,6 +53,7 @@ export class SourcesListComponent implements OnInit {
   @Input() public showAdd: boolean;
   @Input() public showIcons: boolean;
   @Input() public showVisibilityIcons: boolean;
+  @Input() public showNoSourcesMessage: boolean;
   @Output() public addSourceClicked:EventEmitter<any> = new EventEmitter<any>();
   @Output() public pillClicked:EventEmitter<SourcePillClickEvent> = new EventEmitter<SourcePillClickEvent>();
 

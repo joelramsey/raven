@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import 'rxjs/add/observable/throw';
 
-import { Source, Project } from '../models/index';
-import { Record } from '../models/record.interface';
+import { Source, Project, Record } from '../models/index';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class SourceDaoService {
@@ -29,42 +29,29 @@ export class SourceDaoService {
     });
   }
 
-  public getSources(project:Project, options?:SourceDaoOptions):Observable<Array<Source>> {
-
-    // TODO: Uncomment this upon API completion
-    //
-    // let excludeRecords:boolean = !options || !options.includeRecords;
-    //
-    // let params:URLSearchParams = new URLSearchParams();
-    // params.append('includeRecords', (!excludeRecords).toString());
-    //
-    // return this._http.get(this._getCreateEndpoint(project), {
-    //   search: params
-    // })
-    //   .map((response:Response):Array<Source> => {
-    //     return response.json();
-    //   });
+  public getSources(project:Project):Observable<Array<Source>> {
     
-    return this._http.get('api/records').map((response: Response) => {
-      let records: Array<any> = response.json();
-     
-      // Temporarily extract source from Alchemy record
-      //
-      return records.map((record: Record): Source => {
-        return {
-          id: record.id,
-          type: 'url',
-          title: record.result.title,
-          content: record.result.text,
-          record: record,
-          visible: true
-        };
+    return this._http.get(this._getCreateEndpoint(project))
+      .map((response:Response):Array<Source> => {
+        let records:Array<any> = response.json();
+
+        // Temporarily extract source from Alchemy record
+        //
+        return records.map((record:Record):Source => {
+          return {
+            id: record.id,
+            type: 'url',
+            title: record.result.title,
+            content: record.result.text,
+            record: record,
+            visible: true
+          };
+          });
       });
-    });
   }
 
   private _getCreateEndpoint(project:Project) {
-    return '/api/projects/' + project.id + '/sources';
+    return environment.api + '/projects/' + project.id + '/records';
   }
 }
 

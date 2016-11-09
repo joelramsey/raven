@@ -25,6 +25,7 @@ export class ProjectComponent implements OnInit {
 
   newSourceVisible: boolean;
   visibleSources: Array<Source> = [];
+  showNoSourcesMessage: boolean;
   
 
   constructor(private _activatedRoute: ActivatedRoute, 
@@ -43,9 +44,7 @@ export class ProjectComponent implements OnInit {
           .switchMap((project:Project) => {
             this.project = project;
             
-            return this._sourceDaoService.getSources(project, {
-              includeRecords: true
-            });
+            return this._sourceDaoService.getSources(project);
           })
           .subscribe((sources: Array<Source>) => {
             this.project.sources = sources;
@@ -53,6 +52,12 @@ export class ProjectComponent implements OnInit {
             // Copy for usage in displaying data
             //
             this.visibleSources = sources.slice();
+            
+            // Set message if no sources
+            //
+            if (!sources.length) {
+              this.showNoSourcesMessage = true;
+            }
           });
       }
     });

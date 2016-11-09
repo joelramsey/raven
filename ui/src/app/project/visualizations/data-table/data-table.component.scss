@@ -1,5 +1,7 @@
+@import '../../../../variables';
+
 :host {
-  font-family: Roboto, "Helvetica Neue", sans-serif
+  font-family: $application-font
 }
 
 md-icon {

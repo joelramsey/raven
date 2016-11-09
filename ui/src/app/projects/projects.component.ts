@@ -24,11 +24,39 @@ export class ProjectsComponent implements OnInit {
   }
 
   /**
-   * Removes a project from the currently displayed projects.
-   * @param project
+   * Checks all current projects (by id) to see if any match
+   * the provided project parameter. If so, that entry is updated.
+   * This ensures that project references in this array are
+   * up-to-date with the latest version from the server
+   * (which are returned after a successful project save).
+   * 
+   * @param $project
    */
-  removeProject(project: Project) {
-    let projectIdx = this.projects.indexOf(project);
+  updateProjectReference($project: Project) {
+    let projectIdx = -1;
+
+    // Check by id
+    //
+    this.projects.some((project: Project, i: number) => {
+      if (project.id === $project.id) {
+        projectIdx = i;
+        return true;
+      }
+
+      return false;
+    });
+
+    if (projectIdx > -1) {
+      this.projects[projectIdx] = $project;
+    }
+  }
+
+  /**
+   * Removes a project from the currently displayed projects.
+   * @param $project
+   */
+  removeProject($project: Project) {
+    let projectIdx = this.projects.indexOf($project);
     
     if (projectIdx > -1) {
       this.projects.splice(projectIdx, 1);

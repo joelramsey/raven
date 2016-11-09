@@ -2,6 +2,14 @@
     <md-card>
         <md-card-title>
             <span *ngIf="!editing">{{project.name}}</span>
+
+            <button *ngIf="!editing"
+                    md-icon-button
+                    class="launch-button"
+                    (click)="launch()">
+                <md-icon>launch</md-icon>
+            </button>
+
             <md-input *ngIf="editing"
                       required
                       name="name"
@@ -9,6 +17,7 @@
                       placeholder="Project Name"></md-input>
 
         </md-card-title>
+
         <md-card-subtitle>
             <p *ngIf="!editing">{{project.description}}</p>
             <md-input *ngIf="editing"
@@ -29,7 +38,7 @@
                     (click)="edit()" type="button">Edit</button>
 
             <button md-button *ngIf="canDelete && !editing"
-                    (click)="destroy()" type="button">Delete</button>
+                    (click)="destroy()" type="button">{{pendingDelete ? 'Confirm Delete' : 'Delete'}}</button>
         </md-card-actions>
     </md-card>
 </div>

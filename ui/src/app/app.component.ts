@@ -10,6 +10,7 @@ import { ProjectDaoService } from './shared/services/project-dao.service';
 })
 export class AppComponent implements OnInit {
   public projects: Array<Project> = [];
+  public initialized: boolean = false;
   public options = {
     timeOut: 1500,
     lastOnBottom: true
@@ -20,13 +21,19 @@ export class AppComponent implements OnInit {
   }
   
   ngOnInit() {
-    this._projectDaoService.getProjects(3).subscribe((projects: Array<Project>) => {
+    this._projectDaoService.recentProjects(3, true).subscribe((projects: Array<Project>) => {
       if (projects.length) {
         this.projects = projects;
-        this._router.navigate(['project', projects[0].id]);
+        
+        if (!this.initialized) {
+          this._router.navigate(['project', projects[0].id]);
+        }
       } else {
-        this._router.navigate(['project', 'new']);
+        // Create default project for user
+        //
       }
-    })
+    });
+    
+    this.initialized = true;
   }
 }
