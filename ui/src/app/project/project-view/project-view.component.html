@@ -21,8 +21,19 @@
 <div class="col">
   <div class="card-wrapper">
     <md-card>
-      <md-card-title>Project Notes</md-card-title>
-      <textarea placeholder="Add some workspace notes here!" [(ngModel)]="workspaceText"></textarea>
+
+      <md-card-title>
+        <div class="notes-title-wrapper">
+          <div class="notes-title">Project Notes</div>
+
+          <div class="save-message"
+               [class.hide-save-message]="hideSaveMessage">{{saveStatus}}</div>
+        </div>
+      </md-card-title>
+
+      <textarea placeholder="Add some workspace notes here!"
+                [formControl]="notesControl"
+                [ngModel]="project.notes"></textarea>
     </md-card>
   </div>
 </div>

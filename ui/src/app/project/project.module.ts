@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MdCardModule, MdIconModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Angular2DataTableModule } from 'angular2-data-table/release/index';
 
 import { SharedModule } from '../shared/shared.module';
@@ -14,6 +14,7 @@ import { DataTableComponent } from './visualizations/data-table/data-table.compo
   imports: [
     SharedModule,
     FormsModule,
+    ReactiveFormsModule,
     MdCardModule,
     MdIconModule,
     Angular2DataTableModule

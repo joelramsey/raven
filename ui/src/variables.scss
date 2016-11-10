@@ -1,3 +1,6 @@
+@import '~@angular/material/core/theming/_palette';
+
 $link-color: steelblue;
 $navbar-color: whitesmoke;
 $application-font: Roboto, "Helvetica Neue", sans-serif;
+$subtext-color: map-get($md-grey, 600);
