@@ -9,6 +9,7 @@ import { ProjectViewComponent } from './project-view/project-view.component';
 import { TabulateSourcesPipe } from './pipes/tabulate-sources.pipe';
 import { TreeMapComponent } from './visualizations/tree-map/tree-map.component';
 import { DataTableComponent } from './visualizations/data-table/data-table.component';
+import { NgGridModule } from 'angular2-grid/dist/main';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { DataTableComponent } from './visualizations/data-table/data-table.compo
     ReactiveFormsModule,
     MdCardModule,
     MdIconModule,
-    Angular2DataTableModule
+    Angular2DataTableModule,
+    NgGridModule
   ],
   declarations: [
     ProjectComponent,

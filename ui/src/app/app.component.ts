@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     this._projectDaoService.recentProjects(3, true).subscribe((projects: Array<Project>) => {
       if (projects.length) {
         this.projects = projects;
-        
+
         if (!this.initialized) {
           this._router.navigate(['project', projects[0].id]);
         }
@@ -32,8 +32,8 @@ export class AppComponent implements OnInit {
         // Create default project for user
         //
       }
+
+      this.initialized = true;
     });
-    
-    this.initialized = true;
   }
 }

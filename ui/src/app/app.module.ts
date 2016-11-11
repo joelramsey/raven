@@ -10,6 +10,7 @@ import { SourcesModule } from './sources/sources.module';
 import { ProjectsModule } from './projects/projects.module';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
+import { NotFoundModule } from './not-found/not-found.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SharedModule } from './shared/shared.module';
     ProjectModule,
     ProjectsModule,
     SourcesModule,
-    SharedModule
+    SharedModule,
+    NotFoundModule
   ],
   bootstrap: [AppComponent]
 })

@@ -4,18 +4,20 @@ import { RouterModule } from '@angular/router';
 import { ProjectsRoutes } from './projects/projects.routes';
 import { SourcesRoutes } from './sources/sources.routes';
 import { ProjectRoutes } from './project/project.routes';
-import { AppComponent } from './app.component';
+import { NotFoundRoutes } from './not-found/not-found.routes';
 
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      ...ProjectRoutes,
-      ...ProjectsRoutes,
-      ...SourcesRoutes,
       {
         path: '',
-        component: AppComponent
+        children: [
+          ...ProjectRoutes,
+          ...ProjectsRoutes,
+          ...SourcesRoutes,
+        ]
       },
+      ...NotFoundRoutes
     ])
   ],
   exports: [

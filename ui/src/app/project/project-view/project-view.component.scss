@@ -1,11 +1,5 @@
 @import '../../../variables';
 
-:host {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
 md-card-title {
 
   div {
@@ -31,38 +25,13 @@ md-card-title {
   }
 }
 
-div {
-
-  &.card-wrapper {
-    width: 100%;
-  }
-
-  &.col {
-    width: 32%;
-    min-width: 200px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-
-  &.double-col {
-    width: 64%;
-  }
-
-  &.triple-col {
-    width: 100%;
-  }
-
-  &.row {
-    width: 100%;
-    margin-bottom: 10px;
-  }
+md-card {
+  height: 100%;
 }
 
 textarea {
   width: 100%;
-  height: 300px;
+  height: 100%;
   border: 0;
   border-bottom: 1px solid black;
 }
