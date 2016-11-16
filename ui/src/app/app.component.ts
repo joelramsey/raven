@@ -31,9 +31,29 @@ export class AppComponent implements OnInit {
       } else {
         // Create default project for user
         //
+        this._projectDaoService.createProject(this._createNewProject()).subscribe((project: Project) => {
+          this.projects = [project];
+          this._router.navigate(['project', project.id]);
+        })
       }
 
       this.initialized = true;
     });
+  }
+  
+  private _createNewProject(): Project {
+    
+    let newProject: Project = {
+      id: null,
+      name: 'New Project',
+      description: 'Auto-generated project',
+      updated_at: new Date().toDateString(),
+    };
+
+    //TODO: Remove this once the backend can handle adding user id
+    //
+    newProject['user_id'] = 1;
+    
+    return newProject;
   }
 }

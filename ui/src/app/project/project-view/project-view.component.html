@@ -1,48 +1,47 @@
-<div [ngGrid]="configs.grid">
-
-  <div [(ngGridItem)]="configs.linkDiagram">
-      <md-card>
-
-        <md-card-title>Link Diagram</md-card-title>
-
-        <p>
-          insert link diagram here
-        </p>
-      </md-card>
-  </div>
-
-  <div [(ngGridItem)]="configs.treeMap">
+<div class="col double-col">
+  <div class="card-wrapper row">
     <md-card>
-
       <md-card-title>Tree Map</md-card-title>
-
       <p>
         insert tree-map here
       </p>
     </md-card>
   </div>
 
-  <div [(ngGridItem)]="configs.workspace">
-      <md-card>
-        <md-card-title>
+  <div class="card-wrapper row">
+    <md-card>
+      <md-card-title>Link Diagram</md-card-title>
+      <p>
+        insert link diagram here
+      </p>
+    </md-card>
+  </div>
+</div>
 
-          <div class="notes-title-wrapper">
-            <div class="notes-title">Project Notes</div>
+<div class="col">
+  <div class="card-wrapper">
+    <md-card>
 
-            <div class="save-message"
-                 [class.hide-save-message]="hideSaveMessage">{{saveStatus}}
-            </div>
-          </div>
-        </md-card-title>
+      <md-card-title>
+        <div class="notes-title-wrapper">
+          <div class="notes-title">Project Notes</div>
+
+          <div class="save-message"
+               [class.hide-save-message]="hideSaveMessage">{{saveStatus}}</div>
+        </div>
+      </md-card-title>
 
       <textarea placeholder="Add some workspace notes here!"
                 [formControl]="notesControl"
                 [ngModel]="project.notes"></textarea>
-      </md-card>
+    </md-card>
   </div>
+</div>
 
-  <div [(ngGridItem)]="configs.table">
-      <rvn-data-table [rows]="visibleSources | tabulateSources"></rvn-data-table>
+<div class="col triple-col">
+
+  <div class="card-wrapper">
+    <rvn-data-table [rows]="visibleSources | tabulateSources"></rvn-data-table>
   </div>
 
 </div>

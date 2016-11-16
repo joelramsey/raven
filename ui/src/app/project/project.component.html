@@ -1,4 +1,5 @@
-<rvn-sources-list [sources]="project.sources"
+<rvn-sources-list *ngIf="!newSourceVisible"
+                  [sources]="project.sources"
                   [showAdd]="true"
                   [showIcons]="true"
                   [showVisibilityIcons]="true"
@@ -6,15 +7,16 @@
                   (pillClicked)="toggleVisibility($event)"
                   (addSourceClicked)="showNewSource()"></rvn-sources-list>
 
-<div class="project-view-wrapper">
-    <rvn-project-view [project]="project"
-                      [visibleSources]="visibleSources"></rvn-project-view>
+<div *ngIf="!newSourceVisible" class="project-view-wrapper">
+  <rvn-project-view [project]="project"
+                    [visibleSources]="visibleSources"></rvn-project-view>
 </div>
 
-<rvn-new-source
-        *ngIf="newSourceVisible"
-        [project]="project"
-        (created)="addSource($event)"
-        (done)="hideNewSource()"
-        (cancelled)="hideNewSource()"></rvn-new-source>
-
+<div class="new-source-wrapper">
+  <rvn-new-source
+      *ngIf="newSourceVisible"
+      [project]="project"
+      (created)="addSource($event)"
+      (done)="hideNewSource()"
+      (cancelled)="hideNewSource()"></rvn-new-source>
+</div>
