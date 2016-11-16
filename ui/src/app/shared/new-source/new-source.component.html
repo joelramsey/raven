@@ -7,7 +7,8 @@
       credits from your balance.
     </p>
 
-    <p><em>Note:</em> Currently, only PDF files are supported. Any other file type will be ignored.</p>
+    <p><em>Note:</em> Currently, only PDF (.pdf), Word (.doc and .docx), and plain text (.txt) files are supported. Any
+      other file type will be ignored.</p>
 
     <div ng2FileDrop
          (fileOver)="fileOverBase($event)"
@@ -27,7 +28,7 @@
              name="file"
              type="file"
              multiple
-             accept=".pdf">
+             accept=".pdf,.doc,.docx,.txt">
 
       <button md-raised-button (click)="openFileDialog()" [disabled]="busy">Choose Files</button>
 
@@ -76,10 +77,12 @@
     <button md-button
             color="primary"
             (click)="addSources()"
-            [disabled]="busy || !sourcesPending">Add Sources</button>
+            [disabled]="busy || !sourcesPending">Add Sources
+    </button>
 
     <button md-button
-            (click)="cancel()">Cancel</button>
+            (click)="cancel()">Cancel
+    </button>
 
   </md-card-actions>
 </md-card>

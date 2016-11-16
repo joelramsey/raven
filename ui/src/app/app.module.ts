@@ -1,16 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
-import { SimpleNotificationsModule } from 'angular2-notifications/components';
+import { Angular2TokenService } from 'angular2-token';
 
 import { AppComponent } from './app.component';
-import { ProjectModule } from './project/project.module';
-import { SourcesModule } from './sources/sources.module';
-import { ProjectsModule } from './projects/projects.module';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { NotFoundModule } from './not-found/not-found.module';
+import { LoginModule } from './login/login.module';
+import { MainModule } from './main/main.module';
 
 @NgModule({
   declarations: [
@@ -18,15 +15,14 @@ import { NotFoundModule } from './not-found/not-found.module';
   ],
   imports: [
     BrowserModule,
-    MaterialModule.forRoot(),
-    HttpModule,
-    SimpleNotificationsModule,
     AppRoutingModule,
-    ProjectModule,
-    ProjectsModule,
-    SourcesModule,
+    LoginModule,
+    MainModule,
     SharedModule,
     NotFoundModule
+  ],
+  providers: [
+    Angular2TokenService
   ],
   bootstrap: [AppComponent]
 })

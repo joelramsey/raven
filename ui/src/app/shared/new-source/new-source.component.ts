@@ -9,7 +9,7 @@ import { SourceDaoService, ObservableResultHandlerService } from '../services/in
 
 const UPLOAD_OPTIONS= {
   url: '/api/fribble',
-  allowedFileType: ['pdf']
+  allowedFileType: ['pdf', 'doc', 'docx', 'txt']
 };
 
 @Component({

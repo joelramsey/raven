@@ -1,0 +1,64 @@
+<div class="login-wrapper">
+
+  <md-card>
+    <div class="forms-wrapper">
+      <form (ngSubmit)="logIn()">
+
+        <h3>Log In</h3>
+
+        <div>
+          <label for="email">Email</label><br>
+          <md-input type="email"
+                    [(ngModel)]="login.email"
+                    name="email"
+                    id="email" required autofocus></md-input>
+        </div>
+
+        <div>
+          <label for="password">Password</label><br>
+          <md-input type="password"
+                    [(ngModel)]="login.password"
+                    name="password"
+                    id="password" required></md-input>
+        </div>
+
+        <button md-raised-button type="submit" color="primary">Log In</button>
+
+      </form>
+
+      <span>-or-</span>
+
+      <form (ngSubmit)="register()">
+
+        <h3>Register</h3>
+
+        <div>
+          <label for="register-email">Email</label><br>
+          <md-input type="email"
+                    [(ngModel)]="registration.email"
+                    name="email"
+                    id="register-email" required></md-input>
+        </div>
+
+        <div>
+          <label for="password">Password</label><br>
+          <md-input type="password"
+                    [(ngModel)]="registration.password"
+                    name="password"
+                    id="register-password" required></md-input>
+        </div>
+
+        <div>
+          <label for="register-password-confirmation">Confirm password</label><br>
+          <md-input type="password"
+                    [(ngModel)]="registration.passwordConfirmation"
+                    name="password-confirmation"
+                    id="register-password-confirmation" required></md-input>
+        </div>
+
+        <button md-raised-button type="submit" color="primary">Register</button>
+
+      </form>
+    </div>
+  </md-card>
+</div>

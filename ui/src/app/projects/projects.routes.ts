@@ -1,10 +1,10 @@
-import {Route} from '@angular/router';
+import { Routes } from '@angular/router';
 
-import {ProjectsComponent} from './projects.component';
+import { ProjectsComponent } from './projects.component';
 
-export  const ProjectsRoutes: Route[] = [
-    {
-        path: 'projects',
-        component: ProjectsComponent
-    }
+export const ProjectsRoutes:Routes = [
+  {
+    path: 'projects',
+    component: ProjectsComponent
+  }
 ]

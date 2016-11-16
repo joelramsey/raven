@@ -1,0 +1,60 @@
+import { Component, OnInit } from '@angular/core';
+import { Project } from '../shared/models/project.interface';
+import { ProjectDaoService } from '../shared/services/project-dao.service';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'rvn-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.scss']
+})
+export class MainComponent implements OnInit {
+  
+  public projects: Array<Project> = [];
+  public initialized: boolean = false;
+  public options = {
+    timeOut: 1500,
+    lastOnBottom: true
+  };
+
+  constructor(private _projectDaoService: ProjectDaoService,
+              private _router: Router) {
+  }
+
+  ngOnInit() {
+    this._projectDaoService.recentProjects(3, true).subscribe((projects: Array<Project>) => {
+      if (projects.length) {
+        this.projects = projects;
+
+        if (!this.initialized) {
+          this._router.navigate(['project', projects[0].id]);
+        }
+      } else {
+        // Create default project for user
+        //
+        this._projectDaoService.createProject(this._createNewProject()).subscribe((project: Project) => {
+          this.projects = [project];
+          this._router.navigate(['project', project.id]);
+        })
+      }
+
+      this.initialized = true;
+    });
+  }
+
+  private _createNewProject(): Project {
+
+    let newProject: Project = {
+      id: null,
+      name: 'New Project',
+      description: 'Auto-generated project',
+      updated_at: new Date().toDateString(),
+    };
+
+    //TODO: Remove this once the backend can handle adding user id
+    //
+    newProject['user_id'] = 1;
+
+    return newProject;
+  }
+}
