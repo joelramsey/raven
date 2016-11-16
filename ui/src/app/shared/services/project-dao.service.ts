@@ -111,9 +111,6 @@ export class ProjectDaoService {
 
   public createProject(project:Project):Observable<Project> {
 
-    // TODO: Remove this once user id can be added by the back end on project create.
-    //
-    project['user_id'] = 1;
     return this._http.post(environment.api + '/projects', project)
       .map((response:Response):Project => {
 

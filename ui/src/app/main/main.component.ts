@@ -67,10 +67,6 @@ export class MainComponent implements OnInit {
       updated_at: new Date().toDateString(),
     };
 
-    //TODO: Remove this once the backend can handle adding user id
-    //
-    newProject['user_id'] = 1;
-
     return newProject;
   }
 }
