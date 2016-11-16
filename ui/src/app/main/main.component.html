@@ -53,9 +53,7 @@
     </button>
 
     <md-menu #menu="mdMenu" x-position="before">
-      <button md-menu-item> Refresh</button>
-      <button md-menu-item> Help</button>
-      <button md-menu-item disabled> Sign Out</button>
+      <button md-menu-item (click)="signOut()"> Sign Out</button>
     </md-menu>
 
   </md-toolbar>

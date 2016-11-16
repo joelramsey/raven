@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Angular2TokenService } from 'angular2-token/angular2-token';
 import { Project } from '../shared/models/project.interface';
 import { ProjectDaoService } from '../shared/services/project-dao.service';
-import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'rvn-main',
@@ -18,7 +20,13 @@ export class MainComponent implements OnInit {
   };
 
   constructor(private _projectDaoService: ProjectDaoService,
+              private _tokenService: Angular2TokenService,
               private _router: Router) {
+    
+    this._tokenService.init({
+      validateTokenPath: environment.api + '/auth/validate_token',
+      signOutPath: environment.api + '/auth/sign_out'
+    });
   }
 
   ngOnInit() {
@@ -39,6 +47,14 @@ export class MainComponent implements OnInit {
       }
 
       this.initialized = true;
+    });
+  }
+  
+  public signOut() {
+    this._tokenService.signOut().subscribe(() => {
+      this._router.navigate(['/login']);
+    }, () => {
+      this._router.navigate(['/login']);
     });
   }
 

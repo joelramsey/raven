@@ -4,7 +4,13 @@ import { CommonModule } from '@angular/common';
 import { NewSourceModule } from './new-source/new-source.module';
 import { SourcesListModule } from './sources-list/sources-list.module';
 import { SourcePillModule } from './source-pill/source-pill.module';
-import { ProjectDaoService, SourceDaoService, ObservableResultHandlerService } from './services/index';
+import {
+  ProjectDaoService,
+  SourceDaoService,
+  ObservableResultHandlerService,
+  AuthGuard,
+  AntiAuthGuard
+} from './services/index';
 
 @NgModule({
   imports: [
@@ -22,7 +28,10 @@ import { ProjectDaoService, SourceDaoService, ObservableResultHandlerService } f
   providers: [
     ProjectDaoService,
     SourceDaoService,
-    ObservableResultHandlerService
+    ObservableResultHandlerService,
+    AuthGuard,
+    AntiAuthGuard
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

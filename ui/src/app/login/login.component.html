@@ -1,13 +1,20 @@
 <div class="login-wrapper">
 
   <md-card>
+
+    <md-card-title>
+      Welcome to Raven.
+    </md-card-title>
+
+    <md-card-subtitle>{{errorMessage}}</md-card-subtitle>
+
     <div class="forms-wrapper">
       <form (ngSubmit)="logIn()">
 
-        <h3>Log In</h3>
+        <h4><small>Log In</small></h4>
 
         <div>
-          <label for="email">Email</label><br>
+          <label for="email"><md-icon>email</md-icon>Email</label><br>
           <md-input type="email"
                     [(ngModel)]="login.email"
                     name="email"
@@ -15,11 +22,13 @@
         </div>
 
         <div>
-          <label for="password">Password</label><br>
+          <label for="password"><md-icon>lock</md-icon>Password</label><br>
           <md-input type="password"
                     [(ngModel)]="login.password"
                     name="password"
-                    id="password" required></md-input>
+                    id="password" required>
+
+          </md-input>
         </div>
 
         <button md-raised-button type="submit" color="primary">Log In</button>
@@ -30,10 +39,10 @@
 
       <form (ngSubmit)="register()">
 
-        <h3>Register</h3>
+        <h4><small>Register</small></h4>
 
         <div>
-          <label for="register-email">Email</label><br>
+          <label for="register-email"><md-icon>email</md-icon>Email</label><br>
           <md-input type="email"
                     [(ngModel)]="registration.email"
                     name="email"
@@ -41,11 +50,12 @@
         </div>
 
         <div>
-          <label for="password">Password</label><br>
+          <label for="password"><md-icon>lock</md-icon>Password</label><br>
           <md-input type="password"
                     [(ngModel)]="registration.password"
                     name="password"
-                    id="register-password" required></md-input>
+                    id="register-password" required>
+          </md-input>
         </div>
 
         <div>
@@ -53,7 +63,10 @@
           <md-input type="password"
                     [(ngModel)]="registration.passwordConfirmation"
                     name="password-confirmation"
-                    id="register-password-confirmation" required></md-input>
+                    id="register-password-confirmation" required>
+
+            <md-hint align="end">Must be at least eight characters.</md-hint>
+          </md-input>
         </div>
 
         <button md-raised-button type="submit" color="primary">Register</button>

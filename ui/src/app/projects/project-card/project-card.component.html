@@ -1,4 +1,4 @@
-<div class="project-card-wrapper">
+<form class="project-card-wrapper">
     <md-card>
         <md-card-title>
             <span *ngIf="!editing">{{project.name}}</span>
@@ -6,6 +6,7 @@
             <button *ngIf="!editing"
                     md-icon-button
                     class="launch-button"
+                    type="button"
                     (click)="launch()">
                 <md-icon>launch</md-icon>
             </button>
@@ -14,7 +15,8 @@
                       required
                       name="name"
                       [(ngModel)]="project.name"
-                      placeholder="Project Name"></md-input>
+                      placeholder="Project Name"
+                      autofocus></md-input>
 
         </md-card-title>
 
@@ -41,4 +43,4 @@
                     (click)="destroy()" type="button">{{pendingDelete ? 'Confirm Delete' : 'Delete'}}</button>
         </md-card-actions>
     </md-card>
-</div>
+</form>

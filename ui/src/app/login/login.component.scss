@@ -1,3 +1,5 @@
+@import '../../variables';
+
 div {
   &.login-wrapper {
     min-height: 300px;
@@ -39,9 +41,15 @@ div {
   }
 }
 
-h3 {
+h4 {
   margin-bottom: 20px;
+  font-weight:400;
 }
+
+button {
+  margin-top: 30px;
+}
+
 
 md-card {
   min-width: 250px;
@@ -54,7 +62,11 @@ md-input {
   width: 100%;
 }
 
-button {
-  margin-top: 20px;
+md-icon {
+  vertical-align: middle;
   margin-right: 5px;
+}
+
+md-card-subtitle {
+  color: map-get($md-red, 600);
 }
