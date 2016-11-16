@@ -1,0 +1,15 @@
+div {
+  &.project-card-wrapper {
+    width: 100%;
+    max-width: 450px;
+    min-width: 200px;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+}
+
+button {
+  &.launch-button {
+    float: right;
+  }
+}

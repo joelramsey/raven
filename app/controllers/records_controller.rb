@@ -4,7 +4,7 @@ class RecordsController < ApplicationController
 
   # GET /records
   def index
-    @records = Record.all
+    @records = Record.where(project_id: params[:project_id])
 
     render json: @records
   end

@@ -1,0 +1,15 @@
+<div class="sources-container">
+  <button *ngIf="showAdd" md-mini-fab (click)="addSourceClicked.emit()">
+    <md-icon class="md-24">add</md-icon>
+  </button>
+
+  <div *ngFor="let source of sources; let i = index" class="pill-wrapper" @sourceInOut>
+    <rvn-source-pill [source]="source"
+                     [showIcon]="showIcons"
+                     [showVisibilityIcon]="showVisibilityIcons"
+                     (pillClicked)="handlePillClick(source, i)"></rvn-source-pill>
+  </div>
+
+  <span *ngIf="showNoSourcesMessage">It looks like you haven't added any sources to this project yet. <a (click)="addSourceClicked.emit()">Click here to change that.</a></span>
+
+</div>

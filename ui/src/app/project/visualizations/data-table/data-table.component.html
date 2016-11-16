@@ -1,0 +1,39 @@
+<datatable
+    #rvnDataTable
+    class="material fullscreen expandable"
+    [rows]="rows"
+    [columns]="columns"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [limit]="5"
+    [scrollbarH]="true"
+    [cssClasses]="cssClasses"
+    [detailRowHeight]="100"
+    [rowHeight]="'auto'">
+
+  <datatable-row-detail-template>
+    <template let-row="row">
+      <div style="padding-left:35px;">
+        <div><strong>Sentence</strong></div>
+        <div>Hello!</div>
+      </div>
+    </template>
+  </datatable-row-detail-template>
+  <datatable-column
+      [width]="50"
+      [resizeable]="false"
+      [sortable]="false"
+      [draggable]="false"
+      [canAutoResize]="false">
+    <template let-row="row">
+        <md-icon [@iconExpandTransition]="rowExpandedState(row.$$expanded)"
+                 class="clickable-icon"
+                 (click)="toggleExpandRow(row)">chevron_right
+        </md-icon>
+    </template>
+  </datatable-column>
+  <datatable-column name="Name"></datatable-column>
+  <datatable-column name="Type"></datatable-column>
+  <datatable-column name="Sentiment"></datatable-column>
+  <datatable-column name="Relevance"></datatable-column>
+</datatable>
