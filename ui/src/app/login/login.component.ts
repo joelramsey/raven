@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
     ).subscribe(() => {
       this._router.navigate(['/projects']);
     }, (error) => {
-      console.log(error);
       this.errorMessage = error.json().errors;
     });
   }
@@ -64,7 +63,6 @@ export class LoginComponent implements OnInit {
     ).subscribe(() => {
       this._router.navigate(['/projects']);
     }, (error: Response) => {
-      console.log(error.json());
       this.errorMessage = error.json().errors.full_messages.join('\n');
     });
   }
