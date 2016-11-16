@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Project } from '../../shared/models/index';
-import { ProjectDaoService } from '../../shared/services/index';
+import { ProjectDaoService, ObservableResultHandlerService } from '../../shared/services/index';
 
 @Component({
   selector: 'rvn-project-card',
@@ -19,7 +19,9 @@ export class ProjectCardComponent implements OnInit {
   @Output() saved:EventEmitter<Project> = new EventEmitter<Project>();
   @Output() created:EventEmitter<Project> = new EventEmitter<Project>();
 
-  constructor(private _projectDaoService:ProjectDaoService, private _router:Router) { }
+  constructor(private _projectDaoService:ProjectDaoService,
+              private _errorHandler: ObservableResultHandlerService,
+              private _router:Router) { }
 
   ngOnInit() {
   }
@@ -33,13 +35,13 @@ export class ProjectCardComponent implements OnInit {
         .subscribe((project:Project) => {
           this.project = project;
           this.saved.emit(this.project);
-        });
+        }, this._errorHandler.failure);
     } else {
       this._projectDaoService.createProject(this.project)
         .subscribe((project:Project) => {
           this.project = project;
           this.created.emit(this.project);
-        });
+        }, this._errorHandler.failure);
     }
   }
 
@@ -59,7 +61,7 @@ export class ProjectCardComponent implements OnInit {
       this._projectDaoService.deleteProject(this.project)
         .subscribe(() => {
           this.deleted.emit(this.project);
-        });
+        }, this._errorHandler.failure);
     } else {
       this.pendingDelete = true;
     }

@@ -3,12 +3,14 @@ import { FormControl } from '@angular/forms';
 import { FileUploader, ParsedResponseHeaders } from 'ng2-file-upload/ng2-file-upload';
 import 'rxjs/add/operator/debounceTime';
 
-import { TextSourceParserPipe } from './pipes/text-source-parser.pipe';
+import { TextSourceParserPipe } from './pipes/index';
 import { Source, SourcePillClickEvent, SourceUploadState, Project } from '../models/index';
-import { SourceDaoService } from '../services/source-dao.service';
+import { SourceDaoService, ObservableResultHandlerService } from '../services/index';
 
-const URL:string = '/api/fribble';
-
+const UPLOAD_OPTIONS= {
+  url: '/api/fribble',
+  allowedFileType: ['pdf']
+};
 
 @Component({
   selector: 'rvn-new-source',
@@ -42,7 +44,7 @@ export class NewSourceComponent implements OnInit {
     }
   };
 
-  public uploader:FileUploader = new FileUploader({url: URL});
+  public uploader:FileUploader = new FileUploader(UPLOAD_OPTIONS);
   public fileOver:boolean = false;
   public rawSourcesControl:FormControl = new FormControl();
   public state: SourceUploadState = this.UPLOAD_STATES.NEW;
@@ -56,6 +58,7 @@ export class NewSourceComponent implements OnInit {
   private _cachedFileObjects:Array<Source> = [];
 
   constructor(private _textSourceParserService:TextSourceParserPipe,
+              private _errorHandler: ObservableResultHandlerService,
               private _renderer: Renderer,
               private _sourceDaoService: SourceDaoService) {
   }
@@ -90,14 +93,15 @@ export class NewSourceComponent implements OnInit {
       this.state = this.UPLOAD_STATES.UPLOADING_FILES;
       this.uploader.uploadAll();
     } else {
-      this.addTextAndUrlSources();
+      this.addTextAndUrlSources([]);
     }
   }
 
   /**
    * Adds
    */
-  addTextAndUrlSources() {
+  addTextAndUrlSources(foo: Array<any>) {
+    console.log(foo);
     this.state = this.UPLOAD_STATES.ADDING_SOURCES;
     
     let totalLength = this.linkSources.length + this.textSources.length;
@@ -105,8 +109,10 @@ export class NewSourceComponent implements OnInit {
     this._sourceDaoService.createSources(this.textSources.concat(this.linkSources), this.project)
       .subscribe((source: Source) => {
         this.incrementSourceUploadProgress(source, totalLength);
+        this.created.emit(source);
       }, (source: Source) => {
         this.incrementSourceUploadProgress(source, totalLength);
+        this._errorHandler.failure(source);
       });
   }
 
@@ -161,8 +167,7 @@ export class NewSourceComponent implements OnInit {
    * @param headers
    */
   fileUploadFailed(item: any, response: string, status: number, headers: ParsedResponseHeaders) {
-    console.log('Failed to upload file: ');
-    console.log(item);
+    this._errorHandler.failure('Failed to upload file: ' + item.file.name);
   }
 
   /**

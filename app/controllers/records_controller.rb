@@ -16,11 +16,11 @@ class RecordsController < ApplicationController
 
   # POST /records
   def create
-    alchemy = AlchemyParser.new(params)
+    alchemy = AlchemyParser.new(params, record_params)
     @record = alchemy.call
-    
+
     if alchemy.successful?
-      render json: @record, status: :created, location: @record
+      render json: @record, status: :created, location: project_url(@record)
     else
       render json: @record.errors, status: :unprocessable_entity
     end
@@ -48,7 +48,7 @@ class RecordsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def record_params
-      params.require(:record).permit(:result)
+      params.require(:record).permit(:result, :project_id)
     end
 end
 

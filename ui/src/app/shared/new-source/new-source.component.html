@@ -7,6 +7,8 @@
       credits from your balance.
     </p>
 
+    <p><em>Note:</em> Currently, only PDF files are supported. Any other file type will be ignored.</p>
+
     <div ng2FileDrop
          (fileOver)="fileOverBase($event)"
          [uploader]="uploader">
@@ -19,7 +21,14 @@
     <div class="source-list">
 
       <h2>Files</h2>
-      <input #fileInput name="file" type="file" ng2FileSelect [uploader]="uploader" multiple>
+      <input #fileInput
+             ng2FileSelect
+             [uploader]="uploader"
+             name="file"
+             type="file"
+             multiple
+             accept=".pdf">
+
       <button md-raised-button (click)="openFileDialog()" [disabled]="busy">Choose Files</button>
 
       <span *ngIf="!fileSources.length">(empty)</span>

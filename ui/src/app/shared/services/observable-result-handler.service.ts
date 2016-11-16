@@ -22,12 +22,12 @@ export class ObservableResultHandlerService {
   public failure(response: any) {
     if (response instanceof Response) {
       try {
-        this._notificationService.success('Error', response.json())
+        this._notificationService.error('Error', response.json())
       } catch (e) {
-        this._notificationService.success('Error', response.text())
+        this._notificationService.error('Error', response.text())
       }
     } else {
-      this._notificationService.success('Error', response)
+      this._notificationService.error('Error', response)
     }
     
   }

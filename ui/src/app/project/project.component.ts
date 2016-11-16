@@ -115,6 +115,9 @@ export class ProjectComponent implements OnInit {
     this.newSourceVisible = false;
     
     if (this.project && this.project.sources instanceof Array) {
+      
+      // Add to existing project sources
+      //
       this.project.sources.push($newSource);
     } else {
       throw new Error('Project sources are undefined; unable to add source.');
