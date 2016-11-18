@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, URLSearchParams } from '@angular/http';
+import { Http, Response, URLSearchParams, Headers } from '@angular/http';
+import { Angular2TokenService, AuthData } from 'angular2-token/angular2-token';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import 'rxjs/add/observable/throw';
@@ -10,7 +11,8 @@ import { environment } from '../../../environments/environment';
 @Injectable()
 export class SourceDaoService {
 
-  constructor(private _http:Http) {
+  constructor(private _http:Http,
+              private _tokenService: Angular2TokenService) {
   }
 
   public createSources(sources:Array<Source>, project:Project):Observable<Source> {
@@ -22,7 +24,8 @@ export class SourceDaoService {
           project: project.id,
           source: source
         }, {
-          search: this._getURLParams(source)
+          search: this._getURLParams(source),
+          headers: this._getAuthHeaders()
         })
           .map((response:Response):Source => {
             let record:any = response.json();
@@ -48,7 +51,9 @@ export class SourceDaoService {
 
   public getSources(project:Project):Observable<Array<Source>> {
 
-    return this._http.get(this._getCreateEndpoint(project))
+    return this._http.get(this._getCreateEndpoint(project), {
+      headers: this._getAuthHeaders()
+    })
       .map((response:Response):Array<Source> => {
         let records:Array<any> = response.json();
 
@@ -88,6 +93,19 @@ export class SourceDaoService {
     params.append('utf8', '%E2%9C%93');
 
     return params;
+  }
+  
+  private _getAuthHeaders(): Headers {
+
+    let authData: AuthData = this._tokenService.currentAuthData;
+
+    return new Headers({
+      'access-token': authData.accessToken,
+      'client':       authData.client,
+      'expiry':       authData.expiry,
+      'token-type':   authData.tokenType,
+      'uid':          authData.uid
+    });
   }
 }
 

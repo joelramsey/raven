@@ -32,7 +32,6 @@ users = User.all
  # Create Records
  20.times do
    record = project.records.create!(
-     title:   Faker::Lorem.sentence,
      result:  Faker::Lorem.paragraph
    )
  end

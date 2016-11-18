@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, URLSearchParams } from '@angular/http';
+import { Http, Response, URLSearchParams, Headers } from '@angular/http';
+import { Angular2TokenService, AuthData } from 'angular2-token/angular2-token';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import 'rxjs/add/observable/of';
@@ -16,6 +17,7 @@ export class ProjectDaoService {
   private _recentProjects:Array<Project> = [];
 
   constructor(private _http:Http,
+              private _tokenService: Angular2TokenService,
               private _observableResultHandlerService:ObservableResultHandlerService) {
 
     this._recentProjectsObservable = new Observable<Array<Project>>((observer:Observer<Array<Project>>) => {
@@ -24,7 +26,9 @@ export class ProjectDaoService {
   }
 
   public getProject(id:number):Observable<Project> {
-    return this._http.get(environment.api + '/projects/' + id)
+    return this._http.get(environment.api + '/projects/' + id, {
+      headers: this._getAuthHeaders()
+    })
       .map((response:Response):Project => {
         return response.json();
       });
@@ -32,7 +36,9 @@ export class ProjectDaoService {
 
   public getProjects(limit?:number):Observable<Array<Project>> {
 
-    let options = {};
+    let options = {
+      headers: this._getAuthHeaders()
+    };
 
     // Add query params for three most recent projects
     //
@@ -81,7 +87,9 @@ export class ProjectDaoService {
   }
 
   public saveProject(project:Project):Observable<Project> {
-    return this._http.put(environment.api + '/projects/' + project.id, project)
+    return this._http.put(environment.api + '/projects/' + project.id, project, {
+      headers: this._getAuthHeaders()
+    })
       .map((response:Response):Project => {
 
         let savedProject:Project = response.json();
@@ -111,7 +119,9 @@ export class ProjectDaoService {
 
   public createProject(project:Project):Observable<Project> {
 
-    return this._http.post(environment.api + '/projects', project)
+    return this._http.post(environment.api + '/projects', project, {
+      headers: this._getAuthHeaders()
+    })
       .map((response:Response):Project => {
 
         let newProject:Project = response.json();
@@ -130,7 +140,9 @@ export class ProjectDaoService {
    * @returns {Observable<R>}
    */
   public deleteProject(project:Project):Observable<any> {
-    return this._http.delete(environment.api + '/projects/' + project.id)
+    return this._http.delete(environment.api + '/projects/' + project.id, {
+      headers: this._getAuthHeaders()
+    })
       .map((response:Response) => {
 
         // Remove from recent projects
@@ -151,5 +163,18 @@ export class ProjectDaoService {
         
         return response;
       });
+  }
+  
+  private _getAuthHeaders() {
+    
+    let authData: AuthData = this._tokenService.currentAuthData;
+    
+    return new Headers({
+      'access-token': authData.accessToken,
+      'client':       authData.client,
+      'expiry':       authData.expiry,
+      'token-type':   authData.tokenType,
+      'uid':          authData.uid
+    });
   }
 }

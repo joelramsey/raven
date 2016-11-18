@@ -63,6 +63,7 @@ export class LoginComponent implements OnInit {
     ).subscribe(() => {
       this._router.navigate(['/projects']);
     }, (error: Response) => {
+      this.login.password = '';
       this.errorMessage = error.json().errors.full_messages.join('\n');
     });
   }
