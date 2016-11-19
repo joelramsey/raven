@@ -50,6 +50,14 @@ ActiveRecord::Schema.define(version: 20161115213819) do
     t.index ["project_id"], name: "index_records_on_project_id", using: :btree
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.string   "note",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "project_id"
+    t.index ["project_id"], name: "index_notes_on_project_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "provider",               default: "email", null: false
     t.string   "uid",                    default: "",      null: false
