@@ -23,7 +23,6 @@ export class TreeMapComponent implements OnInit, OnChanges {
   ngOnChanges(changes:SimpleChanges):void {
     if (changes['data'] && this._div) {
       this._render();
-      console.log(changes['data']);
     }
   }
   

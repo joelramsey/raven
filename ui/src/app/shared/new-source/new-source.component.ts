@@ -1,16 +1,13 @@
 import { Component, Output, EventEmitter, OnInit, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FileUploader, ParsedResponseHeaders } from 'ng2-file-upload/ng2-file-upload';
+import { FileUploader, ParsedResponseHeaders, Headers } from 'ng2-file-upload/ng2-file-upload';
 import 'rxjs/add/operator/debounceTime';
 
 import { TextSourceParserPipe } from './pipes/index';
 import { Source, SourcePillClickEvent, SourceUploadState, Project } from '../models/index';
 import { SourceDaoService, ObservableResultHandlerService } from '../services/index';
+import { AuthData, Angular2TokenService } from 'angular2-token/angular2-token';
 
-const UPLOAD_OPTIONS= {
-  url: '/api/items',
-  allowedFileType: ['pdf', 'doc', 'docx', 'txt']
-};
 
 @Component({
   selector: 'rvn-new-source',
@@ -44,7 +41,7 @@ export class NewSourceComponent implements OnInit {
     }
   };
 
-  public uploader:FileUploader = new FileUploader(UPLOAD_OPTIONS);
+  public uploader:FileUploader;
   public fileOver:boolean = false;
   public rawSourcesControl:FormControl = new FormControl();
   public state: SourceUploadState = this.UPLOAD_STATES.NEW;
@@ -60,6 +57,7 @@ export class NewSourceComponent implements OnInit {
   constructor(private _textSourceParserService:TextSourceParserPipe,
               private _errorHandler: ObservableResultHandlerService,
               private _renderer: Renderer,
+              private _tokenService: Angular2TokenService,
               private _sourceDaoService: SourceDaoService) {
   }
 
@@ -73,6 +71,14 @@ export class NewSourceComponent implements OnInit {
         this.textSources = parsedSources.textSources;
         this.linkSources = parsedSources.linkSources;
       });
+
+    // Instantiate uploader
+    //
+    this.uploader = new FileUploader({
+      url: '/api/items',
+      allowedFileType: ['pdf', 'doc', 'docx', 'txt'],
+      headers: this._getAuthHeaders()
+    });
     
     this.uploader.onCompleteAll = this.addTextAndUrlSources.bind(this);
     this.uploader.onErrorItem = this.fileUploadFailed.bind(this);
@@ -267,5 +273,18 @@ export class NewSourceComponent implements OnInit {
     let mouseEvent = new MouseEvent('click', { bubbles: true });
     
     this._renderer.invokeElementMethod(this.fileInput.nativeElement, 'dispatchEvent', [mouseEvent]);
+  }
+  
+  private _getAuthHeaders(): Array<Headers> {
+
+    let authData: AuthData = this._tokenService.currentAuthData;
+
+    return [
+      { name: 'access-token', value: authData.accessToken },
+      { name: 'client',       value: authData.client },
+      { name: 'expiry',       value: authData.expiry },
+      { name: 'token-type',   value: authData.tokenType },
+      { name: 'uid',          value: authData.uid }
+    ];
   }
 }
