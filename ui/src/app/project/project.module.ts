@@ -10,6 +10,7 @@ import { TabulateSourcesPipe } from './pipes/tabulate-sources.pipe';
 import { TreeMapComponent } from './visualizations/tree-map/tree-map.component';
 import { DataTableComponent } from './visualizations/data-table/data-table.component';
 import { NgGridModule } from 'angular2-grid/dist/main';
+import { LinkDiagramComponent } from './visualizations/link-diagram/link-diagram.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { NgGridModule } from 'angular2-grid/dist/main';
     ProjectViewComponent,
     TabulateSourcesPipe,
     TreeMapComponent,
-    DataTableComponent
+    DataTableComponent,
+    LinkDiagramComponent
   ],
   exports: [
     ProjectComponent

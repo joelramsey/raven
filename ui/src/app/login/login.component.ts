@@ -39,6 +39,8 @@ export class LoginComponent implements OnInit {
   }
 
   logIn() {
+    
+    this.errorMessage = '';
 
     // Do log in
     //
