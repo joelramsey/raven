@@ -8,7 +8,7 @@ import { Source, SourcePillClickEvent, SourceUploadState, Project } from '../mod
 import { SourceDaoService, ObservableResultHandlerService } from '../services/index';
 
 const UPLOAD_OPTIONS= {
-  url: '/api/fribble',
+  url: '/api/items',
   allowedFileType: ['pdf', 'doc', 'docx', 'txt']
 };
 

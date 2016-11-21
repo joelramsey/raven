@@ -2,14 +2,14 @@
   <div class="card-wrapper row">
     <md-card>
       <md-card-title>Tree Map</md-card-title>
-      <rvn-tree-map></rvn-tree-map>
+      <rvn-tree-map [data]="visibleSources | toTreeMap"></rvn-tree-map>
     </md-card>
   </div>
 
   <div class="card-wrapper row">
     <md-card>
       <md-card-title>Link Diagram</md-card-title>
-      <rvn-link-diagram></rvn-link-diagram>
+      <rvn-link-diagram [data]="visibleSources | toLinkDiagram"></rvn-link-diagram>
     </md-card>
   </div>
 </div>

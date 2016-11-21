@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as d3 from 'd3';
+
+import { LinkDiagramDatum } from './link-diagram-datum.interface';
 
 @Component({
   selector: 'rvn-link-diagram',
@@ -8,6 +10,8 @@ import * as d3 from 'd3';
 })
 export class LinkDiagramComponent implements OnInit {
 
+  @Input() data: LinkDiagramDatum;
+  
   constructor() { }
 
   ngOnInit() {

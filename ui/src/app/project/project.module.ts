@@ -11,6 +11,8 @@ import { TreeMapComponent } from './visualizations/tree-map/tree-map.component';
 import { DataTableComponent } from './visualizations/data-table/data-table.component';
 import { NgGridModule } from 'angular2-grid/dist/main';
 import { LinkDiagramComponent } from './visualizations/link-diagram/link-diagram.component';
+import { LinkDiagramAdapterPipe } from './pipes/link-diagram-adapter.pipe';
+import { TreeMapAdapterPipe } from './pipes/tree-map-adapter.pipe';
 
 @NgModule({
   imports: [
@@ -26,6 +28,8 @@ import { LinkDiagramComponent } from './visualizations/link-diagram/link-diagram
     ProjectComponent,
     ProjectViewComponent,
     TabulateSourcesPipe,
+    LinkDiagramAdapterPipe,
+    TreeMapAdapterPipe,
     TreeMapComponent,
     DataTableComponent,
     LinkDiagramComponent

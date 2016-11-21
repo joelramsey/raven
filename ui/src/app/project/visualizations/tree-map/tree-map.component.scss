@@ -12,4 +12,8 @@ div {
     overflow-y: hidden;
     overflow-x: auto;
   }
+
+  &.hidden {
+    display:none;
+  }
 }
