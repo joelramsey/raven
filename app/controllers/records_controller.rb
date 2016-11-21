@@ -4,7 +4,8 @@ class RecordsController < ApplicationController
 
   # GET /records
   def index
-    @records = Record.where(project_id: params[:project_id])
+    project_id = params[:project_id]
+    @records = Record.where(:project_id => project_id) if project_id.present?
 
     render json: @records
   end

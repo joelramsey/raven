@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
 
   # GET /items
   def index
-    @items = Item.all
+    @items = current_user.items.all
 
     render json: @items
   end
@@ -15,7 +15,7 @@ class ItemsController < ApplicationController
 
   # POST /items
   def create
-    @item = Item.new(item_params)
+    @item = current_user.items.new(item_params)
 
     if @item.save
       params[:item][:document_data].each do |file|

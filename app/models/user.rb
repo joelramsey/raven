@@ -7,5 +7,6 @@ class User < ActiveRecord::Base
   before_save -> { skip_confirmation! }
 
   has_many :projects
+  has_many :records
   has_many :items
 end

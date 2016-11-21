@@ -23,8 +23,8 @@ class AlchemyParser
   def make_request_to_alchemy
     alchemyapi = AlchemyAPI.new()
 
-    if type == 'file'
-      path = 'app/samples/' # where do we want to keep the files? temp, if so, rake task to kill them after
+    if @params[:type] == 'file'
+      path = '../public/uploads/item/document//' # where do we want to keep the files? temp, if so, rake task to kill them after
       doc = 'pdf.pdf' # need to variable out to this item's location
       body = ''
       puts path+doc
@@ -36,7 +36,7 @@ class AlchemyParser
         #just for verification
         puts body
       end
-      type = 'text'
+      @params[:type] = 'text'
     end
 
     @response = alchemyapi.combined(@params[:type], @params[:q], {'extract' => 'page-image, title, concept, doc-sentiment, doc-emotion, entity, typed-rels', 'sentiment' => 1, 'knowledgeGraph' => 1, 'showSourceText' => 1})

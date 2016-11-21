@@ -1,4 +1,4 @@
 class ProjectSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :notes
-  has_one :user
+  attributes :id, :name, :description
+  
 end
