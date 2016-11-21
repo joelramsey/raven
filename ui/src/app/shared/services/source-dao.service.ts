@@ -33,7 +33,7 @@ export class SourceDaoService {
             return {
               id: record.id,
               type: SOURCE_TYPES.url,
-              title: record.result.title,
+              title: record.result.title || record.result.text.substring(0,10),
               content: record.result.text,
               record: record,
               visible: true
@@ -63,7 +63,7 @@ export class SourceDaoService {
           return {
             id: record.id,
             type: SOURCE_TYPES.url,
-            title: record.result.title,
+            title: record.result.title || record.result.text.substring(0, 10),
             content: record.result.text,
             record: record,
             visible: true
