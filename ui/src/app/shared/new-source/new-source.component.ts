@@ -75,7 +75,7 @@ export class NewSourceComponent implements OnInit {
     // Instantiate uploader
     //
     this.uploader = new FileUploader({
-      url: '/api/items',
+      url: '/api/items?project=' + this.project.id,
       allowedFileType: ['pdf', 'doc', 'docx', 'txt'],
       headers: this._getAuthHeaders()
     });

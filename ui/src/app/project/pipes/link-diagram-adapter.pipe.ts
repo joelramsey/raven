@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Source } from '../../shared/models/index';
 import { DataTableRow } from '../visualizations/data-table/data-table.interface';
-import { AlchemyConcept, AlchemyEntity } from '../../shared/models/record.interface';
+import { AlchemyConcept, AlchemyEntity, AlchemyTypedRelation } from '../../shared/models/record.interface';
 import { LinkDiagramDatum } from '../visualizations/link-diagram/link-diagram-datum.interface';
 
 @Pipe({
@@ -25,42 +25,43 @@ export class LinkDiagramAdapterPipe implements PipeTransform {
       links: []
     };
     
-    return result;
     
-    // if (!value) {
-    //   return [];
-    // }
-    //
-    // return value.reduce((rows: Array<DataTableRow>, source: Source) => {
-    //
-    //   // If no record, return immediately
-    //   //
-    //   if (!source.record) {
-    //     return rows;
-    //   }
-    //
-    //   if (source.record.result.concepts) {
-    //     source.record.result.concepts.forEach((concept: AlchemyConcept) => {
-    //       rows.push({
-    //         name: concept.text,
-    //         type: 'Concept',
-    //         relevance: concept.relevance
-    //       })
-    //     });
-    //   }
-    //
-    //   if (source.record.result.entities) {
-    //     source.record.result.entities.forEach((entity: AlchemyEntity) => {
-    //       rows.push({
-    //         name: entity.text,
-    //         type: entity.type,
-    //         sentiment: entity.sentiment.type
-    //       })
-    //     });
-    //   }
-    //
-    //   return rows;
-    // }, []);
+    if (!value) {
+      return result;
+    }
+    
+    value.reduce((res: LinkDiagramDatum, source: Source) => {
+    
+      // If no record, return immediately
+      //
+      if (!source.record) {
+        return res;
+      }
+    
+      if (source.record.result.typedRelations) {
+        source.record.result.typedRelations.forEach((relation: AlchemyTypedRelation) => {
+          // rows.push({
+          //   name: relation.text,
+          //   type: 'Relation',
+          //   relevance: relation.relevance
+          // })
+        });
+      }
+    
+      if (source.record.result.entities) {
+        source.record.result.entities.forEach((entity: AlchemyEntity) => {
+          
+          // rows.push({
+          //   name: entity.text,
+          //   type: entity.type,
+          //   sentiment: entity.sentiment.type
+          // })
+        });
+      }
+    
+      return res;
+    }, result);
+    
+    return result;
   }
-
 }

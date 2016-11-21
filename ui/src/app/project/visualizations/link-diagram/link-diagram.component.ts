@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import * as d3 from 'd3';
 
 import { LinkDiagramDatum } from './link-diagram-datum.interface';
@@ -10,11 +10,25 @@ import { LinkDiagramDatum } from './link-diagram-datum.interface';
 })
 export class LinkDiagramComponent implements OnInit {
 
-  @Input() data: LinkDiagramDatum;
-  
-  constructor() { }
+  @Input() data:LinkDiagramDatum;
+
+  private _svg;
+
+  constructor() {
+  }
 
   ngOnInit() {
+    this._svg = d3.select("#link-diagram").append("svg")
+  }
+
+  ngOnChanges(changes:SimpleChanges):void {
+    if (changes['data'] && this._svg) {
+      this._render();
+    }
+  }
+
+  private _render() {
+
     var width = 480,
       height = 500;
 
@@ -25,46 +39,59 @@ export class LinkDiagramComponent implements OnInit {
       .linkDistance(30)
       .size([width, height]);
 
-    var svg = d3.select("#link-diagram").append("svg")
+    this._svg
       .attr("width", width)
       .attr("height", height);
 
-    d3.json("assets/miserables.json", function(error, graph) {
-      if (error) throw error;
 
-      force
-        .nodes(graph.nodes)
-        .links(graph.links)
-        .start();
+    force
+      .nodes(this.data.nodes)
+      .links(this.data.links)
+      .start();
 
-      var link = svg.selectAll(".link")
-        .data(graph.links)
-        .enter().append("line")
-        .attr("class", "link")
-        .style("stroke-width", function(d:any) { return Math.sqrt(d.value); });
-
-      var node = svg.selectAll(".node")
-        .data(graph.nodes)
-        .enter().append("circle")
-        .attr("class", "node")
-        .attr("r", 5)
-        .style("fill", function(d:any) { return color(<any>d.group); })
-        .call(force.drag);
-
-      node.append("title")
-        .text(function(d:any) { return d.name; });
-
-      force.on("tick", function() {
-        link.attr("x1", function(d:any) { return d.source.x; })
-          .attr("y1", function(d:any) { return d.source.y; })
-          .attr("x2", function(d:any) { return d.target.x; })
-          .attr("y2", function(d:any) { return d.target.y; });
-
-        node.attr("cx", function(d:any) { return d.x; })
-          .attr("cy", function(d:any) { return d.y; });
+    var link = this._svg.selectAll(".link")
+      .data(this.data.links)
+      .enter().append("line")
+      .attr("class", "link")
+      .style("stroke-width", function (d:any) {
+        return Math.sqrt(d.value);
       });
-    });
-    
-  }
 
+    var node = this._svg.selectAll(".node")
+      .data(this.data.nodes)
+      .enter().append("circle")
+      .attr("class", "node")
+      .attr("r", 5)
+      .style("fill", function (d:any) {
+        return color(<any>d.group);
+      })
+      .call(force.drag);
+
+    node.append("title")
+      .text(function (d:any) {
+        return d.name;
+      });
+
+    force.on("tick", function () {
+      link.attr("x1", function (d:any) {
+        return d.source.x;
+      })
+        .attr("y1", function (d:any) {
+          return d.source.y;
+        })
+        .attr("x2", function (d:any) {
+          return d.target.x;
+        })
+        .attr("y2", function (d:any) {
+          return d.target.y;
+        });
+
+      node.attr("cx", function (d:any) {
+        return d.x;
+      })
+        .attr("cy", function (d:any) {
+          return d.y;
+        });
+    });
+  }
 }
