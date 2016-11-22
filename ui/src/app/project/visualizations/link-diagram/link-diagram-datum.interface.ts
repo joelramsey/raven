@@ -1,12 +1,13 @@
 export interface  LinkDiagramNode {
   name: string;
-  group: number;
+  group: string|number;
 }
 
 export interface LinkDiagramLink {
   source: number;
   target: number;
   value: number;
+  type: string;
 }
 
 export interface LinkDiagramDatum {
