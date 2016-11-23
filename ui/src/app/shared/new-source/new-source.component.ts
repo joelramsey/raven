@@ -1,12 +1,13 @@
 import { Component, Output, EventEmitter, OnInit, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FileUploader, ParsedResponseHeaders, Headers } from 'ng2-file-upload/ng2-file-upload';
+import { ParsedResponseHeaders, Headers } from 'ng2-file-upload/ng2-file-upload';
 import 'rxjs/add/operator/debounceTime';
 
 import { TextSourceParserPipe } from './pipes/index';
 import { Source, SourcePillClickEvent, SourceUploadState, Project } from '../models/index';
 import { SourceDaoService, ObservableResultHandlerService } from '../services/index';
 import { AuthData, Angular2TokenService } from 'angular2-token/angular2-token';
+import { RavenFileUploader } from '../services/raven-file-uploader.service';
 
 
 @Component({
@@ -41,7 +42,7 @@ export class NewSourceComponent implements OnInit {
     }
   };
 
-  public uploader:FileUploader;
+  public uploader:RavenFileUploader;
   public fileOver:boolean = false;
   public rawSourcesControl:FormControl = new FormControl();
   public state: SourceUploadState = this.UPLOAD_STATES.NEW;
@@ -74,7 +75,7 @@ export class NewSourceComponent implements OnInit {
 
     // Instantiate uploader
     //
-    this.uploader = new FileUploader({
+    this.uploader = new RavenFileUploader({
       url: '/api/items?project=' + this.project.id,
       allowedFileType: ['pdf', 'doc', 'docx', 'txt'],
       headers: this._getAuthHeaders()
