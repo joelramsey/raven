@@ -17,16 +17,7 @@ class RecordsController < ApplicationController
 
   # POST /records
   def create
-    logger.debug "Params are: #{params.inspect}"
-    logger.debug "Record Params are: #{record_params.inspect}"
-    alchemy = AlchemyParser.new(params, record_params)
-    @record = alchemy.call
-
-    if alchemy.successful?
-      render json: @record, status: :created, location: project_url(@record)
-    else
-      render json: @record.errors, status: :unprocessable_entity
-    end
+    create_record(record_params[:project_id])
   end
 
   # PATCH/PUT /records/1

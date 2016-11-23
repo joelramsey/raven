@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :update, :destroy]
-  include Creator
 
   # GET /items
   def index
@@ -19,14 +18,18 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     logger.debug "Params are: #{item_params.inspect}"
 
+    params[:type] = 'file'
+    params[:q] = ''
+
+    @item.project_id = params[:project] if params[:project].present? 
+
     if @item.save
       #iterate through each of the files 
       params[:item][:document_data].each do |file| 
-      @item.documents.create!(:document => file) 
-      #create a document associated with the item that has just been created
-      Creator.create
-    end
-      render :show, status: :created, location: @item
+        @item.documents.create!(:document => file) 
+      end
+
+      create_record(@item.project_id)
     else
       render json: @item.errors, status: :unprocessable_entity
     end

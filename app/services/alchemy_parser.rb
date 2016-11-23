@@ -7,10 +7,10 @@ class AlchemyParser
   attr_reader :type, :q
   attr_accessor :response
 
-  def initialize(params, record_params)
+  def initialize(params, project_id)
 
     @params = params
-    @record_params = record_params
+    @project_id = project_id
     @successful = false
   end
 
@@ -26,7 +26,7 @@ class AlchemyParser
     if @params[:type] != 'text' and @params[:type] != 'url'
       # path = "../public/uploads/document/10/" # where do we want to keep the files? temp, if so, rake task to kill them after
       # doc = "bank.pdf" # need to variable out to this item's location
-      # body = ''
+      body = ''
 
       filename = File.join(Rails.root, 'public', 'uploads', 'document', '10', 'bank.pdf')
       
@@ -52,7 +52,7 @@ class AlchemyParser
 
   def save_document
     #initialize document and bring in top level attributes
-    @record = Record.new(result: @response, project_id: @record_params[:project_id])
+    @record = Record.new(result: @response, project_id: @project_id)
     @record.save
     @successful = true if @record.persisted?
     @record
