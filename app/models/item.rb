@@ -1,7 +1,6 @@
 class Item < ApplicationRecord
-	mount_uploader :document, DocumentUploader
-	mount_uploader :picture, PictureUploader
+	#mount_uploader :picture, PictureUploader
+	belongs_to :user, optional: true
 	has_many :documents
-	belongs_to :user
 	attr_accessor :document_data
 end

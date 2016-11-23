@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :update, :destroy]
+  include Creator
 
   # GET /items
   def index
@@ -15,13 +16,17 @@ class ItemsController < ApplicationController
 
   # POST /items
   def create
-    @item = current_user.items.new(item_params)
+    @item = Item.new(item_params)
+    logger.debug "Params are: #{item_params.inspect}"
 
     if @item.save
-      params[:item][:document_data].each do |file|
-        @item.documents.create!(:document => file)
-      end
-      render json: @item, status: :created, location: @item
+      #iterate through each of the files 
+      params[:item][:document_data].each do |file| 
+      @item.documents.create!(:document => file) 
+      #create a document associated with the item that has just been created
+      Creator.create
+    end
+      render :show, status: :created, location: @item
     else
       render json: @item.errors, status: :unprocessable_entity
     end
@@ -49,6 +54,6 @@ class ItemsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def item_params
-      params.require(:item).permit(:name, :description, :picture, :document, :document_data => [])
+      params.require(:item).permit(:name, :description, :user_id, :project_id, :document_data => []) #Add :documents_data in permit() to accept an array 
     end
 end

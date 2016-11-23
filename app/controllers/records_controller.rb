@@ -17,6 +17,8 @@ class RecordsController < ApplicationController
 
   # POST /records
   def create
+    logger.debug "Params are: #{params.inspect}"
+    logger.debug "Record Params are: #{record_params.inspect}"
     alchemy = AlchemyParser.new(params, record_params)
     @record = alchemy.call
 

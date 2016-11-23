@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115213819) do
+ActiveRecord::Schema.define(version: 20161123055313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,8 +18,12 @@ ActiveRecord::Schema.define(version: 20161115213819) do
   create_table "documents", force: :cascade do |t|
     t.integer  "item_id"
     t.string   "document"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
     t.index ["item_id"], name: "index_documents_on_item_id", using: :btree
   end
 
@@ -27,12 +31,21 @@ ActiveRecord::Schema.define(version: 20161115213819) do
     t.string   "name"
     t.string   "description"
     t.integer  "user_id"
+    t.integer  "project_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "document"
     t.string   "picture"
     t.index ["user_id"], name: "index_items_on_user_id", using: :btree
+    t.index ["project_id"], name: "index_items_on_project_id", using: :btree
+  end
 
+  create_table "notes", force: :cascade do |t|
+    t.string   "note",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "project_id"
+    t.index ["project_id"], name: "index_notes_on_project_id", using: :btree
   end
 
   create_table "projects", force: :cascade do |t|
@@ -53,14 +66,6 @@ ActiveRecord::Schema.define(version: 20161115213819) do
     t.integer  "user_id"
     t.index ["project_id"], name: "index_records_on_project_id", using: :btree
     t.index ["user_id"], name: "index_records_on_user_id", using: :btree
-  end
-
-  create_table "notes", force: :cascade do |t|
-    t.string   "note",     null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "project_id"
-    t.index ["project_id"], name: "index_notes_on_project_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -92,10 +97,9 @@ ActiveRecord::Schema.define(version: 20161115213819) do
   end
 
   add_foreign_key "documents", "items"
-  add_foreign_key "projects", "users"
-  add_foreign_key "records", "users"
-  add_foreign_key "records", "projects"
   add_foreign_key "items", "users"
+  add_foreign_key "items", "projects"
   add_foreign_key "notes", "projects"
+  add_foreign_key "projects", "users"
+  add_foreign_key "records", "projects"
 end
-
