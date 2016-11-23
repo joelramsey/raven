@@ -1,3 +1,33 @@
-<p>
-  sources works!
-</p>
+<form class="project-card-wrapper">
+  <md-card *ngFor="let project of projects">
+    <md-card-title>
+      <span>{{project.name}}</span>
+    </md-card-title>
+    <md-card-subtitle>Sources:</md-card-subtitle>
+
+    <div *ngFor="let source of project.sources"
+         class="source-name-field">
+
+      <md-input *ngIf="editing"
+                name="{{source.title}}"
+                [(ngModel)]="source.title">
+
+        <md-icon md-prefix>{{ sourceIcon(source) }}</md-icon>
+      </md-input>
+
+      <md-icon *ngIf="!editing">{{ sourceIcon(source) }}</md-icon>
+      <span *ngIf="!editing">{{source.title}}</span>
+    </div>
+
+    <md-card-actions align="end">
+      <button md-button color="primary" *ngIf="editing"
+              (click)="save(project)" type="submit">Save</button>
+
+      <button md-button *ngIf=" editing"
+              (click)="cancel()" type="button">Cancel</button>
+
+      <button md-button color="primary" *ngIf="!editing"
+              (click)="edit()" type="button">Edit</button>
+    </md-card-actions>
+  </md-card>
+</form>

@@ -48,6 +48,37 @@ export class SourceDaoService {
       });
     });
   }
+  
+  public saveSources(sources:Array<Source>, project:Project):Observable<Source> {
+    return new Observable<Source>((observer:Observer<Source>) => {
+
+      sources.forEach((source:Source) => {
+        this._http.put(this._getSaveEndpoint(source, project), {
+          title: source.title
+        }, {
+          headers: this._getAuthHeaders()
+        })
+          .map((response:Response):Source => {
+            let record:any = response.json();
+
+            return {
+              id: record.id,
+              type: source.type,
+              title: record.title || record.result.title || record.result.text.substring(0,10),
+              content: record.result.text,
+              record: record,
+              visible: true
+            };
+          })
+          .subscribe((createdSource:Source) => {
+            observer.next(createdSource);
+          }, () => {
+            observer.next(source);
+          });
+
+      });
+    });
+  }
 
   public getSources(project:Project):Observable<Array<Source>> {
 
@@ -74,6 +105,10 @@ export class SourceDaoService {
 
   private _getCreateEndpoint(project:Project):string {
     return environment.api + '/projects/' + project.id + '/records';
+  }
+  
+  private _getSaveEndpoint(source: Source, project:Project):string {
+    return environment.api + '/projects/' + project.id + '/records/' + source.id;
   }
 
   /**
