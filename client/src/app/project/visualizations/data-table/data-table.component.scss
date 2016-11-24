@@ -1,0 +1,11 @@
+@import '../../../../variables';
+
+:host {
+  font-family: $application-font
+}
+
+md-icon {
+  &.clickable-icon {
+    cursor: pointer;
+  }
+}

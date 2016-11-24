@@ -1,0 +1,44 @@
+<div class="col double-col">
+  <div class="card-wrapper row">
+    <md-card>
+      <md-card-title>Tree Map</md-card-title>
+      <rvn-tree-map [data]="visibleSources | toTreeMap"></rvn-tree-map>
+    </md-card>
+  </div>
+
+  <div class="card-wrapper row">
+    <md-card>
+      <md-card-title>Entity Relationships</md-card-title>
+      <rvn-link-diagram [data]="visibleSources | toLinkDiagram"></rvn-link-diagram>
+    </md-card>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card-wrapper">
+    <md-card>
+
+      <md-card-title>
+        <div class="notes-title-wrapper">
+          <div class="notes-title">Project Notes</div>
+
+          <div class="save-message"
+               [class.hide-save-message]="hideSaveMessage">{{saveStatus}}</div>
+        </div>
+      </md-card-title>
+
+      <textarea placeholder="Add some workspace notes here!"
+                [formControl]="notesControl"
+                [ngModel]="project.notes"></textarea>
+    </md-card>
+  </div>
+</div>
+
+<div class="col triple-col">
+
+  <div class="card-wrapper">
+    <rvn-data-table [rows]="visibleSources | tabulateSources"></rvn-data-table>
+  </div>
+
+</div>
+

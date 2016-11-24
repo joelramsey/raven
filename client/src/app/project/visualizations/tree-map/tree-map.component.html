@@ -1,0 +1,8 @@
+<div id="chart" class="tree-map" [class.hidden]="!data?.children?.length">
+  <form>
+    <label><input type="radio" name="mode" value="size" checked> Size</label>
+    <label><input type="radio" name="mode" value="count"> Count</label>
+  </form>
+</div>
+
+<span *ngIf="!data?.children?.length">No data to display</span>

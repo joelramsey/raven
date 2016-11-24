@@ -1,0 +1,72 @@
+@import '../../variables';
+
+div {
+  &.login-wrapper {
+    min-height: 300px;
+    display: flex;
+    justify-content: space-around;
+    margin: 0 5px;
+  }
+
+  &.forms-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    form {
+      width: 40%;
+      min-width: 200px;
+    }
+
+    span {
+      width: 20%;
+      margin: 20px 0;
+      text-align: center;
+      align-self: center;
+    }
+  }
+}
+
+@media(max-width: 540px) {
+  div {
+    &.forms-wrapper {
+      span {
+        width: 100%;
+      }
+
+      form {
+        width: 100%;
+      }
+    }
+  }
+}
+
+h4 {
+  margin-bottom: 20px;
+  font-weight:400;
+}
+
+button {
+  margin-top: 30px;
+}
+
+
+md-card {
+  min-width: 250px;
+  max-width: 600px;
+  width: 100%;
+  margin-top: 40px;
+}
+
+md-input {
+  width: 100%;
+}
+
+md-icon {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+md-card-subtitle {
+  color: map-get($md-red, 600);
+}

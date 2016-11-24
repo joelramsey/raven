@@ -1,0 +1,46 @@
+<form class="project-card-wrapper">
+    <md-card>
+        <md-card-title>
+            <span *ngIf="!editing">{{project.name}}</span>
+
+            <button *ngIf="!editing"
+                    md-icon-button
+                    class="launch-button"
+                    type="button"
+                    (click)="launch()">
+                <md-icon>launch</md-icon>
+            </button>
+
+            <md-input *ngIf="editing"
+                      required
+                      name="name"
+                      [(ngModel)]="project.name"
+                      placeholder="Project Name"
+                      autofocus></md-input>
+
+        </md-card-title>
+
+        <md-card-subtitle>
+            <p *ngIf="!editing">{{project.description}}</p>
+            <md-input *ngIf="editing"
+                      name="name"
+                      [(ngModel)]="project.description"
+                      placeholder="Description"></md-input>
+
+        </md-card-subtitle>
+
+        <md-card-actions align="end">
+            <button md-button color="primary" *ngIf="canEdit && editing"
+                    (click)="save()" type="submit">Save</button>
+
+            <button md-button *ngIf="canEdit && editing"
+                    (click)="cancel()" type="button">Cancel</button>
+
+            <button md-button color="primary" *ngIf="canEdit && !editing"
+                    (click)="edit()" type="button">Edit</button>
+
+            <button md-button *ngIf="canDelete && !editing"
+                    (click)="destroy()" type="button">{{pendingDelete ? 'Confirm Delete' : 'Delete'}}</button>
+        </md-card-actions>
+    </md-card>
+</form>
