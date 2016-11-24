@@ -70,6 +70,14 @@ export class ProjectComponent implements OnInit {
   hideNewSource() {
     this.newSourceVisible = false;
   }
+  
+  newSourcesAdded() {
+    this.hideNewSource();
+
+    // To trigger change detection
+    //
+    this.visibleSources = this.project.sources.slice();
+  }
 
   /**
    * Toggles a source's visibility; if it's supposed to be
@@ -119,6 +127,7 @@ export class ProjectComponent implements OnInit {
       // Add to existing project sources
       //
       this.project.sources.push($newSource);
+      
     } else {
       throw new Error('Project sources are undefined; unable to add source.');
     }

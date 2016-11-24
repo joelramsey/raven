@@ -47,7 +47,7 @@ export class SourcesComponent implements OnInit {
   
   save(project: Project) {
     this._sourceDaoService.saveSources(project.sources, project).subscribe((source: Source) => {
-      console.log(source);
+      this.editing = false;
     });
   }
   
