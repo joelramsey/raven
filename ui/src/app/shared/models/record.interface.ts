@@ -1,5 +1,6 @@
 export interface Record {
   id:number;
+  title?:string;
   result:AlchemyResult
 }
 
