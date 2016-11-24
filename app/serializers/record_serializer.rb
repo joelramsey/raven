@@ -1,3 +1,3 @@
 class RecordSerializer < ActiveModel::Serializer
-  attributes :id, :result
+  attributes :id, :result, :title
 end
