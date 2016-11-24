@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
   # POST /items
   def create
     @project = params[:project]
-    @item = @project.items.new(item_params)
+    @item = Item.new(item_params)
     logger.debug "Params are: #{item_params.inspect}"
 
     params[:type] = 'file'
