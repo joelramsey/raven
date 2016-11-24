@@ -15,7 +15,8 @@ class ItemsController < ApplicationController
 
   # POST /items
   def create
-    @item = Item.new(item_params)
+    @project = params[:project]
+    @item = @project.items.new(item_params)
     logger.debug "Params are: #{item_params.inspect}"
 
     params[:type] = 'file'
@@ -28,8 +29,13 @@ class ItemsController < ApplicationController
       params[:item][:document_data].each do |file| 
         @item.documents.create!(:document => file) 
       end
-
-      create_record(@item.project_id)
+      
+      @item_id = @item.id
+      @item_name = @item.name
+      puts "Item details is this #{@item_id}"
+      puts "Item details is this #{@item_name}"
+      
+      create_record(@item.project_id, @item_id, @item_name)
     else
       render json: @item.errors, status: :unprocessable_entity
     end

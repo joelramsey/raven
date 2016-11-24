@@ -7,10 +7,12 @@ class AlchemyParser
   attr_reader :type, :q
   attr_accessor :response
 
-  def initialize(params, project_id)
+  def initialize(params, project_id, *item_details)
 
     @params = params
     @project_id = project_id
+    @item_id = item_details[0]
+    @item_name = item_details[1]
     @successful = false
   end
 
@@ -21,14 +23,13 @@ class AlchemyParser
 
   def make_request_to_alchemy
     alchemyapi = AlchemyAPI.new()
+    puts "item ID in the service: #{@item_id}"
+    puts "document_name in the service: #{@item_name}"
 
     #execute this block only if the type param isnt url or text
-    if @params[:type] != 'text' and @params[:type] != 'url'
-      # path = "../public/uploads/document/10/" # where do we want to keep the files? temp, if so, rake task to kill them after
-      # doc = "bank.pdf" # need to variable out to this item's location
+    if @params[:type] == 'file'
       body = ''
-
-      filename = File.join(Rails.root, 'public', 'uploads', 'document', '10', 'bank.pdf')
+      filename = File.join(Rails.root, 'public', 'uploads', 'document', "#{@item_id}", "#{@item_name}")
       
       #just to verify the correct file path as i play
       puts filename
@@ -39,7 +40,7 @@ class AlchemyParser
         end
         
         #just for verification
-        puts body
+        #puts body
         
         #set the params for text and make the pdf body q
         @params[:type] = 'text'

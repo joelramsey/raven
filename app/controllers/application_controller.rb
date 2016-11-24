@@ -3,8 +3,9 @@ class ApplicationController < ActionController::API
 
   private
 
-    def create_record(project_id)
-      alchemy = AlchemyParser.new(params, project_id)
+    def create_record(project_id, *item_details)
+
+      alchemy = AlchemyParser.new(params, project_id, *item_details)
       @record = alchemy.call
 
       if alchemy.successful?
