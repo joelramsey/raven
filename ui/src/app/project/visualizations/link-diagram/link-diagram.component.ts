@@ -18,7 +18,11 @@ export class LinkDiagramComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._svg = d3.select('#link-diagram').append('svg')
+    this._svg = d3.select('#link-diagram').append('svg');
+    
+    if (this.data) {
+      this._render();
+    }
   }
 
   ngOnChanges(changes:SimpleChanges):void {
@@ -28,7 +32,9 @@ export class LinkDiagramComponent implements OnInit {
   }
 
   private _render() {
-
+    
+    this._svg.selectAll("*").remove();
+    
     var width = 480,
       height = 500;
 

@@ -107,8 +107,7 @@ export class NewSourceComponent implements OnInit {
   /**
    * Adds
    */
-  addTextAndUrlSources(foo: Array<any>) {
-    console.log(foo);
+  addTextAndUrlSources() {
     this.state = this.UPLOAD_STATES.ADDING_SOURCES;
     
     let totalLength = this.linkSources.length + this.textSources.length;

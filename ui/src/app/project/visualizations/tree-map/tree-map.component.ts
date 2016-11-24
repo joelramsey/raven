@@ -18,6 +18,10 @@ export class TreeMapComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this._div = d3.select('#chart').append('div');
+    
+    if (this.data) {
+      this._render();
+    }
   }
 
   ngOnChanges(changes:SimpleChanges):void {
@@ -28,6 +32,8 @@ export class TreeMapComponent implements OnInit, OnChanges {
   
   private _render() {
 
+    this._div.html('');
+    
     var margin = {top: 0, right: 0, bottom: 0, left: 0},
       width = 960 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
