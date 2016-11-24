@@ -17,6 +17,6 @@
       *ngIf="newSourceVisible"
       [project]="project"
       (created)="addSource($event)"
-      (done)="hideNewSource()"
+      (done)="newSourcesAdded()"
       (cancelled)="hideNewSource()"></rvn-new-source>
 </div>
