@@ -1,2 +1,2 @@
 web: cd client && npm start
-api: brails s -p 3000
+api: rails s -p 3000
