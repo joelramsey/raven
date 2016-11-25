@@ -21,7 +21,8 @@ export class RavenFileUploader extends FileUploader {
 
       sendable.append('item[name]', item.file.name);
       sendable.append('item[description]', '');
-      sendable.append('item[document_data][]', item._file, item.file.name);
+      console.log(item);
+      sendable.append('item[document_data][]', item._file);
     } else {
       sendable = item._file;
     }

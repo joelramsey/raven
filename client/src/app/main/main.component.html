@@ -44,6 +44,7 @@
     </button>
 
     <span class="toolbar-title">RAVEN</span>
+    <span *ngIf="projectDaoService?.activeProject">{{projectDaoService.activeProject.name}}</span>
 
     <span class="wide-nav"></span>
 

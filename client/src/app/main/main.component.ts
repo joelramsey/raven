@@ -19,7 +19,7 @@ export class MainComponent implements OnInit {
     lastOnBottom: true
   };
 
-  constructor(private _projectDaoService: ProjectDaoService,
+  constructor(public projectDaoService: ProjectDaoService,
               private _tokenService: Angular2TokenService,
               private _router: Router) {
     
@@ -30,7 +30,7 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._projectDaoService.recentProjects(3, true).subscribe((projects: Array<Project>) => {
+    this.projectDaoService.recentProjects(3, true).subscribe((projects: Array<Project>) => {
       if (projects.length) {
         this.projects = projects;
 
@@ -40,7 +40,7 @@ export class MainComponent implements OnInit {
       } else {
         // Create default project for user
         //
-        this._projectDaoService.createProject(this._createNewProject()).subscribe((project: Project) => {
+        this.projectDaoService.createProject(this._createNewProject()).subscribe((project: Project) => {
           this.projects = [project];
           this._router.navigate(['project', project.id]);
         })

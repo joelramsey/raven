@@ -15,6 +15,7 @@ export class ProjectDaoService {
   private _recentProjectsObservable:Observable<Array<Project>>;
   private _recentProjectsObserver:Observer<Array<Project>>;
   private _recentProjects:Array<Project> = [];
+  private _activeProject: Project;
 
   constructor(private _http:Http,
               private _tokenService: Angular2TokenService,
@@ -32,6 +33,14 @@ export class ProjectDaoService {
       .map((response:Response):Project => {
         return response.json();
       });
+  }
+  
+  public set activeProject(project: Project) {
+    this._activeProject = project;
+  }
+  
+  public get activeProject() {
+    return this._activeProject;
   }
 
   public getProjects(limit?:number):Observable<Array<Project>> {

@@ -57,7 +57,7 @@
 
     <!-- Progress indicator -->
     <div [ngSwitch]="state" class="progress-indicator">
-      {{state.message}}
+      <span>{{state.message}}{{uploadError}}</span>
       <md-progress-bar *ngSwitchCase="UPLOAD_STATES.UPLOADING_FILES"
                        mode="determinate"
                        value="uploader.progress"></md-progress-bar>

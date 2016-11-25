@@ -46,6 +46,7 @@ export class NewSourceComponent implements OnInit {
   public fileOver:boolean = false;
   public rawSourcesControl:FormControl = new FormControl();
   public state: SourceUploadState = this.UPLOAD_STATES.NEW;
+  public uploadError: string = '';
   public sourceUploadProgress: number = 0;
 
   // Sources
@@ -91,6 +92,7 @@ export class NewSourceComponent implements OnInit {
    * immediately.
    */
   addSources() {
+    this.uploadError = '';
     this.rawSourcesControl.disable();
    
     // Upload if applicable; otherwise proceed straight
@@ -108,19 +110,35 @@ export class NewSourceComponent implements OnInit {
    * Adds
    */
   addTextAndUrlSources(fileSources: Array<any>) {
-    console.log(fileSources);
     this.state = this.UPLOAD_STATES.ADDING_SOURCES;
     
     let totalLength = this.linkSources.length + this.textSources.length;
-   
-    this._sourceDaoService.createSources(this.textSources.concat(this.linkSources), this.project)
-      .subscribe((source: Source) => {
-        this.incrementSourceUploadProgress(source, totalLength);
-        this.created.emit(source);
-      }, (source: Source) => {
-        this.incrementSourceUploadProgress(source, totalLength);
-        this._errorHandler.failure(source);
-      });
+  
+    if (totalLength === 0) {
+      
+      // All done
+      //
+      this.state = this.UPLOAD_STATES.DONE;
+
+      this.rawSourcesControl.setValue('');
+      this.rawSourcesControl.enable();
+      this.uploader.clearQueue();
+      
+      this.done.emit(true);
+      
+    } else {
+      
+      // Create sources
+      //
+      this._sourceDaoService.createSources(this.textSources.concat(this.linkSources), this.project)
+        .subscribe((source: Source) => {
+          this.incrementSourceUploadProgress(source, totalLength);
+          this.created.emit(source);
+        }, (source: Source) => {
+          this.incrementSourceUploadProgress(source, totalLength);
+          this._errorHandler.failure(source);
+        });
+    }
   }
 
   /**
@@ -173,7 +191,16 @@ export class NewSourceComponent implements OnInit {
    * @param status
    * @param headers
    */
-  fileUploadFailed(item: any, response: string, status: number, headers: ParsedResponseHeaders) {
+  fileUploadFailed(item: any, response: any, status: number, headers: ParsedResponseHeaders) {
+
+    try {
+      let res: any = JSON.parse(response);
+      this.uploadError = ' (Encountered error during file upload: ' + status + ' - ' + res.error + ')';
+    } catch(e) {
+      console.log(e);
+      this.uploadError = ' (Encountered error during file upload: ' + response + ')';
+    }
+    
     this._errorHandler.failure('Failed to upload file: ' + item.file.name);
   }
 

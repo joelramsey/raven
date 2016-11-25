@@ -43,6 +43,7 @@ export class ProjectComponent implements OnInit {
         this._projectDaoService.getProject(id)
           .switchMap((project:Project) => {
             this.project = project;
+            this._projectDaoService.activeProject = project;
             
             return this._sourceDaoService.getSources(project);
           })
@@ -72,8 +73,7 @@ export class ProjectComponent implements OnInit {
   }
   
   newSourcesAdded() {
-    this.hideNewSource();
-
+    
     // To trigger change detection
     //
     this.visibleSources = this.project.sources.slice();
@@ -119,8 +119,6 @@ export class ProjectComponent implements OnInit {
    * @param $newSource
    */
   addSource($newSource:Source) {
-    
-    this.newSourceVisible = false;
     
     if (this.project && this.project.sources instanceof Array) {
       

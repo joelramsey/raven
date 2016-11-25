@@ -1,7 +1,11 @@
-import { Component, OnInit, Input, ViewChild, style, state, animate, transition, trigger } from '@angular/core';
+import {
+  Component, OnInit, Input, ViewChild, style, state, animate, transition, trigger,
+  ViewEncapsulation
+} from '@angular/core';
 import { DataTableRow } from './data-table.interface';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
   selector: 'rvn-data-table',
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.scss'],
