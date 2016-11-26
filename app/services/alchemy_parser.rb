@@ -24,7 +24,7 @@ class AlchemyParser
   def make_request_to_alchemy
     alchemyapi = AlchemyAPI.new()
     puts "item ID in the service: #{@item_id}"
-    puts "document_name in the service: #{@item_name}"
+    puts "Document name in the service: #{@item_name}"
 
     #execute this block only if the type param isnt url or text
     if @params[:type] == 'file'

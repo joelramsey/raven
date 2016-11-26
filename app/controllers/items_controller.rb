@@ -27,13 +27,12 @@ class ItemsController < ApplicationController
     if @item.save
       #iterate through each of the files 
       params[:item][:document_data].each do |file| 
-        @item.documents.create!(:document => file) 
+        @document = @item.documents.create!(:document => file) 
       end
-      
       @item_id = @item.id
-      @item_name = @item.name
-      puts "Item details is this #{@item_id}"
-      puts "Item details is this #{@item_name}"
+      @item_name = @document[:document]
+      puts "Item ID is this: #{@item_id}"
+      puts "Item name is this: #{@item_name}"
       
       create_record(@item.project_id, @item_id, @item_name)
     else
@@ -63,6 +62,6 @@ class ItemsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def item_params
-      params.require(:item).permit(:name, :description, :user_id, :project_id, :document_data => []) #Add :documents_data in permit() to accept an array 
+      params.require(:item).permit(:name, :description, :user_id, :project_id, :document, :document_data => []) #Add :documents_data in permit() to accept an array 
     end
 end
