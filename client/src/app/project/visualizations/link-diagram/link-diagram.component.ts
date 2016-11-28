@@ -13,13 +13,14 @@ export class LinkDiagramComponent implements OnInit {
   @Input() data:LinkDiagramDatum;
 
   private _svg;
+  private _container;
 
   constructor() {
   }
 
   ngOnInit() {
     this._svg = d3.select('#link-diagram').append('svg');
-    
+
     if (this.data) {
       this._render();
     }
@@ -32,10 +33,10 @@ export class LinkDiagramComponent implements OnInit {
   }
 
   private _render() {
-    
-    this._svg.selectAll("*").remove();
-    
-    var width = 480,
+
+    this._svg.selectAll('*').remove();
+
+    var width = 500,
       height = 500;
 
     var color = d3.scale.category20();
@@ -45,30 +46,42 @@ export class LinkDiagramComponent implements OnInit {
       .linkDistance(30)
       .size([width, height]);
 
+    var zoom = d3.behavior.zoom()
+      .scaleExtent([.1, 10])
+      .on('zoom', this._zoomed.bind(this));
+
     this._svg
-      .attr('width', width)
+      .attr('width', '100%')
       .attr('height', height);
 
+    var rect = this._svg.append('rect')
+      .attr('width', '100%')
+      .attr('height', '100%')
+      .style('fill', 'none')
+      .style('pointer-events', 'all')
+      .call(zoom);
 
+    this._container = this._svg.append('g');
+    
     force
       .nodes(this.data.nodes)
       .links(this.data.links)
       .start();
 
-    var link = this._svg.selectAll('.link')
+    var link = this._container.selectAll('.link')
       .data(this.data.links)
       .enter().append('line')
       .attr('class', 'link')
       .style('stroke-width', function (d:any) {
         return Math.sqrt(d.value);
       });
-    
+
     link.append('title')
       .text(function (d:any) {
         return d.type;
       });
 
-    var node = this._svg.selectAll('.node')
+    var node = this._container.selectAll('.node')
       .data(this.data.nodes)
       .enter().append('circle')
       .attr('class', 'node')
@@ -104,5 +117,9 @@ export class LinkDiagramComponent implements OnInit {
           return d.y;
         });
     });
+  }
+
+  private _zoomed() {
+    this._container.attr('transform', 'translate(' + (<any>d3.event).translate + ')scale(' + (<any>d3.event).scale + ')');
   }
 }
