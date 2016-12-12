@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20161123055313) do
     t.string   "result",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "original_name"
     t.integer  "project_id"
     t.integer  "user_id"
     t.string   "title"
@@ -85,8 +86,9 @@ ActiveRecord::Schema.define(version: 20161123055313) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.string   "name"
-    t.string   "nickname"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "username"
     t.string   "image"
     t.string   "email"
     t.json     "tokens"
