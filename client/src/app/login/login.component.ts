@@ -13,13 +13,16 @@ import { environment } from '../../environments/environment';
 export class LoginComponent implements OnInit {
 
   public errorMessage:string = '';
-  
+
   public login:User = {
     email: '',
     password: ''
   };
 
   public registration:User = {
+    first_name: '',
+    last_name: '',
+    username: '',
     email: '',
     password: '',
     passwordConfirmation: ''
@@ -39,7 +42,7 @@ export class LoginComponent implements OnInit {
   }
 
   logIn() {
-    
+
     this.errorMessage = '';
 
     // Do log in
@@ -59,6 +62,9 @@ export class LoginComponent implements OnInit {
     // Do registration
     //
     this._tokenService.registerAccount(
+      // this.registration.first_name,
+      // this.registration.last_name,
+      // this.registration.username,
       this.registration.email,
       this.registration.password,
       this.registration.passwordConfirmation

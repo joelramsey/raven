@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :project do
-    name "MyString"
-    description "MyString"
-    user nil
+    name "Test Project 1"
+    description "A test project to see if I work"
+    user
   end
 end

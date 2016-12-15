@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :record do
-    result ""
+    result "{'status'=> 'half dead', 'name'=>'Joel', 'usage'=>'all of the time'}"
+    project
   end
-
 end
