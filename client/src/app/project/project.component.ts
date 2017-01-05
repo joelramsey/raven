@@ -52,7 +52,9 @@ export class ProjectComponent implements OnInit {
             
             // Copy for usage in displaying data
             //
-            this.visibleSources = sources.slice();
+            this.visibleSources = sources.slice().filter((source: Source) => {
+              return source.visible;
+            });
             
             // Set message if no sources
             //
@@ -70,10 +72,7 @@ export class ProjectComponent implements OnInit {
   
   hideNewSource() {
     this.newSourceVisible = false;
-  }
-  
-  newSourcesAdded() {
-    
+
     // To trigger change detection
     //
     this.visibleSources = this.project.sources.slice();
@@ -107,6 +106,16 @@ export class ProjectComponent implements OnInit {
         this.visibleSources.splice(sourceIdx, 1);
       }
     }
+    
+    // Persist visibility change
+    //
+    this._sourceDaoService.saveSources([$source.source], this.project)
+      .subscribe(() => {
+        // No-op
+        //
+      }, (err: any) => {
+        console.log(err);
+      });
    
     // Because Angular 2 Change Detection doesn't seem to think that
     // removing/adding an element counts as a "valid" change...

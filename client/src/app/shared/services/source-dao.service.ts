@@ -54,7 +54,8 @@ export class SourceDaoService {
 
       sources.forEach((source:Source) => {
         this._http.put(this._getSaveEndpoint(source, project), {
-          title: source.title
+          title: source.title,
+          visible: source.visible
         }, {
           headers: this._getAuthHeaders()
         })
@@ -67,7 +68,7 @@ export class SourceDaoService {
               title: record.title || record.result.title || record.result.text.substring(0,10),
               content: record.result.text,
               record: record,
-              visible: true
+              visible: record.visible
             };
           })
           .subscribe((createdSource:Source) => {
@@ -97,7 +98,7 @@ export class SourceDaoService {
             title: record.title || record.result.title || record.result.text.substring(0, 10),
             content: record.result.text,
             record: record,
-            visible: true
+            visible: record.visible
           };
         });
       });

@@ -66,6 +66,7 @@ export class TextSourceParserPipe implements PipeTransform {
         id: null,
         type: 'url',
         content: lines[currentIndex],
+        visible: true,
         title: this._extractDomain(lines[currentIndex])
       });
 
@@ -134,6 +135,7 @@ export class TextSourceParserPipe implements PipeTransform {
         id: null,
         title: title,
         type: 'text',
+        visible: true,
         content: text
       });
     }

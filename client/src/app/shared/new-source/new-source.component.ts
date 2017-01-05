@@ -221,6 +221,7 @@ export class NewSourceComponent implements OnInit {
           id: null,
           type: 'file',
           title: fileObject.file.name,
+          visible: true,
           content: fileObject
         });
 

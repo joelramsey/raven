@@ -58,13 +58,12 @@
     <!-- Progress indicator -->
     <div [ngSwitch]="state" class="progress-indicator">
       <span>{{state.message}}{{uploadError}}</span>
+
       <md-progress-bar *ngSwitchCase="UPLOAD_STATES.UPLOADING_FILES"
-                       mode="determinate"
-                       value="uploader.progress"></md-progress-bar>
+                       mode="indeterminate"></md-progress-bar>
 
       <md-progress-bar *ngSwitchCase="UPLOAD_STATES.ADDING_SOURCES"
-                       mode="determinate"
-                       value="sourceUploadProgress"></md-progress-bar>
+                       mode="indeterminate"></md-progress-bar>
 
       <md-progress-bar *ngSwitchCase="UPLOAD_STATES.DONE"
                        mode="determinate"
@@ -81,6 +80,7 @@
     </button>
 
     <button md-button
+            [disabled]="busy"
             (click)="cancel()">Done
     </button>
 
