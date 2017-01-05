@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20161123055313) do
     t.integer  "project_id"
     t.integer  "user_id"
     t.string   "title"
+    t.boolean  "visible", default: true
     t.index ["project_id"], name: "index_records_on_project_id", using: :btree
     t.index ["user_id"], name: "index_records_on_user_id", using: :btree
   end
