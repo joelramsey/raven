@@ -6,6 +6,7 @@ import { SourcesListModule } from './sources-list/sources-list.module';
 import { SourcePillModule } from './source-pill/source-pill.module';
 import {
   ProjectDaoService,
+  UserDaoService,
   SourceDaoService,
   ObservableResultHandlerService,
   AuthGuard,
@@ -28,6 +29,7 @@ import {
   providers: [
     ProjectDaoService,
     SourceDaoService,
+    UserDaoService,
     ObservableResultHandlerService,
     AuthGuard,
     AntiAuthGuard

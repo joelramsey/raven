@@ -10,24 +10,25 @@ export class ObservableResultHandlerService {
   public success(response: any) {
     if (response instanceof Response) {
       try {
-        this._notificationService.success('Success', response.json())
+        this._notificationService.success('Success', response.json());
       } catch (e) {
-        this._notificationService.success('Success', response.text())
+        this._notificationService.success('Success', response.text());
       }
     } else {
-      this._notificationService.success('Success', response)
+      this._notificationService.success('Success', response);
     }
   }
   
   public failure(response: any) {
     if (response instanceof Response) {
       try {
-        this._notificationService.error('Error', response.json())
+        let err = response.json();
+        this._notificationService.error('Error', err.error ? err.error : err);
       } catch (e) {
-        this._notificationService.error('Error', response.text())
+        this._notificationService.error('Error', response.text());
       }
     } else {
-      this._notificationService.error('Error', response)
+      this._notificationService.error('Error', response);
     }
     
   }

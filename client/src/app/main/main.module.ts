@@ -5,6 +5,7 @@ import { MainComponent } from './main.component';
 import { MainRoutingModule } from './main-routing.module';
 import { ProjectsModule } from '../projects/projects.module';
 import { ProjectModule } from '../project/project.module';
+import { ProfileModule } from '../profile/profile.module';
 import { SourcesModule } from '../sources/sources.module';
 import { SimpleNotificationsModule } from 'angular2-notifications/components';
 
@@ -15,6 +16,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications/components';
     SimpleNotificationsModule,
     ProjectModule,
     ProjectsModule,
+    ProfileModule,
     SourcesModule,
     MainRoutingModule
   ],

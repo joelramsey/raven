@@ -35,13 +35,17 @@ export class ProjectCardComponent implements OnInit {
         .subscribe((project:Project) => {
           this.project = project;
           this.saved.emit(this.project);
-        }, this._errorHandler.failure);
+        }, (error: any) => {
+          this._errorHandler.failure(error);
+        });
     } else {
       this._projectDaoService.createProject(this.project)
         .subscribe((project:Project) => {
           this.project = project;
           this.created.emit(this.project);
-        }, this._errorHandler.failure);
+        }, (error: any) => {
+          this._errorHandler.failure(error);
+        });
     }
   }
 
@@ -61,7 +65,9 @@ export class ProjectCardComponent implements OnInit {
       this._projectDaoService.deleteProject(this.project)
         .subscribe(() => {
           this.deleted.emit(this.project);
-        }, this._errorHandler.failure);
+        }, (error: any) => {
+          this._errorHandler.failure(error);
+        });
     } else {
       this.pendingDelete = true;
     }

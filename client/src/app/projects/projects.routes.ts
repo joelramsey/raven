@@ -7,4 +7,4 @@ export const ProjectsRoutes:Routes = [
     path: 'projects',
     component: ProjectsComponent
   }
-]
+];

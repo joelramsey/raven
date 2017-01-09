@@ -57,6 +57,10 @@ export class MainComponent implements OnInit {
       this._router.navigate(['/login']);
     });
   }
+  
+  public showProfile() {
+    this._router.navigate(['/profile']);
+  }
 
   private _createNewProject(): Project {
 
