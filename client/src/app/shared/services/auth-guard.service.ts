@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate } from '@angular/router';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Angular2TokenService } from 'angular2-token';
 import { Observable } from 'rxjs/Observable';
 import { Response } from '@angular/http';
@@ -7,11 +7,13 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
 
 import { environment } from '../../../environments/environment';
+import { InitialNavigationService } from './initial-navigation.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  
+ 
   constructor(private _tokenService:Angular2TokenService,
+              private _initialNavigationService: InitialNavigationService,
               private _router:Router) {
     
     this._tokenService.init({
@@ -20,7 +22,9 @@ export class AuthGuard implements CanActivate {
     
   }
 
-  canActivate():Observable<boolean>|boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):Observable<boolean>|boolean {
+  
+    this._initialNavigationService.setIntendedDestination(state);
     
     return this._tokenService.validateToken()
       .map((response: Response) => {

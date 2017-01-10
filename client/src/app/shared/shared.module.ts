@@ -9,6 +9,7 @@ import {
   SourceDaoService,
   ProjectExportService,
   ObservableResultHandlerService,
+  InitialNavigationService,
   AuthGuard,
   AntiAuthGuard
 } from './services/index';
@@ -30,6 +31,7 @@ import {
     UserDaoService,
     ProjectExportService,
     ObservableResultHandlerService,
+    InitialNavigationService,
     AuthGuard,
     AntiAuthGuard
   ]

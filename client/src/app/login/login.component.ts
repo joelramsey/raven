@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 import { Angular2TokenService } from 'angular2-token';
-import { User } from '../shared/models/index';
+
 import { environment } from '../../environments/environment';
+import { User } from '../shared/models/index';
+import { InitialNavigationService } from '../shared/services/index';
 
 @Component({
   selector: 'rvn-login',
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
   };
 
   constructor(private _tokenService:Angular2TokenService,
-              private _router:Router) {
+              private _initialNavigationService: InitialNavigationService) {
 
     this._tokenService.init({
       registerAccountPath: environment.api + '/auth',
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit {
       this.login.email,
       this.login.password
     ).subscribe(() => {
-      this._router.navigate(['/projects']);
+      this._initialNavigationService.navigate();
     }, (error) => {
       this.errorMessage = error.json().errors;
     });
@@ -63,7 +64,7 @@ export class LoginComponent implements OnInit {
       this.registration.password,
       this.registration.passwordConfirmation
     ).subscribe(() => {
-      this._router.navigate(['/projects']);
+      this._initialNavigationService.navigate();
     }, (error: Response) => {
       this.login.password = '';
       this.errorMessage = error.json().errors.full_messages.join('\n');

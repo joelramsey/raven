@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Angular2TokenService } from 'angular2-token/angular2-token';
 import { Project } from '../shared/models/project.interface';
 import { ProjectDaoService } from '../shared/services/project-dao.service';
@@ -21,7 +21,6 @@ export class MainComponent implements OnInit {
 
   constructor(public projectDaoService: ProjectDaoService,
               private _tokenService: Angular2TokenService,
-              private _activatedRoute: ActivatedRoute,
               private _router: Router) {
     
     this._tokenService.init({
@@ -32,13 +31,11 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.projectDaoService.recentProjects(3, true).subscribe((projects: Array<Project>) => {
+      
       if (projects.length) {
         this.projects = projects;
-
-        if (!this.initialized && this._activatedRoute.firstChild.children.length === 0) {
-          this._router.navigate(['project', projects[0].id]);
-        }
       } else {
+        
         // Create default project for user
         //
         this.projectDaoService.createProject(this._createNewProject()).subscribe((project: Project) => {
