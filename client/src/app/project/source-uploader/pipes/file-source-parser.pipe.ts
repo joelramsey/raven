@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform, Injectable } from '@angular/core';
-import { Source } from '../../models/index';
+import { Source } from '../../../shared/models/index';
 
 @Pipe({
   name: 'fileSourceParser'

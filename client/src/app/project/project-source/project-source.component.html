@@ -1,0 +1,18 @@
+<div class="flex-around">
+  <md-card>
+
+    <div class="flex-around">
+
+      <a class="lg-show"
+         [routerLink]="['/project', projectId, 'sources', 'upload']"
+         routerLinkActive="active">UPLOAD</a>
+
+      <a class="lg-show" style="pointer-events: none">ADD EXISTING</a>
+
+    </div>
+
+    <div class="router-outlet-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </md-card>
+</div>

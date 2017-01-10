@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
 import { Project, Source } from '../shared/models/index';
@@ -28,7 +28,8 @@ export class ProjectComponent implements OnInit {
   showNoSourcesMessage: boolean;
   
 
-  constructor(private _activatedRoute: ActivatedRoute, 
+  constructor(private _activatedRoute: ActivatedRoute,
+              private _router: Router,
               private _projectDaoService: ProjectDaoService,
               private _projectExportService: ProjectExportService,
               private _sourceDaoService: SourceDaoService) {
@@ -68,15 +69,7 @@ export class ProjectComponent implements OnInit {
   }
   
   showNewSource() {
-    this.newSourceVisible = true;
-  }
-  
-  hideNewSource() {
-    this.newSourceVisible = false;
-
-    // To trigger change detection
-    //
-    this.visibleSources = this.project.sources.slice();
+    this._router.navigate(['project', this.project.id, 'sources']);
   }
 
   /**
@@ -123,23 +116,6 @@ export class ProjectComponent implements OnInit {
     //
     this.visibleSources = this.visibleSources.slice();
   }
-
-  /**
-   * Adds a new source to the project's list.
-   * @param $newSource
-   */
-  addSource($newSource:Source) {
-    
-    if (this.project && this.project.sources instanceof Array) {
-      
-      // Add to existing project sources
-      //
-      this.project.sources.push($newSource);
-      
-    } else {
-      throw new Error('Project sources are undefined; unable to add source.');
-    }
-  };
 
   /**
    * Sends the current project to the export service.

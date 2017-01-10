@@ -1,0 +1,9 @@
+md-card {
+  max-width: 600px;
+}
+
+div {
+  &.router-outlet-wrapper {
+    margin-top: 20px;
+  }
+}

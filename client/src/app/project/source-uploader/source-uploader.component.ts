@@ -1,21 +1,25 @@
 import { Component, Output, EventEmitter, OnInit, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormControl } from '@angular/forms';
+import { AuthData, Angular2TokenService } from 'angular2-token/angular2-token';
 import { ParsedResponseHeaders, Headers } from 'ng2-file-upload/ng2-file-upload';
 import 'rxjs/add/operator/debounceTime';
 
 import { TextSourceParserPipe } from './pipes/index';
-import { Source, SourcePillClickEvent, SourceUploadState, Project } from '../models/index';
-import { SourceDaoService, ObservableResultHandlerService } from '../services/index';
-import { AuthData, Angular2TokenService } from 'angular2-token/angular2-token';
-import { RavenFileUploader } from '../services/raven-file-uploader.service';
-
+import { Source, SourcePillClickEvent, SourceUploadState, Project, SourceCreator } from '../../shared/models/index';
+import { 
+  SourceDaoService,
+  ProjectDaoService,
+  ObservableResultHandlerService,
+  RavenFileUploader
+} from '../../shared/services/index';
 
 @Component({
-  selector: 'rvn-new-source',
-  templateUrl: './new-source.component.html',
-  styleUrls: ['./new-source.component.scss']
+  selector: 'rvn-source-uploader',
+  templateUrl: './source-uploader.component.html',
+  styleUrls: ['./source-uploader.component.scss']
 })
-export class NewSourceComponent implements OnInit {
+export class SourceUploaderComponent implements OnInit, SourceCreator {
 
   @Input() public project:Project;
   @Output() public created:EventEmitter<Source> = new EventEmitter<Source>();
@@ -58,9 +62,12 @@ export class NewSourceComponent implements OnInit {
 
   constructor(private _textSourceParserService:TextSourceParserPipe,
               private _errorHandler: ObservableResultHandlerService,
+              private _router: Router,
+              private _activatedRoute: ActivatedRoute,
               private _renderer: Renderer,
               private _tokenService: Angular2TokenService,
-              private _sourceDaoService: SourceDaoService) {
+              private _sourceDaoService: SourceDaoService,
+              private _projectDaoService: ProjectDaoService) {
   }
 
   ngOnInit() {
@@ -74,16 +81,34 @@ export class NewSourceComponent implements OnInit {
         this.linkSources = parsedSources.linkSources;
       });
 
-    // Instantiate uploader
+    // Load project, if necessary
     //
-    this.uploader = new RavenFileUploader({
-      url: '/api/items?project=' + this.project.id,
-      allowedFileType: ['pdf', 'doc', 'docx', 'txt'],
-      headers: this._getAuthHeaders()
-    });
-    
-    this.uploader.onCompleteAll = this.addTextAndUrlSources.bind(this);
-    this.uploader.onErrorItem = this.fileUploadFailed.bind(this);
+    if (!this.project) {
+      this._activatedRoute.parent.params.forEach((params: Params) => {
+
+        // Get project from service, if it exists.
+        //
+        if (params['id']) {
+          let id = +params['id'];
+
+          this._projectDaoService.getProject(id).subscribe((project: Project) => {
+
+            this.project = project;
+
+            // Instantiate uploader
+            //
+            this.uploader = new RavenFileUploader({
+              url: '/api/items?project=' + this.project.id,
+              allowedFileType: ['pdf', 'doc', 'docx', 'txt'],
+              headers: this._getAuthHeaders()
+            });
+
+            this.uploader.onCompleteAll = this.addTextAndUrlSources.bind(this);
+            this.uploader.onErrorItem = this.fileUploadFailed.bind(this);
+          });
+        }
+      });
+    }
   }
 
   /**
@@ -125,7 +150,6 @@ export class NewSourceComponent implements OnInit {
       this.uploader.clearQueue();
       
       this.done.emit(true);
-      
     } else {
       
       // Create sources
@@ -181,6 +205,7 @@ export class NewSourceComponent implements OnInit {
   cancel() {
     this.uploader.clearQueue();
     this.cancelled.emit();
+    this._router.navigate(['project', this.project.id]);
   }
 
   /**
@@ -213,6 +238,10 @@ export class NewSourceComponent implements OnInit {
    */
   get fileSources():Array<Source> {
 
+    if (!this.uploader) {
+      return [];
+    }
+    
     // Refresh queue if changed
     //
     if (this.uploader.queue.length !== this._cachedFileObjects.length) {

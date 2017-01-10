@@ -1,6 +1,6 @@
 <div *ngIf="!newSourceVisible">
 
-  <div class="source-list-wrapper">
+  <div class="flex-between">
     <rvn-sources-list [sources]="project.sources"
                       [showAdd]="true"
                       [showIcons]="true"
@@ -25,12 +25,4 @@
     <rvn-project-view [project]="project"
                       [visibleSources]="visibleSources"></rvn-project-view>
   </div>
-</div>
-
-<div class="new-source-wrapper">
-  <rvn-new-source
-      *ngIf="newSourceVisible"
-      [project]="project"
-      (created)="addSource($event)"
-      (cancelled)="hideNewSource()"></rvn-new-source>
 </div>

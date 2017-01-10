@@ -13,6 +13,8 @@ import { NgGridModule } from 'angular2-grid/dist/main';
 import { LinkDiagramComponent } from './visualizations/link-diagram/link-diagram.component';
 import { LinkDiagramAdapterPipe } from './pipes/link-diagram-adapter.pipe';
 import { TreeMapAdapterPipe } from './pipes/tree-map-adapter.pipe';
+import { SourceUploaderModule } from './source-uploader/source-uploader.module';
+import { ProjectSourceModule } from './project-source/project-source.module';
 
 @NgModule({
   imports: [
@@ -23,7 +25,9 @@ import { TreeMapAdapterPipe } from './pipes/tree-map-adapter.pipe';
     MdIconModule,
     MdTooltipModule,
     Angular2DataTableModule,
-    NgGridModule
+    NgGridModule,
+    SourceUploaderModule,
+    ProjectSourceModule
   ],
   declarations: [
     ProjectComponent,

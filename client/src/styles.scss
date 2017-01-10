@@ -47,6 +47,17 @@ a {
   text-decoration: none;
   position: relative;
 
+  &.active:after {
+    content: "";
+    position: absolute;
+    width: 10%;
+    height: 2px;
+    bottom: 0;
+    left: 45%;
+    background-color: $link-color;
+    visibility: visible;
+  }
+
   &:before {
     content: "";
     position: absolute;
@@ -146,5 +157,15 @@ div {
       stroke: #999;
       stroke-opacity: .6;
     }
+  }
+
+  .flex-around {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .flex-between {
+    display: flex;
+    justify-content: space-between;
   }
 }
