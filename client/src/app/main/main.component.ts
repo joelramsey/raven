@@ -35,7 +35,7 @@ export class MainComponent implements OnInit {
       if (projects.length) {
         this.projects = projects;
 
-        if (!this.initialized && this._activatedRoute.children.length > 1) {
+        if (!this.initialized && this._activatedRoute.firstChild.children.length === 0) {
           this._router.navigate(['project', projects[0].id]);
         }
       } else {
