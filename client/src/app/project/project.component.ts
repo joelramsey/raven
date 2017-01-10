@@ -3,7 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
 import { Project, Source } from '../shared/models/index';
-import { ProjectDaoService, SourceDaoService } from '../shared/services/index';
+import { ProjectDaoService, ProjectExportService, SourceDaoService } from '../shared/services/index';
 import { SourcePillClickEvent } from '../shared/models/source-pill-click-event.interface';
 
 @Component({
@@ -30,6 +30,7 @@ export class ProjectComponent implements OnInit {
 
   constructor(private _activatedRoute: ActivatedRoute, 
               private _projectDaoService: ProjectDaoService,
+              private _projectExportService: ProjectExportService,
               private _sourceDaoService: SourceDaoService) {
   }
 
@@ -139,4 +140,12 @@ export class ProjectComponent implements OnInit {
       throw new Error('Project sources are undefined; unable to add source.');
     }
   };
+
+  /**
+   * Sends the current project to the export service.
+   * @param project
+   */
+  exportProject() {
+    this._projectExportService.exportProject(this.project);
+  }
 }

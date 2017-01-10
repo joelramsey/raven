@@ -1,4 +1,10 @@
 div {
+
+  &.source-list-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
   &.project-view-wrapper {
     margin-top: 20px;
   }

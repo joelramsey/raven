@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Project } from '../../shared/models/index';
-import { ProjectDaoService, ObservableResultHandlerService } from '../../shared/services/index';
+import { ProjectDaoService, ObservableResultHandlerService, ProjectExportService } from '../../shared/services/index';
 
 @Component({
   selector: 'rvn-project-card',
@@ -19,7 +19,8 @@ export class ProjectCardComponent implements OnInit {
   @Output() saved:EventEmitter<Project> = new EventEmitter<Project>();
   @Output() created:EventEmitter<Project> = new EventEmitter<Project>();
 
-  constructor(private _projectDaoService:ProjectDaoService,
+  constructor(private _projectDaoService: ProjectDaoService,
+              private _projectExportService: ProjectExportService,
               private _errorHandler: ObservableResultHandlerService,
               private _router:Router) { }
 
@@ -75,5 +76,9 @@ export class ProjectCardComponent implements OnInit {
   
   launch() {
     this._router.navigate(['project', this.project.id]);
+  }
+  
+  exportProject() {
+    this._projectExportService.exportProject(this.project);
   }
 }

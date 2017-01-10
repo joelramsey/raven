@@ -1,15 +1,30 @@
-<rvn-sources-list *ngIf="!newSourceVisible"
-                  [sources]="project.sources"
-                  [showAdd]="true"
-                  [showIcons]="true"
-                  [showVisibilityIcons]="true"
-                  [showNoSourcesMessage]="showNoSourcesMessage && !project.sources?.length"
-                  (pillClicked)="toggleVisibility($event)"
-                  (addSourceClicked)="showNewSource()"></rvn-sources-list>
+<div *ngIf="!newSourceVisible">
 
-<div *ngIf="!newSourceVisible" class="project-view-wrapper">
-  <rvn-project-view [project]="project"
-                    [visibleSources]="visibleSources"></rvn-project-view>
+  <div class="source-list-wrapper">
+    <rvn-sources-list [sources]="project.sources"
+                      [showAdd]="true"
+                      [showIcons]="true"
+                      [showVisibilityIcons]="true"
+                      [showNoSourcesMessage]="showNoSourcesMessage && !project.sources?.length"
+                      (pillClicked)="toggleVisibility($event)"
+                      (addSourceClicked)="showNewSource()"></rvn-sources-list>
+
+
+    <button md-icon-button
+            [disabled]="true"
+            [md-tooltip]="'Export'"
+            tooltip-position="below"
+            class="project-button"
+            type="button"
+            (click)="exportProject()">
+      <md-icon>file_download</md-icon>
+    </button>
+  </div>
+
+  <div class="project-view-wrapper">
+    <rvn-project-view [project]="project"
+                      [visibleSources]="visibleSources"></rvn-project-view>
+  </div>
 </div>
 
 <div class="new-source-wrapper">

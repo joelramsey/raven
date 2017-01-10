@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MdCardModule, MdIconModule } from '@angular/material';
+import { MdCardModule, MdIconModule, MdTooltipModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Angular2DataTableModule } from 'angular2-data-table/release/index';
 
@@ -21,6 +21,7 @@ import { TreeMapAdapterPipe } from './pipes/tree-map-adapter.pipe';
     ReactiveFormsModule,
     MdCardModule,
     MdIconModule,
+    MdTooltipModule,
     Angular2DataTableModule,
     NgGridModule
   ],

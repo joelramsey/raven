@@ -8,6 +8,7 @@ import {
   ProjectDaoService,
   UserDaoService,
   SourceDaoService,
+  ProjectExportService,
   ObservableResultHandlerService,
   AuthGuard,
   AntiAuthGuard
@@ -30,6 +31,7 @@ import {
     ProjectDaoService,
     SourceDaoService,
     UserDaoService,
+    ProjectExportService,
     ObservableResultHandlerService,
     AuthGuard,
     AntiAuthGuard

@@ -4,11 +4,24 @@
             <span *ngIf="!editing">{{project.name}}</span>
 
             <button *ngIf="!editing"
+                    [md-tooltip]="'Launch'"
+                    tooltip-position="below"
                     md-icon-button
-                    class="launch-button"
+                    class="project-button"
                     type="button"
                     (click)="launch()">
                 <md-icon>launch</md-icon>
+            </button>
+
+            <button *ngIf="!editing"
+                    md-icon-button
+                    [disabled]="true"
+                    [md-tooltip]="'Export'"
+                    tooltip-position="below"
+                    class="project-button"
+                    type="button"
+                    (click)="exportProject()">
+                <md-icon>file_download</md-icon>
             </button>
 
             <md-input *ngIf="editing"
