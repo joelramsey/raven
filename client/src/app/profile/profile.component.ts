@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   
 
   constructor(private _userDao: UserDaoService,
+              private _observableResultHandler: ObservableResultHandlerService,
               private _errorHandler: ObservableResultHandlerService) {
   }
 
@@ -28,5 +29,43 @@ export class ProfileComponent implements OnInit {
         this._errorHandler.failure(error);
       }
     );
+  }
+  
+  save() {
+    this._userDao.updateUser(this.user).subscribe((user: UserDetails) => {
+      this._observableResultHandler.success('User profile updated.');
+    }, (error: any) => {
+      this._observableResultHandler.failure(error);
+    });
+  }
+
+  /**
+   * Gets a display name for a user; based on first
+   * name, but defaults to e-mail if no first name
+   * exists.
+   * 
+   * @returns {string}
+   */
+  get displayName() {
+    
+    if (this.user) {
+      let displayName = this.user.firstName || this.user.uid;
+      
+      if (!displayName) {
+        return '';
+      }
+
+      // If it ends in 's', only add apostrophe
+      //
+      if (displayName.lastIndexOf('s') === displayName.length - 1) {
+        displayName += '\'';
+      } else {
+        displayName += '\'s';
+      }
+      
+      return displayName;
+    } else {
+      return '';
+    }
   }
 }

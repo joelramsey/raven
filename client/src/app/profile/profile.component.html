@@ -1,1 +1,42 @@
-{{user.uid}}
+  <md-card>
+
+    <md-card-title>
+      {{displayName}} Profile
+    </md-card-title>
+
+    <md-card-content>
+
+      <form class="profile-data-wrapper" *ngIf="user">
+
+        <div class="form-control">
+          <md-input required
+                    name="firstName"
+                    [(ngModel)]="user.firstName"
+                    placeholder="First Name"
+                    autofocus></md-input>
+        </div>
+
+        <div class="form-control">
+          <md-input required
+                    name="lastName"
+                    [(ngModel)]="user.lastName"
+                    placeholder="Last Name"></md-input>
+        </div>
+
+        <div class="form-control">
+          <md-input required
+                    name="email"
+                    [(ngModel)]="user.email"
+                    placeholder="E-mail"></md-input>
+        </div>
+
+      </form>
+
+    </md-card-content>
+
+    <md-card-actions align="end">
+      <button md-button color="primary"
+              (click)="save()"
+              type="submit">Save</button>
+    </md-card-actions>
+  </md-card>
