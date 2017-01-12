@@ -13,7 +13,6 @@ import { ProjectCardComponent } from './project-card/project-card.component';
     MdButtonModule,
     MdInputModule,
     MdIconModule,
-    MdButtonModule,
     MdTooltipModule,
     FormsModule
   ],

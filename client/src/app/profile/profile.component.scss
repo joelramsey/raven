@@ -1,0 +1,15 @@
+div {
+  &.profile-data-wrapper {
+    display: block;
+  }
+
+  &.form-control {
+    width: 100%;
+  }
+}
+
+md-input {
+  width: 100%;
+  max-width: 300px;
+  margin-top: 20px;
+}
