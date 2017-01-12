@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123055313) do
+ActiveRecord::Schema.define(version: 20170112144419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 20161123055313) do
     t.datetime "updated_at",  null: false
     t.string   "document"
     t.string   "picture"
-    t.index ["user_id"], name: "index_items_on_user_id", using: :btree
     t.index ["project_id"], name: "index_items_on_project_id", using: :btree
+    t.index ["user_id"], name: "index_items_on_user_id", using: :btree
   end
 
   create_table "notes", force: :cascade do |t|
@@ -59,16 +59,24 @@ ActiveRecord::Schema.define(version: 20161123055313) do
   end
 
   create_table "records", force: :cascade do |t|
-    t.string   "result",     null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "result",                       null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "original_name"
     t.integer  "project_id"
     t.integer  "user_id"
     t.string   "title"
-    t.boolean  "visible", default: true
+    t.boolean  "visible",       default: true
     t.index ["project_id"], name: "index_records_on_project_id", using: :btree
     t.index ["user_id"], name: "index_records_on_user_id", using: :btree
+  end
+
+  create_table "resolutions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "entities"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_resolutions_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -101,8 +109,8 @@ ActiveRecord::Schema.define(version: 20161123055313) do
   end
 
   add_foreign_key "documents", "items"
-  add_foreign_key "items", "users"
   add_foreign_key "items", "projects"
+  add_foreign_key "items", "users"
   add_foreign_key "notes", "projects"
   add_foreign_key "projects", "users"
   add_foreign_key "records", "projects"
