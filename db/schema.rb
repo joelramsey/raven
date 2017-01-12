@@ -113,5 +113,6 @@ ActiveRecord::Schema.define(version: 20170112144419) do
   add_foreign_key "items", "users"
   add_foreign_key "notes", "projects"
   add_foreign_key "projects", "users"
+  add_foreign_key "resolutions", "users"
   add_foreign_key "records", "projects"
 end

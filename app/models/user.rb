@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
 
   has_many :projects
   has_many :records
+  has_many :resolutions
 end

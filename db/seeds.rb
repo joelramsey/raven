@@ -14,20 +14,27 @@ require 'faker'
 
 #Create Users
   user = User.create!({
-    name:     Faker::Name.name,
+    last_name:     'ramsey',
+    first_name:    'joel', 
     provider: 'email',
     uid: 	  '',
-    email:    Faker::Internet.email,
-    password: Faker::Lorem.characters(10)
+    email:    'joel@me.com',
+    password: 'joelthepole'
     })
-users = User.all
+  users = User.all
 
  # Create Projects
-   project = user.projects.create!(
+  project = user.projects.create!(
      name:         Faker::Lorem.sentence,
      description:  Faker::Lorem.paragraph
-   )
- projects = Project.all
+  )
+  projects = Project.all
+
+ # Create Resolutions
+  resolution = user.resolutions.create!(
+     entities:     Faker::Lorem.sentence 
+  )
+  resolutions = Resolution.all
 
  # Create Records
  20.times do
@@ -40,4 +47,5 @@ users = User.all
  puts "Seeding finished"
  puts "#{User.count} users created"
  puts "#{Project.count} projects created"
+ puts "#{Resolution.count} resolutions created"
  puts "#{Record.count} records created"
