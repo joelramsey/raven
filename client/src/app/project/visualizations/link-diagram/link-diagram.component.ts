@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, SimpleChanges, EventEmitter } from '@angular/core';
 import * as d3 from 'd3';
 
 import { LinkDiagramDatum } from './link-diagram-datum.interface';
@@ -11,6 +11,7 @@ import { LinkDiagramDatum } from './link-diagram-datum.interface';
 export class LinkDiagramComponent implements OnInit {
 
   @Input() data:LinkDiagramDatum;
+  @Output() click:EventEmitter<any> = new EventEmitter();
 
   private _svg;
   private _container;
@@ -84,6 +85,9 @@ export class LinkDiagramComponent implements OnInit {
     var node = this._container.selectAll('.node')
       .data(this.data.nodes)
       .enter().append('circle')
+      .on('click', (d) => {
+        this.click.emit(d);
+      })
       .attr('class', 'node')
       .attr('r', 5)
       .style('fill', function (d:any) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import * as d3 from 'd3';
 
 import { TreeMapDatum } from './tree-map-datum.interface';
@@ -11,6 +11,8 @@ import { TreeMapDatum } from './tree-map-datum.interface';
 export class TreeMapComponent implements OnInit, OnChanges {
 
   @Input() data:TreeMapDatum;
+  @Output() click:EventEmitter<any> = new EventEmitter();
+  
   private _div;
 
   constructor() {
@@ -58,6 +60,9 @@ export class TreeMapComponent implements OnInit, OnChanges {
     var node = nodeData.enter()
       .append('div')
       .attr('class', 'node')
+      .on('click', (d) => {
+        this.click.emit(d);
+      })
       .call(position)
       .style('background', function (d:any) {
         return d.children ? color(d.name) : null;

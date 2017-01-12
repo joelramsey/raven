@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { SourcesListModule } from './sources-list/sources-list.module';
 import { SourcePillModule } from './source-pill/source-pill.module';
+import { EntityCardModule } from './entity-card/entity-card.module';
+
 import {
   ProjectDaoService,
   UserDaoService,
@@ -23,7 +25,8 @@ import {
   exports: [
     CommonModule,
     SourcesListModule,
-    SourcePillModule
+    SourcePillModule,
+    EntityCardModule
   ],
   providers: [
     ProjectDaoService,
