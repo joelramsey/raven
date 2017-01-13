@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { EntityCardModel } from '../models/index';
 
 @Component({
   selector: 'rvn-entity-card',
@@ -7,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EntityCardComponent implements OnInit {
 
+  @Input() public entity: EntityCardModel;
+  
   constructor() { }
 
   ngOnInit() {

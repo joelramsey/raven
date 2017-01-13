@@ -58,6 +58,12 @@ div {
     width: 100%;
     margin-bottom: 10px;
   }
+
+  &.floating-entity-card {
+    position: absolute;
+    z-index: 2;
+    transition: top 0.2s, left 0.2s;
+  }
 }
 
 textarea {

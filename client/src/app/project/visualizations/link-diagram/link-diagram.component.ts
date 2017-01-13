@@ -11,7 +11,7 @@ import { LinkDiagramDatum } from './link-diagram-datum.interface';
 export class LinkDiagramComponent implements OnInit {
 
   @Input() data:LinkDiagramDatum;
-  @Output() click:EventEmitter<any> = new EventEmitter();
+  @Output() entityClick:EventEmitter<any> = new EventEmitter();
 
   private _svg;
   private _container;
@@ -86,7 +86,7 @@ export class LinkDiagramComponent implements OnInit {
       .data(this.data.nodes)
       .enter().append('circle')
       .on('click', (d) => {
-        this.click.emit(d);
+        this.entityClick.emit(d);
       })
       .attr('class', 'node')
       .attr('r', 5)

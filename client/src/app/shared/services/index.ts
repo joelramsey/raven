@@ -7,3 +7,4 @@ export * from './auth-guard.service';
 export * from './anti-auth-guard.service';
 export * from './raven-file-uploader.service';
 export * from './initial-navigation.service';
+export * from './window-ref.service';

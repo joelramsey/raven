@@ -11,7 +11,7 @@ import { TreeMapDatum } from './tree-map-datum.interface';
 export class TreeMapComponent implements OnInit, OnChanges {
 
   @Input() data:TreeMapDatum;
-  @Output() click:EventEmitter<any> = new EventEmitter();
+  @Output() entityClick:EventEmitter<any> = new EventEmitter();
   
   private _div;
 
@@ -61,7 +61,7 @@ export class TreeMapComponent implements OnInit, OnChanges {
       .append('div')
       .attr('class', 'node')
       .on('click', (d) => {
-        this.click.emit(d);
+        this.entityClick.emit(d);
       })
       .call(position)
       .style('background', function (d:any) {

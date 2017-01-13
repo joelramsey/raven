@@ -12,6 +12,7 @@ import {
   ProjectExportService,
   ObservableResultHandlerService,
   InitialNavigationService,
+  WindowRefService,
   AuthGuard,
   AntiAuthGuard
 } from './services/index';
@@ -35,6 +36,7 @@ import {
     ProjectExportService,
     ObservableResultHandlerService,
     InitialNavigationService,
+    WindowRefService,
     AuthGuard,
     AntiAuthGuard
   ]
