@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SourcesListModule } from './sources-list/sources-list.module';
 import { SourcePillModule } from './source-pill/source-pill.module';
 import { EntityCardModule } from './entity-card/entity-card.module';
+import { SourcePreviewModule } from './source-preview/source-preview.module';
 
 import {
   ProjectDaoService,
@@ -21,13 +22,15 @@ import {
   imports: [
     CommonModule,
     SourcesListModule,
-    SourcePillModule
+    SourcePillModule,
+    SourcePreviewModule
   ],
   exports: [
     CommonModule,
     SourcesListModule,
     SourcePillModule,
-    EntityCardModule
+    EntityCardModule,
+    SourcePreviewModule
   ],
   providers: [
     ProjectDaoService,

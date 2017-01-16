@@ -62,7 +62,8 @@ export class TreeMapAdapterPipe implements PipeTransform {
           rows[typeIndexMap[entity.type]].children.push({
             name: entity.text,
             size: parseInt(entity.count),
-            entity: entity
+            entity: entity,
+            source: source
           });
         });
       }

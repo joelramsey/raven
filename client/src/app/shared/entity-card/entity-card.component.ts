@@ -16,4 +16,12 @@ export class EntityCardComponent implements OnInit {
   ngOnInit() {
   }
 
+  get entityCount(): string|number {
+
+    if (this.entity) {
+      return this.entity.weight || this.entity.size || 'N/A';
+    }
+    
+    return null;
+  }
 }

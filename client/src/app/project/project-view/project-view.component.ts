@@ -127,7 +127,6 @@ export class ProjectViewComponent implements OnInit {
   showEntityCardFromLinkDiagram($event:any) {
     this.cardX = $event.x + 'px';
     this.cardY = $event.y + 'px';
-    console.log($event);
   }
 
   updateEntityFromLinkDiagram($event:any) {

@@ -6,9 +6,10 @@
     </md-card-title>
 
     <md-card-content>
-      <p>
-        entity-card works!
-      </p>
+      <md-list>
+        <md-list-item>Occurrences: {{entityCount}}</md-list-item>
+        <rvn-source-preview [source]="entity?.source"></rvn-source-preview>
+      </md-list>
     </md-card-content>
   </md-card>
 </div>
