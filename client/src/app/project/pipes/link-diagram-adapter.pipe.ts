@@ -60,7 +60,7 @@ export class LinkDiagramAdapterPipe implements PipeTransform {
                   name: entity.text,
                   group: entity.type,
                   entity: entity,
-                  source: source
+                  sources: [source]
                 });
               }
             });

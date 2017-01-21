@@ -1,0 +1,22 @@
+div {
+  &.drawer-toggle {
+    cursor: pointer;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+
+  &.drawer-content {
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    white-space: normal;
+  };
+}
+
+md-icon {
+  text-align: center;
+  vertical-align: middle;
+}

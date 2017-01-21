@@ -1,3 +1,13 @@
-<p>
-  source-preview works!
-</p>
+<div class="drawer-toggle"
+     (click)="toggleDrawer()"
+     [md-tooltip]="source.title"
+     tooltip-position="below"><md-icon [@expandedState]="expandedState">keyboard_arrow_right</md-icon>{{source.title}}</div>
+
+<div class="drawer-content"
+     @sourceState
+     *ngIf="expanded">
+
+  <p>
+    {{source.record.result.text}}
+  </p>
+</div>

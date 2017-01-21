@@ -5,5 +5,5 @@ export interface TreeMapDatum {
   children?: Array<TreeMapDatum>;
   entity?: AlchemyEntity;
   size?: number;
-  source?: Source;
+  sources?: Array<Source>;
 }

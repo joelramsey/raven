@@ -4,7 +4,7 @@ export interface  LinkDiagramNode {
   name: string;
   entity: AlchemyArgumentEntity;
   group: string|number;
-  source?: Source;
+  sources?: Array<Source>;
 }
 
 export interface LinkDiagramLink {

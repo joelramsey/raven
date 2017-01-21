@@ -4,5 +4,5 @@ export interface EntityCardModel {
   name: string;
   weight: number|string;
   size: number|string;
-  source: Source;
+  sources: Array<Source>;
 }

@@ -1,5 +1,18 @@
 div {
+
   &.entity-card-wrapper {
     white-space: nowrap;
+    max-width: 600px;
+    min-width: 200px;
+  }
+
+  &.entity-datum {
+    margin-top: 10px;
+  }
+}
+
+p {
+  &.card-preview {
+    margin-top: 15px;
   }
 }
