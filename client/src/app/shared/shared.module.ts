@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { SourcesListModule } from './sources-list/sources-list.module';
 import { SourcePillModule } from './source-pill/source-pill.module';
+import { EntityCardModule } from './entity-card/entity-card.module';
+import { SourcePreviewModule } from './source-preview/source-preview.module';
+import { SharedPipesModule } from './pipes/shared-pipes.module';
+
 import {
   ProjectDaoService,
   UserDaoService,
@@ -10,6 +14,7 @@ import {
   ProjectExportService,
   ObservableResultHandlerService,
   InitialNavigationService,
+  WindowRefService,
   AuthGuard,
   AntiAuthGuard
 } from './services/index';
@@ -18,12 +23,16 @@ import {
   imports: [
     CommonModule,
     SourcesListModule,
-    SourcePillModule
+    SourcePillModule,
+    SourcePreviewModule
   ],
   exports: [
     CommonModule,
     SourcesListModule,
-    SourcePillModule
+    SourcePillModule,
+    EntityCardModule,
+    SourcePreviewModule,
+    SharedPipesModule
   ],
   providers: [
     ProjectDaoService,
@@ -32,6 +41,7 @@ import {
     ProjectExportService,
     ObservableResultHandlerService,
     InitialNavigationService,
+    WindowRefService,
     AuthGuard,
     AntiAuthGuard
   ]

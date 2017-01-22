@@ -37,6 +37,10 @@ span {
       }
     }
   }
+
+  &.highlight {
+    background-color: $highlight-color;
+  }
 }
 
 a {
@@ -144,6 +148,7 @@ div {
       overflow: hidden;
       position: absolute;
       text-indent: 2px;
+      cursor: pointer;
     }
   }
 
@@ -151,6 +156,7 @@ div {
     .node {
       stroke: #fff;
       stroke-width: 1.5px;
+      cursor: pointer;
     }
 
     .link {

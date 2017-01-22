@@ -57,8 +57,11 @@ export class LinkDiagramAdapterPipe implements PipeTransform {
                 nodeIds.push(entity.id);
                 nodeIdIndexMap[entity.id] = result.nodes.length;
                 result.nodes.push({
-                  name: entity.text + ' (' + entity.type + ')',
-                  group: entity.type
+                  name: entity.text,
+                  group: entity.type,
+                  type: entity.type,
+                  entity: entity,
+                  sources: [source]
                 });
               }
             });

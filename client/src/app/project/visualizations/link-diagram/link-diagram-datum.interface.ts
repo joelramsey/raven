@@ -1,6 +1,11 @@
+import { AlchemyArgumentEntity, Source } from '../../../shared/models/index';
+
 export interface  LinkDiagramNode {
   name: string;
+  entity: AlchemyArgumentEntity;
   group: string|number;
+  type?: string;
+  sources?: Array<Source>;
 }
 
 export interface LinkDiagramLink {

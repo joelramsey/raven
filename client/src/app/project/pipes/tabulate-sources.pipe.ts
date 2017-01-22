@@ -36,7 +36,8 @@ export class TabulateSourcesPipe implements PipeTransform {
           rows.push({
             name: concept.text,
             type: 'Concept',
-            relevance: concept.relevance
+            relevance: concept.relevance,
+            concept: concept
           })
         });
       }
@@ -46,7 +47,8 @@ export class TabulateSourcesPipe implements PipeTransform {
           rows.push({
             name: entity.text,
             type: entity.type,
-            sentiment: entity.sentiment.type
+            sentiment: entity.sentiment.type,
+            entity: entity
           })
         });
       }
