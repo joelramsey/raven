@@ -34,6 +34,7 @@ import { Source } from '../models/index';
 export class SourcePreviewComponent implements OnInit {
 
   @Input() source: Source;
+  @Input() highlight: string;
   
   public expanded: boolean;
   

@@ -7,7 +7,6 @@
      @sourceState
      *ngIf="expanded">
 
-  <p>
-    {{source.record.result.text}}
+  <p [innerHtml]="source.record.result.text | textHighlight : highlight">
   </p>
 </div>

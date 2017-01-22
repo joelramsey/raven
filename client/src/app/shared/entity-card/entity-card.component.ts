@@ -24,4 +24,13 @@ export class EntityCardComponent implements OnInit {
     
     return null;
   }
+  
+  get entityType(): string {
+
+    if (this.entity) {
+      return this.entity.type;
+    }
+
+    return '';
+  }
 }

@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { MdTooltipModule, MdIconModule } from '@angular/material';
 
 import { SourcePreviewComponent } from './source-preview.component';
+import { SharedPipesModule } from '../pipes/shared-pipes.module';
 
 @NgModule({
   imports: [
     CommonModule,
     MdTooltipModule,
-    MdIconModule
+    MdIconModule,
+    SharedPipesModule
   ],
   declarations: [
     SourcePreviewComponent

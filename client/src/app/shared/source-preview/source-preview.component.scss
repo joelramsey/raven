@@ -1,3 +1,8 @@
+md-icon {
+  text-align: center;
+  vertical-align: middle;
+}
+
 div {
   &.drawer-toggle {
     cursor: pointer;
@@ -14,9 +19,4 @@ div {
     overflow-y: auto;
     white-space: normal;
   };
-}
-
-md-icon {
-  text-align: center;
-  vertical-align: middle;
 }

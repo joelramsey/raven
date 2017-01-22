@@ -6,6 +6,7 @@
     </md-card-title>
 
     <md-card-content>
+      <div class="entity-datum">Type: {{entityType}}</div>
       <div class="entity-datum">Occurrences: {{entityCount}}</div>
       <div class="entity-datum">Sources: {{entity?.sources?.length || 0}}</div>
 
@@ -13,7 +14,7 @@
         <p class="card-preview"
            *ngFor="let source of entity?.sources">
 
-          <rvn-source-preview [source]="source"></rvn-source-preview>
+          <rvn-source-preview [source]="source" [highlight]="entity?.name"></rvn-source-preview>
         </p>
       </div>
 

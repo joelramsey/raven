@@ -4,6 +4,7 @@ export interface  LinkDiagramNode {
   name: string;
   entity: AlchemyArgumentEntity;
   group: string|number;
+  type?: string;
   sources?: Array<Source>;
 }
 

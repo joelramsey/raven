@@ -5,6 +5,7 @@ import { SourcesListModule } from './sources-list/sources-list.module';
 import { SourcePillModule } from './source-pill/source-pill.module';
 import { EntityCardModule } from './entity-card/entity-card.module';
 import { SourcePreviewModule } from './source-preview/source-preview.module';
+import { SharedPipesModule } from './pipes/shared-pipes.module';
 
 import {
   ProjectDaoService,
@@ -30,7 +31,8 @@ import {
     SourcesListModule,
     SourcePillModule,
     EntityCardModule,
-    SourcePreviewModule
+    SourcePreviewModule,
+    SharedPipesModule
   ],
   providers: [
     ProjectDaoService,
