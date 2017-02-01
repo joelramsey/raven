@@ -8,15 +8,16 @@ import { SourcePreviewModule } from './source-preview/source-preview.module';
 import { SharedPipesModule } from './pipes/shared-pipes.module';
 
 import {
-  ProjectDaoService,
-  UserDaoService,
-  SourceDaoService,
-  ProjectExportService,
-  ObservableResultHandlerService,
-  InitialNavigationService,
-  WindowRefService,
+  AntiAuthGuard,
   AuthGuard,
-  AntiAuthGuard
+  InitialNavigationService,
+  ObservableResultHandlerService,
+  ProjectDaoService,
+  ProjectExportService,
+  ResolutionDaoService,
+  SourceDaoService,
+  UserDaoService,
+  WindowRefService
 } from './services/index';
 
 @NgModule({
@@ -28,22 +29,23 @@ import {
   ],
   exports: [
     CommonModule,
-    SourcesListModule,
-    SourcePillModule,
     EntityCardModule,
+    SharedPipesModule,
+    SourcePillModule,
     SourcePreviewModule,
-    SharedPipesModule
+    SourcesListModule
   ],
   providers: [
+    AntiAuthGuard,
+    AuthGuard,
+    InitialNavigationService,
+    ObservableResultHandlerService,
     ProjectDaoService,
+    ProjectExportService,
+    ResolutionDaoService,
     SourceDaoService,
     UserDaoService,
-    ProjectExportService,
-    ObservableResultHandlerService,
-    InitialNavigationService,
-    WindowRefService,
-    AuthGuard,
-    AntiAuthGuard
+    WindowRefService
   ]
 })
 export class SharedModule {

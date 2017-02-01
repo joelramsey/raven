@@ -61,7 +61,8 @@ export class LinkDiagramAdapterPipe implements PipeTransform {
                   group: entity.type,
                   type: entity.type,
                   entity: entity,
-                  sources: [source]
+                  sources: [source],
+                  alternateNames: [entity.text]
                 });
               }
             });

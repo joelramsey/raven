@@ -3,8 +3,8 @@ import { AbstractControl, FormControl } from '@angular/forms';
 import * as Moment from 'moment';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-import { Project, Source, EntityCardModel } from '../../shared/models/index';
-import { ProjectDaoService } from '../../shared/services/index';
+import { Project, Source, EntityCardModel, Resolution } from '../../shared/models/index';
+import { ProjectDaoService, ResolutionDaoService } from '../../shared/services/index';
 
 @Component({
   selector: 'rvn-project-view',
@@ -14,7 +14,7 @@ import { ProjectDaoService } from '../../shared/services/index';
     trigger('entityCardInOut', [
       state('*', style({width: '*', height: '*', opacity: 1})),
       transition('void => *', [
-        style({width: 10, opacity: 0}),
+        style({width: 0, opacity: 0}),
         group([
           animate('0.2s 0.2s ease', style({
             width: '*',
@@ -32,7 +32,7 @@ import { ProjectDaoService } from '../../shared/services/index';
             width: 0,
             height: 0
           })),
-          animate('0.2s 0.2s ease', style({
+          animate('0.2s ease', style({
             opacity: 0
           }))
         ])
@@ -48,6 +48,7 @@ export class ProjectViewComponent implements OnInit {
   public saveStatus:string;
   public hideSaveMessage:boolean = false;
   public activeEntity:EntityCardModel;
+  public resolutions:Array<Resolution>;
 
   private _noteChangeDebounceTime:number = 800;
   private _hideMessageTime:number = 4 * 1000;
@@ -56,10 +57,16 @@ export class ProjectViewComponent implements OnInit {
   cardX = '0';
   cardY = '0';
 
-  constructor(private _projectDaoService:ProjectDaoService) {
+  constructor(private _projectDaoService:ProjectDaoService,
+              private _resolutionDaoService: ResolutionDaoService) {
   }
 
   ngOnInit() {
+
+    // Fetch entity resolution information
+    //
+    this._resolutionDaoService.getResolutions()
+      .subscribe((resolutions: Array<Resolution>) => this.resolutions = resolutions);
 
     // Subscribe to and update project notes value.
     // Save the project soon after typing stops.
@@ -112,7 +119,7 @@ export class ProjectViewComponent implements OnInit {
             this.saveStatus = 'An error occurred trying to save your notes. If you want to keep them, it\'s probably ' +
               'a good idea to copy them elsewhere and try again later.';
           });
-      })
+      });
   }
 
   showEntityCardFromTreeMap($event:any) {
@@ -131,5 +138,9 @@ export class ProjectViewComponent implements OnInit {
 
   updateEntityFromLinkDiagram($event:any) {
     this.activeEntity = $event;
+  }
+  
+  closeCard() {
+    this.activeEntity = null;
   }
 }

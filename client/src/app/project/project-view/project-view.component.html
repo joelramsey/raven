@@ -5,6 +5,7 @@
      [style.top]="cardY">
 
   <rvn-entity-card
+      (close)="closeCard()"
       [entity]="activeEntity"></rvn-entity-card>
 </div>
 
@@ -14,7 +15,7 @@
       <md-card>
         <md-card-title>Tree Map</md-card-title>
         <rvn-tree-map
-            [data]="visibleSources | toTreeMap"
+            [data]="visibleSources | toTreeMap : resolutions"
             (entityClick)="updateEntityFromTreeMap($event)"></rvn-tree-map>
       </md-card>
     </div>
@@ -24,7 +25,7 @@
     <md-card>
       <md-card-title>Entity Relationships</md-card-title>
       <rvn-link-diagram
-          [data]="visibleSources | toLinkDiagram"
+          [data]="visibleSources | toLinkDiagram : resolutions"
           (entityClick)="updateEntityFromLinkDiagram($event)"
       ></rvn-link-diagram>
     </md-card>
@@ -54,7 +55,8 @@
 <div class="col triple-col">
 
   <div class="card-wrapper">
-    <rvn-data-table [rows]="visibleSources | tabulateSources"></rvn-data-table>
+    <rvn-data-table
+        [rows]="visibleSources | tabulateSources : resolutions"></rvn-data-table>
   </div>
 
 </div>

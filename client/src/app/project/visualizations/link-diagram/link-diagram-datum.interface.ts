@@ -6,6 +6,7 @@ export interface  LinkDiagramNode {
   group: string|number;
   type?: string;
   sources?: Array<Source>;
+  alternateNames?: Array<string>;
 }
 
 export interface LinkDiagramLink {

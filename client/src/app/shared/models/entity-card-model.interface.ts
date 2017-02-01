@@ -6,4 +6,5 @@ export interface EntityCardModel {
   weight: number|string;
   size: number|string;
   sources: Array<Source>;
+  alternateNames: Array<string>;
 }

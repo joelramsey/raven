@@ -4,7 +4,8 @@ export interface TreeMapDatum {
   name: string;
   type?: string;
   children?: Array<TreeMapDatum>;
-  entity?: AlchemyEntity;
+  entities?: Array<AlchemyEntity>;
+  alternateNames?: Array<string>;
   size?: number;
   sources?: Array<Source>;
 }

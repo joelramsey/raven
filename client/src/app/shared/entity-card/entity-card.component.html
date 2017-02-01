@@ -2,19 +2,35 @@
   <md-card>
 
     <md-card-title>
-      {{entity?.name}}
+      <div class="flex-between">
+        <span>
+          {{entity?.name}}
+        </span>
+        <button md-icon-button
+                (click)="close.emit()">
+          <md-icon>remove</md-icon>
+        </button>
+      </div>
     </md-card-title>
 
     <md-card-content>
       <div class="entity-datum">Type: {{entityType}}</div>
       <div class="entity-datum">Occurrences: {{entityCount}}</div>
+      <div class="alternate-names flex-between" *ngIf="showAlternateNames">
+        <div class="entity-datum">Alternate Names: {{alternateNames}}</div>
+        <md-button-toggle-group #group="mdButtonToggleGroup" (change)="updateAlternateName($event)">
+          <md-button-toggle *ngFor="let name of entity?.alternateNames" value="{{name}}" [checked]="(name == alternateName)">
+            {{name}}
+          </md-button-toggle>
+        </md-button-toggle-group>
+      </div>
       <div class="entity-datum">Sources: {{entity?.sources?.length || 0}}</div>
 
       <div>
         <p class="card-preview"
            *ngFor="let source of entity?.sources">
 
-          <rvn-source-preview [source]="source" [highlight]="entity?.name"></rvn-source-preview>
+          <rvn-source-preview [source]="source" [highlight]="alternateName"></rvn-source-preview>
         </p>
       </div>
 
