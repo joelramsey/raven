@@ -18,11 +18,11 @@ export class LinkDiagramAdapterPipe implements PipeTransform {
    * of #{@link DataTableRow} instances based on Alchemy concepts
    * and entities.
    *
-   * @param value
+   * @param sources
    * @param args
    * @returns {any}
    */
-  transform(value:Array<Source>, args?:any):LinkDiagramDatum {
+  transform(sources:Array<Source>, args?:any):LinkDiagramDatum {
 
     let result:LinkDiagramDatum = {
       nodes: [],
@@ -32,11 +32,11 @@ export class LinkDiagramAdapterPipe implements PipeTransform {
     let nodeIds:Array<string> = [];
     let nodeIdIndexMap:any = {};
 
-    if (!value) {
+    if (!sources) {
       return result;
     }
 
-    value.reduce((res:LinkDiagramDatum, source:Source) => {
+    sources.reduce((res:LinkDiagramDatum, source:Source) => {
 
       // If no record, return immediately
       //

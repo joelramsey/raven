@@ -12,11 +12,11 @@ export class TreeMapAdapterPipe implements PipeTransform {
    * of #{@link DataTableRow} instances based on Alchemy concepts
    * and entities.
    *
-   * @param value
+   * @param sources
    * @param resolutions
    * @returns {any}
    */
-  transform(value: Array<Source>, resolutions: Array<Resolution>): TreeMapDatum {
+  transform(sources: Array<Source>, resolutions: Array<Resolution>): TreeMapDatum {
 
     let types: Array<string> = [];
     let typeIndexMap: any = {};
@@ -47,11 +47,11 @@ export class TreeMapAdapterPipe implements PipeTransform {
       children: []
     };
     
-    if (!value) {
+    if (!sources) {
       return result;
     }
     
-    value.reduce((rows: Array<TreeMapDatum>, source: Source) => {
+    sources.reduce((rows: Array<TreeMapDatum>, source: Source) => {
     
       // If no record, return immediately
       //
@@ -104,14 +104,14 @@ export class TreeMapAdapterPipe implements PipeTransform {
     //
     Object.keys(nameEntityMap).forEach((key: string) => {
       Object.keys(nameEntityMap[key]).forEach((entityName: string) => {
-        result.children[typeIndexMap[key]].children.push(this.deconflict(entityName, key, nameEntityMap[key][entityName]));
+        result.children[typeIndexMap[key]].children.push(this.deconflict(key, nameEntityMap[key][entityName]));
       });
     });
     
     return result;
   }
 
-  deconflict(entityName: string, type: string, data: Array<TreeMapDatum>): TreeMapDatum {
+  deconflict(type: string, data: Array<TreeMapDatum>): TreeMapDatum {
 
     // If there's only one, no need to deconflict
     //
