@@ -8,15 +8,12 @@
     [limit]="50"
     [scrollbarH]="true"
     [cssClasses]="cssClasses"
-    [detailRowHeight]="100"
+    [detailRowHeight]="'auto'"
     [rowHeight]="'auto'">
 
   <datatable-row-detail-template>
     <template let-row="row">
-      <div style="padding-left:35px;">
-        <div><strong>Sentence</strong></div>
-        <div>Hello!</div>
-      </div>
+      <rvn-entity-card [entity]="row"></rvn-entity-card>
     </template>
   </datatable-row-detail-template>
   <datatable-column

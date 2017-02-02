@@ -46,7 +46,7 @@ export class TreeMapComponent implements OnInit, OnChanges {
       .size([width, height])
       .sticky(true)))
       .value(function (d) {
-        return d.size;
+        return d.count;
       });
 
     this._div.style('position', 'relative')
@@ -80,7 +80,7 @@ export class TreeMapComponent implements OnInit, OnChanges {
         return 1;
       }
         : function (d:any) {
-        return d.size;
+        return d.count;
       };
 
       node

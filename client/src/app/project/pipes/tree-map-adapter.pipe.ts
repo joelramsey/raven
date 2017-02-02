@@ -88,7 +88,7 @@ export class TreeMapAdapterPipe implements PipeTransform {
           //
           nameEntityMap[entity.type][name.toLowerCase()].push({
             name: entity.text,
-            size: parseInt(entity.count),
+            count: parseInt(entity.count),
             entities: [entity],
             type: entity.type,
             sources: [source],
@@ -125,7 +125,7 @@ export class TreeMapAdapterPipe implements PipeTransform {
       
       // Combine size
       //
-      merged.size += datum.size;
+      merged.count += datum.count;
      
       // Add source
       //
@@ -159,7 +159,7 @@ export class TreeMapAdapterPipe implements PipeTransform {
       children: [],
       entities: [],
       alternateNames: [],
-      size: 1,
+      count: 1,
       sources: []
     });
   }

@@ -15,7 +15,7 @@
 
     <md-card-content>
       <div class="entity-datum">Type: {{entityType}}</div>
-      <div class="entity-datum">Occurrences: {{entityCount}}</div>
+      <div class="entity-datum">Occurrences: {{entity.count}}</div>
       <div class="alternate-names flex-between" *ngIf="showAlternateNames">
         <div class="entity-datum">Alternate Names: {{alternateNames}}</div>
         <md-button-toggle-group #group="mdButtonToggleGroup" (change)="updateAlternateName($event)">

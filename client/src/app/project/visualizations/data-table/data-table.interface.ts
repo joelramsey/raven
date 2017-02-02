@@ -3,6 +3,7 @@ import { AlchemyEntity, AlchemyConcept, Source } from '../../../shared/models/in
 export interface DataTableRow {
   name: string;
   type: string;
+  count: number|string;
   alternateNames?: Array<string>;
   sentiment?: string;
   relevance?: string;

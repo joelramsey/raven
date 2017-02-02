@@ -184,7 +184,8 @@ export class TabulateSourcesPipe implements PipeTransform {
       name: entities[0].name,
       type: type,
       entity: entities[0].entity,
-      concept: entities[0].concept
+      concept: entities[0].concept,
+      count: 0
     });
   
     // Set merged attributes
@@ -199,6 +200,7 @@ export class TabulateSourcesPipe implements PipeTransform {
 
     if (!isConcept) {
       deconflictedRow.entity.count = totalCount.toString();
+      deconflictedRow.count = totalCount.toString();
     }
    
     return deconflictedRow;
