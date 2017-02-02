@@ -43,8 +43,9 @@ export class LinkDiagramComponent implements OnInit {
     var color = d3.scale.category20();
 
     var force = d3.layout.force()
-      .charge(-120)
-      .linkDistance(30)
+      .charge(-100)
+      .linkDistance(100)
+      .gravity(0.05)
       .size([width, height]);
 
     var zoom = d3.behavior.zoom()
@@ -84,16 +85,24 @@ export class LinkDiagramComponent implements OnInit {
 
     var node = this._container.selectAll('.node')
       .data(this.data.nodes)
-      .enter().append('circle')
+      .enter().append('g')
       .on('click', (d) => {
         this.entityClick.emit(d);
       })
       .attr('class', 'node')
+      .call(force.drag);
+    
+    node.append('circle')
       .attr('r', 5)
+      .attr('class', 'node')
       .style('fill', function (d:any) {
         return color(<any>d.group);
-      })
-      .call(force.drag);
+      });
+
+    node.append('text')
+      .attr('dx', 12)
+      .attr('dy', '.35em')
+      .text(function(d) { return d.name });
 
     node.append('title')
       .text(function (d:any) {
@@ -114,12 +123,9 @@ export class LinkDiagramComponent implements OnInit {
           return d.target.y;
         });
 
-      node.attr('cx', function (d:any) {
-        return d.x;
-      })
-        .attr('cy', function (d:any) {
-          return d.y;
-        });
+      node.attr('transform', function(d:any) {
+        return 'translate(' + d.x + ',' + d.y + ')';
+      });
     });
   }
 

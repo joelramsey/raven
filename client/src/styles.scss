@@ -142,7 +142,7 @@ div {
 
   .tree-map {
     .node {
-      border: solid 1px white;
+      border: solid 1px $link-diagram-node-color;
       font: 10px sans-serif;
       line-height: 12px;
       overflow: hidden;
@@ -154,13 +154,20 @@ div {
 
   .link-diagram {
     .node {
-      stroke: #fff;
+      stroke: $link-diagram-node-color;
       stroke-width: 1.5px;
       cursor: pointer;
+
+      text {
+        pointer-events: none;
+        font: 11px sans-serif;
+        fill: $subtext-color;
+        stroke-width: 0.3px;
+      }
     }
 
     .link {
-      stroke: #999;
+      stroke: $link-diagram-link-color;
       stroke-opacity: .6;
     }
   }
