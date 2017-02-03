@@ -45,10 +45,10 @@ export class LoginComponent implements OnInit {
 
     // Do log in
     //
-    this._tokenService.signIn(
-      this.login.email,
-      this.login.password
-    ).subscribe(() => {
+    this._tokenService.signIn({
+      email: this.login.email,
+      password: this.login.password
+    }).subscribe(() => {
       this._initialNavigationService.navigate();
     }, (error) => {
       this.errorMessage = error.json().errors;
@@ -59,11 +59,11 @@ export class LoginComponent implements OnInit {
 
     // Do registration
     //
-    this._tokenService.registerAccount(
-      this.registration.email,
-      this.registration.password,
-      this.registration.passwordConfirmation
-    ).subscribe(() => {
+    this._tokenService.registerAccount({
+      email: this.registration.email,
+      password: this.registration.password,
+      passwordConfirmation: this.registration.passwordConfirmation
+    }).subscribe(() => {
       this._initialNavigationService.navigate();
     }, (error: Response) => {
       this.login.password = '';

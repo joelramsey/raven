@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/core/theming/prebuilt/deeppurple-amber.scss';
-@import '../node_modules/angular2-data-table/release/datatable.css';
-@import '../node_modules/angular2-data-table/release/material.css';
+@import '../node_modules/@swimlane/ngx-datatable/release/material.css';
 @import './variables';
 
 [md-mini-fab] {

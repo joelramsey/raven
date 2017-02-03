@@ -2,6 +2,8 @@ import {
   Component, OnInit, Input, ViewChild, style, state, animate, transition, trigger,
   ViewEncapsulation
 } from '@angular/core';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
+
 import { DataTableRow } from './data-table.interface';
 
 @Component({
@@ -24,7 +26,7 @@ import { DataTableRow } from './data-table.interface';
 })
 export class DataTableComponent implements OnInit {
 
-  @ViewChild('rvnDataTable') table;
+  @ViewChild('rvnDataTable') table: DatatableComponent;
   @Input() rows: Array<DataTableRow> = [];
   
   cssClasses = {
@@ -43,7 +45,7 @@ export class DataTableComponent implements OnInit {
   }
 
   toggleExpandRow(row) {
-    this.table.toggleExpandRow(row);
+    this.table.rowDetail.toggleExpandRow(row);
   }
 
   rowExpandedState(state:number) {

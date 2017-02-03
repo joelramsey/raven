@@ -1,4 +1,4 @@
-<datatable
+<ngx-datatable
     #rvnDataTable
     class="material fullscreen expandable"
     [rows]="rows"
@@ -8,29 +8,28 @@
     [limit]="50"
     [scrollbarH]="true"
     [cssClasses]="cssClasses"
-    [detailRowHeight]="'auto'"
     [rowHeight]="'auto'">
 
-  <datatable-row-detail-template>
-    <template let-row="row">
+  <ngx-datatable-row-detail [rowHeight]="'auto'">
+    <template let-row="row" ngx-datatable-row-detail-template>
       <rvn-entity-card [entity]="row"></rvn-entity-card>
     </template>
-  </datatable-row-detail-template>
-  <datatable-column
+  </ngx-datatable-row-detail>
+  <ngx-datatable-column
       [width]="50"
       [resizeable]="false"
       [sortable]="false"
       [draggable]="false"
       [canAutoResize]="false">
-    <template let-row="row">
+    <template let-row="row" ngx-datatable-cell-template>
         <md-icon [@iconExpandTransition]="rowExpandedState(row.$$expanded)"
                  class="clickable-icon"
                  (click)="toggleExpandRow(row)">chevron_right
         </md-icon>
     </template>
-  </datatable-column>
-  <datatable-column name="Name"></datatable-column>
-  <datatable-column name="Type"></datatable-column>
-  <datatable-column name="Sentiment"></datatable-column>
-  <datatable-column name="Relevance"></datatable-column>
-</datatable>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Name"></ngx-datatable-column>
+  <ngx-datatable-column name="Type"></ngx-datatable-column>
+  <ngx-datatable-column name="Sentiment"></ngx-datatable-column>
+  <ngx-datatable-column name="Relevance"></ngx-datatable-column>
+</ngx-datatable>

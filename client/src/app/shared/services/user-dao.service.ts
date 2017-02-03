@@ -46,7 +46,7 @@ export class UserDaoService {
       email: user.email
     };
     
-    return this._http.put(environment.api + '/users/' + user.id, apiUser, {
+    return this._http.put(environment.api + '/users/' + user.id + '.json', apiUser, {
       headers: this._getAuthHeaders()
     })
       .map((response:Response):UserDetails => {

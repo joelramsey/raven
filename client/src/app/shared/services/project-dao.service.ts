@@ -27,7 +27,7 @@ export class ProjectDaoService {
   }
 
   public getProject(id:number):Observable<Project> {
-    return this._http.get(environment.api + '/projects/' + id, {
+    return this._http.get(environment.api + '/projects/' + id + '.json', {
       headers: this._getAuthHeaders()
     })
       .map((response:Response):Project => {
@@ -96,7 +96,7 @@ export class ProjectDaoService {
   }
 
   public saveProject(project:Project):Observable<Project> {
-    return this._http.put(environment.api + '/projects/' + project.id, project, {
+    return this._http.put(environment.api + '/projects/' + project.id + '.json', project, {
       headers: this._getAuthHeaders()
     })
       .map((response:Response):Project => {
@@ -128,7 +128,7 @@ export class ProjectDaoService {
 
   public createProject(project:Project):Observable<Project> {
 
-    return this._http.post(environment.api + '/projects', project, {
+    return this._http.post(environment.api + '/projects.json', project, {
       headers: this._getAuthHeaders()
     })
       .map((response:Response):Project => {

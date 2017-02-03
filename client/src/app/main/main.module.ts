@@ -13,7 +13,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications/components';
   imports: [
     CommonModule,
     MaterialModule.forRoot(),
-    SimpleNotificationsModule,
+    SimpleNotificationsModule.forRoot(),
     ProjectModule,
     ProjectsModule,
     ProfileModule,
