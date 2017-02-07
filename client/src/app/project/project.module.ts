@@ -16,6 +16,8 @@ import { TreeMapAdapterPipe } from './pipes/tree-map-adapter.pipe';
 import { SourceUploaderModule } from './source-uploader/source-uploader.module';
 import { ProjectSourceModule } from './project-source/project-source.module';
 
+import { DraggableDirective } from './directives/index';
+
 @NgModule({
   imports: [
     SharedModule,
@@ -30,6 +32,7 @@ import { ProjectSourceModule } from './project-source/project-source.module';
     ProjectSourceModule
   ],
   declarations: [
+    DraggableDirective,
     ProjectComponent,
     ProjectViewComponent,
     TabulateSourcesPipe,
