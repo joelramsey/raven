@@ -12,7 +12,10 @@ export class TreeMapComponent implements OnInit, OnChanges {
 
   @Input() data:TreeMapDatum;
   @Output() entityClick:EventEmitter<any> = new EventEmitter();
-  
+  @Output() mergeClick:EventEmitter<any> = new EventEmitter();
+
+  public merging: boolean = false;
+  public mergeList: Array<any> = [];
   private _div;
 
   constructor() {
@@ -20,7 +23,7 @@ export class TreeMapComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this._div = d3.select('#chart').append('div');
-    
+
     if (this.data) {
       this._render();
     }
@@ -31,11 +34,11 @@ export class TreeMapComponent implements OnInit, OnChanges {
       this._render();
     }
   }
-  
+
   private _render() {
 
     this._div.html('');
-    
+
     var margin = {top: 0, right: 0, bottom: 0, left: 0},
       width = 960 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
@@ -56,12 +59,43 @@ export class TreeMapComponent implements OnInit, OnChanges {
       .style('top', margin.top + 'px');
 
     var nodeData = this._div.datum(this.data).selectAll('.node').data(treemap.nodes);
-    
-    var node = nodeData.enter()
+
+    let self = this;
+    let node = nodeData.enter()
       .append('div')
       .attr('class', 'node')
-      .on('click', (d) => {
-        this.entityClick.emit(d);
+      .on('click', function(d) {
+        if (!self.merging) {
+
+          // Emit entity click
+          //
+          self.entityClick.emit(d);
+
+        } else if (self.mergeList.indexOf(d) === -1) {
+
+          // Add to merge list
+          //
+          self.mergeList.push(d);
+
+          // Reset styles
+          //
+          d3.select(this)
+            .style('z-index', '' + (1000 + self.mergeList.length))
+            .style('background', 'white')
+            .style('box-shadow', '0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12)')
+            .style('transform', 'scale(1.04)')
+        } else {
+
+          self.mergeList.splice(self.mergeList.indexOf(d), 1);
+
+          // Reset styles
+          //
+          d3.select(this)
+            .style('z-index', '')
+            .style('background', '')
+            .style('box-shadow', '')
+            .style('transform', '')
+        }
       })
       .call(position)
       .style('background', function (d:any) {
@@ -107,4 +141,23 @@ export class TreeMapComponent implements OnInit, OnChanges {
     }
   }
 
+  handleMergeClick() {
+    if (this.merging) {
+      // Send results to service
+      //
+      console.log('send deconfliction to service');
+      console.log(this.mergeList);
+
+      // Reset merge list
+      //
+      this.mergeList = [];
+    } else {
+
+      // Send start merging event for anyone interested
+      //
+      this.mergeClick.emit();
+    }
+
+    this.merging = !this.merging;
+  }
 }

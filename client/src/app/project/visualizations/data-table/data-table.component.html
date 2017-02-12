@@ -12,7 +12,8 @@
 
   <ngx-datatable-row-detail [rowHeight]="'auto'">
     <template let-row="row" ngx-datatable-row-detail-template>
-      <rvn-entity-card [entity]="row"></rvn-entity-card>
+      <rvn-entity-card [entity]="row"
+                       (close)="toggleExpandRow(row)"></rvn-entity-card>
     </template>
   </ngx-datatable-row-detail>
   <ngx-datatable-column

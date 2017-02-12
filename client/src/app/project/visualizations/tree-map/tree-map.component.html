@@ -2,6 +2,14 @@
   <form>
     <label><input type="radio" name="mode" value="size" checked> Size</label>
     <label><input type="radio" name="mode" value="count"> Count</label>
+    <button md-icon-button
+            [md-tooltip]="'Merge Like Entities'"
+            tooltip-position="below"
+            (click)="handleMergeClick()"
+            class="merge-button"
+            type="button">
+      <md-icon>{{merging ? 'save' : 'merge_type'}}</md-icon>
+    </button>
   </form>
 </div>
 

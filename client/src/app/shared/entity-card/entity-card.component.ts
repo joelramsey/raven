@@ -12,6 +12,7 @@ export class EntityCardComponent implements OnInit {
 
   @Input() public entity: EntityCardModel;
   @Output() public close: EventEmitter<any> = new EventEmitter<any>();
+  @Output() public move: EventEmitter<any> = new EventEmitter<any>();
   private _alternateName: string;
   
   constructor() { }
