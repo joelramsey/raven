@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { NotFoundModule } from './not-found/not-found.module';
 import { LoginModule } from './login/login.module';
 import { MainModule } from './main/main.module';
+import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { MainModule } from './main/main.module';
     LoginModule,
     MainModule,
     SharedModule,
-    NotFoundModule
+    NotFoundModule,
+    FroalaEditorModule.forRoot(), 
+    FroalaViewModule.forRoot()
   ],
   providers: [
     Angular2TokenService

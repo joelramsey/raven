@@ -5,29 +5,36 @@
      [style.top]="cardY">
 
   <rvn-entity-card
-      (close)="closeCard()"
-      [entity]="activeEntity"></rvn-entity-card>
+    (close)="closeCard()"
+    [entity]="activeEntity"></rvn-entity-card>
 </div>
 
 <div class="col double-col">
   <div class="card-wrapper row">
-    <div class="tree-map-wrapper">
-      <md-card>
-        <md-card-title>Tree Map</md-card-title>
-        <rvn-tree-map
-            [data]="visibleSources | toTreeMap : resolutions"
-            (entityClick)="updateEntityFromTreeMap($event)"></rvn-tree-map>
-      </md-card>
-    </div>
-  </div>
+    <md-card>
+      <md-card-title id="citations">Citations <a class="fragment-link" (click)="goTo('citations')">
+        <md-icon class="centered">link</md-icon>
+      </a></md-card-title>
 
+      <span style="font-size: 16px; font-family: Arial, Helvetica, sans-serif;">
+        <p>We're currently working on adding a drop-dead simple citation helper to Raven at the moment - in the
+          meantime, we recommend using <a href="https://www.easybib.com" target="_blank">EasyBib</a> to create
+          citations, which can be pasted into the <a (click)="goTo('projectComposer')">Project Composer</a>
+          section below.
+        </p>
+        </span>
+
+    </md-card>
+  </div>
+</div>
+
+<div class="col double-col">
   <div class="card-wrapper row">
     <md-card>
-      <md-card-title>Entity Relationships</md-card-title>
-      <rvn-link-diagram
-          [data]="visibleSources | toLinkDiagram : resolutions"
-          (entityClick)="updateEntityFromLinkDiagram($event)"
-      ></rvn-link-diagram>
+      <md-card-title id="projectComposer">Project Composer <a class="fragment-link" (click)="goTo('projectComposer')">
+        <md-icon class="centered">link</md-icon>
+      </a></md-card-title>
+      <div [froalaEditor]></div>
     </md-card>
   </div>
 </div>
@@ -36,18 +43,48 @@
   <div class="card-wrapper">
     <md-card>
 
-      <md-card-title>
+      <md-card-title id="ideasAndNotes">
         <div class="notes-title-wrapper">
-          <div class="notes-title">Project Notes</div>
+          <div class="notes-title">Ideas and Notes <a class="fragment-link" (click)="goTo('ideasAndNotes')">
+            <md-icon class="centered">link</md-icon>
+          </a></div>
 
           <div class="save-message"
-               [class.hide-save-message]="hideSaveMessage">{{saveStatus}}</div>
+               [class.hide-save-message]="hideSaveMessage">{{saveStatus}}
+          </div>
         </div>
       </md-card-title>
 
-    <textarea placeholder="Add some workspace notes here!"
-              [formControl]="notesControl"
-              [ngModel]="project.notes"></textarea>
+      <textarea placeholder="Add some workspace notes here!"
+                [formControl]="notesControl"
+                [ngModel]="project.notes"></textarea>
+    </md-card>
+  </div>
+</div>
+
+<div class="col double-col">
+  <div class="card-wrapper row">
+    <div class="tree-map-wrapper">
+      <md-card>
+        <md-card-title id="treeMap">Tree Map <a class="fragment-link" (click)="goTo('treeMap')">
+            <md-icon class="centered">link</md-icon>
+          </a></md-card-title>
+        <rvn-tree-map
+          [data]="visibleSources | toTreeMap : resolutions"
+          (entityClick)="updateEntityFromTreeMap($event)"></rvn-tree-map>
+      </md-card>
+    </div>
+  </div>
+
+  <div class="card-wrapper row">
+    <md-card>
+      <md-card-title id="entityRelationships">Entity Relationships <a class="fragment-link" (click)="goTo('entityRelationships')">
+            <md-icon class="centered">link</md-icon>
+          </a></md-card-title>
+      <rvn-link-diagram
+        [data]="visibleSources | toLinkDiagram : resolutions"
+        (entityClick)="updateEntityFromLinkDiagram($event)"
+      ></rvn-link-diagram>
     </md-card>
   </div>
 </div>
@@ -56,7 +93,7 @@
 
   <div class="card-wrapper">
     <rvn-data-table
-        [rows]="visibleSources | tabulateSources : resolutions"></rvn-data-table>
+      [rows]="visibleSources | tabulateSources : resolutions"></rvn-data-table>
   </div>
 
 </div>

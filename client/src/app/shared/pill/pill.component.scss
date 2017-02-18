@@ -1,0 +1,26 @@
+md-card {
+  height: 20px;
+  padding: 10px;
+  cursor: pointer;
+  min-width: 150px;
+}
+
+md-icon {
+  font-size: initial;
+  text-align: center;
+
+  &.secondary-icon {
+    float: right;
+    position: absolute;
+  }
+}
+
+div {
+  &.title {
+    max-width: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block
+  }
+}

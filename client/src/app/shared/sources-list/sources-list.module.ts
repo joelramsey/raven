@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MdIconModule } from '@angular/material';
+import { MdButtonModule, MdIconModule } from '@angular/material';
 import { SourcesListComponent } from './sources-list.component';
 import { SourcePillModule } from '../source-pill/source-pill.module';
 
@@ -8,6 +8,7 @@ import { SourcePillModule } from '../source-pill/source-pill.module';
   imports: [
     CommonModule,
     MdIconModule,
+    MdButtonModule,
     SourcePillModule
   ],
   declarations: [

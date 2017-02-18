@@ -1,42 +1,53 @@
-  <md-card>
+<md-card>
 
-    <md-card-title>
-      {{displayName}} Profile
-    </md-card-title>
+  <md-card-title>
+    {{displayName}} Profile
+  </md-card-title>
 
-    <md-card-content>
+  <md-card-content>
 
-      <form class="profile-data-wrapper" *ngIf="user">
+    <form class="profile-data-wrapper" *ngIf="user">
 
-        <div class="form-control">
-          <md-input required
-                    name="firstName"
-                    [(ngModel)]="user.firstName"
-                    placeholder="First Name"
-                    autofocus></md-input>
-        </div>
+      <div class="form-control">
 
-        <div class="form-control">
-          <md-input required
-                    name="lastName"
-                    [(ngModel)]="user.lastName"
-                    placeholder="Last Name"></md-input>
-        </div>
+        <md-input-container>
+          <input mdInput
+                 required
+                 name="firstName"
+                 [(ngModel)]="user.firstName"
+                 placeholder="First Name"
+                 autofocus>
+        </md-input-container>
+      </div>
 
-        <div class="form-control">
-          <md-input required
-                    name="email"
-                    [(ngModel)]="user.email"
-                    placeholder="E-mail"></md-input>
-        </div>
+      <div class="form-control">
+        <md-input-container>
+          <input mdInput
+                 required
+                 name="lastName"
+                 [(ngModel)]="user.lastName"
+                 placeholder="Last Name">
+        </md-input-container>
+      </div>
 
-      </form>
+      <div class="form-control">
+        <md-input-container>
+          <input mdInput
+                 required
+                 name="email"
+                 [(ngModel)]="user.email"
+                 placeholder="E-mail">
+        </md-input-container>
+      </div>
 
-    </md-card-content>
+    </form>
 
-    <md-card-actions align="end">
-      <button md-button color="primary"
-              (click)="save()"
-              type="submit">Save</button>
-    </md-card-actions>
-  </md-card>
+  </md-card-content>
+
+  <md-card-actions align="end">
+    <button md-button color="primary"
+            (click)="save()"
+            type="submit">Save
+    </button>
+  </md-card-actions>
+</md-card>

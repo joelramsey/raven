@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/core/theming/prebuilt/deeppurple-amber.scss';
-@import '../node_modules/@swimlane/ngx-datatable/release/material.css';
+@import '../node_modules/@swimlane/ngx-datatable/release/index';
+@import '../node_modules/@swimlane/ngx-datatable/release/themes/material.css';
 @import './variables';
 
 [md-mini-fab] {
@@ -8,7 +9,12 @@
 }
 
 md-icon {
-  color: lightgray;
+  color: $icon-color;
+
+  &.centered {
+    text-align: center;
+    vertical-align: middle;
+  }
 }
 
 html, body, .viewport {

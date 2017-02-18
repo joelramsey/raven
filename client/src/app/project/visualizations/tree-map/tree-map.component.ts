@@ -143,14 +143,15 @@ export class TreeMapComponent implements OnInit, OnChanges {
 
   handleMergeClick() {
     if (this.merging) {
+
       // Send results to service
       //
-      console.log('send deconfliction to service');
       console.log(this.mergeList);
 
       // Reset merge list
       //
       this.mergeList = [];
+
     } else {
 
       // Send start merging event for anyone interested

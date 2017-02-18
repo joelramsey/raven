@@ -15,20 +15,23 @@
 
         <div>
           <label for="email"><md-icon>email</md-icon>Email</label><br>
-          <md-input type="email"
+          <md-input-container>
+            <input mdInput  type="email"
                     [(ngModel)]="login.email"
                     name="email"
-                    id="email" required autofocus></md-input>
+                    id="email" required autofocus>
+          </md-input-container>
         </div>
 
         <div>
           <label for="password"><md-icon>lock</md-icon>Password</label><br>
-          <md-input type="password"
-                    [(ngModel)]="login.password"
-                    name="password"
-                    id="password" required>
-
-          </md-input>
+          <md-input-container>
+            <input mdInput
+                   type="password"
+                   [(ngModel)]="login.password"
+                   name="password"
+                   id="password" required>
+          </md-input-container>
         </div>
 
         <button md-raised-button type="submit" color="primary">Log In</button>
@@ -43,30 +46,37 @@
 
         <div>
           <label for="register-email"><md-icon>email</md-icon>Email</label><br>
-          <md-input type="email"
-                    [(ngModel)]="registration.email"
-                    name="email"
-                    id="register-email" required></md-input>
+          <md-input-container>
+            <input mdInput
+                   type="email"
+                   [(ngModel)]="registration.email"
+                   name="email"
+                   id="register-email" required>
+          </md-input-container>
         </div>
 
         <div>
           <label for="password"><md-icon>lock</md-icon>Password</label><br>
-          <md-input type="password"
+          <md-input-container>
+            <input  mdInput
+                    type="password"
                     [(ngModel)]="registration.password"
                     name="password"
                     id="register-password" required>
-          </md-input>
+          </md-input-container>
         </div>
 
         <div>
           <label for="register-password-confirmation">Confirm password</label><br>
-          <md-input type="password"
-                    [(ngModel)]="registration.passwordConfirmation"
-                    name="password-confirmation"
-                    id="register-password-confirmation" required>
+          <md-input-container>
+            <input mdInput
+                   type="password"
+                   [(ngModel)]="registration.passwordConfirmation"
+                   name="password-confirmation"
+                   id="register-password-confirmation" required>
 
             <md-hint align="end">Must be at least eight characters.</md-hint>
-          </md-input>
+          </md-input-container>
         </div>
 
         <button md-raised-button type="submit" color="primary">Register</button>

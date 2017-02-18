@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
-    MaterialModule.forRoot(),
+    MaterialModule,
     LoginRoutingModule
   ],
   declarations: [

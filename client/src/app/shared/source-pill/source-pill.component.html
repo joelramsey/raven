@@ -1,4 +1,4 @@
-<md-card (click)="handlePillClick()" [md-tooltip]="source?.title" tooltip-position="below">
+<md-card (click)="handlePillClick()" [mdTooltip]="source?.title" mdTooltipPosition="below">
   <md-card-subtitle>
     <md-icon *ngIf="showIcon">{{ sourceIcon }}</md-icon>
     <div class="source-title">{{ source?.title}}</div>

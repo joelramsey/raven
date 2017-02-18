@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MdCardModule, MdIconModule, MdInputModule } from '@angular/material';
+import { MdButtonModule, MdCardModule, MdIconModule, MdInputModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '../shared/shared.module';
@@ -10,6 +10,7 @@ import { ProfileComponent } from './profile.component';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    MdButtonModule,
     MdCardModule,
     MdInputModule,
     MdIconModule

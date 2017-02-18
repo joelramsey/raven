@@ -1,10 +1,15 @@
-import { Component, OnInit, Input, style, state, animate, group, trigger, transition } from '@angular/core';
+import {
+  Component, OnInit, Input, style, state, animate, group, trigger, transition,
+  OnDestroy, AfterViewChecked
+} from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import * as Moment from 'moment';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 import { Project, Source, EntityCardModel, Resolution } from '../../shared/models/index';
 import { ProjectDaoService, ResolutionDaoService } from '../../shared/services/index';
+import { WindowRefService } from '../../shared/services/window-ref.service';
 
 @Component({
   selector: 'rvn-project-view',
@@ -40,7 +45,7 @@ import { ProjectDaoService, ResolutionDaoService } from '../../shared/services/i
     ])
   ]
 })
-export class ProjectViewComponent implements OnInit {
+export class ProjectViewComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   @Input() project:Project;
   @Input() visibleSources:Array<Source>;
@@ -53,12 +58,16 @@ export class ProjectViewComponent implements OnInit {
   private _noteChangeDebounceTime:number = 800;
   private _hideMessageTime:number = 4 * 1000;
   private _hideSaveMessageTimeout;
+  private _routeFragmentSubscription: any;
+  private _currentFragment: string;
 
   cardX = '0';
   cardY = '0';
 
   constructor(private _projectDaoService:ProjectDaoService,
-              private _resolutionDaoService: ResolutionDaoService) {
+              private _resolutionDaoService: ResolutionDaoService,
+              private _windowRef: WindowRefService,
+              private _route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -122,6 +131,25 @@ export class ProjectViewComponent implements OnInit {
       });
   }
 
+  /**
+   * Checks for route fragments, since Angular's router isn't quite capable of it yet...
+   */
+  ngAfterViewChecked() {
+    if (!this._routeFragmentSubscription) {
+      this._routeFragmentSubscription = this._route.fragment
+        .subscribe(fragment => {
+          if (fragment && fragment !== this._currentFragment) {
+            this._currentFragment = fragment;
+            this.goTo(fragment);
+          }
+        });
+    }
+  }
+
+  ngOnDestroy() {
+    this._routeFragmentSubscription.unsubscribe();
+  }
+
   showEntityCardFromTreeMap($event:any) {
     this.cardX = $event.x + 'px';
     this.cardY = $event.y + 'px';
@@ -130,7 +158,7 @@ export class ProjectViewComponent implements OnInit {
   updateEntityFromTreeMap($event:any) {
     this.activeEntity = $event;
   }
-  
+
   showEntityCardFromLinkDiagram($event:any) {
     this.cardX = $event.x + 'px';
     this.cardY = $event.y + 'px';
@@ -139,8 +167,23 @@ export class ProjectViewComponent implements OnInit {
   updateEntityFromLinkDiagram($event:any) {
     this.activeEntity = $event;
   }
-  
+
   closeCard() {
     this.activeEntity = null;
+  }
+
+  /**
+   * Specifies a location on the page to navigate to.
+   *
+   * Currently, this only modifies the current window hash.
+   * @param location to navigate to
+   */
+  goTo(location: string) {
+    let element = this._windowRef.nativeDocument.getElementById(location);
+    if (element) {
+      element.scrollIntoView();
+    }
+
+    this._windowRef.nativeWindow.location.hash = location;
   }
 }

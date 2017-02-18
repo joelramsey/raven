@@ -10,10 +10,10 @@
                       (addSourceClicked)="showNewSource()"></rvn-sources-list>
 
 
-    <button md-icon-button
+    <button md-button
             [disabled]="true"
-            [md-tooltip]="'Export'"
-            tooltip-position="below"
+            [mdTooltip]="'Export'"
+            mdTooltipPosition="below"
             class="project-button"
             type="button"
             (click)="exportProject()">

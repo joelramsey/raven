@@ -58,7 +58,7 @@ md-card {
   margin-top: 40px;
 }
 
-md-input {
+md-input-container {
   width: 100%;
 }
 
@@ -68,5 +68,5 @@ md-icon {
 }
 
 md-card-subtitle {
-  color: map-get($md-red, 600);
+  color: map-get($mat-red, 600);
 }

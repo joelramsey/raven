@@ -1,0 +1,25 @@
+:host {
+  width: 100%;
+}
+
+div {
+  &.pill-container {
+    width: 100%;
+  }
+
+  &.pill-wrapper {
+    margin: 5px;
+    max-width: 180px;
+    display: inline-block
+  }
+}
+
+md-icon {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+span {
+  margin-left: 15px;
+}

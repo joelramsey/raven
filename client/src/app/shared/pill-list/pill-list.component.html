@@ -1,0 +1,15 @@
+<div class="pill-container">
+  <button *ngIf="showAdd" md-mini-fab (click)="addModelClicked.emit()">
+    <md-icon class="md-24">add</md-icon>
+  </button>
+
+  <div *ngFor="let model of models; let i = index" class="pill-wrapper" @pillInOut>
+    <rvn-pill [model]="model"
+                      [showPrimaryIcon]="showPrimaryIcons"
+                      [showSecondaryIcon]="showSecondaryIcons"
+                      (pillClicked)="handlePillClick(model, i)"></rvn-pill>
+  </div>
+
+  <span *ngIf="showNoModelsMessage">Looks like there aren't any items in this list. <a (click)="addModelClicked.emit()">Click here to change that.</a></span>
+
+</div>

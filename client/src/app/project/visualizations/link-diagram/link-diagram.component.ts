@@ -44,8 +44,8 @@ export class LinkDiagramComponent implements OnInit {
 
     var force = d3.layout.force()
       .charge(-100)
-      .linkDistance(100)
-      .gravity(0.05)
+      .linkDistance(200)
+      .gravity(0.01)
       .size([width, height]);
 
     var zoom = d3.behavior.zoom()

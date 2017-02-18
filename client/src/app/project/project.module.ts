@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { MdCardModule, MdIconModule, MdTooltipModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
+import { MdCardModule, MdIconModule, MdTooltipModule, MdButtonModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgGridModule } from 'angular2-grid/main';
@@ -15,6 +16,7 @@ import { LinkDiagramAdapterPipe } from './pipes/link-diagram-adapter.pipe';
 import { TreeMapAdapterPipe } from './pipes/tree-map-adapter.pipe';
 import { SourceUploaderModule } from './source-uploader/source-uploader.module';
 import { ProjectSourceModule } from './project-source/project-source.module';
+import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
 
 import { DraggableDirective } from './directives/index';
 
@@ -23,13 +25,17 @@ import { DraggableDirective } from './directives/index';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
     MdCardModule,
     MdIconModule,
     MdTooltipModule,
+    MdButtonModule,
     NgxDatatableModule,
     NgGridModule,
     SourceUploaderModule,
-    ProjectSourceModule
+    ProjectSourceModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot()
   ],
   declarations: [
     DraggableDirective,
