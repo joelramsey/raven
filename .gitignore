@@ -7,6 +7,10 @@
 # Ignore bundler config.
 /.bundle
 
+# Ignore accidental node_modules creation
+/node_modules
+npm-debug.log
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
@@ -17,5 +21,6 @@
 .byebug_history
 
 # Editor
-\.idea
+/.idea
 *.iml
+
