@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter, OnInit, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { MdDialog } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { AuthData, Angular2TokenService } from 'angular2-token/angular2-token';
 import { ParsedResponseHeaders, Headers } from 'ng2-file-upload/ng2-file-upload';
@@ -7,7 +8,7 @@ import 'rxjs/add/operator/debounceTime';
 
 import { TextSourceParserPipe } from './pipes/index';
 import { Source, SourcePillClickEvent, SourceUploadState, Project, SourceCreator } from '../../shared/models/index';
-import { 
+import {
   SourceDaoService,
   ProjectDaoService,
   ObservableResultHandlerService,
@@ -26,7 +27,7 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
   @Output() public done:EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() public cancelled:EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('fileInput') fileInput: ElementRef;
-  
+
   public UPLOAD_STATES = {
     NEW: {
       key: 'new',
@@ -47,11 +48,14 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
   };
 
   public uploader:RavenFileUploader;
+  public showQueue:boolean = false;
   public fileOver:boolean = false;
   public rawSourcesControl:FormControl = new FormControl();
   public state: SourceUploadState = this.UPLOAD_STATES.NEW;
   public uploadError: string = '';
   public sourceUploadProgress: number = 0;
+  public uploaderPlaceholder: string = 'Drag some files over me, paste URLs, or even enter plain text. I\'ll turn ' +
+    'it into a source for your project.';
 
   // Sources
   //
@@ -67,16 +71,17 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
               private _renderer: Renderer,
               private _tokenService: Angular2TokenService,
               private _sourceDaoService: SourceDaoService,
-              private _projectDaoService: ProjectDaoService) {
+              private _projectDaoService: ProjectDaoService,
+              private _dialog: MdDialog) {
   }
 
   ngOnInit() {
     this.rawSourcesControl.valueChanges
       .debounceTime(1000)
       .subscribe((rawSources:string) => {
-        
+
         let parsedSources:any  = this._textSourceParserService.transform(rawSources);
-        
+
         this.textSources = parsedSources.textSources;
         this.linkSources = parsedSources.linkSources;
       });
@@ -119,7 +124,7 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
   addSources() {
     this.uploadError = '';
     this.rawSourcesControl.disable();
-   
+
     // Upload if applicable; otherwise proceed straight
     // to source upload.
     //
@@ -136,11 +141,11 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
    */
   addTextAndUrlSources(fileSources: Array<any>) {
     this.state = this.UPLOAD_STATES.ADDING_SOURCES;
-    
+
     let totalLength = this.linkSources.length + this.textSources.length;
-  
+
     if (totalLength === 0) {
-      
+
       // All done
       //
       this.state = this.UPLOAD_STATES.DONE;
@@ -148,10 +153,10 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
       this.rawSourcesControl.setValue('');
       this.rawSourcesControl.enable();
       this.uploader.clearQueue();
-      
+
       this.done.emit(true);
     } else {
-      
+
       // Create sources
       //
       this._sourceDaoService.createSources(this.textSources.concat(this.linkSources), this.project)
@@ -170,7 +175,7 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
    * upload progress. In addition to that, it pops sources off the list
    * which have been uploaded. Upon completion, it clears out and re-enables
    * the raw text textarea.
-   * 
+   *
    * @param source
    * @param totalLength
    */
@@ -179,7 +184,7 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
     let completed = this.sourceUploadProgress / 100 * totalLength + 1;
     let linkSourceIdx = this.linkSources.indexOf(source);
     let textSourceIdx = this.textSources.indexOf(source);
-   
+
     // Remove from current set
     //
     if (textSourceIdx > -1) {
@@ -187,7 +192,7 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
     } else if (linkSourceIdx > -1) {
       this.linkSources.splice(linkSourceIdx, 1);
     }
-   
+
     if (completed === totalLength) {
       this.state = this.UPLOAD_STATES.DONE;
 
@@ -210,7 +215,7 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
 
   /**
    * Handles file upload failure.
-   * 
+   *
    * @param item
    * @param response
    * @param status
@@ -225,7 +230,7 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
       console.log(e);
       this.uploadError = ' (Encountered error during file upload: ' + response + ')';
     }
-    
+
     this._errorHandler.failure('Failed to upload file: ' + item.file.name);
   }
 
@@ -233,7 +238,7 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
    * Translates an array of file item objects into a list of sources.
    * Checks the current file queue against the cached list to avoid
    * spastic re-renders.
-   * 
+   *
    * @returns {Array<Source>}
    */
   get fileSources():Array<Source> {
@@ -241,7 +246,7 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
     if (!this.uploader) {
       return [];
     }
-    
+
     // Refresh queue if changed
     //
     if (this.uploader.queue.length !== this._cachedFileObjects.length) {
@@ -276,33 +281,33 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
   get busy():boolean {
       return (this.state !== this.UPLOAD_STATES.NEW && this.state !== this.UPLOAD_STATES.DONE);
   }
-  
+
 
   /**
    * Removes a file from both the file upload queue and the cached
    * file list.
-   * 
+   *
    * @param $sourceEvent
    */
   removeFile($sourceEvent:SourcePillClickEvent) {
     let cacheIdx = this._cachedFileObjects.indexOf($sourceEvent.source);
-    
+
     if (cacheIdx > -1) {
       this._cachedFileObjects.splice(cacheIdx, 1);
     }
-    
+
     this.uploader.removeFromQueue($sourceEvent.source.content);
   }
 
   /**
    * Removes a pending text source.
-   * 
+   *
    * @param $sourceEvent
    */
   removeText($sourceEvent:SourcePillClickEvent) {
     this.textSources.splice($sourceEvent.index, 1);
   }
-  
+
   /**
    * Removes a pending link source.
    *
@@ -315,7 +320,7 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
   /**
    * Handles the mouseover event for a file (so we can change the
    * file border color - whoo!)
-   * 
+   *
    * @param $event
    */
   fileOverBase($event:boolean) {
@@ -329,10 +334,10 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
    */
   openFileDialog() {
     let mouseEvent = new MouseEvent('click', { bubbles: true });
-    
+
     this._renderer.invokeElementMethod(this.fileInput.nativeElement, 'dispatchEvent', [mouseEvent]);
   }
-  
+
   private _getAuthHeaders(): Array<Headers> {
 
     let authData: AuthData = this._tokenService.currentAuthData;
@@ -344,5 +349,12 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
       { name: 'token-type',   value: authData.tokenType },
       { name: 'uid',          value: authData.uid }
     ];
+  }
+
+  /**
+   * Toggles whether the source queue is visible.
+   */
+  toggleQueue() {
+    this.showQueue = !this.showQueue;
   }
 }
