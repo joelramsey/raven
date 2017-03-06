@@ -1,11 +1,13 @@
 import {
   Component, OnInit, Input, style, state, animate, group, trigger, transition,
-  OnDestroy, AfterViewChecked
+  OnDestroy, AfterViewChecked, Output, EventEmitter
 } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import * as Moment from 'moment';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/observable/fromEvent';
 
 import { Project, Source, EntityCardModel, Resolution } from '../../shared/models/index';
 import { ProjectDaoService, ResolutionDaoService } from '../../shared/services/index';
@@ -49,7 +51,7 @@ export class ProjectViewComponent implements OnInit, AfterViewChecked, OnDestroy
 
   @Input() project:Project;
   @Input() visibleSources:Array<Source>;
-  public notesControl:AbstractControl = new FormControl();
+  @Output() projectNotesChanged: EventEmitter<string> = new EventEmitter<string>();
   public saveStatus:string;
   public hideSaveMessage:boolean = false;
   public activeEntity:EntityCardModel;
@@ -80,7 +82,7 @@ export class ProjectViewComponent implements OnInit, AfterViewChecked, OnDestroy
     // Subscribe to and update project notes value.
     // Save the project soon after typing stops.
     //
-    this.notesControl.valueChanges
+    this.projectNotesChanged
       .debounceTime(this._noteChangeDebounceTime)
       .distinctUntilChanged()
       .subscribe((value:string) => {
@@ -148,6 +150,17 @@ export class ProjectViewComponent implements OnInit, AfterViewChecked, OnDestroy
 
   ngOnDestroy() {
     this._routeFragmentSubscription.unsubscribe();
+    this.projectNotesChanged.unsubscribe();
+  }
+
+  /**
+   * Wrapper around Frola's model change event; this allows us to debounce the changes
+   * and use our own RxJS operators on the result.
+   *
+   * @param value
+   */
+  froalaModelChanged(value: string) {
+    this.projectNotesChanged.next(value);
   }
 
   showEntityCardFromTreeMap($event:any) {

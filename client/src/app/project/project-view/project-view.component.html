@@ -33,31 +33,13 @@
     <md-card>
       <md-card-title id="projectComposer">Project Composer <a class="fragment-link" (click)="goTo('projectComposer')">
         <md-icon class="centered">link</md-icon>
-      </a></md-card-title>
-      <div [froalaEditor]></div>
-    </md-card>
-  </div>
-</div>
-
-<div class="col">
-  <div class="card-wrapper">
-    <md-card>
-
-      <md-card-title id="ideasAndNotes">
-        <div class="notes-title-wrapper">
-          <div class="notes-title">Ideas and Notes <a class="fragment-link" (click)="goTo('ideasAndNotes')">
-            <md-icon class="centered">link</md-icon>
-          </a></div>
-
-          <div class="save-message"
-               [class.hide-save-message]="hideSaveMessage">{{saveStatus}}
-          </div>
+      </a>
+        <div class="save-message"
+             [class.hide-save-message]="hideSaveMessage">{{saveStatus}}
         </div>
       </md-card-title>
 
-      <textarea placeholder="Add some workspace notes here!"
-                [formControl]="notesControl"
-                [ngModel]="project.notes"></textarea>
+      <div [froalaEditor] [froalaModel]="project.notes" (froalaModelChange)="froalaModelChanged($event)"></div>
     </md-card>
   </div>
 </div>
@@ -67,8 +49,8 @@
     <div class="tree-map-wrapper">
       <md-card>
         <md-card-title id="treeMap">Tree Map <a class="fragment-link" (click)="goTo('treeMap')">
-            <md-icon class="centered">link</md-icon>
-          </a></md-card-title>
+          <md-icon class="centered">link</md-icon>
+        </a></md-card-title>
         <rvn-tree-map
           [data]="visibleSources | toTreeMap : resolutions"
           (entityClick)="updateEntityFromTreeMap($event)"></rvn-tree-map>
@@ -78,9 +60,10 @@
 
   <div class="card-wrapper row">
     <md-card>
-      <md-card-title id="entityRelationships">Entity Relationships <a class="fragment-link" (click)="goTo('entityRelationships')">
-            <md-icon class="centered">link</md-icon>
-          </a></md-card-title>
+      <md-card-title id="entityRelationships">Entity Relationships <a class="fragment-link"
+                                                                      (click)="goTo('entityRelationships')">
+        <md-icon class="centered">link</md-icon>
+      </a></md-card-title>
       <rvn-link-diagram
         [data]="visibleSources | toLinkDiagram : resolutions"
         (entityClick)="updateEntityFromLinkDiagram($event)"
