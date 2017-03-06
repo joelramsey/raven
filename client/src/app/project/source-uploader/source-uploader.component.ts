@@ -275,6 +275,14 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
   }
 
   /**
+   * Returns the total number of sources queued for upload.
+   * @returns {number}
+   */
+  get sourceCount(): number {
+    return (this.fileSources.length + this.textSources.length + this.linkSources.length);
+  }
+
+  /**
    * Returns a boolean value indicating whether an async process (e.g., file upload) is running.
    * @returns {boolean}
    */

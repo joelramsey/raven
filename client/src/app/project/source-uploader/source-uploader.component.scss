@@ -3,17 +3,20 @@
 $file-over-color: forestgreen;
 
 md-card {
-  max-width: 600px;
 
   &.source-queue-card {
     position: absolute;
     bottom: 70px;
     left: 55px;
     z-index: 2;
-    min-width: 300px;
+    min-width: 150px;
+    width: 65%;
+    max-height: 300px;
     font-size: 12px;
     padding-top: 6px;
     padding-bottom: 6px;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     md-card-title {
       font-size: 12px;
@@ -22,7 +25,8 @@ md-card {
 }
 
 md-card-content {
-  width: 600px;
+  min-width: 300px;
+  width: 100%;
 }
 
 md-card-actions {
@@ -84,6 +88,12 @@ div {
 
   &.source-file-drop {
     width: 40%;
+  }
+}
+
+span {
+  &.queued-sources-message {
+    font-size: 12px;
   }
 }
 
