@@ -33,6 +33,7 @@ md-card-actions {
   margin-bottom: 0;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 
   button {
     margin-left: 10px;

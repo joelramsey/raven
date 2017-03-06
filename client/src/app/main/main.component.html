@@ -3,7 +3,7 @@
   <!-- (mouseover)="start.open()" -->
 
   <md-sidenav #start>
-  <!-- (mouseleave)="start.close()" -->
+    <!-- (mouseleave)="start.close()" -->
     <div class="md-nav-wrapper">
 
       <div class="md-nav-item navbar-title sm-show">
@@ -11,10 +11,10 @@
       </div>
 
       <div class="md-nav-item sm-show">
-      <a class="lg-link"
-      (click)="start.close()"
-      [routerLink]="['/sources']"
-      routerLinkActive="active">SOURCES</a>
+        <a class="lg-link"
+           (click)="start.close()"
+           [routerLink]="['/sources']"
+           routerLinkActive="active">SOURCES</a>
       </div>
 
       <div class="md-nav-item sm-show">
@@ -44,7 +44,7 @@
     </button>
 
     <span class="toolbar-title">RAVEN</span>
-    <span *ngIf="projectDaoService?.activeProject">{{projectDaoService.activeProject.name}}</span>
+    <span class="lg-show project-title" *ngIf="projectDaoService?.activeProject">{{projectDaoService.activeProject.name}}</span>
 
     <span class="wide-nav"></span>
 

@@ -4,18 +4,6 @@
   height: 100%;
 }
 
-@media all and (min-width: 480px) {
-  .sm-show {
-    display: none;
-  }
-}
-
-@media all and (max-width: 480px) {
-  .lg-show {
-    display: none;
-  }
-}
-
 md-sidenav {
 
   background-color: $navbar-color;
@@ -73,5 +61,10 @@ span {
 
   &.toolbar-title {
     margin-right: 20px;
+  }
+
+  &.project-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
