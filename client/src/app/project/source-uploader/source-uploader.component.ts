@@ -365,4 +365,12 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
   toggleQueue() {
     this.showQueue = !this.showQueue;
   }
+
+  /**
+   * Placeholder for showing search options
+   */
+  showOptions() {
+    // No-op
+    //
+  }
 }

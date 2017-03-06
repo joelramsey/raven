@@ -36,13 +36,15 @@
 
 <md-card-actions>
 
-  <button md-button
-          [mdTooltip]="'Show Source Queue'"
-          (click)="toggleQueue()">
-    <md-icon>list</md-icon>
-  </button>
+  <span>
+    <button md-button
+            [mdTooltip]="'Show Source Queue'"
+            (click)="toggleQueue()">
+      <md-icon>list</md-icon>
+    </button>
 
-  <span class="queued-sources-message">{{sourceCount}} Sources Queued</span>
+    <span class="queued-sources-message">{{sourceCount}} Sources Queued</span>
+  </span>
 
   <button md-button
           color="primary"
@@ -53,6 +55,12 @@
   <button md-button
           [disabled]="busy"
           (click)="cancel()">Done
+  </button>
+
+  <button md-button
+          [mdTooltip]="'Search Options'"
+          (click)="showOptions()">
+    <md-icon>more_vert</md-icon>
   </button>
 
   <md-card *ngIf="showQueue" class="source-queue-card">
