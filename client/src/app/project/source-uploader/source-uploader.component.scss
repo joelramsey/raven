@@ -54,17 +54,12 @@ textarea {
 
 div {
 
-  &.file-selector-button-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-  }
-
   &.search-wrapper {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 30px;
   }
 
   &.source-list {
@@ -85,10 +80,6 @@ div {
 
   &.progress-indicator {
     margin-top: 30px;
-  }
-
-  md-input-container {
-    width: 55%;
   }
 
   &.source-file-drop {

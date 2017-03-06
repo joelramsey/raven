@@ -1,11 +1,6 @@
 <md-card-content>
 
   <div class="search-wrapper">
-    <md-input-container>
-      <input mdInput
-             autofocus
-             placeholder="Search">
-    </md-input-container>
 
     <div ng2FileDrop
          class="source-file-drop"
@@ -17,21 +12,23 @@
                 [ngClass]="{'new-source-file-over': fileOver}"></textarea>
 
     </div>
-  </div>
 
-  <div class="file-selector-button-wrapper">
-    <input #fileInput
-           ng2FileSelect
-           [uploader]="uploader"
-           name="file"
-           type="file"
-           multiple
-           accept=".pdf,.doc,.docx,.txt">
+    <div>or</div>
 
-    <button md-raised-button
-            class="file-selector"
-            (click)="openFileDialog()"
-            [disabled]="busy">Choose Files</button>
+    <div>
+      <button md-raised-button
+              class="file-selector"
+              (click)="openFileDialog()"
+              [disabled]="busy">Choose Files</button>
+
+      <input #fileInput
+             ng2FileSelect
+             [uploader]="uploader"
+             name="file"
+             type="file"
+             multiple
+             accept=".pdf,.doc,.docx,.txt">
+    </div>
   </div>
 
   <rvn-source-search></rvn-source-search>

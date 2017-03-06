@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
+import { MdInputModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 
 import { SourceSearchComponent } from './source-search.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    MdInputModule
   ],
   declarations: [
     SourceSearchComponent
