@@ -1,5 +1,6 @@
 export * from './auth-guard.service';
 export * from './anti-auth-guard.service';
+export * from './html-export.service';
 export * from './initial-navigation.service';
 export * from './observable-result-handler.service';
 export * from './project-dao.service';

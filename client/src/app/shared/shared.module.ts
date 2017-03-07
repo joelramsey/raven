@@ -10,6 +10,7 @@ import { SharedPipesModule } from './pipes/shared-pipes.module';
 import {
   AntiAuthGuard,
   AuthGuard,
+  HtmlExportService,
   InitialNavigationService,
   ObservableResultHandlerService,
   ProjectDaoService,
@@ -38,6 +39,7 @@ import {
   providers: [
     AntiAuthGuard,
     AuthGuard,
+    HtmlExportService,
     InitialNavigationService,
     ObservableResultHandlerService,
     ProjectDaoService,
