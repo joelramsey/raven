@@ -3,3 +3,26 @@ div {
     margin-top: 20px;
   }
 }
+
+a {
+  &.export-link {
+    visibility: hidden;
+  }
+}
+
+md-spinner {
+  height: 24px;
+  width: 24px;
+}
+
+div {
+  &.export-block {
+    display: flex;
+    align-items: center;
+
+    span {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
+}

@@ -15,22 +15,21 @@ export class ProfileComponent implements OnInit {
    * Current user. Initializes to empty.
    */
   user:UserDetails = null;
-  
+
 
   constructor(private _userDao: UserDaoService,
-              private _observableResultHandler: ObservableResultHandlerService,
-              private _errorHandler: ObservableResultHandlerService) {
+              private _observableResultHandler: ObservableResultHandlerService) {
   }
 
   ngOnInit() {
     this._userDao.getUser().subscribe(
       user => this.user = user,
       (error: any) => {
-        this._errorHandler.failure(error);
+        this._observableResultHandler.failure(error);
       }
     );
   }
-  
+
   save() {
     this._userDao.updateUser(this.user).subscribe((user: UserDetails) => {
       this._observableResultHandler.success('User profile updated.');
@@ -43,14 +42,14 @@ export class ProfileComponent implements OnInit {
    * Gets a display name for a user; based on first
    * name, but defaults to e-mail if no first name
    * exists.
-   * 
+   *
    * @returns {string}
    */
   get displayName() {
-    
+
     if (this.user) {
       let displayName = this.user.firstName || this.user.uid;
-      
+
       if (!displayName) {
         return '';
       }
@@ -62,7 +61,7 @@ export class ProfileComponent implements OnInit {
       } else {
         displayName += '\'s';
       }
-      
+
       return displayName;
     } else {
       return '';

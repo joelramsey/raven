@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { MdCardModule, MdIconModule, MdTooltipModule, MdButtonModule } from '@angular/material';
+import {
+  MdCardModule, MdIconModule, MdTooltipModule, MdButtonModule,
+  MdProgressSpinnerModule
+} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgGridModule } from 'angular2-grid/main';
@@ -29,6 +32,7 @@ import { DraggableDirective } from './directives/index';
     MdCardModule,
     MdIconModule,
     MdTooltipModule,
+    MdProgressSpinnerModule,
     MdButtonModule,
     NgxDatatableModule,
     NgGridModule,

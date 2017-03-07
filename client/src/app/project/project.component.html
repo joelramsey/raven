@@ -11,7 +11,7 @@
 
 
     <button md-button
-            [disabled]="true"
+            *ngIf="!exporting"
             [mdTooltip]="'Export'"
             mdTooltipPosition="below"
             class="project-button"
@@ -19,6 +19,13 @@
             (click)="exportProject()">
       <md-icon>file_download</md-icon>
     </button>
+
+    <div *ngIf="exporting" class="export-block">
+      <md-spinner></md-spinner>
+      <span>Exporting...</span>
+    </div>
+
+    <a class="export-link" target="_blank" #exportLink></a>
   </div>
 
   <div class="project-view-wrapper">
