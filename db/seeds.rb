@@ -15,7 +15,7 @@ require 'faker'
 #Create Users
   user = User.create!({
     last_name:     'ramsey',
-    first_name:    'joel', 
+    first_name:    'joel',
     provider: 'email',
     uid: 	  '',
     email:    'joel@me.com',
@@ -44,8 +44,16 @@ require 'faker'
  end
  records = Record.all
 
+ 20.times do
+   article = Article.create!(
+     text: Faker::Lorem.paragraph
+   )
+ end
+ articles = Article.all
+
  puts "Seeding finished"
  puts "#{User.count} users created"
  puts "#{Project.count} projects created"
  puts "#{Resolution.count} resolutions created"
  puts "#{Record.count} records created"
+ puts "#{Article.count} articles created"

@@ -23,4 +23,5 @@ npm-debug.log
 # Editor
 /.idea
 *.iml
+solr/data
 
