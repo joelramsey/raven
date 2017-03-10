@@ -41,12 +41,13 @@ class AlchemyParser
     url = @params[:q]
 
     if @params[:type] == ('url') && url.end_with?('pdf')
-      path = File.join(Rails.root, 'public', 'uploads', 'document')
+      path = File.join(Rails.root, 'tmp', 'uploads')
+      FileUtils.mkdir_p(path) unless File.directory?(path)
+      puts path
       download = open(url)
       uri = URI.parse(url)
       filename = path + '/' + File.basename(uri.path)
       IO.copy_stream(download, filename)
-      sleep(15)
       read_format(filename)
     end
 
@@ -54,6 +55,7 @@ class AlchemyParser
     if @params[:type] == 'file'
       filename = File.join(Rails.root, 'public', 'uploads', 'document',
                            "#{@item_id}", "#{@item_name}")
+      puts filename
       read_format(filename)
     end
 
