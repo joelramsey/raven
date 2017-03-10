@@ -46,6 +46,7 @@ class AlchemyParser
       uri = URI.parse(url)
       filename = path + '/' + File.basename(uri.path)
       IO.copy_stream(download, filename)
+      sleep(15)
       read_format(filename)
     end
 
