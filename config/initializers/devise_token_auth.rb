@@ -4,6 +4,8 @@ DeviseTokenAuth.setup do |config|
   # this to false to prevent the Authorization header from changing after
   # each request.
   config.change_headers_on_each_request = false
+  config.secret_key = '8de186e23d14079f50ba89c049871691fed4c1475448f06c80bbf52af9a544ff5a8919528054bfaf568dfcfd76a118d39ba16d9c5a11ef1a389242716ae611ec'
+
 
   # By default, users will need to re-authenticate after 2 weeks. This setting
   # determines how long tokens will remain valid after they are issued.
