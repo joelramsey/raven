@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "license": "MIT",
   "angular-cli": {},
+  "engines": {
+    "node": "6.10.0"
+  },
   "scripts": {
     "start": "ng serve --proxy-config proxy.conf.json",
     "start-phone": "ng serve --proxy-config proxy.conf.json --host 0.0.0.0",
@@ -51,9 +54,7 @@
     "ts-node": "2.1.0",
     "tslint": "4.5.1",
     "typescript": "~2.2.1",
-    "zone.js": "^0.7.6"
-  },
-  "devDependencies": {
+    "zone.js": "^0.7.6",
     "@angular/cli": "^1.0.0-rc.0"
   }
 }
