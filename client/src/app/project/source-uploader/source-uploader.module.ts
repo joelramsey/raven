@@ -10,7 +10,8 @@ import {
   MdTooltipModule,
   MdDialogModule
 } from '@angular/material';
-import { FileDropDirective, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
+
+import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
 
 import { SourceUploaderComponent } from './source-uploader.component';
 import { SourceConcatPipe, TextSourceParserPipe, FileSourceParserPipe } from './pipes/index';
@@ -22,6 +23,7 @@ import { SourceSearchModule } from '../source-search/source-search.module';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    FileUploadModule,
     MdCardModule,
     MdInputModule,
     MdIconModule,
@@ -35,8 +37,6 @@ import { SourceSearchModule } from '../source-search/source-search.module';
   declarations: [
     SourceUploaderComponent,
     SourceConcatPipe,
-    FileDropDirective,
-    FileSelectDirective,
     TextSourceParserPipe,
     FileSourceParserPipe
   ],
