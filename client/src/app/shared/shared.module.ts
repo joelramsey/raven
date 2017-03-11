@@ -17,6 +17,7 @@ import {
   ProjectExportService,
   ResolutionDaoService,
   SourceDaoService,
+  SourceSearchService,
   UserDaoService,
   WindowRefService
 } from './services/index';
@@ -46,6 +47,7 @@ import {
     ProjectExportService,
     ResolutionDaoService,
     SourceDaoService,
+    SourceSearchService,
     UserDaoService,
     WindowRefService
   ]

@@ -3,6 +3,7 @@ export * from './entity-card-model.interface';
 export * from './project.interface';
 export * from './record.interface';
 export * from './resolution.interface';
+export * from './search-result.interface';
 export * from './source.interface';
 export * from './source-creator.interface';
 export * from './source-pill-click-event.interface';

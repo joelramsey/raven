@@ -1,8 +1,18 @@
 <md-input-container>
   <input mdInput
+         [formControl]="searchControl"
          autofocus
          placeholder="Search">
 </md-input-container>
 <div class="search-results-bar">
-  Search Results: 0-0 of {{results.length}}
+  Search Results: {{paginationIndex}}-{{paginatedResultsLength}} of {{results.length}}
 </div>
+
+<md-list>
+  <md-list-item *ngFor="let item of paginatedResults"
+                (click)="handleSearchClick(item)">
+
+    <h3 md-line>{{item.title}}</h3>
+    <p md-line>{{item.description}}</p>
+  </md-list-item>
+</md-list>

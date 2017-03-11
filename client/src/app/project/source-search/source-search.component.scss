@@ -14,3 +14,14 @@ md-input-container {
   width: 55%;
   margin-top: 20px;
 }
+
+md-list-item {
+  p {
+    color: $subtext-color;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(0,0,0,.12);
+  }
+}
