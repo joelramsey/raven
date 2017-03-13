@@ -2,8 +2,8 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
 
-import { SourceSearchService } from '../../shared/services/index';
-import { SearchResultListItem } from '../../shared/models/search-result.interface';
+import { SourceSearchService, ObservableResultHandlerService } from '../../shared/services/index';
+import { SearchResult, SearchResultListItem } from '../../shared/models/index';
 
 @Component({
   selector: 'rvn-source-search',
@@ -20,23 +20,44 @@ export class SourceSearchComponent implements OnInit {
   public paginatedResults: Array<SearchResultListItem> = [];
   public paginationSize: number = 10;
   public paginationIndex: number = 0;
+  public searching: boolean = false;
 
-  constructor(private _sourceSearchService: SourceSearchService) { }
+  constructor(private _sourceSearchService: SourceSearchService,
+              private _observableResultHandlerService: ObservableResultHandlerService) {
+
+  }
 
   ngOnInit() {
     this.searchControl.valueChanges
       .debounceTime(400)
       .distinctUntilChanged()
-      .switchMap(term => this._sourceSearchService.search(term))
-      .subscribe((value: Array<SearchResultListItem>) => {
-        this.results = value;
-        this.paginatedResults = this.results.slice(0, this.paginationSize - 1);
-        this.paginationIndex = 1;
+      .switchMap(term => {
+        this.searching = true;
+        this.searchTerm = term;
+        return this._sourceSearchService.search(term)
+      })
+      .subscribe((value: SearchResult) => {
+        if (value.results.length) {
+          this.results = value.results;
+          this.paginatedResults = this.results.slice(0, this.paginationSize - 1);
+          this.paginationIndex = 1;
+        } else {
+          this.results = value.results;
+          this.paginatedResults = [];
+          this.paginationIndex = 0;
+        }
+
+        this.searching = false;
+        console.log(value);
+      }, (error:any) => {
+        this.searching = false;
+        this._observableResultHandlerService.failure(error);
       });
   }
 
   public handleSearchClick($item: any) {
     console.log($item);
+    this.resultSelected.emit($item);
   }
 
   get paginatedResultsLength() {

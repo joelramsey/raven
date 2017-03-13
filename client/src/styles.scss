@@ -34,6 +34,18 @@ md-icon {
   }
 }
 
+md-spinner {
+  &.medium {
+    height: 24px;
+    width: 24px;
+  }
+
+  &.small {
+    height: 12px;
+    width: 12px;
+  }
+}
+
 /* Element-level styling
  */
 html, body, .viewport {

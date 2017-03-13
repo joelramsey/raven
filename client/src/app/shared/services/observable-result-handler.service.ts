@@ -6,7 +6,7 @@ import { NotificationsService } from 'angular2-notifications/components';
 export class ObservableResultHandlerService {
 
   constructor(private _notificationService: NotificationsService) { }
-  
+
   public success(response: any) {
     if (response instanceof Response) {
       try {
@@ -18,8 +18,13 @@ export class ObservableResultHandlerService {
       this._notificationService.success('Success', response);
     }
   }
-  
+
   public failure(response: any) {
+
+    // Log to console
+    //
+    console.error(response);
+
     if (response instanceof Response) {
       try {
         let err = response.json();
@@ -30,6 +35,6 @@ export class ObservableResultHandlerService {
     } else {
       this._notificationService.error('Error', response);
     }
-    
+
   }
 }

@@ -14,7 +14,9 @@ export class HtmlExportService {
   }
 
   public exportToDocx(projectName: string, html: string): Observable<CloudConvertCompletedResponse> {
-    let base64: any = btoa(html);
+
+    let formattedHtml = html.startsWith('<html>') ? html : '<html><body>' + html + '</body></html>';
+    let base64: any = btoa(formattedHtml);
 
     return this._http.post(HtmlExportService.API_URL + '/process', {
       inputformat: 'html',

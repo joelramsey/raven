@@ -24,4 +24,5 @@ npm-debug.log
 /.idea
 *.iml
 solr/data
+solr/pids
 

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { MdInputModule, MdListModule } from '@angular/material';
+import { MdInputModule, MdListModule, MdProgressSpinnerModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -9,6 +9,7 @@ import { SourceSearchComponent } from './source-search.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    MdProgressSpinnerModule,
     MdInputModule,
     MdListModule
   ],

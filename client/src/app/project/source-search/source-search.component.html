@@ -3,6 +3,10 @@
          [formControl]="searchControl"
          autofocus
          placeholder="Search">
+
+  <div *ngIf="searching" mdSuffix class="search-spinner">
+    <md-spinner class="small"></md-spinner>
+  </div>
 </md-input-container>
 <div class="search-results-bar">
   Search Results: {{paginationIndex}}-{{paginatedResultsLength}} of {{results.length}}
