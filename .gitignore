@@ -25,4 +25,5 @@ npm-debug.log
 *.iml
 solr/data
 solr/pids
+solr/development
 
