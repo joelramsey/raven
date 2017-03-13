@@ -20,6 +20,8 @@ gem 'sunspot_solr'
 
 gem 'progress_bar'
 
+gem 'yajl-ruby'
+
 # both for document upload support
 gem 'carrierwave'
 #gem "paperclip", "~> 5.0.0.beta1"
