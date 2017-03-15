@@ -12,10 +12,7 @@ export class SearchResultsDeserializerService {
 
   public deserialize(response: Response): Observable<SearchResult> {
 
-    // TODO: Unstub this once the backend is supporting search.
-    //
-    let rawData: any = this._mockData();
-    // let rawData: any = response.json();
+    let rawData: any = response.json();
 
     let facetMap: any = {
       subject: [],

@@ -24,7 +24,11 @@
                    (pillClicked)="removeFilter($event)"></rvn-pill-list>
   </div>
 
-  <div *ngIf="facets.length"
+  <p *ngIf="!firstSearch && !filteredResults.length">
+    No results found - try some synonyms  or use fewer words if you can't find what you're looking for.
+  </p>
+
+  <div *ngIf="facets.length && filteredResults.length"
        class="search-facets-container">
 
     <h4>Refine Results</h4>

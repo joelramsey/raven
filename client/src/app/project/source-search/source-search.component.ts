@@ -25,6 +25,7 @@ export class SourceSearchComponent implements OnInit {
   public paginationSize: number = 10;
   public paginationIndex: number = 0;
   public searching: boolean = false;
+  public firstSearch: boolean = true;
 
   constructor(private _sourceSearchService: SourceSearchService,
               private _inPlaceFilterService: InPlaceFilterService,
@@ -38,6 +39,7 @@ export class SourceSearchComponent implements OnInit {
       .distinctUntilChanged()
       .switchMap(term => {
         this.searching = true;
+        this.firstSearch = false;
         this.searchTerm = term;
         return this._sourceSearchService.search(term)
       })
