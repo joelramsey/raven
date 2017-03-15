@@ -17,22 +17,11 @@ export const ProjectRoutes:Routes = [
     path: 'project/:id',
     component: ProjectComponent,
     children: [
-      {
-        path:'table',
-        component: DataTableComponent
-      },
-      {
-        path:'link',
-        component: LinkDiagramComponent
-      },
-      {
-        path:'treemap',
-        component: TreeMapComponent
-      },
-      {
-        path: 'search',
-        component: SourceSearchComponent
-      }
+      { path: '', redirectTo: 'table', pathMatch: 'full' },
+      { path:'table', component: DataTableComponent },
+      { path:'link', component: LinkDiagramComponent },
+      { path:'treemap', component: TreeMapComponent },
+      { path: 'search', component: SourceSearchComponent }
     ]
    },
   {

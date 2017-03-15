@@ -51,12 +51,12 @@ import { WindowRefService } from '../../shared/services/window-ref.service';
 export class ProjectViewComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   @Input() project:Project;
-  @Input() visibleSources:Array<Source>;
+  @Input() visibleSources:Array<Source> = [];
   @Output() projectNotesChanged: EventEmitter<string> = new EventEmitter<string>();
   public saveStatus:string;
   public hideSaveMessage:boolean = false;
   public activeEntity:EntityCardModel;
-  public resolutions:Array<Resolution>;
+  public resolutions:Array<Resolution> = [];
 
   private _noteChangeDebounceTime:number = 800;
   private _hideMessageTime:number = 4 * 1000;
