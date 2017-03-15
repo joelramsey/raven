@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MdCardModule, MdTooltipModule, MdIconModule } from '@angular/material';
+import { MdCardModule, MdIconModule } from '@angular/material';
 import { PillComponent } from './pill.component';
 
 @NgModule({
   imports: [
     MdCardModule,
-    MdTooltipModule,
     MdIconModule,
     CommonModule
   ],

@@ -8,16 +8,37 @@
     <md-spinner class="small"></md-spinner>
   </div>
 </md-input-container>
+
 <div class="search-results-bar">
-  Search Results: {{paginationIndex}}-{{paginatedResultsLength}} of {{results.length}}
+  Search Results: {{paginationIndex}}-{{paginatedResultsLength}} of {{filteredResults.length}}
 </div>
 
 <div class="search-container flex-between">
 
-  <div *ngIf="facets.length" class="search-facets-container">
+  <div *ngIf="appliedFilters.length"
+       class="applied-filter-wrapper">
+
+    <h4>Current Filters</h4>
+    <rvn-pill-list [models]="appliedFilters"
+                   [modelTitleAttribute]="'prettyName'"
+                   (pillClicked)="removeFilter($event)"></rvn-pill-list>
+  </div>
+
+  <div *ngIf="facets.length"
+       class="search-facets-container">
+
     <h4>Refine Results</h4>
-    <rvn-accordion *ngFor="let facet of facets" [title]="facet.label" [visible]="true">
-      <p>fake facet body</p>
+    <rvn-accordion *ngFor="let facet of facets"
+                   [title]="facet.label"
+                   [maxContentHeight]="'200px'"
+                   [visible]="true">
+      <md-list dense>
+        <md-list-item *ngFor="let value of facet.values"
+                      (click)="addFilter(facet.label, value)">
+
+          <p>{{value}}</p>
+        </md-list-item>
+      </md-list>
     </rvn-accordion>
   </div>
 

@@ -2,6 +2,16 @@
 
 div {
 
+  &.applied-filter-wrapper {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  &.search-container {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
   &.search-results-bar {
     background: $navbar-color;
     margin-top: 10px;
@@ -10,15 +20,11 @@ div {
   }
 
   &.search-results-container {
-    min-width: 200px;
-    width: 70%;
+    width: 65%;
   }
 
   &.search-facets-container {
-    max-width: 300px;
-    min-width: 100px;
     width: 30%;
-    align-self: flex-start;
   }
 }
 

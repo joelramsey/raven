@@ -2,7 +2,7 @@ md-card {
   height: 20px;
   padding: 10px;
   cursor: pointer;
-  min-width: 150px;
+  min-width: 100px;
 }
 
 md-icon {
@@ -17,7 +17,7 @@ md-icon {
 
 div {
   &.title {
-    max-width: 100px;
+    max-width: 125px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
