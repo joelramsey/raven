@@ -10,15 +10,15 @@ const linkRegex = /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}
 export class TextSourceParserPipe implements PipeTransform {
 
 
-  transform(value:string, args?:any):{ linkSources: Array<Source>, textSources: Array<Source> } {
-   
+  transform(value:string):{ linkSources: Array<Source>, textSources: Array<Source> } {
+
     if (!value || !value.length) {
       return {
         linkSources: [],
         textSources: []
       };
     }
-    
+
     let lines:Array<string> = value.split('\n');
     let linkLines:Array<number> = [];
 
@@ -32,11 +32,11 @@ export class TextSourceParserPipe implements PipeTransform {
         linkLines.push(i);
       }
     });
-    
+
     // Edge case (text at beginning)
     //
     if (!linkLines.length && value.length) {
-      
+
       // Get either entire document, or until the first URL
       //
       let content = lines.slice(0, lines.length);
@@ -49,19 +49,19 @@ export class TextSourceParserPipe implements PipeTransform {
     // Handle main cases (e.g., URL at beginning or end)
     //
     linkLines.reduce((previousIndex:number, currentIndex:number) => {
-      
+
       if (currentIndex > 0 && currentIndex - previousIndex > 1) {
-        
+
         let content = lines.slice(
           previousIndex === 0 ? 0 : previousIndex + 1,
           currentIndex
         );
-   
+
         // Create if applicable
         //
         this._createTextSource(content, textSources);
       }
-      
+
       linkSources.push({
         id: null,
         type: 'url',
@@ -85,7 +85,7 @@ export class TextSourceParserPipe implements PipeTransform {
       //
       this._createTextSource(content, textSources);
     }
-    
+
     return {
       linkSources: linkSources,
       textSources: textSources
@@ -111,9 +111,9 @@ export class TextSourceParserPipe implements PipeTransform {
 
     return domain;
   }
-  
+
   private _createTextSource(content: Array<string>, textSources: Array<Source>) {
-    
+
     // Check if we have content
     //
     let text:string = content.join('\n').trim();

@@ -56,7 +56,6 @@ export class SourceSearchComponent implements OnInit {
   }
 
   public handleSearchClick($item: any) {
-    console.log($item);
     this.resultSelected.emit($item);
   }
 

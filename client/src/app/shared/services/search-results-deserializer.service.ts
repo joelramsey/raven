@@ -52,7 +52,7 @@ export class SearchResultsDeserializerService {
         return {
           title: datum['metadata']['dc:title'],
           description: datum['metadata']['dc:description'],
-          sourceUrl: 'http://files.eric.ed.gov/fulltext/' + datum['metadata']['dc:identifier']['content'],
+          sourceUrl: 'http://files.eric.ed.gov/fulltext/' + datum['metadata']['dc:identifier']['content'] + '.pdf',
           citation: datum['metadata']['eric:citation'],
           facets: [
             {
