@@ -3,7 +3,8 @@ import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
 
 import { SourceSearchService, ObservableResultHandlerService } from '../../shared/services/index';
-import { SearchResult, SearchResultListItem } from '../../shared/models/index';
+import { SearchResult, SearchResultListItem, SearchFacet, SearchFilter, PillClickEvent } from '../../shared/models/index';
+import { InPlaceFilterService } from './in-place-filter.service';
 
 @Component({
   selector: 'rvn-source-search',
@@ -17,12 +18,16 @@ export class SourceSearchComponent implements OnInit {
 
   public searchControl: FormControl = new FormControl();
   public results: Array<SearchResultListItem> = [];
+  public facets: Array<SearchFacet> = [];
   public paginatedResults: Array<SearchResultListItem> = [];
+  public filteredResults: Array<SearchResultListItem> = [];
+  public appliedFilters: Array<SearchFilter> = [];
   public paginationSize: number = 10;
   public paginationIndex: number = 0;
   public searching: boolean = false;
 
   constructor(private _sourceSearchService: SourceSearchService,
+              private _inPlaceFilterService: InPlaceFilterService,
               private _observableResultHandlerService: ObservableResultHandlerService) {
 
   }
@@ -37,26 +42,76 @@ export class SourceSearchComponent implements OnInit {
         return this._sourceSearchService.search(term)
       })
       .subscribe((value: SearchResult) => {
+
         if (value.results.length) {
           this.results = value.results;
-          this.paginatedResults = this.results.slice(0, this.paginationSize - 1);
-          this.paginationIndex = 1;
+          this.filteredResults = value.results.slice();
+          this.appliedFilters = [];
+          this._resetPaginatedResults();
         } else {
-          this.results = value.results;
+          this.results = [];
+          this.filteredResults = [];
           this.paginatedResults = [];
           this.paginationIndex = 0;
+          this.appliedFilters = [];
         }
 
+        this.facets = value.facets;
         this.searching = false;
-        console.log(value);
       }, (error:any) => {
         this.searching = false;
         this._observableResultHandlerService.failure(error);
       });
   }
 
+  /**
+   * Adds a filter if it doesn't already exist.
+   *
+   * @param label
+   * @param value
+   */
+  public addFilter(label: string, value: string) {
+
+    let filterExists = this.appliedFilters.some((filter: SearchFilter) => {
+      return (filter.label === label && filter.value === value);
+    });
+
+    // Add if the filter doesn't already exist
+    //
+    if (!filterExists) {
+
+      let newFilter: SearchFilter = {
+        prettyName: label + ':' + value,
+        label: label,
+        value: value
+      };
+      this.appliedFilters.push(newFilter);
+
+      // Filter results
+      //
+      this._inPlaceFilterService.addFilter(this.filteredResults, newFilter);
+      this._resetPaginatedResults();
+    }
+  }
+
+  /**
+   * Removes a particular filter.
+   *
+   * @param $event
+   */
+  public removeFilter($event: PillClickEvent) {
+    let filterIdx = this.appliedFilters.indexOf($event.model);
+    if (filterIdx > -1) {
+      this.appliedFilters.splice(filterIdx, 1);
+
+      // Un-filter results
+      //
+      this._inPlaceFilterService.removeFilter(this.results, this.filteredResults, $event.model);
+      this._resetPaginatedResults();
+    }
+  }
+
   public handleSearchClick($item: any) {
-    console.log($item);
     this.resultSelected.emit($item);
   }
 
@@ -69,4 +124,8 @@ export class SourceSearchComponent implements OnInit {
     return 0;
   }
 
+  private _resetPaginatedResults() {
+    this.paginatedResults = this.filteredResults.slice(0, this.paginationSize - 1);
+    this.paginationIndex = this.paginatedResults.length ? 1 : 0;
+  }
 }

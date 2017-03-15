@@ -1,7 +1,7 @@
-<md-card (click)="handlePillClick()" [mdTooltip]="tooltip" mdTooltipPosition="below">
+<md-card (click)="handlePillClick()">
   <md-card-subtitle>
     <md-icon *ngIf="showPrimaryIcon">{{ primaryIcon }}</md-icon>
-    <div class="title">{{ model.title }}</div>
+    <div class="title">{{ model[modelTitleAttribute] }}</div>
     <md-icon class="secondary-icon" *ngIf="showSecondaryIcon">{{ secondaryIcon }}</md-icon>
   </md-card-subtitle>
 </md-card>

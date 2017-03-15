@@ -12,7 +12,7 @@ import {
   EventEmitter
 } from '@angular/core';
 
-import { PillClickEvent, PillModel } from '../models/index';
+import { PillClickEvent } from '../models/index';
 
 @Component({
   selector: 'rvn-pill-list',
@@ -49,7 +49,8 @@ import { PillClickEvent, PillModel } from '../models/index';
 })
 export class PillListComponent implements OnInit {
 
-  @Input() public models:Array<PillModel>;
+  @Input() public models:Array<any>;
+  @Input() public modelTitleAttribute:string;
   @Input() public showAdd: boolean;
   @Input() public showPrimaryIcons: boolean;
   @Input() public showSecondaryIcons: boolean;

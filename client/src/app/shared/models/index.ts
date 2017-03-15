@@ -1,5 +1,6 @@
 export * from './cloudconvert.interface';
 export * from './entity-card-model.interface';
+export * from './pill.interface';
 export * from './project.interface';
 export * from './record.interface';
 export * from './resolution.interface';

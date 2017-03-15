@@ -1,7 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-
-import { MdTooltip } from '@angular/material';
-import { PillModel } from '../models/index';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'rvn-pill',
@@ -11,13 +8,13 @@ import { PillModel } from '../models/index';
 export class PillComponent {
 
   @Input() text:string;
-  @Input() model:PillModel;
+  @Input() model:any;
+  @Input() modelTitleAttribute:string;
   @Input() primaryIcon:string;
   @Input() secondayIcon:string;
   @Input() showPrimaryIcon:boolean;
   @Input() showSecondaryIcon:boolean;
   @Output() pillClicked: EventEmitter<any> = new EventEmitter<any>();
-  @ViewChild(MdTooltip) tooltip:MdTooltip;
 
   constructor() { }
 

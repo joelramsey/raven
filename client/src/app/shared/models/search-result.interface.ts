@@ -9,9 +9,16 @@ export interface SearchFacet {
   values: Array<string>;
 }
 
+export interface SearchFilter {
+  label: string;
+  value: string;
+  prettyName?:string;
+}
+
 export interface SearchResultListItem {
   title: string;
   description: string;
+  facets: Array<SearchFacet>;
   sourceUrl?: string;
   citation?: Citation;
 }

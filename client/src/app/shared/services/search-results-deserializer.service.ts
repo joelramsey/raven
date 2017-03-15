@@ -52,15 +52,17 @@ export class SearchResultsDeserializerService {
         return {
           title: datum['metadata']['dc:title'],
           description: datum['metadata']['dc:description'],
-          sourceUrl: 'http://files.eric.ed.gov/fulltext/' + datum['metadata']['dc:identifier']['content'],
+          sourceUrl: 'http://files.eric.ed.gov/fulltext/' + datum['metadata']['dc:identifier']['content'] + '.pdf',
           citation: datum['metadata']['eric:citation'],
           facets: [
             {
-              type: 'subject',
+              type: 'nominal',
+              label: 'subject',
               values: datum['metadata']['dc:subject']
             },
             {
-              type: 'type',
+              type: 'nominal',
+              label: 'type',
               values: (datum['metadata']['dc:type'] instanceof Array) ?
                 datum['metadata']['dc:type'] :
                 [datum['metadata']['dc:type']]

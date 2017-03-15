@@ -2,11 +2,29 @@
 
 div {
 
+  &.applied-filter-wrapper {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  &.search-container {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
   &.search-results-bar {
     background: $navbar-color;
     margin-top: 10px;
     padding: 6px;
     border-radius: 10px;
+  }
+
+  &.search-results-container {
+    width: 65%;
+  }
+
+  &.search-facets-container {
+    width: 30%;
   }
 }
 

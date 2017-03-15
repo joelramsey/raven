@@ -1,0 +1,30 @@
+div {
+
+  &.accordion-title {
+
+    display: flex;
+    align-items: center;
+
+    span {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    &.after {
+      flex-direction: row-reverse;
+      justify-content: space-between;
+    }
+
+    &.before {
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(0,0,0,.12);
+    }
+  }
+
+  &.accordion-content {
+    overflow: auto;
+  }
+}
