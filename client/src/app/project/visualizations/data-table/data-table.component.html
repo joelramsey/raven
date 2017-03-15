@@ -1,3 +1,10 @@
+<div class="col triple-col">
+  <div class="card-wrapper">
+    <rvn-data-table
+      [rows]="visibleSources | tabulateSources : resolutions"></rvn-data-table>
+  </div>
+</div>
+
 <ngx-datatable
     #rvnDataTable
     class="material fullscreen expandable"
@@ -34,3 +41,4 @@
   <ngx-datatable-column name="Sentiment"></ngx-datatable-column>
   <ngx-datatable-column name="Relevance"></ngx-datatable-column>
 </ngx-datatable>
+

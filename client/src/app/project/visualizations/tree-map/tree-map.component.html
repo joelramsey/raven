@@ -1,4 +1,17 @@
 <div id="chart" class="tree-map" [class.hidden]="!data?.children?.length">
+  <div class="col double-col">
+    <div class="card-wrapper row">
+      <div class="tree-map-wrapper">
+        <md-card>
+          <md-card-title id="treeMap">Tree Map <a class="fragment-link" (click)="goTo('treeMap')">
+            <md-icon class="centered">link</md-icon>
+          </a></md-card-title>
+          <rvn-tree-map
+            [data]="visibleSources | toTreeMap : resolutions"
+            (entityClick)="updateEntityFromTreeMap($event)"></rvn-tree-map>
+        </md-card>
+      </div>
+    </div>
   <form>
     <label><input type="radio" name="mode" value="size" checked> Size</label>
     <label><input type="radio" name="mode" value="count"> Count</label>

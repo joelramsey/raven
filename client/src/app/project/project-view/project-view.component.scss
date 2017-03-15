@@ -7,20 +7,30 @@
 }
 
 .side {
-  width: 260px;
+  width: 12%;
   float: left;
   background-color: #263238;
   height: 650px;
+  display: inline;
 }
 
 .mainContent {
   background-color: #f5f5f5;
   height: 650px;
-  //float: left;
+  float: left;
+  width: 88%;
+  display: inline;
+  overflow: auto;
+}
+
+.composer {
+  width: 35%;
+  float: right;
 }
 
 .project {
   height: 650px;
+  width: 100%;
 }
 
 i, .fa {
@@ -43,6 +53,10 @@ li {
 
 span {
   color: white;
+}
+
+md-card .mat-card {
+  display: inline;
 }
 
 md-card-title {
