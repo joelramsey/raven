@@ -8,6 +8,18 @@ div {
     padding: 6px;
     border-radius: 10px;
   }
+
+  &.search-results-container {
+    min-width: 200px;
+    width: 70%;
+  }
+
+  &.search-facets-container {
+    max-width: 300px;
+    min-width: 100px;
+    width: 30%;
+    align-self: flex-start;
+  }
 }
 
 md-input-container {

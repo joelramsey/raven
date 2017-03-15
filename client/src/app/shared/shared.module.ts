@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { AccordionModule } from './accordion/accordion.module';
 import { SourcesListModule } from './sources-list/sources-list.module';
 import { SourcePillModule } from './source-pill/source-pill.module';
 import { EntityCardModule } from './entity-card/entity-card.module';
@@ -26,12 +27,14 @@ import {
 @NgModule({
   imports: [
     CommonModule,
+    AccordionModule,
     SourcesListModule,
     SourcePillModule,
     SourcePreviewModule
   ],
   exports: [
     CommonModule,
+    AccordionModule,
     EntityCardModule,
     SharedPipesModule,
     SourcePillModule,

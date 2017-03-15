@@ -12,11 +12,23 @@
   Search Results: {{paginationIndex}}-{{paginatedResultsLength}} of {{results.length}}
 </div>
 
-<md-list>
-  <md-list-item *ngFor="let item of paginatedResults"
-                (click)="handleSearchClick(item)">
+<div class="search-container flex-between">
 
-    <h3 md-line>{{item.title}}</h3>
-    <p md-line>{{item.description}}</p>
-  </md-list-item>
-</md-list>
+  <div *ngIf="facets.length" class="search-facets-container">
+    <h4>Refine Results</h4>
+    <rvn-accordion *ngFor="let facet of facets" [title]="facet.label" [visible]="true">
+      <p>fake facet body</p>
+    </rvn-accordion>
+  </div>
+
+  <div class="search-results-container">
+    <md-list>
+      <md-list-item *ngFor="let item of paginatedResults"
+                    (click)="handleSearchClick(item)">
+
+        <h3 md-line>{{item.title}}</h3>
+        <p md-line>{{item.description}}</p>
+      </md-list-item>
+    </md-list>
+  </div>
+</div>

@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
 
 import { SourceSearchService, ObservableResultHandlerService } from '../../shared/services/index';
-import { SearchResult, SearchResultListItem } from '../../shared/models/index';
+import { SearchResult, SearchResultListItem, SearchFacet } from '../../shared/models/index';
 
 @Component({
   selector: 'rvn-source-search',
@@ -17,6 +17,7 @@ export class SourceSearchComponent implements OnInit {
 
   public searchControl: FormControl = new FormControl();
   public results: Array<SearchResultListItem> = [];
+  public facets: Array<SearchFacet> = [];
   public paginatedResults: Array<SearchResultListItem> = [];
   public paginationSize: number = 10;
   public paginationIndex: number = 0;
@@ -47,8 +48,8 @@ export class SourceSearchComponent implements OnInit {
           this.paginationIndex = 0;
         }
 
+        this.facets = value.facets;
         this.searching = false;
-        console.log(value);
       }, (error:any) => {
         this.searching = false;
         this._observableResultHandlerService.failure(error);

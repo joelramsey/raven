@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { SourceSearchComponent } from './source-search.component';
+import { AccordionModule } from '../../shared/accordion/accordion.module';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import { SourceSearchComponent } from './source-search.component';
     ReactiveFormsModule,
     MdProgressSpinnerModule,
     MdInputModule,
-    MdListModule
+    MdListModule,
+    AccordionModule
   ],
   declarations: [
     SourceSearchComponent
