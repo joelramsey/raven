@@ -3,7 +3,7 @@ import {
   OnDestroy, AfterViewChecked, Output, EventEmitter
 } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as Moment from 'moment';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -12,6 +12,7 @@ import 'rxjs/add/observable/fromEvent';
 import { Project, Source, EntityCardModel, Resolution } from '../../shared/models/index';
 import { ProjectDaoService, ResolutionDaoService } from '../../shared/services/index';
 import { WindowRefService } from '../../shared/services/window-ref.service';
+
 
 @Component({
   selector: 'rvn-project-view',
@@ -50,12 +51,12 @@ import { WindowRefService } from '../../shared/services/window-ref.service';
 export class ProjectViewComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   @Input() project:Project;
-  @Input() visibleSources:Array<Source>;
+  @Input() visibleSources:Array<Source> = [];
   @Output() projectNotesChanged: EventEmitter<string> = new EventEmitter<string>();
   public saveStatus:string;
   public hideSaveMessage:boolean = false;
   public activeEntity:EntityCardModel;
-  public resolutions:Array<Resolution>;
+  public resolutions:Array<Resolution> = [];
 
   private _noteChangeDebounceTime:number = 800;
   private _hideMessageTime:number = 4 * 1000;
@@ -69,7 +70,8 @@ export class ProjectViewComponent implements OnInit, AfterViewChecked, OnDestroy
   constructor(private _projectDaoService:ProjectDaoService,
               private _resolutionDaoService: ResolutionDaoService,
               private _windowRef: WindowRefService,
-              private _route: ActivatedRoute) {
+              private _route: ActivatedRoute,
+  ) {
   }
 
   ngOnInit() {

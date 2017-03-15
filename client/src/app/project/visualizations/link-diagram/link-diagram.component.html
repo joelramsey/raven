@@ -1,4 +1,19 @@
-<div id="link-diagram" class="link-diagram" [class.hidden]="!data?.nodes?.length">
-</div>
+<div class="card-wrapper row">
+  <md-card>
+    <md-card-title id="entityRelationships">Entity Relationships <a class="fragment-link"
+                                                                    (click)="goTo('entityRelationships')">
+      <md-icon class="centered">link</md-icon>
+    </a></md-card-title>
 
-<span *ngIf="!data?.nodes?.length">No data to display</span>
+    <span *ngIf="!data?.nodes?.length">No data to display</span>
+
+    <div id="link-diagram" class="link-diagram" [class.hidden]="!data?.nodes?.length">
+    </div>
+
+    <!--<rvn-link-diagram-->
+    <!--[data]="visibleSources | toLinkDiagram : resolutions"-->
+    <!--(entityClick)="updateEntityFromLinkDiagram($event)"-->
+    <!--&gt;</rvn-link-diagram>-->
+
+  </md-card>
+</div>
