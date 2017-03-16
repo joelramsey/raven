@@ -27,23 +27,33 @@
   <div class="navigation-container">
     <div class="md-nav-iteml" [mdTooltip]="'Data Table'">
       <a [class.active]="activeView === Views.DATA_TABLE"
-         (click)="goTo(Views.DATA_TABLE)"><md-icon>list</md-icon></a>
+         (click)="goTo(Views.DATA_TABLE)">
+        <md-icon>list</md-icon>
+      </a>
     </div>
     <div class="md-nav-item" [mdTooltip]="'Network Diagram'">
       <a [class.active]="activeView === Views.ENTITY_RELATIONSHIPS"
-         (click)="goTo(Views.ENTITY_RELATIONSHIPS)"><md-icon>bubble_chart</md-icon></a>
+         (click)="goTo(Views.ENTITY_RELATIONSHIPS)">
+        <md-icon>bubble_chart</md-icon>
+      </a>
     </div>
     <div class="md-nav-item" [mdTooltip]="'Tree Map'">
       <a [class.active]="activeView === Views.TREE_MAP"
-         (click)="goTo(Views.TREE_MAP)"><md-icon>view_compact</md-icon></a>
+         (click)="goTo(Views.TREE_MAP)">
+        <md-icon>view_compact</md-icon>
+      </a>
     </div>
     <div class="md-nav-item" [mdTooltip]="'Search Articles'">
       <a [class.active]="activeView === Views.SEARCH"
-         (click)="goTo(Views.SEARCH)"><md-icon>search</md-icon></a>
+         (click)="goTo(Views.SEARCH)">
+        <md-icon>search</md-icon>
+      </a>
     </div>
     <div class="md-nav-item" [mdTooltip]="'Citations'">
       <a [class.active]="activeView === Views.CITATIONS"
-         (click)="goTo(Views.CITATIONS)"><md-icon>format_quote</md-icon></a>
+         (click)="goTo(Views.CITATIONS)">
+        <md-icon>format_quote</md-icon>
+      </a>
     </div>
   </div>
 

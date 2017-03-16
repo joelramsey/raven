@@ -1,34 +1,21 @@
-<div class="col double-col">
-  <div class="card-wrapper row">
-    <div class="tree-map-wrapper">
-      <md-card>
-        <md-card-title id="treeMap">Tree Map <a class="fragment-link" (click)="goTo('treeMap')">
-          <md-icon class="centered">link</md-icon>
-        </a></md-card-title>
+<div class="tree-map-wrapper">
 
-        <!--<rvn-tree-map-->
-        <!--[data]="visibleSources | toTreeMap : resolutions"-->
-        <!--(entityClick)="updateEntityFromTreeMap($event)"></rvn-tree-map>-->
+  <span *ngIf="!data?.children?.length">No data to display</span>
 
-        <span *ngIf="!data?.children?.length">No data to display</span>
+  <div id="chart" class="tree-map" [class.hidden]="!data?.children?.length">
+    <form>
+      <label><input type="radio" name="mode" value="size" checked> Size</label>
+      <label><input type="radio" name="mode" value="count"> Count</label>
 
-        <div id="chart" class="tree-map" [class.hidden]="!data?.children?.length">
-          <form>
-            <label><input type="radio" name="mode" value="size" checked> Size</label>
-            <label><input type="radio" name="mode" value="count"> Count</label>
-
-            <!-- Placeholder for merging functionality -->
-            <!--<button md-button-->
-            <!--[mdTooltip]="'Merge Like Entities'"-->
-            <!--mdTooltipPosition="below"-->
-            <!--(click)="handleMergeClick()"-->
-            <!--class="merge-button"-->
-            <!--type="button">-->
-            <!--<md-icon>{{merging ? 'save' : 'merge_type'}}</md-icon>-->
-            <!--</button>-->
-          </form>
-        </div>
-      </md-card>
-    </div>
+      <!-- Placeholder for merging functionality -->
+      <!--<button md-button-->
+      <!--[mdTooltip]="'Merge Like Entities'"-->
+      <!--mdTooltipPosition="below"-->
+      <!--(click)="handleMergeClick()"-->
+      <!--class="merge-button"-->
+      <!--type="button">-->
+      <!--<md-icon>{{merging ? 'save' : 'merge_type'}}</md-icon>-->
+      <!--</button>-->
+    </form>
   </div>
 </div>

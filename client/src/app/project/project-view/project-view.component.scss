@@ -67,6 +67,8 @@ div {
 
   &.navigation-container {
     width: 32px;
+    padding-right: 16px;
+    border-right: 1px solid $icon-color;
 
     div {
       margin-top: 16px;

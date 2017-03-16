@@ -14,7 +14,7 @@ import { InPlaceFilterService } from './in-place-filter.service';
 export class SourceSearchComponent implements OnInit {
 
   @Input() public searchTerm: string = '';
-  @Input() public paginationSize: number = 7;
+  @Input() public paginationSize: number = 10;
 
   @Output() public resultSelected: EventEmitter<SearchResultListItem> = new EventEmitter<SearchResultListItem>();
 

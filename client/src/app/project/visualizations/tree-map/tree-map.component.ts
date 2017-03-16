@@ -53,7 +53,7 @@ export class TreeMapComponent implements OnInit, OnChanges {
       });
 
     this._div.style('position', 'relative')
-      .style('width', (width + margin.left + margin.right) + 'px')
+      .style('width', '100%')
       .style('height', (height + margin.top + margin.bottom) + 'px')
       .style('left', margin.left + 'px')
       .style('top', margin.top + 'px');
