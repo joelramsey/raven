@@ -23,11 +23,9 @@ ActiveRecord::Schema.define(version: 20170316005210) do
 
   create_table "citations", force: :cascade do |t|
     t.string   "text"
-    t.integer  "project_id"
     t.integer  "record_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_citations_on_project_id", using: :btree
     t.index ["record_id"], name: "index_citations_on_record_id", using: :btree
   end
 
@@ -131,4 +129,5 @@ ActiveRecord::Schema.define(version: 20170316005210) do
   add_foreign_key "projects", "users"
   add_foreign_key "records", "projects"
   add_foreign_key "resolutions", "users"
+  add_foreign_key "citations", "records"
 end

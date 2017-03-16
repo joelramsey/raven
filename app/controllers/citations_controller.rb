@@ -18,11 +18,11 @@ class CitationsController < ApplicationController
   # POST /citations
   # POST /citations.json
   def create
-    @citation = Citation.new(citation_params)
+    @record = record.find(params[:record_id])
+    @citation = @record.citations.new(citation_params)
 
     if @citation.save
       render :show, status: :created, location: @citation
-    else
       render json: @citation.errors, status: :unprocessable_entity
     end
   end
@@ -51,6 +51,6 @@ class CitationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def citation_params
-      params.require(:citation).permit(:text, :project_id, :record_id)
+      params.require(:citation).permit(:text, :record_id)
     end
 end
