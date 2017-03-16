@@ -14,6 +14,8 @@ import { InPlaceFilterService } from './in-place-filter.service';
 export class SourceSearchComponent implements OnInit {
 
   @Input() public searchTerm: string = '';
+  @Input() public paginationSize: number = 7;
+
   @Output() public resultSelected: EventEmitter<SearchResultListItem> = new EventEmitter<SearchResultListItem>();
 
   public searchControl: FormControl = new FormControl();
@@ -22,7 +24,6 @@ export class SourceSearchComponent implements OnInit {
   public paginatedResults: Array<SearchResultListItem> = [];
   public filteredResults: Array<SearchResultListItem> = [];
   public appliedFilters: Array<SearchFilter> = [];
-  public paginationSize: number = 10;
   public paginationIndex: number = 0;
   public searching: boolean = false;
   public firstSearch: boolean = true;
@@ -113,8 +114,38 @@ export class SourceSearchComponent implements OnInit {
     }
   }
 
+  /**
+   * Emits the clicked item.
+   * @param $item
+   */
   public handleSearchClick($item: any) {
     this.resultSelected.emit($item);
+  }
+
+  /**
+   * Moves to the next page of search results.
+   */
+  public nextPage() {
+
+    if (this.nextPageEnabled) {
+      // Move to next page
+      //
+      this.paginationIndex += this.paginationSize;
+      this.paginatedResults = this.filteredResults.slice(this.paginationIndex - 1, this.paginationIndex + this.paginationSize - 1);
+    }
+  }
+
+  /**
+   * Moves to the previous page of search results.
+   */
+  public previousPage() {
+
+    if (this.previousPageEnabled) {
+      // Move to next page
+      //
+      this.paginationIndex -= this.paginationSize;
+      this.paginatedResults = this.filteredResults.slice(this.paginationIndex - 1, this.paginationIndex + this.paginationSize - 1);
+    }
   }
 
   get paginatedResultsLength() {
@@ -126,8 +157,16 @@ export class SourceSearchComponent implements OnInit {
     return 0;
   }
 
+  get nextPageEnabled() {
+    return this.paginationIndex + this.paginationSize < this.filteredResults.length;
+  }
+
+  get previousPageEnabled() {
+    return this.paginationIndex - this.paginationSize > -1;
+  }
+
   private _resetPaginatedResults() {
-    this.paginatedResults = this.filteredResults.slice(0, this.paginationSize - 1);
+    this.paginatedResults = this.filteredResults.slice(0, this.paginationSize);
     this.paginationIndex = this.paginatedResults.length ? 1 : 0;
   }
 }

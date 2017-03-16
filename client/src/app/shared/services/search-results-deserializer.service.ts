@@ -77,8 +77,6 @@ export class SearchResultsDeserializerService {
           type: 'nominal'
         });
 
-        console.log(facetMap);
-
         return res;
       }, [])
     });

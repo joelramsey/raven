@@ -15,38 +15,44 @@
 
 <div class="search-container flex-between">
 
-  <div *ngIf="appliedFilters.length"
-       class="applied-filter-wrapper">
 
-    <h4>Current Filters</h4>
-    <rvn-pill-list [models]="appliedFilters"
-                   [modelTitleAttribute]="'prettyName'"
-                   (pillClicked)="removeFilter($event)"></rvn-pill-list>
-  </div>
 
-  <p *ngIf="!firstSearch && !filteredResults.length">
-    No results found - try some synonyms  or use fewer words if you can't find what you're looking for.
-  </p>
-
-  <div *ngIf="facets.length && filteredResults.length"
+  <div *ngIf="facets.length"
        class="search-facets-container">
 
-    <h4>Refine Results</h4>
-    <rvn-accordion *ngFor="let facet of facets"
-                   [title]="facet.label"
-                   [maxContentHeight]="'200px'"
-                   [visible]="true">
-      <md-list dense>
-        <md-list-item *ngFor="let value of facet.values"
-                      (click)="addFilter(facet.label, value)">
+    <div *ngIf="appliedFilters.length"
+         class="applied-filter-wrapper">
 
-          <p>{{value}}</p>
-        </md-list-item>
-      </md-list>
-    </rvn-accordion>
+      <h4>Current Filters</h4>
+      <rvn-pill-list [models]="appliedFilters"
+                     [modelTitleAttribute]="'prettyName'"
+                     (pillClicked)="removeFilter($event)"></rvn-pill-list>
+    </div>
+
+    <div *ngIf="filteredResults.length">
+      <h4>Refine Results</h4>
+      <rvn-accordion *ngFor="let facet of facets"
+                     [title]="facet.label"
+                     [maxContentHeight]="'200px'"
+                     [visible]="true">
+        <md-list dense>
+          <md-list-item *ngFor="let value of facet.values"
+                        (click)="addFilter(facet.label, value)">
+
+            <p>{{value}}</p>
+          </md-list-item>
+        </md-list>
+      </rvn-accordion>
+    </div>
   </div>
 
   <div class="search-results-container">
+
+    <p *ngIf="!firstSearch && !filteredResults.length">
+      No results found - try some synonyms, use fewer words, or remove some filters if you can't find what you're looking
+      for.
+    </p>
+
     <md-list>
       <md-list-item *ngFor="let item of paginatedResults"
                     (click)="handleSearchClick(item)">
@@ -55,5 +61,26 @@
         <p md-line>{{item.description}}</p>
       </md-list-item>
     </md-list>
+
+    <div *ngIf="filteredResults.length" class="flex-between">
+      <div>
+        <button *ngIf="previousPageEnabled"
+                md-button
+                (click)="previousPage()">
+
+          <md-icon>keyboard_arrow_left</md-icon>
+          Previous
+        </button>
+      </div>
+      <div>
+        <button *ngIf="nextPageEnabled"
+                md-button
+                (click)="nextPage()">
+
+          Next
+          <md-icon>keyboard_arrow_right</md-icon>
+        </button>
+      </div>
+    </div>
   </div>
 </div>

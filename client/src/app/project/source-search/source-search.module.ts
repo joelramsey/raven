@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { MdInputModule, MdListModule, MdProgressSpinnerModule } from '@angular/material';
+import { MdButtonModule, MdIconModule, MdInputModule, MdListModule, MdProgressSpinnerModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -12,9 +12,11 @@ import { InPlaceFilterService } from './in-place-filter.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MdProgressSpinnerModule,
+    MdButtonModule,
+    MdIconModule,
     MdInputModule,
     MdListModule,
+    MdProgressSpinnerModule,
     AccordionModule,
     PillListModule
   ],
