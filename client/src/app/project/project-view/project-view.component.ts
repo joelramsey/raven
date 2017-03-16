@@ -2,16 +2,14 @@ import {
   Component, OnInit, Input, style, state, animate, group, trigger, transition,
   OnDestroy, AfterViewChecked, Output, EventEmitter
 } from '@angular/core';
-import { AbstractControl, FormControl } from '@angular/forms';
+
 import { ActivatedRoute } from '@angular/router';
 import * as Moment from 'moment';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
 
 import { Project, Source, EntityCardModel, Resolution } from '../../shared/models/index';
 import { ProjectDaoService, ResolutionDaoService } from '../../shared/services/index';
-import { WindowRefService } from '../../shared/services/window-ref.service';
 
 @Component({
   selector: 'rvn-project-view',
@@ -49,16 +47,26 @@ import { WindowRefService } from '../../shared/services/window-ref.service';
 })
 export class ProjectViewComponent implements OnInit, AfterViewChecked, OnDestroy {
 
-  @Input() project:Project;
-  @Input() visibleSources:Array<Source>;
-  @Output() projectNotesChanged: EventEmitter<string> = new EventEmitter<string>();
-  public saveStatus:string;
-  public hideSaveMessage:boolean = false;
-  public activeEntity:EntityCardModel;
-  public resolutions:Array<Resolution>;
+  public Views = {
+    CITATIONS: 'citations',
+    DATA_TABLE: 'data-table',
+    ENTITY_RELATIONSHIPS: 'entity-relationships',
+    TREE_MAP: 'tree-map',
+    SEARCH: 'search'
+  };
 
-  private _noteChangeDebounceTime:number = 800;
-  private _hideMessageTime:number = 4 * 1000;
+  @Input() project: Project;
+  @Input() activeView: string = this.Views.DATA_TABLE;
+  @Input() visibleSources: Array<Source>;
+  @Output() projectNotesChanged: EventEmitter<string> = new EventEmitter<string>();
+
+  public saveStatus: string;
+  public hideSaveMessage: boolean = false;
+  public activeEntity: EntityCardModel;
+  public resolutions: Array<Resolution>;
+
+  private _noteChangeDebounceTime: number = 800;
+  private _hideMessageTime: number = 4 * 1000;
   private _hideSaveMessageTimeout;
   private _routeFragmentSubscription: any;
   private _currentFragment: string;
@@ -66,9 +74,8 @@ export class ProjectViewComponent implements OnInit, AfterViewChecked, OnDestroy
   cardX = '0';
   cardY = '0';
 
-  constructor(private _projectDaoService:ProjectDaoService,
+  constructor(private _projectDaoService: ProjectDaoService,
               private _resolutionDaoService: ResolutionDaoService,
-              private _windowRef: WindowRefService,
               private _route: ActivatedRoute) {
   }
 
@@ -85,7 +92,7 @@ export class ProjectViewComponent implements OnInit, AfterViewChecked, OnDestroy
     this.projectNotesChanged
       .debounceTime(this._noteChangeDebounceTime)
       .distinctUntilChanged()
-      .subscribe((value:string) => {
+      .subscribe((value: string) => {
 
         if (this.project.notes === value) {
 
@@ -109,7 +116,7 @@ export class ProjectViewComponent implements OnInit, AfterViewChecked, OnDestroy
         clearTimeout(this._hideSaveMessageTimeout);
 
         this._projectDaoService.saveProject(this.project)
-          .subscribe((project:Project) => {
+          .subscribe((project: Project) => {
 
             // Update project and save status
             //
@@ -163,21 +170,21 @@ export class ProjectViewComponent implements OnInit, AfterViewChecked, OnDestroy
     this.projectNotesChanged.next(value);
   }
 
-  showEntityCardFromTreeMap($event:any) {
+  showEntityCardFromTreeMap($event: any) {
     this.cardX = $event.x + 'px';
     this.cardY = $event.y + 'px';
   }
 
-  updateEntityFromTreeMap($event:any) {
+  updateEntityFromTreeMap($event: any) {
     this.activeEntity = $event;
   }
 
-  showEntityCardFromLinkDiagram($event:any) {
+  showEntityCardFromLinkDiagram($event: any) {
     this.cardX = $event.x + 'px';
     this.cardY = $event.y + 'px';
   }
 
-  updateEntityFromLinkDiagram($event:any) {
+  updateEntityFromLinkDiagram($event: any) {
     this.activeEntity = $event;
   }
 
@@ -192,11 +199,6 @@ export class ProjectViewComponent implements OnInit, AfterViewChecked, OnDestroy
    * @param location to navigate to
    */
   goTo(location: string) {
-    let element = this._windowRef.nativeDocument.getElementById(location);
-    if (element) {
-      element.scrollIntoView();
-    }
-
-    this._windowRef.nativeWindow.location.hash = location;
+    this.activeView = location;
   }
 }

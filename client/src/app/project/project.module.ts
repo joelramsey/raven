@@ -22,6 +22,7 @@ import { ProjectSourceModule } from './project-source/project-source.module';
 import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
 
 import { DraggableDirective } from './directives/index';
+import { SourceSearchModule } from './source-search/source-search.module';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { DraggableDirective } from './directives/index';
     NgxDatatableModule,
     NgGridModule,
     SourceUploaderModule,
+    SourceSearchModule,
     ProjectSourceModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot()

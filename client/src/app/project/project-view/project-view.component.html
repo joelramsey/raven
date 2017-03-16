@@ -9,74 +9,85 @@
     [entity]="activeEntity"></rvn-entity-card>
 </div>
 
-<div class="col double-col">
-  <div class="card-wrapper row">
-    <md-card>
-      <md-card-title id="citations">Citations <a class="fragment-link" (click)="goTo('citations')">
-        <md-icon class="centered">link</md-icon>
-      </a></md-card-title>
-
-      <span style="font-size: 16px; font-family: Arial, Helvetica, sans-serif;">
-        <p>We're currently working on adding a drop-dead simple citation helper to Raven at the moment - in the
-          meantime, we recommend using <a href="https://www.easybib.com" target="_blank">EasyBib</a> to create
-          citations, which can be pasted into the <a (click)="goTo('projectComposer')">Project Composer</a>
-          section below.
-        </p>
-        </span>
-
-    </md-card>
-  </div>
-</div>
-
-<div class="col double-col">
-  <div class="card-wrapper row">
-    <md-card>
-      <md-card-title id="projectComposer">Project Composer <a class="fragment-link" (click)="goTo('projectComposer')">
-        <md-icon class="centered">link</md-icon>
-      </a>
+<div class="project-composer-wrapper">
+  <md-card>
+    <rvn-accordion [title]="'Project Composer'">
+      <md-card-title>
         <div class="save-message"
              [class.hide-save-message]="hideSaveMessage">{{saveStatus}}
         </div>
       </md-card-title>
 
       <div [froalaEditor] [froalaModel]="project.notes" (froalaModelChange)="froalaModelChanged($event)"></div>
-    </md-card>
-  </div>
+    </rvn-accordion>
+  </md-card>
 </div>
 
-<div class="col double-col">
-  <div class="card-wrapper row">
-    <div class="tree-map-wrapper">
-      <md-card>
-        <md-card-title id="treeMap">Tree Map <a class="fragment-link" (click)="goTo('treeMap')">
-          <md-icon class="centered">link</md-icon>
-        </a></md-card-title>
-        <rvn-tree-map
-          [data]="visibleSources | toTreeMap : resolutions"
-          (entityClick)="updateEntityFromTreeMap($event)"></rvn-tree-map>
-      </md-card>
+<md-card class="project-container">
+  <div class="navigation-container">
+    <div class="md-nav-iteml" [mdTooltip]="'Data Table'">
+      <a [class.active]="activeView === Views.DATA_TABLE"
+         (click)="goTo(Views.DATA_TABLE)"><md-icon>list</md-icon></a>
+    </div>
+    <div class="md-nav-item" [mdTooltip]="'Network Diagram'">
+      <a [class.active]="activeView === Views.ENTITY_RELATIONSHIPS"
+         (click)="goTo(Views.ENTITY_RELATIONSHIPS)"><md-icon>bubble_chart</md-icon></a>
+    </div>
+    <div class="md-nav-item" [mdTooltip]="'Tree Map'">
+      <a [class.active]="activeView === Views.TREE_MAP"
+         (click)="goTo(Views.TREE_MAP)"><md-icon>view_compact</md-icon></a>
+    </div>
+    <div class="md-nav-item" [mdTooltip]="'Search Articles'">
+      <a [class.active]="activeView === Views.SEARCH"
+         (click)="goTo(Views.SEARCH)"><md-icon>search</md-icon></a>
+    </div>
+    <div class="md-nav-item" [mdTooltip]="'Citations'">
+      <a [class.active]="activeView === Views.CITATIONS"
+         (click)="goTo(Views.CITATIONS)"><md-icon>format_quote</md-icon></a>
     </div>
   </div>
 
-  <div class="card-wrapper row">
-    <md-card>
-      <md-card-title id="entityRelationships">Entity Relationships <a class="fragment-link"
-                                                                      (click)="goTo('entityRelationships')">
-        <md-icon class="centered">link</md-icon>
-      </a></md-card-title>
+  <div class="active-view-container" [ngSwitch]="activeView">
+
+    <!-- Citations -->
+    <div *ngSwitchCase="Views.CITATIONS" class="card-wrapper">
+      <md-card-title>Citations</md-card-title>
+      <p>We're currently working on adding a drop-dead simple citation helper to Raven at the moment - in the
+        meantime, we recommend using <a href="https://www.easybib.com" target="_blank">EasyBib</a> to create
+        citations, which can be pasted into the Project Composer.
+      </p>
+    </div>
+
+    <!-- Tree Map -->
+    <div *ngSwitchCase="Views.TREE_MAP" class="card-wrapper">
+      <md-card-title>Tree Map</md-card-title>
+      <div class="tree-map-wrapper">
+        <rvn-tree-map
+          [data]="visibleSources | toTreeMap : resolutions"
+          (entityClick)="updateEntityFromTreeMap($event)"></rvn-tree-map>
+      </div>
+    </div>
+
+    <!-- Link Diagram -->
+    <div *ngSwitchCase="Views.ENTITY_RELATIONSHIPS" class="card-wrapper">
+      <md-card-title>Network Diagram</md-card-title>
       <rvn-link-diagram
         [data]="visibleSources | toLinkDiagram : resolutions"
-        (entityClick)="updateEntityFromLinkDiagram($event)"
-      ></rvn-link-diagram>
-    </md-card>
+        (entityClick)="updateEntityFromLinkDiagram($event)"></rvn-link-diagram>
+    </div>
+
+    <!-- Data Table -->
+    <div *ngSwitchCase="Views.DATA_TABLE" class="card-wrapper">
+      <md-card-title>Data Table</md-card-title>
+      <rvn-data-table
+        [rows]="visibleSources | tabulateSources : resolutions"></rvn-data-table>
+    </div>
+
+    <!-- Search -->
+    <div *ngSwitchCase="Views.SEARCH" class="card-wrapper">
+      <md-card-title>Search</md-card-title>
+      <rvn-source-search></rvn-source-search>
+    </div>
+
   </div>
-</div>
-
-<div class="col triple-col">
-
-  <div class="card-wrapper">
-    <rvn-data-table
-      [rows]="visibleSources | tabulateSources : resolutions"></rvn-data-table>
-  </div>
-
-</div>
+</md-card>

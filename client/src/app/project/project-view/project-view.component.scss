@@ -6,6 +6,15 @@
   justify-content: space-between;
 }
 
+md-card {
+  &.project-container {
+    width: 100%;
+    margin-top: 90px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
 md-card-title {
 
   div {
@@ -37,26 +46,17 @@ div {
     width: 100%;
   }
 
-  &.col {
-    width: 100%;
-    min-width: 200px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  &.active-view-container {
+    width: 85%;
+    overflow: auto;
   }
 
-  &.double-col {
-    width: 100%;
-  }
-
-  &.triple-col {
-    width: 100%;
-  }
-
-  &.row {
-    width: 100%;
-    margin-bottom: 10px;
+  &.project-composer-wrapper {
+    position: absolute;
+    right: 4px;
+    min-width: 312px;
+    width: 65%;
+    z-index: 10;
   }
 
   &.floating-entity-card {
@@ -64,19 +64,26 @@ div {
     right: 0;
     z-index: 5;
   }
+
+  &.navigation-container {
+    width: 32px;
+
+    div {
+      margin-top: 16px;
+    }
+
+    md-icon {
+      font-size: 32px;
+      width: 32px;
+      height: 32px;
+    }
+  }
 }
 
 a {
   &.fragment-link:before {
     background-color: $icon-color;
   }
-}
-
-textarea {
-  width: 100%;
-  height: 175px;
-  border: 0;
-  border-bottom: 1px solid black;
 }
 
 
