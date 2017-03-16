@@ -26,25 +26,28 @@ export class SearchResultsDeserializerService {
 
         // Generate facets
         //
-        metadata['dc:subject'].forEach((subject: string) => {
+        let flattenedSubjects = this._flattenSubjects(metadata['dc:subject']);
+
+        // Add to general facet map
+        //
+        flattenedSubjects.forEach((subject: string) => {
           if (facetMap.subject.indexOf(subject) === -1) {
             facetMap.subject.push(subject);
           }
         });
 
+
         // Types can be an array...
         //
-        if (metadata['dc:type'] instanceof Array) {
-          metadata['dc:type'].forEach((type: string) => {
-            if (facetMap.type.indexOf(type) === -1) {
-              facetMap.type.push(type);
-            }
-          });
-        } else {
-          if (facetMap.type.indexOf(metadata['dc:type']) === -1) {
-            facetMap.type.push(metadata['dc:type']);
+        let flattenedTypes = this._flattenTypes(metadata['dc:type']);
+
+        // Add to general facet map
+        //
+        flattenedTypes.forEach((type: string) => {
+          if (facetMap.type.indexOf(type) === -1) {
+            facetMap.type.push(type);
           }
-        }
+        });
 
         // Map data
         //
@@ -57,14 +60,12 @@ export class SearchResultsDeserializerService {
             {
               type: 'nominal',
               label: 'subject',
-              values: metadata['dc:subject']
+              values: flattenedSubjects
             },
             {
               type: 'nominal',
               label: 'type',
-              values: (metadata['dc:type'] instanceof Array) ?
-                metadata['dc:type'] :
-                [metadata['dc:type']]
+              values: flattenedTypes
             }
           ]
         }
@@ -76,8 +77,28 @@ export class SearchResultsDeserializerService {
           type: 'nominal'
         });
 
+        console.log(facetMap);
+
         return res;
       }, [])
     });
+  }
+
+  private _flattenSubjects(subjects: any) {
+
+    return subjects.map((subject) => {
+
+      if (typeof subject === 'string') {
+          return subject;
+      }
+      else if (subject['content']) {
+          return subject['content'];
+      }
+    });
+
+  }
+
+  private _flattenTypes(types: any) {
+    return types instanceof Array ? types : [types];
   }
 }

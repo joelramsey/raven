@@ -43,7 +43,7 @@ export class InPlaceFilterService {
     //
     if (indexesToRemove.length) {
       for(let i = indexesToRemove.length - 1; i > -1; i--) {
-        filteredResults.splice(indexesToRemove[i]);
+        filteredResults.splice(indexesToRemove[i], 1);
       }
     }
   }
