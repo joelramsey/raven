@@ -9,10 +9,10 @@ require 'yajl'
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-user = User.create!({provider: 'email', uid: '1234567', email: 'test@gmail.com', password: '!QAZxsw2'})
-project = user.projects.create!({name: 'Chemistry Stuff', description: 'A test project with chemistry stuff'})
-record = project.records.create!({title: 'first source', result: 'Results from source one'})
-citation = Citation.create!({text: 'some citation stuff', record_id: 1})
+# user = User.create!({provider: 'email', uid: '1234567', email: 'test@gmail.com', password: '!QAZxsw2'})
+# project = user.projects.create!({name: 'Chemistry Stuff', description: 'A test project with chemistry stuff'})
+# record = project.records.create!({title: 'first source', result: 'Results from source one'})
+# citation = Citation.create!({text: 'some citation stuff', record_id: 1})
 
 # #Create Users
 #   user = User.create!({
@@ -45,33 +45,33 @@ citation = Citation.create!({text: 'some citation stuff', record_id: 1})
 #    )
 #  end
 #  records = Record.all
-citations = Citation.all
+# citations = Citation.all
 
 
 
 
-# file = File.join(Rails.root, 'tmp', 'eric1969.json')
-#
-#   json = File.new(file, 'r')
-#   parser = Yajl::Parser.new
-#   hash = parser.parse(json)
-#   num = 0
-#   #hash = hash.to_json
-#     hash.each do |stuff|
-#       Article.create(text: stuff)
-#       puts num += 1
-#       sleep(0.25)
-#     end
-#
-#
-# articles = Article.all
+file = File.join(Rails.root, 'tmp', 'eric1967.json')
+
+  json = File.new(file, 'r')
+  parser = Yajl::Parser.new
+  hash = parser.parse(json)
+  num = 0
+  #hash = hash.to_json
+    hash.each do |stuff|
+      Article.create(text: stuff)
+      puts num += 1
+      sleep(0.25)
+    end
+
+
+articles = Article.all
 
 
 
- puts "Seeding finished"
- puts "#{User.count} users created"
- puts "#{Project.count} projects created"
- puts "#{Resolution.count} resolutions created"
- puts "#{Record.count} records created"
- puts "#{Citation.count} citations created"
- # puts "#{Article.count} articles created"
+ # puts "Seeding finished"
+ # puts "#{User.count} users created"
+ # puts "#{Project.count} projects created"
+ # puts "#{Resolution.count} resolutions created"
+ # puts "#{Record.count} records created"
+ # puts "#{Citation.count} citations created"
+ puts "#{Article.count} articles created"
