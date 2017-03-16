@@ -15,15 +15,8 @@ export const ProjectRoutes:Routes = [
   },
   {
     path: 'project/:id',
-    component: ProjectComponent,
-    children: [
-      { path: '', redirectTo: 'table', pathMatch: 'full' },
-      { path:'table', component: DataTableComponent },
-      { path:'link', component: LinkDiagramComponent },
-      { path:'treemap', component: TreeMapComponent },
-      { path: 'search', component: SourceSearchComponent }
-    ]
-   },
+    component: ProjectComponent
+  },
   {
     path: 'project/:id/sources',
     component: ProjectSourceComponent,
