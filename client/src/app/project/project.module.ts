@@ -23,6 +23,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
 
 import { DraggableDirective } from './directives/index';
 import { SourceSearchModule } from './source-search/source-search.module';
+import { AvailableFacetComponent } from './available-facet/available-facet.component';
 
 @NgModule({
   imports: [

@@ -29,24 +29,16 @@
 
     <div *ngIf="filteredResults.length">
       <h4>Refine Results</h4>
-      <rvn-accordion *ngFor="let facet of facets"
-                     [title]="facet.label"
-                     [maxContentHeight]="'200px'"
-                     [visible]="true">
-        <md-list dense>
-          <md-list-item *ngFor="let value of facet.values"
-                        (click)="addFilter(facet.label, value)">
-
-            <p>{{value}}</p>
-          </md-list-item>
-        </md-list>
-      </rvn-accordion>
+      <rvn-available-facet *ngFor="let facet of facets"
+                           [facet]="facet"
+                           (facetClicked)="addFilter($event)">
+      </rvn-available-facet>
     </div>
   </div>
 
   <div class="search-results-container">
 
-    <p *ngIf="!firstSearch && !filteredResults.length">
+    <p *ngIf="!firstSearch && !filteredResults.length && !searching">
       No results found - try some synonyms, use fewer words, or remove some filters if you can't find what you're looking
       for.
     </p>

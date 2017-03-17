@@ -1,27 +1,34 @@
 import { CommonModule } from '@angular/common';
-import { MdButtonModule, MdIconModule, MdInputModule, MdListModule, MdProgressSpinnerModule } from '@angular/material';
+import {
+  MdButtonModule, MdIconModule, MdInputModule, MdListModule, MdProgressSpinnerModule,
+  MdCheckboxModule
+} from '@angular/material';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SourceSearchComponent } from './source-search.component';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
 import { PillListModule } from '../../shared/pill-list/pill-list.module';
 import { InPlaceFilterService } from './in-place-filter.service';
+import { AvailableFacetComponent } from '../available-facet/available-facet.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     MdButtonModule,
     MdIconModule,
     MdInputModule,
     MdListModule,
+    MdCheckboxModule,
     MdProgressSpinnerModule,
     AccordionModule,
     PillListModule
   ],
   declarations: [
-    SourceSearchComponent
+    SourceSearchComponent,
+    AvailableFacetComponent
   ],
   exports: [
     SourceSearchComponent

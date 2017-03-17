@@ -1,0 +1,20 @@
+<rvn-accordion [title]="facet.label"
+               [maxContentHeight]="'200px'"
+               [visible]="true"
+               [ngSwitch]="facet.type">
+
+  <!-- Named sets (ex.: apples, oranges, grapes) -->
+  <div *ngSwitchCase="'nominal'">
+    <md-list dense>
+      <md-list-item *ngFor="let value of facet.values"
+                    (click)="handleFacetClick(facet.label, value)">
+
+        <p>{{value}}</p>
+      </md-list-item>
+    </md-list>
+  </div>
+
+  <div class="boolean-container" *ngSwitchCase="'boolean'">
+    <md-checkbox (change)="handleFacetClick(facet.label, $event.checked)"></md-checkbox>
+  </div>
+</rvn-accordion>

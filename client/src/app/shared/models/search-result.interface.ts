@@ -5,13 +5,13 @@ export interface SearchResult {
 
 export interface SearchFacet {
   label: string;
-  type: string; // ordinal, nominal, range
-  values: Array<string>;
+  type: string; // ordinal, nominal, range, boolean
+  values: Array<any>;
 }
 
 export interface SearchFilter {
   label: string;
-  value: string;
+  value: any;
   prettyName?:string;
 }
 

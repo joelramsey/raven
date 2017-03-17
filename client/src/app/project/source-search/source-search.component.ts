@@ -73,10 +73,10 @@ export class SourceSearchComponent implements OnInit {
    * @param label
    * @param value
    */
-  public addFilter(label: string, value: string) {
+  public addFilter($event: SearchFilter) {
 
     let filterExists = this.appliedFilters.some((filter: SearchFilter) => {
-      return (filter.label === label && filter.value === value);
+      return (filter.label === $event.label && filter.value === $event.value);
     });
 
     // Add if the filter doesn't already exist
@@ -84,9 +84,9 @@ export class SourceSearchComponent implements OnInit {
     if (!filterExists) {
 
       let newFilter: SearchFilter = {
-        prettyName: label + ':' + value,
-        label: label,
-        value: value
+        prettyName: $event.label + ':' + $event.value,
+        label: $event.label,
+        value: $event.value
       };
       this.appliedFilters.push(newFilter);
 

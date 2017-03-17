@@ -1,0 +1,24 @@
+@import '../../../variables';
+
+md-list-item {
+  p {
+    color: $subtext-color;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(0,0,0,.12);
+  }
+}
+
+div {
+  &.boolean-container {
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+
+    md-checkbox {
+      margin-left: 12px;
+    }
+  }
+}

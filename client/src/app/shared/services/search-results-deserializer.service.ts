@@ -49,6 +49,8 @@ export class SearchResultsDeserializerService {
           }
         });
 
+
+
         // Map data
         //
         return {
@@ -66,6 +68,11 @@ export class SearchResultsDeserializerService {
               type: 'nominal',
               label: 'type',
               values: flattenedTypes
+            },
+            {
+              type: 'boolean',
+              label: 'peer reviewed',
+              values: [metadata['eric:peer_reviewed'] === 'T']
             }
           ]
         }
@@ -78,7 +85,11 @@ export class SearchResultsDeserializerService {
         });
 
         return res;
-      }, [])
+      }, [{
+        label: 'peer reviewed',
+        values: [true, false],
+        type: 'boolean'
+      }])
     });
   }
 
