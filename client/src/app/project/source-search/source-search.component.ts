@@ -36,7 +36,7 @@ export class SourceSearchComponent implements OnInit {
 
   ngOnInit() {
     this.searchControl.valueChanges
-      .debounceTime(400)
+      .debounceTime(900)
       .distinctUntilChanged()
       .switchMap(term => {
         this.searching = true;
