@@ -36,6 +36,11 @@ export class SearchResultsDeserializerService {
       label: 'sponsor',
       type: 'nominal'
     },
+    AUDIENCE: {
+      eric: 'dcterms:audience',
+      label: 'audience',
+      type: 'nominal'
+    },
     FULLTEXT_AVAILABLE: {
       eric: 'dcterms:accessRights',
       label: 'full text available',
@@ -79,7 +84,8 @@ export class SearchResultsDeserializerService {
           this.ericLabelMap.TYPE,
           this.ericLabelMap.LANGUAGE,
           this.ericLabelMap.EDUCATION_LEVEL,
-          this.ericLabelMap.SPONSOR
+          this.ericLabelMap.SPONSOR,
+          this.ericLabelMap.AUDIENCE
         ]
           .map(facetType => {
             let flattenedGenerics = this._flattenGeneric(metadata[facetType.eric]);
