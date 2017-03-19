@@ -62,17 +62,17 @@ export class SearchResultsDeserializerService {
             {
               type: 'nominal',
               label: 'subject',
-              values: flattenedSubjects
+              value: flattenedSubjects
             },
             {
               type: 'nominal',
               label: 'type',
-              values: flattenedTypes
+              value: flattenedTypes
             },
             {
               type: 'boolean',
               label: 'peer reviewed',
-              values: [metadata['eric:peer_reviewed'] === 'T']
+              value: [metadata['eric:peer_reviewed'] === 'T']
             }
           ]
         }
@@ -80,14 +80,14 @@ export class SearchResultsDeserializerService {
       facets: Object.keys(facetMap).reduce((res, key) => {
         res.push({
           label: key,
-          values: facetMap[key],
+          value: facetMap[key],
           type: 'nominal'
         });
 
         return res;
       }, [{
         label: 'peer reviewed',
-        values: [true, false],
+        value: [true, false],
         type: 'boolean'
       }])
     });

@@ -6,12 +6,13 @@ export interface SearchResult {
 export interface SearchFacet {
   label: string;
   type: string; // ordinal, nominal, range, boolean
-  values: Array<any>;
+  value: Array<any>;
 }
 
 export interface SearchFilter {
   label: string;
   value: any;
+  type: string; // ordinal, nominal, range, boolean
   prettyName?:string;
 }
 
@@ -25,4 +26,13 @@ export interface SearchResultListItem {
 
 export interface Citation {
   text: string;
+}
+
+export class SearchConstants {
+  public static FACET_TYPES = {
+    Boolean: 'boolean',
+    Nominal: 'nominal'
+  };
+
+  public static BINARY_FACET_TYPES = [SearchConstants.FACET_TYPES.Boolean];
 }

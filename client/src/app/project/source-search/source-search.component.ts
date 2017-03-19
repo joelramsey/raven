@@ -3,8 +3,15 @@ import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
 
 import { SourceSearchService, ObservableResultHandlerService } from '../../shared/services/index';
-import { SearchResult, SearchResultListItem, SearchFacet, SearchFilter, PillClickEvent } from '../../shared/models/index';
+import {
+  SearchResult,
+  SearchResultListItem,
+  SearchFacet,
+  SearchFilter,
+  PillClickEvent
+} from '../../shared/models/index';
 import { InPlaceFilterService } from './in-place-filter.service';
+import { SearchConstants } from '../../shared/models/search-result.interface';
 
 @Component({
   selector: 'rvn-source-search',
@@ -61,7 +68,7 @@ export class SourceSearchComponent implements OnInit {
 
         this.facets = value.facets;
         this.searching = false;
-      }, (error:any) => {
+      }, (error: any) => {
         this.searching = false;
         this._observableResultHandlerService.failure(error);
       });
@@ -70,13 +77,26 @@ export class SourceSearchComponent implements OnInit {
   /**
    * Adds a filter if it doesn't already exist.
    *
-   * @param label
-   * @param value
+   * @param $event
    */
   public addFilter($event: SearchFilter) {
 
-    let filterExists = this.appliedFilters.some((filter: SearchFilter) => {
-      return (filter.label === $event.label && filter.value === $event.value);
+    let filterIdx = -1;
+    let isBinaryFilter = SearchConstants.BINARY_FACET_TYPES.indexOf($event.type) > -1;
+    let filterExists = this.appliedFilters.some((filter: SearchFilter, index) => {
+      if (filter.label === $event.label) {
+
+        // If the filter is a binary type, we only need to match on label.
+        // Otherwise, we need to match on value too.
+        //
+        if (isBinaryFilter || filter.value === $event.value) {
+
+          filterIdx = index;
+          return true;
+        }
+      }
+
+      return false;
     });
 
     // Add if the filter doesn't already exist
@@ -85,6 +105,7 @@ export class SourceSearchComponent implements OnInit {
 
       let newFilter: SearchFilter = {
         prettyName: $event.label + ':' + $event.value,
+        type: $event.type,
         label: $event.label,
         value: $event.value
       };
@@ -93,6 +114,32 @@ export class SourceSearchComponent implements OnInit {
       // Filter results
       //
       this._inPlaceFilterService.addFilter(this.filteredResults, newFilter);
+      this._resetPaginatedResults();
+    } else if (isBinaryFilter) {
+
+
+      // Reset results
+      //
+      this.filteredResults = this.results.slice();
+
+      // Remove old filter
+      //
+      this.appliedFilters.splice(filterIdx, 1);
+
+      // Update value for binary filter
+      //
+      this.appliedFilters.push({
+        prettyName: $event.label + ':' + $event.value,
+        type: $event.type,
+        label: $event.label,
+        value: $event.value
+      });
+
+      // Re-apply filters
+      //
+      this.appliedFilters.forEach(filter => this._inPlaceFilterService
+        .addFilter(this.filteredResults, filter));
+
       this._resetPaginatedResults();
     }
   }
@@ -105,11 +152,10 @@ export class SourceSearchComponent implements OnInit {
   public removeFilter($event: PillClickEvent) {
     let filterIdx = this.appliedFilters.indexOf($event.model);
     if (filterIdx > -1) {
-      this.appliedFilters.splice(filterIdx, 1);
 
-      // Un-filter results
-      //
-      this._inPlaceFilterService.removeFilter(this.results, this.filteredResults, $event.model);
+      this.filteredResults = this.results.slice();
+      this.appliedFilters.splice(filterIdx, 1);
+      this.appliedFilters.forEach(filter => this._inPlaceFilterService.addFilter(this.filteredResults, filter));
       this._resetPaginatedResults();
     }
   }

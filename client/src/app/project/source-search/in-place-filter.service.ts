@@ -29,7 +29,7 @@ export class InPlaceFilterService {
 
         // If we're here,the label matches
         //
-        return facet.values.some((value: string) => {
+        return facet.value.some((value: string) => {
           return value === filter.value;
         });
       });
@@ -46,48 +46,5 @@ export class InPlaceFilterService {
         filteredResults.splice(indexesToRemove[i], 1);
       }
     }
-  }
-
-  /**
-   * Adds elements based on the provided array of results. Performing this action in-place has the advantage of
-   * allowing us to use 'indexOf', which is rather faster than comparing results one-by-one.
-   *
-   * @param results
-   * @param filteredResults
-   * @param filter
-   */
-  public removeFilter(results: Array<SearchResultListItem>, filteredResults: Array<SearchResultListItem>, filter: SearchFilter) {
-
-    let indexesToAdd: Array<number> = [];
-
-    results.forEach((result: SearchResultListItem, index: number) => {
-
-      let foundFacetMatch = result.facets.some((facet: SearchFacet) => {
-
-        // If any facets match the filter exactly, we're good here and should match the element.
-        //
-        if (facet.label !== filter.label) {
-          return false;
-        }
-
-        // If we're here,the label matches
-        //
-        return facet.values.some((value: string) => {
-          return value === filter.value;
-        });
-      });
-
-      if (!foundFacetMatch) {
-        indexesToAdd.push(index);
-      }
-    });
-
-    // Add elements if they don't already exist in the filtered list.
-    //
-    indexesToAdd.forEach((i: number) => {
-      if (filteredResults.indexOf(results[i]) === -1) {
-        filteredResults.push(results[i]);
-      }
-    });
   }
 }

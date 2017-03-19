@@ -4,9 +4,9 @@
                [ngSwitch]="facet.type">
 
   <!-- Named sets (ex.: apples, oranges, grapes) -->
-  <div *ngSwitchCase="'nominal'">
+  <div *ngSwitchCase="facetTypes.Nominal">
     <md-list dense>
-      <md-list-item *ngFor="let value of facet.values"
+      <md-list-item *ngFor="let value of facet.value"
                     (click)="handleFacetClick(facet.label, value)">
 
         <p>{{value}}</p>
@@ -14,7 +14,7 @@
     </md-list>
   </div>
 
-  <div class="boolean-container" *ngSwitchCase="'boolean'">
+  <div class="boolean-container" *ngSwitchCase="facetTypes.Boolean">
     <md-checkbox (change)="handleFacetClick(facet.label, $event.checked)"></md-checkbox>
   </div>
 </rvn-accordion>
