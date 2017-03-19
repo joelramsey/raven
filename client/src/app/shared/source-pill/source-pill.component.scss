@@ -1,13 +1,20 @@
+@import '../../../variables';
 md-card {
   height: 20px;
   padding: 10px;
   cursor: pointer;
   min-width: 150px;
+  border-radius: 12px;
+
 }
 
 md-icon {
   font-size: initial;
   text-align: center;
+  color: $primary-gray;
+  &:hover{
+    color: $link-color;
+  }
 
   &.visibility-icon {
     float: right;

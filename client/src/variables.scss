@@ -1,10 +1,17 @@
 @import '~@angular/material/core/theming/_palette';
 
-$link-color: steelblue;
-$navbar-color: whitesmoke;
+$primary-gray: #36474F;
+$secondary-gray: #273137;
+$light-gray: #F5F5F5;
+$white: #ffffff;
+$green: #5BAC67;
+$background-color: #F5F5F5;
+$link-color: #27A59B;
+$navbar-color: $secondary-gray;
 $application-font: Roboto, "Helvetica Neue", sans-serif;
 $subtext-color: map-get($mat-grey, 600);
 $highlight-color: map-get($mat-yellow, 600);
-$icon-color: lightgray;
+$icon-color: $white;
+$icon-hover: $link-color;
 $link-diagram-link-color: #999;
 $link-diagram-node-color: #fff;

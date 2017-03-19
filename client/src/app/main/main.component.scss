@@ -5,12 +5,13 @@
 }
 
 md-sidenav {
-  background-color: $navbar-color;
+  background-color: $light-gray;
 }
 
 md-sidenav-container {
   height: 100%;
   width: 100%;
+  background-color: $light-gray;
 }
 
 a {
@@ -46,4 +47,9 @@ span {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+}
+
+.mat-toolbar {
+  background-color: $primary-gray;
+  color: $white;
 }

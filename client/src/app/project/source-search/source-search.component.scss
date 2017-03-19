@@ -5,6 +5,7 @@ div {
   &.applied-filter-wrapper {
     margin-top: 10px;
     width: 100%;
+
   }
 
   &.search-container {
@@ -13,9 +14,9 @@ div {
   }
 
   &.search-results-bar {
-    background: $navbar-color;
+    background-color: $light-gray;;
     margin-top: 10px;
-    padding: 6px;
+    padding: 5px 15px;
     border-radius: 10px;
   }
 
@@ -27,15 +28,18 @@ div {
       // TODO: Figure out how to work 100% width.
       //
       max-width: 90%;
+
     }
   }
 
   &.search-facets-container {
     width: 30%;
+
   }
 }
 
 md-input-container {
-  width: 30%;
-  margin-top: 20px;
+  width: 50%;
+  margin-top: 50px;
+
 }

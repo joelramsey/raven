@@ -18,6 +18,7 @@ md-card {
     overflow-y: auto;
     overflow-x: hidden;
 
+
     md-card-title {
       font-size: 12px;
     }
@@ -46,6 +47,11 @@ button {
     margin-top: 8px;
     margin-bottom: 8px;
     text-align: center;
+
+  }
+  &:hover {
+    background-color: $green;
+    color: $white;
   }
 }
 

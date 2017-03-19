@@ -1,6 +1,9 @@
+@import '../../variables';
+
 md-icon {
   font-size: initial;
   text-align: center;
+  color: $primary-gray;
 }
 
 md-card-title {
