@@ -1,8 +1,13 @@
 @import '../../../variables';
 
 md-list-item {
+
+  white-space: nowrap;
+
   p {
     color: $subtext-color;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   &:hover {

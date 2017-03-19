@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { SearchResult } from '../models/index';
+import { SearchResult, SearchFacet } from '../models/index';
 
 @Injectable()
 export class SearchResultsDeserializerService {
@@ -10,25 +10,60 @@ export class SearchResultsDeserializerService {
   constructor() {
   }
 
+  public ericLabelMap = {
+    LANGUAGE: {
+      eric: 'dc:language',
+      label: 'language',
+      type: 'nominal'
+    },
+    SUBJECT: {
+      eric: 'dc:subject',
+      label: 'subject',
+      type: 'nominal'
+    },
+    TYPE: {
+      eric: 'dc:type',
+      label: 'type',
+      type: 'nominal'
+    },
+    EDUCATION_LEVEL: {
+      eric: 'dcterms:educationLevel',
+      label: 'education level',
+      type: 'nominal'
+    },
+    SPONSOR: {
+      eric: 'eric:sponsor',
+      label: 'sponsor',
+      type: 'nominal'
+    },
+    FULLTEXT_AVAILABLE: {
+      eric: 'dcterms:accessRights',
+      label: 'full text available',
+      type: 'boolean'
+    },
+    PEER_REVIEWED: {
+      eric: 'eric:peer_reviewed',
+      label: 'peer reviewed',
+      type: 'boolean'
+    }
+  };
+
   public deserialize(response: Response): Observable<SearchResult> {
 
     let rawData: any = response.json();
 
     let facetMap: any = {
-      subject: [],
-      type: [],
-      language: []
+      'subject': []
     };
 
     return Observable.of({
       results: rawData.map(datum => {
 
         let metadata: any = datum['text']['metadata'];
-        let language: any = metadata['dc:language'];
 
         // Generate facets
         //
-        let flattenedSubjects = this._flattenSubjects(metadata['dc:subject']);
+        let flattenedSubjects = this._flattenSubjects(metadata[this.ericLabelMap.SUBJECT.eric]);
 
         // Add to general facet map
         //
@@ -38,30 +73,36 @@ export class SearchResultsDeserializerService {
           }
         });
 
-
-        // Types can be an array...
+        // Flatten and add generic cases
         //
-        let flattenedTypes = this._flattenGeneric(metadata['dc:type']);
+        let genericEntryFacets: Array<SearchFacet> = [
+          this.ericLabelMap.TYPE,
+          this.ericLabelMap.LANGUAGE,
+          this.ericLabelMap.EDUCATION_LEVEL,
+          this.ericLabelMap.SPONSOR
+        ]
+          .map(facetType => {
+            let flattenedGenerics = this._flattenGeneric(metadata[facetType.eric]);
 
-        // Add to general facet map
-        //
-        flattenedTypes.forEach((type: string) => {
-          if (facetMap.type.indexOf(type) === -1) {
-            facetMap.type.push(type);
-          }
-        });
+            if (!facetMap[facetType.label]) {
+              facetMap[facetType.label] = [];
+            }
 
-        // Languages can be an array...
-        //
-        let flattenedLanguages = this._flattenGeneric(metadata['dc:language']);
+            // Add to general facet map
+            //
+            flattenedGenerics.forEach((type: string) => {
+              if (facetMap[facetType.label].indexOf(type) === -1) {
+                facetMap[facetType.label].push(type);
+              }
+            });
 
-        // Add to general facet map
-        //
-        flattenedLanguages.forEach((language: string) => {
-          if (facetMap.language.indexOf(language) === -1) {
-            facetMap.language.push(language);
-          }
-        });
+            return {
+              label: facetType.label,
+              type: facetType.type,
+              value: flattenedGenerics
+            };
+          });
+
 
         // Map data
         //
@@ -72,27 +113,22 @@ export class SearchResultsDeserializerService {
           citation: metadata['eric:citation'],
           facets: [
             {
-              type: 'nominal',
-              label: 'subject',
+              type: this.ericLabelMap.SUBJECT.type,
+              label: this.ericLabelMap.SUBJECT.label,
               value: flattenedSubjects
             },
             {
-              type: 'nominal',
-              label: 'type',
-              value: flattenedTypes
+              type: this.ericLabelMap.PEER_REVIEWED.type,
+              label: this.ericLabelMap.PEER_REVIEWED.label,
+              value: [metadata[this.ericLabelMap.PEER_REVIEWED.eric] === 'T']
             },
             {
-              type: 'boolean',
-              label: 'peer reviewed',
-              value: [metadata['eric:peer_reviewed'] === 'T']
+              type: this.ericLabelMap.FULLTEXT_AVAILABLE.type,
+              label: this.ericLabelMap.FULLTEXT_AVAILABLE.label,
+              value: [metadata[this.ericLabelMap.FULLTEXT_AVAILABLE.eric] === 'Yes']
             },
-            {
-              type: 'nominal',
-              label: 'language',
-              value: flattenedLanguages
-            }
-          ]
-        }
+          ].concat(genericEntryFacets)
+        };
       }),
       facets: Object.keys(facetMap).reduce((res, key) => {
         res.push({
@@ -102,15 +138,26 @@ export class SearchResultsDeserializerService {
         });
 
         return res;
-      }, [{
-        label: 'peer reviewed',
-        value: [true, false],
-        type: 'boolean'
-      }])
+      }, [
+        {
+          label: this.ericLabelMap.PEER_REVIEWED.label,
+          value: [true, false],
+          type: this.ericLabelMap.PEER_REVIEWED.type
+        },
+        {
+          label: this.ericLabelMap.FULLTEXT_AVAILABLE.label,
+          value: [true, false],
+          type: this.ericLabelMap.FULLTEXT_AVAILABLE.type
+        }
+      ])
     });
   }
 
   private _flattenSubjects(subjects: any) {
+
+    if (!subjects) {
+      return [];
+    }
 
     return subjects.map((subject) => {
 
@@ -125,6 +172,10 @@ export class SearchResultsDeserializerService {
   }
 
   private _flattenGeneric(types: any) {
+    if (!types) {
+      return [];
+    }
+
     return types instanceof Array ? types : [types];
   }
 }
