@@ -16,13 +16,15 @@ export class SearchResultsDeserializerService {
 
     let facetMap: any = {
       subject: [],
-      type: []
+      type: [],
+      language: []
     };
 
     return Observable.of({
       results: rawData.map(datum => {
 
         let metadata: any = datum['text']['metadata'];
+        let language: any = metadata['dc:language'];
 
         // Generate facets
         //
@@ -39,7 +41,7 @@ export class SearchResultsDeserializerService {
 
         // Types can be an array...
         //
-        let flattenedTypes = this._flattenTypes(metadata['dc:type']);
+        let flattenedTypes = this._flattenGeneric(metadata['dc:type']);
 
         // Add to general facet map
         //
@@ -49,7 +51,17 @@ export class SearchResultsDeserializerService {
           }
         });
 
+        // Languages can be an array...
+        //
+        let flattenedLanguages = this._flattenGeneric(metadata['dc:language']);
 
+        // Add to general facet map
+        //
+        flattenedLanguages.forEach((language: string) => {
+          if (facetMap.language.indexOf(language) === -1) {
+            facetMap.language.push(language);
+          }
+        });
 
         // Map data
         //
@@ -73,6 +85,11 @@ export class SearchResultsDeserializerService {
               type: 'boolean',
               label: 'peer reviewed',
               value: [metadata['eric:peer_reviewed'] === 'T']
+            },
+            {
+              type: 'nominal',
+              label: 'language',
+              value: flattenedLanguages
             }
           ]
         }
@@ -98,16 +115,16 @@ export class SearchResultsDeserializerService {
     return subjects.map((subject) => {
 
       if (typeof subject === 'string') {
-          return subject;
+        return subject;
       }
       else if (subject['content']) {
-          return subject['content'];
+        return subject['content'];
       }
     });
 
   }
 
-  private _flattenTypes(types: any) {
+  private _flattenGeneric(types: any) {
     return types instanceof Array ? types : [types];
   }
 }
