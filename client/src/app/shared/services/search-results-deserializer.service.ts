@@ -73,7 +73,10 @@ export class SearchResultsDeserializerService {
         return {
           title: metadata['dc:title'],
           description: metadata['dc:description'],
-          sourceUrl: 'http://files.eric.ed.gov/fulltext/' + metadata['dc:identifier']['content'] + '.pdf',
+          sourceUrl: metadata[SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.eric] === 'Yes' &&
+                     metadata['dc:identifier']['content'] ?
+                       'http://files.eric.ed.gov/fulltext/' + metadata['dc:identifier']['content'] + '.pdf':
+                        null,
           citation: metadata['eric:citation'],
           facets: [
             {
@@ -89,7 +92,10 @@ export class SearchResultsDeserializerService {
             {
               type: SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.type,
               label: SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.label,
-              value: [metadata[SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.eric] === 'Yes']
+              value: [
+                metadata[SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.eric] === 'Yes' &&
+                metadata['dc:identifier']['content']
+              ]
             },
           ].concat(genericEntryFacets)
         };

@@ -1,6 +1,13 @@
+@import '../../../variables';
+
 div {
   &.top-margin {
     margin-top: 32px;
+  }
+
+  &.description {
+    border-bottom: 1px solid $icon-color;
+    padding-bottom: 12px;
   }
 
   &.facet-list {
