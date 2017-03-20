@@ -20,7 +20,10 @@ export class SearchResultsDeserializerService {
     }
 
     let facetMap: any = {
-      'subject': []
+      'subject': {
+        items: [],
+        count: {}
+      }
     };
 
     return Observable.of({
@@ -35,9 +38,15 @@ export class SearchResultsDeserializerService {
         // Add to general facet map
         //
         flattenedSubjects.forEach((subject: string) => {
-          if (facetMap.subject.indexOf(subject) === -1) {
-            facetMap.subject.push(subject);
+          if (facetMap.subject.items.indexOf(subject) === -1) {
+            facetMap.subject.items.push(subject);
           }
+
+          if (!facetMap.subject.count[subject]) {
+            facetMap.subject.count[subject] = 0;
+          }
+
+          facetMap.subject.count[subject] += 1;
         });
 
         // Flatten and add generic cases
@@ -53,15 +62,24 @@ export class SearchResultsDeserializerService {
             let flattenedGenerics = this._flattenGeneric(metadata[facetType.eric]);
 
             if (!facetMap[facetType.label]) {
-              facetMap[facetType.label] = [];
+              facetMap[facetType.label] = {
+                items: [],
+                count: {}
+              };
             }
 
             // Add to general facet map
             //
             flattenedGenerics.forEach((type: string) => {
-              if (facetMap[facetType.label].indexOf(type) === -1) {
-                facetMap[facetType.label].push(type);
+              if (facetMap[facetType.label].items.indexOf(type) === -1) {
+                facetMap[facetType.label].items.push(type);
               }
+
+              if (!facetMap[facetType.label].count[type]) {
+                facetMap[facetType.label].count[type] = 0;
+              }
+
+              facetMap[facetType.label].count[type] += 1;
             });
 
             return {
@@ -104,10 +122,11 @@ export class SearchResultsDeserializerService {
           ].concat(genericEntryFacets)
         };
       }),
-      facets: Object.keys(facetMap).reduce((res, key) => {
+      facets: Object.keys(facetMap).reduce((res, key): Array<any> => {
         res.push({
           label: key,
-          value: facetMap[key],
+          value: facetMap[key].items,
+          count: facetMap[key].count,
           type: 'nominal'
         });
 
@@ -116,12 +135,14 @@ export class SearchResultsDeserializerService {
         {
           label: SearchConstants.ERIC_LABEL_MAP.PEER_REVIEWED.label,
           value: [true, false],
-          type: SearchConstants.ERIC_LABEL_MAP.PEER_REVIEWED.type
+          type: SearchConstants.ERIC_LABEL_MAP.PEER_REVIEWED.type,
+          count: {}
         },
         {
           label: SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.label,
           value: [true, false],
-          type: SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.type
+          type: SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.type,
+          count: {}
         }
       ])
     });

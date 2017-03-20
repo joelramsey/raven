@@ -7,6 +7,7 @@ export interface SearchFacet {
   label: string;
   type: string; // ordinal, nominal, range, boolean
   value: Array<any>;
+  count?: { [valueKey: string]: number }
 }
 
 export interface SearchFilter {

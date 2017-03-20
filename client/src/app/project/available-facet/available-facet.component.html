@@ -9,7 +9,10 @@
       <md-list-item *ngFor="let value of facet.value"
                     (click)="handleFacetClick(facet.label, value)">
 
-        <p>{{value}}</p>
+        <div class="flex-between">
+          <span class="facet-value">{{value}}</span>
+          <span>({{facet.count[value]}})</span>
+        </div>
       </md-list-item>
     </md-list>
   </div>
