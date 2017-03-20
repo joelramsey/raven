@@ -9,7 +9,7 @@
 md-card {
   &.project-container {
     width: 100%;
-    margin: 0 20px 0 20px;
+    margin: 0 -5px;
     display: flex;
     justify-content: space-between;
     padding: 0;
@@ -57,10 +57,15 @@ div {
 
   &.project-composer-wrapper {
     position: relative;
-    left: 295px;
-    top: 72px;
-    width: 65%;
+    left: 350px;
+    top: 65px;
     z-index: 2;
+    & > md-card {
+      padding: 12px;
+      box-shadow: none;
+      background-color: darken($light-gray, 8%);
+      color: $link-color;
+    }
 
   }
 
