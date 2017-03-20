@@ -13,7 +13,6 @@ md-card {
     display: flex;
     justify-content: space-between;
     padding: 0;
-
   }
 }
 
@@ -56,9 +55,8 @@ div {
   }
 
   &.project-composer-wrapper {
-    position: relative;
-    left: 350px;
-    top: 65px;
+    position: absolute;
+    right: 42px;
     z-index: 2;
     & > md-card {
       padding: 12px;
