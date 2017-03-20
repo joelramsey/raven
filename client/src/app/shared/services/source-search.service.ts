@@ -3,6 +3,7 @@ import { Http, Headers, URLSearchParams } from '@angular/http';
 import { Angular2TokenService, AuthData } from 'angular2-token';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/delay';
+import 'rxjs/add/operator/retry';
 
 import { SearchResult } from '../models/index';
 import { SearchResultsDeserializerService } from './search-results-deserializer.service';
@@ -32,6 +33,7 @@ export class SourceSearchService {
       headers: this._getAuthHeaders(),
       search: params
     })
+      .retry(3)
       .switchMap(response => this._searchResultsDeserializer.deserialize(response));
   }
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { SearchResult, SearchFacet } from '../models/index';
+import { SearchResult, SearchFacet, SearchConstants } from '../models/index';
 
 @Injectable()
 export class SearchResultsDeserializerService {
@@ -10,48 +10,6 @@ export class SearchResultsDeserializerService {
   constructor() {
   }
 
-  public ericLabelMap = {
-    LANGUAGE: {
-      eric: 'dc:language',
-      label: 'language',
-      type: 'nominal'
-    },
-    SUBJECT: {
-      eric: 'dc:subject',
-      label: 'subject',
-      type: 'nominal'
-    },
-    TYPE: {
-      eric: 'dc:type',
-      label: 'type',
-      type: 'nominal'
-    },
-    EDUCATION_LEVEL: {
-      eric: 'dcterms:educationLevel',
-      label: 'education level',
-      type: 'nominal'
-    },
-    SPONSOR: {
-      eric: 'eric:sponsor',
-      label: 'sponsor',
-      type: 'nominal'
-    },
-    AUDIENCE: {
-      eric: 'dcterms:audience',
-      label: 'audience',
-      type: 'nominal'
-    },
-    FULLTEXT_AVAILABLE: {
-      eric: 'dcterms:accessRights',
-      label: 'full text available',
-      type: 'boolean'
-    },
-    PEER_REVIEWED: {
-      eric: 'eric:peer_reviewed',
-      label: 'peer reviewed',
-      type: 'boolean'
-    }
-  };
 
   public deserialize(response: Response): Observable<SearchResult> {
 
@@ -68,7 +26,7 @@ export class SearchResultsDeserializerService {
 
         // Generate facets
         //
-        let flattenedSubjects = this._flattenSubjects(metadata[this.ericLabelMap.SUBJECT.eric]);
+        let flattenedSubjects = this._flattenSubjects(metadata[SearchConstants.ERIC_LABEL_MAP.SUBJECT.eric]);
 
         // Add to general facet map
         //
@@ -81,11 +39,11 @@ export class SearchResultsDeserializerService {
         // Flatten and add generic cases
         //
         let genericEntryFacets: Array<SearchFacet> = [
-          this.ericLabelMap.TYPE,
-          this.ericLabelMap.LANGUAGE,
-          this.ericLabelMap.EDUCATION_LEVEL,
-          this.ericLabelMap.SPONSOR,
-          this.ericLabelMap.AUDIENCE
+          SearchConstants.ERIC_LABEL_MAP.TYPE,
+          SearchConstants.ERIC_LABEL_MAP.LANGUAGE,
+          SearchConstants.ERIC_LABEL_MAP.EDUCATION_LEVEL,
+          SearchConstants.ERIC_LABEL_MAP.SPONSOR,
+          SearchConstants.ERIC_LABEL_MAP.AUDIENCE
         ]
           .map(facetType => {
             let flattenedGenerics = this._flattenGeneric(metadata[facetType.eric]);
@@ -119,19 +77,19 @@ export class SearchResultsDeserializerService {
           citation: metadata['eric:citation'],
           facets: [
             {
-              type: this.ericLabelMap.SUBJECT.type,
-              label: this.ericLabelMap.SUBJECT.label,
+              type: SearchConstants.ERIC_LABEL_MAP.SUBJECT.type,
+              label: SearchConstants.ERIC_LABEL_MAP.SUBJECT.label,
               value: flattenedSubjects
             },
             {
-              type: this.ericLabelMap.PEER_REVIEWED.type,
-              label: this.ericLabelMap.PEER_REVIEWED.label,
-              value: [metadata[this.ericLabelMap.PEER_REVIEWED.eric] === 'T']
+              type: SearchConstants.ERIC_LABEL_MAP.PEER_REVIEWED.type,
+              label: SearchConstants.ERIC_LABEL_MAP.PEER_REVIEWED.label,
+              value: [metadata[SearchConstants.ERIC_LABEL_MAP.PEER_REVIEWED.eric] === 'T']
             },
             {
-              type: this.ericLabelMap.FULLTEXT_AVAILABLE.type,
-              label: this.ericLabelMap.FULLTEXT_AVAILABLE.label,
-              value: [metadata[this.ericLabelMap.FULLTEXT_AVAILABLE.eric] === 'Yes']
+              type: SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.type,
+              label: SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.label,
+              value: [metadata[SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.eric] === 'Yes']
             },
           ].concat(genericEntryFacets)
         };
@@ -146,14 +104,14 @@ export class SearchResultsDeserializerService {
         return res;
       }, [
         {
-          label: this.ericLabelMap.PEER_REVIEWED.label,
+          label: SearchConstants.ERIC_LABEL_MAP.PEER_REVIEWED.label,
           value: [true, false],
-          type: this.ericLabelMap.PEER_REVIEWED.type
+          type: SearchConstants.ERIC_LABEL_MAP.PEER_REVIEWED.type
         },
         {
-          label: this.ericLabelMap.FULLTEXT_AVAILABLE.label,
+          label: SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.label,
           value: [true, false],
-          type: this.ericLabelMap.FULLTEXT_AVAILABLE.type
+          type: SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.type
         }
       ])
     });

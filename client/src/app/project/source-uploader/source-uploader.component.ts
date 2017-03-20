@@ -15,6 +15,7 @@ import {
   RavenFileUploader
 } from '../../shared/services/index';
 import { SearchResultListItem } from '../../shared/models/search-result.interface';
+import { RecordViewComponent } from '../record-view/record-view.component';
 
 @Component({
   selector: 'rvn-source-uploader',
@@ -351,9 +352,17 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
    * Adds a selected search result to the upload queue.
    * @param $event
    */
-  addSearchResultToQueue($event: SearchResultListItem) {
-    let parsedSources:any  = this._textSourceParserService.transform($event.sourceUrl);
-    this.linkSources = this.linkSources.concat(parsedSources.linkSources);
+  searchResultClicked($event: SearchResultListItem) {
+    let dialogRef = this._dialog.open(RecordViewComponent);
+    dialogRef.componentInstance.record = $event;
+    dialogRef.componentInstance.addEnabled = true;
+
+    dialogRef.afterClosed().subscribe((event: SearchResultListItem) => {
+      if (event) {
+        let parsedSources:any  = this._textSourceParserService.transform(event.sourceUrl);
+        this.linkSources = this.linkSources.concat(parsedSources.linkSources);
+      }
+    });
   }
 
   private _getAuthHeaders(): Array<Headers> {

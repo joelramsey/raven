@@ -35,4 +35,47 @@ export class SearchConstants {
   };
 
   public static BINARY_FACET_TYPES = [SearchConstants.FACET_TYPES.Boolean];
+
+  public static ERIC_LABEL_MAP = {
+    LANGUAGE: {
+      eric: 'dc:language',
+      label: 'language',
+      type: 'nominal'
+    },
+    SUBJECT: {
+      eric: 'dc:subject',
+      label: 'subject',
+      type: 'nominal'
+    },
+    TYPE: {
+      eric: 'dc:type',
+      label: 'type',
+      type: 'nominal'
+    },
+    EDUCATION_LEVEL: {
+      eric: 'dcterms:educationLevel',
+      label: 'education level',
+      type: 'nominal'
+    },
+    SPONSOR: {
+      eric: 'eric:sponsor',
+      label: 'sponsor',
+      type: 'nominal'
+    },
+    AUDIENCE: {
+      eric: 'dcterms:audience',
+      label: 'audience',
+      type: 'nominal'
+    },
+    FULLTEXT_AVAILABLE: {
+      eric: 'dcterms:accessRights',
+      label: 'full text available',
+      type: 'boolean'
+    },
+    PEER_REVIEWED: {
+      eric: 'eric:peer_reviewed',
+      label: 'peer reviewed',
+      type: 'boolean'
+    }
+  };
 }
