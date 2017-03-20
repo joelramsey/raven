@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, URLSearchParams } from '@angular/http';
+import { Http, Headers, URLSearchParams, Response } from '@angular/http';
 import { Angular2TokenService, AuthData } from 'angular2-token';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/delay';
@@ -33,7 +33,15 @@ export class SourceSearchService {
       headers: this._getAuthHeaders(),
       search: params
     })
-      .retry(3)
+      .map((response: Response) => {
+
+        if (response.json()) {
+          return response;
+        }
+
+        throw new Error('Invalid JSON received from server.');
+      })
+      .retry(2)
       .switchMap(response => this._searchResultsDeserializer.deserialize(response));
   }
 

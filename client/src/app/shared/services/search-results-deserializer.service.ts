@@ -15,6 +15,10 @@ export class SearchResultsDeserializerService {
 
     let rawData: any = response.json();
 
+    if(!rawData) {
+      return Observable.throw('Response must not be null.');
+    }
+
     let facetMap: any = {
       'subject': []
     };
