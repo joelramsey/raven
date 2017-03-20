@@ -31,7 +31,9 @@
     </div>
   </div>
 
-  <rvn-source-search (resultSelected)="searchResultClicked($event)"></rvn-source-search>
+  <rvn-source-search [addEnabled]="true"
+                     (addSearchResult)="addSearchResult($event)"
+                     (resultSelected)="searchResultClicked($event)"></rvn-source-search>
 </md-card-content>
 
 <md-card-actions>

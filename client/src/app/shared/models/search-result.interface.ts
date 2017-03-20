@@ -21,8 +21,14 @@ export interface SearchResultListItem {
   title: string;
   description: string;
   facets: Array<SearchFacet>;
+  peerReviewed?: boolean;
   sourceUrl?: string;
   citation?: Citation;
+}
+
+export interface SearchResultListItemAddEvent {
+  type: string;
+  record: SearchResultListItem;
 }
 
 export interface Citation {

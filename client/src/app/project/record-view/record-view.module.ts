@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MdButtonModule } from '@angular/material';
+import { MdButtonModule, MdTooltipModule } from '@angular/material';
 
 import { RecordViewComponent } from './record-view.component';
 
@@ -8,7 +8,8 @@ import { RecordViewComponent } from './record-view.component';
 @NgModule({
   imports: [
     CommonModule,
-    MdButtonModule
+    MdButtonModule,
+    MdTooltipModule
   ],
   declarations: [
     RecordViewComponent

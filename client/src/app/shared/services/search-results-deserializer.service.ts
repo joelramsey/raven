@@ -95,6 +95,7 @@ export class SearchResultsDeserializerService {
         return {
           title: metadata['dc:title'],
           description: metadata['dc:description'],
+          peerReviewed: metadata[SearchConstants.ERIC_LABEL_MAP.PEER_REVIEWED.eric] === 'T',
           sourceUrl: metadata[SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.eric] === 'Yes' &&
                      metadata['dc:identifier']['content'] ?
                        'http://files.eric.ed.gov/fulltext/' + metadata['dc:identifier']['content'] + '.pdf':

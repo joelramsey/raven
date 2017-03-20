@@ -10,6 +10,15 @@
   </span>
 </div>
 
-<div class="top-margin" *ngIf="addEnabled && record?.sourceUrl" md-dialog-actions>
-  <button md-button (click)="dialogRef.close(record)">Add to Source Queue</button>
+<div class="top-margin" *ngIf="addEnabled" md-dialog-actions>
+  <button md-button
+          (click)="addAsAbstract(record)"
+          [mdTooltip]="'Adds abstract as a project source'">Add Abstract</button>
 </div>
+
+<div class="top-margin" *ngIf="addEnabled && record?.sourceUrl" md-dialog-actions>
+  <button md-button
+          (click)="addAsFullText(record)"
+          [mdTooltip]="'Adds full text as a project source'">Add Full Text</button>
+</div>
+

@@ -41,4 +41,18 @@ export class RecordViewComponent implements OnInit {
 
     return value;
   }
+
+  addAsFullText(record) {
+    this.dialogRef.close({
+      type: 'fullText',
+      record: record
+    });
+  }
+
+  addAsAbstract(record) {
+    this.dialogRef.close({
+      type: 'abstract',
+      record: record
+    });
+  }
 }

@@ -7,14 +7,23 @@ import { ParsedResponseHeaders, Headers } from 'ng2-file-upload/ng2-file-upload'
 import 'rxjs/add/operator/debounceTime';
 
 import { TextSourceParserPipe } from './pipes/index';
-import { Source, SourcePillClickEvent, SourceUploadState, Project, SourceCreator } from '../../shared/models/index';
+import {
+  Source,
+  SourcePillClickEvent,
+  SourceUploadState,
+  Project,
+  SourceCreator,
+  SearchResultListItem,
+  SearchResultListItemAddEvent
+} from '../../shared/models/index';
+
 import {
   SourceDaoService,
   ProjectDaoService,
   ObservableResultHandlerService,
   RavenFileUploader
 } from '../../shared/services/index';
-import { SearchResultListItem } from '../../shared/models/search-result.interface';
+
 import { RecordViewComponent } from '../record-view/record-view.component';
 
 @Component({
@@ -24,10 +33,10 @@ import { RecordViewComponent } from '../record-view/record-view.component';
 })
 export class SourceUploaderComponent implements OnInit, SourceCreator {
 
-  @Input() public project:Project;
-  @Output() public created:EventEmitter<Source> = new EventEmitter<Source>();
-  @Output() public done:EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() public cancelled:EventEmitter<any> = new EventEmitter<any>();
+  @Input() public project: Project;
+  @Output() public created: EventEmitter<Source> = new EventEmitter<Source>();
+  @Output() public done: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public cancelled: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('fileInput') fileInput: ElementRef;
 
   public UPLOAD_STATES = {
@@ -49,10 +58,10 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
     }
   };
 
-  public uploader:RavenFileUploader;
-  public showQueue:boolean = false;
-  public fileOver:boolean = false;
-  public rawSourcesControl:FormControl = new FormControl();
+  public uploader: RavenFileUploader;
+  public showQueue: boolean = false;
+  public fileOver: boolean = false;
+  public rawSourcesControl: FormControl = new FormControl();
   public state: SourceUploadState = this.UPLOAD_STATES.NEW;
   public uploadError: string = '';
   public sourceUploadProgress: number = 0;
@@ -61,12 +70,12 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
 
   // Sources
   //
-  public textSources:Array<Source> = [];
-  public linkSources:Array<Source> = [];
+  public textSources: Array<Source> = [];
+  public linkSources: Array<Source> = [];
 
-  private _cachedFileObjects:Array<Source> = [];
+  private _cachedFileObjects: Array<Source> = [];
 
-  constructor(private _textSourceParserService:TextSourceParserPipe,
+  constructor(private _textSourceParserService: TextSourceParserPipe,
               private _errorHandler: ObservableResultHandlerService,
               private _router: Router,
               private _activatedRoute: ActivatedRoute,
@@ -80,9 +89,9 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
   ngOnInit() {
     this.rawSourcesControl.valueChanges
       .debounceTime(1000)
-      .subscribe((rawSources:string) => {
+      .subscribe((rawSources: string) => {
 
-        let parsedSources:any  = this._textSourceParserService.transform(rawSources);
+        let parsedSources: any = this._textSourceParserService.transform(rawSources);
 
         this.textSources = parsedSources.textSources;
         this.linkSources = parsedSources.linkSources;
@@ -228,7 +237,7 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
     try {
       let res: any = JSON.parse(response);
       this.uploadError = ' (Encountered error during file upload: ' + status + ' - ' + res.error + ')';
-    } catch(e) {
+    } catch (e) {
       console.log(e);
       this.uploadError = ' (Encountered error during file upload: ' + response + ')';
     }
@@ -243,7 +252,7 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
    *
    * @returns {Array<Source>}
    */
-  get fileSources():Array<Source> {
+  get fileSources(): Array<Source> {
 
     if (!this.uploader) {
       return [];
@@ -252,7 +261,7 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
     // Refresh queue if changed
     //
     if (this.uploader.queue.length !== this._cachedFileObjects.length) {
-      this._cachedFileObjects = this.uploader.queue.reduce((sources:Array<Source>, fileObject:any) => {
+      this._cachedFileObjects = this.uploader.queue.reduce((sources: Array<Source>, fileObject: any) => {
         sources.push({
           id: null,
           type: 'file',
@@ -272,7 +281,7 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
    * Returns a boolean value indicating whether any sources are ready for upload.
    * @returns {boolean}
    */
-  get sourcesPending():boolean {
+  get sourcesPending(): boolean {
     return this.fileSources.length + this.textSources.length + this.linkSources.length > 0;
   }
 
@@ -288,8 +297,8 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
    * Returns a boolean value indicating whether an async process (e.g., file upload) is running.
    * @returns {boolean}
    */
-  get busy():boolean {
-      return (this.state !== this.UPLOAD_STATES.NEW && this.state !== this.UPLOAD_STATES.DONE);
+  get busy(): boolean {
+    return (this.state !== this.UPLOAD_STATES.NEW && this.state !== this.UPLOAD_STATES.DONE);
   }
 
 
@@ -299,7 +308,7 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
    *
    * @param $sourceEvent
    */
-  removeFile($sourceEvent:SourcePillClickEvent) {
+  removeFile($sourceEvent: SourcePillClickEvent) {
     let cacheIdx = this._cachedFileObjects.indexOf($sourceEvent.source);
 
     if (cacheIdx > -1) {
@@ -314,7 +323,7 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
    *
    * @param $sourceEvent
    */
-  removeText($sourceEvent:SourcePillClickEvent) {
+  removeText($sourceEvent: SourcePillClickEvent) {
     this.textSources.splice($sourceEvent.index, 1);
   }
 
@@ -323,7 +332,7 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
    *
    * @param $sourceEvent
    */
-  removeLink($sourceEvent:SourcePillClickEvent) {
+  removeLink($sourceEvent: SourcePillClickEvent) {
     this.linkSources.splice($sourceEvent.index, 1);
   }
 
@@ -333,7 +342,7 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
    *
    * @param $event
    */
-  fileOverBase($event:boolean) {
+  fileOverBase($event: boolean) {
     this.fileOver = $event;
   }
 
@@ -343,7 +352,7 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
    * as they aren't natively supported.
    */
   openFileDialog() {
-    let mouseEvent = new MouseEvent('click', { bubbles: true });
+    let mouseEvent = new MouseEvent('click', {bubbles: true});
 
     this._renderer.invokeElementMethod(this.fileInput.nativeElement, 'dispatchEvent', [mouseEvent]);
   }
@@ -357,12 +366,34 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
     dialogRef.componentInstance.record = $event;
     dialogRef.componentInstance.addEnabled = true;
 
-    dialogRef.afterClosed().subscribe((event: SearchResultListItem) => {
+    dialogRef.afterClosed().subscribe((event: SearchResultListItemAddEvent) => {
       if (event) {
-        let parsedSources:any  = this._textSourceParserService.transform(event.sourceUrl);
-        this.linkSources = this.linkSources.concat(parsedSources.linkSources);
+        this.addSearchResult(event);
       }
     });
+  }
+
+  /**
+   * Adds a selected search result's abstract to the upload queue.
+   * @param $event
+   */
+  addSearchResult($event: SearchResultListItemAddEvent) {
+    if ($event) {
+      if ($event.type === 'abstract') {
+
+        // Add as abstract
+        //
+        let parsedSources: any = this._textSourceParserService.transform($event.record.description);
+        this.textSources = this.textSources.concat(parsedSources.textSources);
+
+      } else if ($event.type === 'fullText') {
+
+        // Add as full text
+        //
+        let parsedSources: any = this._textSourceParserService.transform($event.record.sourceUrl);
+        this.linkSources = this.linkSources.concat(parsedSources.linkSources);
+      }
+    }
   }
 
   private _getAuthHeaders(): Array<Headers> {
@@ -370,11 +401,11 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
     let authData: AuthData = this._tokenService.currentAuthData;
 
     return [
-      { name: 'access-token', value: authData.accessToken },
-      { name: 'client',       value: authData.client },
-      { name: 'expiry',       value: authData.expiry },
-      { name: 'token-type',   value: authData.tokenType },
-      { name: 'uid',          value: authData.uid }
+      {name: 'access-token', value: authData.accessToken},
+      {name: 'client', value: authData.client},
+      {name: 'expiry', value: authData.expiry},
+      {name: 'token-type', value: authData.tokenType},
+      {name: 'uid', value: authData.uid}
     ];
   }
 
