@@ -19,17 +19,18 @@ export class SearchResultsDeserializerService {
       return Observable.throw('Response must not be null.');
     }
 
-    let facetMap: any = {
-      'subject': {
-        items: [],
-        count: {},
-        type: SearchConstants.ERIC_LABEL_MAP.SUBJECT.type
-      },
-      'year': {
-        items: [],
-        count: {},
-        type: SearchConstants.ERIC_LABEL_MAP.PUBLICATION_DATE.type
-      }
+    let facetMap: any = {};
+
+    facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label] ={
+      items: [],
+      count: {},
+      type: SearchConstants.ERIC_LABEL_MAP.SUBJECT.type
+    };
+
+    facetMap[SearchConstants.ERIC_LABEL_MAP.PUBLICATION_DATE.label] ={
+      items: [],
+      count: {},
+      type: SearchConstants.ERIC_LABEL_MAP.PUBLICATION_DATE.type
     };
 
     return Observable.of({
@@ -44,30 +45,30 @@ export class SearchResultsDeserializerService {
         // Add subjects to general facet map
         //
         flattenedSubjects.forEach((subject: string) => {
-          if (facetMap.subject.items.indexOf(subject) === -1) {
-            facetMap.subject.items.push(subject);
+          if (facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].items.indexOf(subject) === -1) {
+            facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].items.push(subject);
           }
 
-          if (!facetMap.subject.count[subject]) {
-            facetMap.subject.count[subject] = 0;
+          if (!facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].count[subject]) {
+            facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].count[subject] = 0;
           }
 
-          facetMap.subject.count[subject] += 1;
+          facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].count[subject] += 1;
         });
 
         // Add date to general facet map
         //
         let date = this._getYear(metadata[SearchConstants.ERIC_LABEL_MAP.PUBLICATION_DATE.eric]);
 
-        if (facetMap.year.items.indexOf(date) === -1) {
-          facetMap.year.items.push(date);
+        if (facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].items.indexOf(date) === -1) {
+          facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].items.push(date);
         }
 
-        if (!facetMap.year.count[date]) {
-          facetMap.year.count[date] = 0;
+        if (!facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].count[date]) {
+          facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].count[date] = 0;
         }
 
-        facetMap.year.count[date] += 1;
+        facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].count[date] += 1;
 
         // Flatten and add generic cases
         //
@@ -127,6 +128,11 @@ export class SearchResultsDeserializerService {
               type: SearchConstants.ERIC_LABEL_MAP.SUBJECT.type,
               label: SearchConstants.ERIC_LABEL_MAP.SUBJECT.label,
               value: flattenedSubjects
+            },
+            {
+              type: SearchConstants.ERIC_LABEL_MAP.PUBLICATION_DATE.type,
+              label: SearchConstants.ERIC_LABEL_MAP.PUBLICATION_DATE.label,
+              value: [date]
             },
             {
               type: SearchConstants.ERIC_LABEL_MAP.PEER_REVIEWED.type,

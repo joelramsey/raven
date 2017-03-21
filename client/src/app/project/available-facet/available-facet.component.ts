@@ -58,11 +58,11 @@ export class AvailableFacetComponent implements OnInit {
     this.showValidationMessage = false;
 
     if (this._facetRef) {
-      this._facetRef.value = [min, max];
+      this._facetRef.value = [+min, +max];
     } else {
       this._facetRef = {
         label: label,
-        value: [min, max],
+        value: [+min, +max],
         type: this.facet.type
       };
     }

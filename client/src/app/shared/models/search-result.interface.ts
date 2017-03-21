@@ -42,7 +42,10 @@ export class SearchConstants {
     Range: 'range'
   };
 
-  public static BINARY_FACET_TYPES = [SearchConstants.FACET_TYPES.Boolean];
+  public static BINARY_FACET_TYPES = [
+    SearchConstants.FACET_TYPES.Boolean,
+    SearchConstants.FACET_TYPES.Range
+  ];
 
   public static ERIC_LABEL_MAP = {
     LANGUAGE: {
