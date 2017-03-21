@@ -22,7 +22,13 @@ export class SearchResultsDeserializerService {
     let facetMap: any = {
       'subject': {
         items: [],
-        count: {}
+        count: {},
+        type: SearchConstants.ERIC_LABEL_MAP.SUBJECT.type
+      },
+      'year': {
+        items: [],
+        count: {},
+        type: SearchConstants.ERIC_LABEL_MAP.PUBLICATION_DATE.type
       }
     };
 
@@ -35,7 +41,7 @@ export class SearchResultsDeserializerService {
         //
         let flattenedSubjects = this._flattenSubjects(metadata[SearchConstants.ERIC_LABEL_MAP.SUBJECT.eric]);
 
-        // Add to general facet map
+        // Add subjects to general facet map
         //
         flattenedSubjects.forEach((subject: string) => {
           if (facetMap.subject.items.indexOf(subject) === -1) {
@@ -48,6 +54,20 @@ export class SearchResultsDeserializerService {
 
           facetMap.subject.count[subject] += 1;
         });
+
+        // Add date to general facet map
+        //
+        let date = this._getYear(metadata[SearchConstants.ERIC_LABEL_MAP.PUBLICATION_DATE.eric]);
+
+        if (facetMap.year.items.indexOf(date) === -1) {
+          facetMap.year.items.push(date);
+        }
+
+        if (!facetMap.year.count[date]) {
+          facetMap.year.count[date] = 0;
+        }
+
+        facetMap.year.count[date] += 1;
 
         // Flatten and add generic cases
         //
@@ -64,7 +84,8 @@ export class SearchResultsDeserializerService {
             if (!facetMap[facetType.label]) {
               facetMap[facetType.label] = {
                 items: [],
-                count: {}
+                count: {},
+                type: facetType.type
               };
             }
 
@@ -128,7 +149,7 @@ export class SearchResultsDeserializerService {
           label: key,
           value: facetMap[key].items,
           count: facetMap[key].count,
-          type: 'nominal'
+          type: facetMap[key].type
         });
 
         return res;
@@ -173,5 +194,9 @@ export class SearchResultsDeserializerService {
     }
 
     return types instanceof Array ? types : [types];
+  }
+
+  private _getYear(date: string) {
+    return date.split('-')[0];
   }
 }

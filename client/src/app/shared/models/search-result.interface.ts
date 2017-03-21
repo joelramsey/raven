@@ -38,7 +38,8 @@ export interface Citation {
 export class SearchConstants {
   public static FACET_TYPES = {
     Boolean: 'boolean',
-    Nominal: 'nominal'
+    Nominal: 'nominal',
+    Range: 'range'
   };
 
   public static BINARY_FACET_TYPES = [SearchConstants.FACET_TYPES.Boolean];
@@ -83,6 +84,11 @@ export class SearchConstants {
       eric: 'eric:peer_reviewed',
       label: 'peer reviewed',
       type: 'boolean'
+    },
+    PUBLICATION_DATE: {
+      eric: 'dc:date',
+      label: 'publication year',
+      type: 'range'
     }
   };
 }

@@ -20,4 +20,26 @@
   <div class="boolean-container" *ngSwitchCase="facetTypes.Boolean">
     <md-checkbox (change)="handleFacetClick(facet.label, $event.checked)"></md-checkbox>
   </div>
+
+  <div class="range-container" *ngSwitchCase="facetTypes.Range">
+    <md-input-container>
+      <input mdInput
+             placeholder="From"
+             type="number"
+             min="1990"
+             [(ngModel)]="min">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput
+             placeholder="To"
+             type="number"
+             [(ngModel)]="max">
+    </md-input-container>
+
+    <span *ngIf="showValidationMessage"
+          class="angry-message">{{validationMessage}}</span>
+
+    <button md-button
+            (click)="handleRangeClick(facet.label, min, max)">Go</button>
+  </div>
 </rvn-accordion>
