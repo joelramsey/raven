@@ -55,9 +55,7 @@
     "tslint": "4.5.1",
     "typescript": "~2.2.1",
     "zone.js": "^0.7.6",
-    "reflect-metadata": "^0.1.8"
-  },
-  "devDependencies": {
+    "reflect-metadata": "^0.1.8",
     "@angular/cli": "^1.0.0-rc.0"
   }
 }
