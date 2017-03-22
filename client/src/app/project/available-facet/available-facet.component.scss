@@ -34,4 +34,13 @@ div {
       margin-left: 12px;
     }
   }
+
+  &.range-container {
+    padding: 16px;
+
+    .angry-message {
+      font-size: 10px;
+      color: $error-color;
+    }
+  }
 }

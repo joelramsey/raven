@@ -19,11 +19,18 @@ export class SearchResultsDeserializerService {
       return Observable.throw('Response must not be null.');
     }
 
-    let facetMap: any = {
-      'subject': {
-        items: [],
-        count: {}
-      }
+    let facetMap: any = {};
+
+    facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label] ={
+      items: [],
+      count: {},
+      type: SearchConstants.ERIC_LABEL_MAP.SUBJECT.type
+    };
+
+    facetMap[SearchConstants.ERIC_LABEL_MAP.PUBLICATION_DATE.label] ={
+      items: [],
+      count: {},
+      type: SearchConstants.ERIC_LABEL_MAP.PUBLICATION_DATE.type
     };
 
     return Observable.of({
@@ -35,19 +42,33 @@ export class SearchResultsDeserializerService {
         //
         let flattenedSubjects = this._flattenSubjects(metadata[SearchConstants.ERIC_LABEL_MAP.SUBJECT.eric]);
 
-        // Add to general facet map
+        // Add subjects to general facet map
         //
         flattenedSubjects.forEach((subject: string) => {
-          if (facetMap.subject.items.indexOf(subject) === -1) {
-            facetMap.subject.items.push(subject);
+          if (facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].items.indexOf(subject) === -1) {
+            facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].items.push(subject);
           }
 
-          if (!facetMap.subject.count[subject]) {
-            facetMap.subject.count[subject] = 0;
+          if (!facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].count[subject]) {
+            facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].count[subject] = 0;
           }
 
-          facetMap.subject.count[subject] += 1;
+          facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].count[subject] += 1;
         });
+
+        // Add date to general facet map
+        //
+        let date = this._getYear(metadata[SearchConstants.ERIC_LABEL_MAP.PUBLICATION_DATE.eric]);
+
+        if (facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].items.indexOf(date) === -1) {
+          facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].items.push(date);
+        }
+
+        if (!facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].count[date]) {
+          facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].count[date] = 0;
+        }
+
+        facetMap[SearchConstants.ERIC_LABEL_MAP.SUBJECT.label].count[date] += 1;
 
         // Flatten and add generic cases
         //
@@ -64,7 +85,8 @@ export class SearchResultsDeserializerService {
             if (!facetMap[facetType.label]) {
               facetMap[facetType.label] = {
                 items: [],
-                count: {}
+                count: {},
+                type: facetType.type
               };
             }
 
@@ -108,6 +130,11 @@ export class SearchResultsDeserializerService {
               value: flattenedSubjects
             },
             {
+              type: SearchConstants.ERIC_LABEL_MAP.PUBLICATION_DATE.type,
+              label: SearchConstants.ERIC_LABEL_MAP.PUBLICATION_DATE.label,
+              value: [date]
+            },
+            {
               type: SearchConstants.ERIC_LABEL_MAP.PEER_REVIEWED.type,
               label: SearchConstants.ERIC_LABEL_MAP.PEER_REVIEWED.label,
               value: [metadata[SearchConstants.ERIC_LABEL_MAP.PEER_REVIEWED.eric] === 'T']
@@ -128,7 +155,7 @@ export class SearchResultsDeserializerService {
           label: key,
           value: facetMap[key].items,
           count: facetMap[key].count,
-          type: 'nominal'
+          type: facetMap[key].type
         });
 
         return res;
@@ -173,5 +200,9 @@ export class SearchResultsDeserializerService {
     }
 
     return types instanceof Array ? types : [types];
+  }
+
+  private _getYear(date: string) {
+    return date.split('-')[0];
   }
 }
