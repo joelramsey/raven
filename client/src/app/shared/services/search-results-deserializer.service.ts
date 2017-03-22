@@ -111,6 +111,9 @@ export class SearchResultsDeserializerService {
             };
           });
 
+        let pdfIdentifier: string = metadata['dc:pdfidentifier'] == null ?
+          null :
+          metadata['dc:pdfidentifier']['source'];
 
         // Map data
         //
@@ -119,8 +122,8 @@ export class SearchResultsDeserializerService {
           description: metadata['dc:description'],
           peerReviewed: metadata[SearchConstants.ERIC_LABEL_MAP.PEER_REVIEWED.eric] === 'T',
           sourceUrl: metadata[SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.eric] === 'Yes' &&
-                     metadata['dc:pdfidentifier']['content'] ?
-                       'http://files.eric.ed.gov/fulltext/' + metadata['dc:pdfidentifier']['content'] + '.pdf':
+                     pdfIdentifier ?
+                       'http://files.eric.ed.gov/fulltext/' + pdfIdentifier + '.pdf':
                         null,
           citation: metadata['eric:citation'],
           facets: [
@@ -144,7 +147,7 @@ export class SearchResultsDeserializerService {
               label: SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.label,
               value: [
                 metadata[SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.eric] === 'Yes' &&
-                metadata['dc:pdfidentifier']['content']
+                pdfIdentifier
               ]
             },
           ].concat(genericEntryFacets)
