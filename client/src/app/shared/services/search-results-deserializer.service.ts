@@ -119,8 +119,8 @@ export class SearchResultsDeserializerService {
           description: metadata['dc:description'],
           peerReviewed: metadata[SearchConstants.ERIC_LABEL_MAP.PEER_REVIEWED.eric] === 'T',
           sourceUrl: metadata[SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.eric] === 'Yes' &&
-                     metadata['dc:identifier']['content'] ?
-                       'http://files.eric.ed.gov/fulltext/' + metadata['dc:identifier']['content'] + '.pdf':
+                     metadata['dc:pdfidentifier']['content'] ?
+                       'http://files.eric.ed.gov/fulltext/' + metadata['dc:pdfidentifier']['content'] + '.pdf':
                         null,
           citation: metadata['eric:citation'],
           facets: [
@@ -144,7 +144,7 @@ export class SearchResultsDeserializerService {
               label: SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.label,
               value: [
                 metadata[SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.eric] === 'Yes' &&
-                metadata['dc:identifier']['content']
+                metadata['dc:pdfidentifier']['content']
               ]
             },
           ].concat(genericEntryFacets)
@@ -203,6 +203,11 @@ export class SearchResultsDeserializerService {
   }
 
   private _getYear(date: string) {
-    return date.split('-')[0];
+    if (date == null){
+      return "no date given"
+    }
+    else {
+      return date.split('-')[0];
+    }
   }
 }
