@@ -19,7 +19,6 @@
   "dependencies": {
     "@angular/common": "~2.4.6",
     "@angular/compiler": "~2.4.6",
-    "@angular/compiler-cli":"2.4.10",
     "@angular/core": "~2.4.6",
     "@angular/forms": "~2.4.6",
     "@angular/http": "~2.4.6",
@@ -57,6 +56,6 @@
     "typescript": "~2.2.1",
     "zone.js": "^0.7.6",
     "reflect-metadata": "^0.1.8",
-    "@angular/cli": "^1.0.0-rc.0"
+    "@angular/cli": "1.0.0-rc.2"
   }
 }
