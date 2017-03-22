@@ -9,20 +9,6 @@
     [entity]="activeEntity"></rvn-entity-card>
 </div>
 
-<div class="project-composer-wrapper">
-  <md-card>
-    <rvn-accordion [title]="'Project Composer'">
-      <md-card-title>
-        <div class="save-message"
-             [class.hide-save-message]="hideSaveMessage">{{saveStatus}}
-        </div>
-      </md-card-title>
-
-      <div [froalaEditor] [froalaModel]="project.notes" (froalaModelChange)="froalaModelChanged($event)"></div>
-    </rvn-accordion>
-  </md-card>
-</div>
-
 <md-card class="project-container">
   <div class="navigation-container">
     <div class="md-nav-iteml" [mdTooltip]="'Data Table'">
@@ -58,6 +44,20 @@
   </div>
 
   <div class="active-view-container" [ngSwitch]="activeView">
+
+    <div class="project-composer-wrapper">
+      <md-card>
+        <rvn-accordion [title]="'Project Composer'">
+          <md-card-title>
+            <div class="save-message"
+                 [class.hide-save-message]="hideSaveMessage">{{saveStatus}}
+            </div>
+          </md-card-title>
+
+          <div [froalaEditor] [froalaModel]="project.notes" (froalaModelChange)="froalaModelChanged($event)"></div>
+        </rvn-accordion>
+      </md-card>
+    </div>
 
     <!-- Citations -->
     <div *ngSwitchCase="Views.CITATIONS" class="card-wrapper">
