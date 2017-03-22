@@ -96,7 +96,7 @@
     <!-- Search -->
     <div *ngSwitchCase="Views.SEARCH" class="card-wrapper">
       <md-card-title>Search</md-card-title>
-      <rvn-source-search></rvn-source-search>
+      <rvn-source-search (resultSelected)="handleSearchClick($event)"></rvn-source-search>
     </div>
 
   </div>

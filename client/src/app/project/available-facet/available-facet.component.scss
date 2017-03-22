@@ -1,13 +1,26 @@
 @import '../../../variables';
 
 md-list-item {
-  p {
+
+  white-space: nowrap;
+
+  span {
     color: $subtext-color;
+
+    &.facet-value {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin-right: 5px;
+    }
+  }
+
+  div {
+    width: 100%;
   }
 
   &:hover {
     cursor: pointer;
-    background-color: rgba(0,0,0,.12);
+    background-color: rgba(0,0,0,.02);
   }
 }
 
@@ -19,6 +32,15 @@ div {
 
     md-checkbox {
       margin-left: 12px;
+    }
+  }
+
+  &.range-container {
+    padding: 16px;
+
+    .angry-message {
+      font-size: 10px;
+      color: $error-color;
     }
   }
 }

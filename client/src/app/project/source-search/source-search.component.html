@@ -2,6 +2,7 @@
   <input mdInput
          [formControl]="searchControl"
          autofocus
+         type="search"
          placeholder="Search">
 
   <div *ngIf="searching" mdSuffix class="search-spinner">
@@ -39,7 +40,8 @@
   <div class="search-results-container">
 
     <p *ngIf="!firstSearch && !filteredResults.length && !searching">
-      No results found - try some synonyms, use fewer words, or remove some filters if you can't find what you're looking
+      No results found - try some synonyms, use fewer words, or remove some filters if you can't find what you're
+      looking
       for.
     </p>
 
@@ -49,6 +51,30 @@
 
         <h3 md-line>{{item.title}}</h3>
         <p md-line>{{item.description}}</p>
+
+        <div md-line>
+          <div  class="flex-between">
+
+            <!-- Wrapper div is a placeholder so that justify-between is consistent -->
+            <div>
+              <div *ngIf="item.peerReviewed" class="peer-reviewed-indicator">
+                <md-icon>check</md-icon>
+                <span>Peer Reviewed</span>
+              </div>
+            </div>
+
+            <div *ngIf="addEnabled">
+              <button *ngIf="item.sourceUrl"
+                      (click)="handleAddAsFullText($event, item)"
+                      md-button
+                      [mdTooltip]="'Adds full text as a project source'">Add Full Text</button>
+
+              <button md-button
+                      (click)="handleAddAsAbstract($event, item)"
+                      [mdTooltip]="'Adds abstract as a project source'">Add Abstract</button>
+            </div>
+          </div>
+        </div>
       </md-list-item>
     </md-list>
 

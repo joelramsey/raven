@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {
   MdCardModule, MdIconModule, MdTooltipModule, MdButtonModule,
-  MdProgressSpinnerModule
+  MdProgressSpinnerModule, MdDialogModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -23,7 +23,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
 
 import { DraggableDirective } from './directives/index';
 import { SourceSearchModule } from './source-search/source-search.module';
-import { AvailableFacetComponent } from './available-facet/available-facet.component';
+import { RecordViewModule } from './record-view/record-view.module';
 
 @NgModule({
   imports: [
@@ -35,12 +35,14 @@ import { AvailableFacetComponent } from './available-facet/available-facet.compo
     MdIconModule,
     MdTooltipModule,
     MdProgressSpinnerModule,
+    MdDialogModule,
     MdButtonModule,
     NgxDatatableModule,
     NgGridModule,
     SourceUploaderModule,
     SourceSearchModule,
     ProjectSourceModule,
+    RecordViewModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot()
   ],

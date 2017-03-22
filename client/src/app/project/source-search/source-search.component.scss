@@ -36,6 +36,27 @@ div {
     width: 30%;
 
   }
+
+  &.peer-reviewed-indicator {
+
+    display: flex;
+    align-items: center;
+
+    md-icon {
+      margin-right: 6px;
+    }
+  }
+}
+
+md-list-item {
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(0,0,0,.02);
+  }
+
+  & > div {
+    margin-top: 10px;
+  }
 }
 
 md-input-container {

@@ -1,0 +1,24 @@
+<h3 md-dialog-title>{{record?.title}}</h3>
+
+<a *ngIf="record?.sourceUrl" [attr.href]="record?.sourceUrl" target="_blank">{{record.sourceUrl}}</a>
+
+<div class="description top-margin" md-dialog-content>{{record?.description}}</div>
+
+<div class="facet-list" *ngFor="let facet of record?.facets">
+  <span *ngIf="!isExclusion(facet)">
+    {{transformLabel(facet.label)}}: {{transformValue(facet.value)}}
+  </span>
+</div>
+
+<div class="top-margin" *ngIf="addEnabled" md-dialog-actions>
+  <button md-button
+          (click)="addAsAbstract(record)"
+          [mdTooltip]="'Adds abstract as a project source'">Add Abstract</button>
+</div>
+
+<div class="top-margin" *ngIf="addEnabled && record?.sourceUrl" md-dialog-actions>
+  <button md-button
+          (click)="addAsFullText(record)"
+          [mdTooltip]="'Adds full text as a project source'">Add Full Text</button>
+</div>
+

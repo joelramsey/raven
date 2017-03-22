@@ -2,14 +2,16 @@ import {
   Component, OnInit, Input, style, state, animate, group, trigger, transition,
   OnDestroy, AfterViewChecked, Output, EventEmitter
 } from '@angular/core';
+import { MdDialog } from '@angular/material';
 
 import { ActivatedRoute } from '@angular/router';
 import * as Moment from 'moment';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
 
-import { Project, Source, EntityCardModel, Resolution } from '../../shared/models/index';
+import { Project, Source, EntityCardModel, Resolution, SearchResultListItem } from '../../shared/models/index';
 import { ProjectDaoService, ResolutionDaoService } from '../../shared/services/index';
+import { RecordViewComponent } from '../record-view/record-view.component';
 
 @Component({
   selector: 'rvn-project-view',
@@ -76,6 +78,7 @@ export class ProjectViewComponent implements OnInit, AfterViewChecked, OnDestroy
 
   constructor(private _projectDaoService: ProjectDaoService,
               private _resolutionDaoService: ResolutionDaoService,
+              private _dialog: MdDialog,
               private _route: ActivatedRoute) {
   }
 
@@ -190,6 +193,14 @@ export class ProjectViewComponent implements OnInit, AfterViewChecked, OnDestroy
 
   closeCard() {
     this.activeEntity = null;
+  }
+
+  handleSearchClick($event: SearchResultListItem) {
+    let dialogRef = this._dialog.open(RecordViewComponent);
+
+    // Set record instance
+    //
+    dialogRef.componentInstance.record = $event;
   }
 
   /**

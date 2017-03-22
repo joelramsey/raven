@@ -8,10 +8,12 @@ import {
   SearchResultListItem,
   SearchFacet,
   SearchFilter,
-  PillClickEvent
+  PillClickEvent,
+  SearchConstants,
+  SearchResultListItemAddEvent
 } from '../../shared/models/index';
+
 import { InPlaceFilterService } from './in-place-filter.service';
-import { SearchConstants } from '../../shared/models/search-result.interface';
 
 @Component({
   selector: 'rvn-source-search',
@@ -22,8 +24,10 @@ export class SourceSearchComponent implements OnInit {
 
   @Input() public searchTerm: string = '';
   @Input() public paginationSize: number = 30;
+  @Input() public addEnabled: boolean = false;
 
   @Output() public resultSelected: EventEmitter<SearchResultListItem> = new EventEmitter<SearchResultListItem>();
+  @Output() public addSearchResult: EventEmitter<SearchResultListItemAddEvent> = new EventEmitter<SearchResultListItemAddEvent>();
 
   public searchControl: FormControl = new FormControl();
   public results: Array<SearchResultListItem> = [];
@@ -166,6 +170,32 @@ export class SourceSearchComponent implements OnInit {
    */
   public handleSearchClick($item: any) {
     this.resultSelected.emit($item);
+  }
+
+  /**
+   * Emits the clicked item as an abstract to be added
+   * @param $event
+   * @param item
+   */
+  public handleAddAsAbstract($event: any, item: any) {
+    $event.stopPropagation();
+    this.addSearchResult.emit({
+      type: 'abstract',
+      record: item
+    });
+  }
+
+  /**
+   * Emits the clicked item as a full text to be added
+   * @param $event
+   * @param item
+   */
+  public handleAddAsFullText($event: any, item: any) {
+    $event.stopPropagation();
+    this.addSearchResult.emit({
+      type: 'fullText',
+      record: item
+    });
   }
 
   /**

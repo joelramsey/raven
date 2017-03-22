@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import {
   MdButtonModule, MdIconModule, MdInputModule, MdListModule, MdProgressSpinnerModule,
-  MdCheckboxModule
+  MdCheckboxModule, MdTooltipModule
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,6 +23,7 @@ import { AvailableFacetComponent } from '../available-facet/available-facet.comp
     MdListModule,
     MdCheckboxModule,
     MdProgressSpinnerModule,
+    MdTooltipModule,
     AccordionModule,
     PillListModule
   ],
