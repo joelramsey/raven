@@ -50,7 +50,7 @@ require 'yajl'
 
 
 
-file = File.join(Rails.root, 'tmp', 'eric1967.json')
+file = File.join(Rails.root, 'db', 'sample.json')
 
   json = File.new(file, 'r')
   parser = Yajl::Parser.new

@@ -8,7 +8,7 @@ class ArticlesController < ApplicationController
         if params[:q].present?
           search = Article.search do
             fulltext params[:q]
-            paginate :page => 1, :per_page => 1000
+            paginate :page => 1, :per_page => 10000
           end
           @articles = search.results
         else
