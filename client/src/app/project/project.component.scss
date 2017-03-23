@@ -1,6 +1,9 @@
 div {
+
   &.project-view-wrapper {
-    margin-top: 20px;
+    position: relative;
+    margin-top: 32px;
+    width: 100%;
   }
 }
 
@@ -14,6 +17,7 @@ div {
   &.export-block {
     display: flex;
     align-items: center;
+
 
     span {
       margin-left: 10px;

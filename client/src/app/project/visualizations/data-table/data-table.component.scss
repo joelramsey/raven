@@ -5,6 +5,7 @@
 }
 
 md-icon {
+  color: lighten($primary-gray, 10%);
   &.clickable-icon {
     cursor: pointer;
   }

@@ -9,9 +9,10 @@
 md-card {
   &.project-container {
     width: 100%;
-    margin-top: 90px;
+    margin: 64px -5px 0;
     display: flex;
     justify-content: space-between;
+    padding: 0;
   }
 }
 
@@ -44,31 +45,40 @@ div {
 
   &.card-wrapper {
     width: 100%;
+
   }
 
   &.active-view-container {
-    width: 85%;
+    width: 90%;
+    margin: 30px;
     overflow: auto;
   }
 
   &.project-composer-wrapper {
     position: absolute;
-    right: 4px;
-    min-width: 312px;
-    width: 65%;
+    right: 42px;
     z-index: 2;
+    & > md-card {
+      padding: 12px;
+      box-shadow: none;
+      background-color: darken($light-gray, 8%);
+      color: $link-color;
+    }
+
   }
 
   &.floating-entity-card {
     position: absolute;
     right: 0;
     z-index: 5;
+      background-color: yellow;
   }
 
   &.navigation-container {
     width: 32px;
-    padding-right: 16px;
-    border-right: 1px solid $icon-color;
+    padding: 16px;
+    background-color: $secondary-gray;
+    margin: 0;
 
     div {
       margin-top: 16px;
@@ -78,6 +88,9 @@ div {
       font-size: 32px;
       width: 32px;
       height: 32px;
+      &:hover{
+        color: $icon-hover;
+      }
     }
   }
 }
@@ -95,4 +108,8 @@ a {
       width: 100%;
     }
   }
+}
+
+.active>md-icon {
+  color: $icon-hover;
 }

@@ -103,6 +103,7 @@ span {
   }
 }
 
+
 a {
 
   cursor: pointer;
@@ -147,6 +148,7 @@ a {
     transform: scaleX(1);
     -moz-transform: scaleX(1);
     -o-transform: scaleX(1);
+    color: darken($link-color, 40%);
   }
 
   &:link {
@@ -241,5 +243,18 @@ div {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 0 30px;
   }
+}
+
+.mat-input-underline .mat-input-ripple {
+  background-color: $green;
+}
+
+.mat-mini-fab {
+  background-color: $link-color;
+}
+
+rvn-main {
+  width: 100%;
 }

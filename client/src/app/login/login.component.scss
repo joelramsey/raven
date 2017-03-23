@@ -1,5 +1,6 @@
 @import '../../variables';
 
+
 div {
   &.login-wrapper {
     min-height: 300px;
@@ -69,4 +70,11 @@ md-icon {
 
 md-card-subtitle {
   color: map-get($mat-red, 600);
+}
+
+.mat-raised-button {
+  background-color: $green;
+  &:hover{
+    background-color: darken($green, 20%);
+  }
 }
