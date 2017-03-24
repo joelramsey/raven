@@ -1,3 +1,4 @@
 [submodule "lib/alchemyapi_ruby"]
 	path = lib/alchemyapi_ruby
-	url = https://github.com/AlchemyAPI/alchemyapi_ruby.git
+	url = https://github.com/joelramsey/alchemyapi_ruby.git
+
