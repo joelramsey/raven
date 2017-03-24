@@ -5,12 +5,13 @@ md-list-item {
   white-space: nowrap;
 
   span {
-    color: $subtext-color;
+    color: black;
 
     &.facet-value {
       text-overflow: ellipsis;
       overflow: hidden;
       margin-right: 5px;
+      color: black;
     }
   }
 

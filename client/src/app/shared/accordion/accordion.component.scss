@@ -1,13 +1,16 @@
 div {
 
   &.accordion-title {
-
+    background-color: #36474f;
+    //background-color: #F5F5F5;
+    color: #F5F5F5;
     display: flex;
     align-items: center;
 
     span {
       text-overflow: ellipsis;
       overflow: hidden;
+
     }
 
     &.after {
@@ -20,11 +23,12 @@ div {
 
     &:hover {
       cursor: pointer;
-      background-color: rgba(0,0,0,.02);
+      //background-color: rgba(0,0,0,.02);
     }
   }
 
   &.accordion-content {
     overflow: auto;
+    background-color: #F5F5F5;
   }
 }
