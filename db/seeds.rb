@@ -49,7 +49,7 @@ require 'yajl'
 
 
 
-
+# run to build out fake data to the db and index
 file = File.join(Rails.root, 'db', 'sample.json')
 
   json = File.new(file, 'r')
