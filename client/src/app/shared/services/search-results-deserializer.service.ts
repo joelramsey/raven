@@ -74,7 +74,7 @@ export class SearchResultsDeserializerService {
         //
         let genericEntryFacets: Array<SearchFacet> = [
           SearchConstants.ERIC_LABEL_MAP.TYPE,
-          SearchConstants.ERIC_LABEL_MAP.LANGUAGE,
+          // SearchConstants.ERIC_LABEL_MAP.LANGUAGE,
           SearchConstants.ERIC_LABEL_MAP.EDUCATION_LEVEL,
           SearchConstants.ERIC_LABEL_MAP.SPONSOR,
           SearchConstants.ERIC_LABEL_MAP.AUDIENCE

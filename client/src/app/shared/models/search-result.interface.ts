@@ -48,11 +48,11 @@ export class SearchConstants {
   ];
 
   public static ERIC_LABEL_MAP = {
-    LANGUAGE: {
-      eric: 'dc:language',
-      label: 'language',
-      type: 'nominal'
-    },
+    // LANGUAGE: {
+    //   eric: 'dc:language',
+    //   label: 'language',
+    //   type: 'nominal'
+    // },
     SUBJECT: {
       eric: 'dc:subject',
       label: 'subject',
