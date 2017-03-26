@@ -142,10 +142,7 @@ export class SearchResultsDeserializerService {
             {
               type: SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.type,
               label: SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.label,
-              value: [
-                metadata[SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.eric] === 'Yes' &&
-                metadata['dc:pdfidentifier']['content']
-              ]
+              value: [metadata[SearchConstants.ERIC_LABEL_MAP.FULLTEXT_AVAILABLE.eric] === 'Yes']
             },
           ].concat(genericEntryFacets)
         };
