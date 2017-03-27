@@ -24,6 +24,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
 import { DraggableDirective } from './directives/index';
 import { SourceSearchModule } from './source-search/source-search.module';
 import { RecordViewModule } from './record-view/record-view.module';
+import { CitationManagerModule } from './citation-manager/citation-manager.module';
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import { RecordViewModule } from './record-view/record-view.module';
     SourceSearchModule,
     ProjectSourceModule,
     RecordViewModule,
+    CitationManagerModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot()
   ],

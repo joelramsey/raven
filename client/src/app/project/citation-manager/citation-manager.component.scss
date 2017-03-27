@@ -1,0 +1,19 @@
+@import '../../../variables';
+
+
+div {
+  &.title {
+    width: 100%;
+    align-items: center;
+  }
+
+  &.center-header {
+    display: flex;
+    align-items:center;
+    margin-bottom: 12px;
+
+    md-icon {
+      margin-right: 24px;
+    }
+  }
+}

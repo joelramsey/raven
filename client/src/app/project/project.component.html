@@ -12,6 +12,15 @@
 
     <button md-button
             *ngIf="!exporting"
+            [mdTooltip]="'Manage Citations'"
+            mdTooltipPosition="below"
+            class="project-button"
+            type="button"
+            (click)="showCitationManager()">
+      <md-icon>format_quote</md-icon>
+    </button>
+    <button md-button
+            *ngIf="!exporting"
             [mdTooltip]="'Export'"
             mdTooltipPosition="below"
             class="project-button"

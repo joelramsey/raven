@@ -1,0 +1,16 @@
+<div class="title flex-around">
+  <div class="center-header">
+    <md-icon>format_quote</md-icon>
+    <h3 md-dialog-title>Citation Manager</h3>
+  </div>
+</div>
+
+<div class="flex-around">
+
+  <a [ngClass]="showNewSourceView ? 'active' : ''" (click)="showNewSourceView = true">NEW CITATIONS</a>
+  <a [ngClass]="showNewSourceView ? '' : 'active'" (click)="showNewSourceView = false">EXISTING CITATIONS</a>
+
+</div>
+
+
+<p md-dialog-content>Select Source(s) to apply citation information <span *ngIf="project"> for {{project.name}}</span></p>
