@@ -11,7 +11,8 @@
       <md-input-container *ngIf="editing">
         <input mdInput
                name="{{source.title}}"
-               [(ngModel)]="source.title">
+               [(ngModel)]="source.title"
+               [ngModelOptions]="{standalone: true}">
 
         <md-icon md-prefix>{{ sourceIcon(source) }}</md-icon>
       </md-input-container>

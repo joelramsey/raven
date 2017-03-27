@@ -196,7 +196,10 @@ export class ProjectViewComponent implements OnInit, AfterViewChecked, OnDestroy
   }
 
   handleSearchClick($event: SearchResultListItem) {
-    let dialogRef = this._dialog.open(RecordViewComponent);
+    let dialogRef = this._dialog.open(RecordViewComponent, {
+      'width': '80%',
+      'height': '90%'
+    });
 
     // Set record instance
     //

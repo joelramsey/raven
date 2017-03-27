@@ -1,24 +1,29 @@
-<h3 md-dialog-title>{{record?.title}}</h3>
+<div class="record-view-wrapper">
+  <h3 md-dialog-title>{{record?.title}}</h3>
 
-<a *ngIf="record?.sourceUrl" [attr.href]="record?.sourceUrl" target="_blank">{{record.sourceUrl}}</a>
+  <a *ngIf="record?.sourceUrl"
+     [attr.href]="record?.sourceUrl"
+     target="_blank">Full Source</a>
 
-<div class="description top-margin" md-dialog-content>{{record?.description}}</div>
+  <div class="description top-margin" md-dialog-content>{{record?.description}}</div>
 
-<div class="facet-list" *ngFor="let facet of record?.facets">
+  <div class="facet-list" *ngFor="let facet of record?.facets">
+
   <span *ngIf="!isExclusion(facet)">
     {{transformLabel(facet.label)}}: {{transformValue(facet.value)}}
   </span>
-</div>
+  </div>
 
-<div class="top-margin" *ngIf="addEnabled" md-dialog-actions>
-  <button md-button
-          (click)="addAsAbstract(record)"
-          [mdTooltip]="'Adds abstract as a project source'">Add Abstract</button>
-</div>
+  <div class="top-margin flex-between dialog-actions" *ngIf="addEnabled" md-dialog-actions>
 
-<div class="top-margin" *ngIf="addEnabled && record?.sourceUrl" md-dialog-actions>
-  <button md-button
-          (click)="addAsFullText(record)"
-          [mdTooltip]="'Adds full text as a project source'">Add Full Text</button>
-</div>
+    <button md-button
+            (click)="addAsAbstract(record)"
+            [mdTooltip]="'Adds abstract as a project source'">Add Abstract</button>
 
+
+    <button md-button
+            (click)="addAsFullText(record)"
+            *ngIf="record?.sourceUrl"
+            [mdTooltip]="'Adds full text as a project source'">Add Full Text</button>
+  </div>
+</div>

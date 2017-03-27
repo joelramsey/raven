@@ -13,4 +13,12 @@ div {
   &.facet-list {
     margin-top: 16px;
   }
+
+  &.record-view-wrapper {
+    width: 100%;
+  }
+
+  &.dialog-actions {
+    flex-direction: row-reverse;
+  }
 }

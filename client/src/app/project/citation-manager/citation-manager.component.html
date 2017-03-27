@@ -1,0 +1,30 @@
+<div class="title flex-around">
+  <div class="center-header">
+    <md-icon>format_quote</md-icon>
+    <h2 md-dialog-title>Citation Manager</h2>
+  </div>
+</div>
+
+<div class="flex-around">
+
+  <a [ngClass]="showNewSourceView ? 'active' : ''" (click)="showNewSourceView = true">NEW CITATIONS</a>
+  <a [ngClass]="showNewSourceView ? '' : 'active'" (click)="showNewSourceView = false">EXISTING CITATIONS</a>
+
+</div>
+
+<div class="citation-manager-body">
+
+  <div *ngIf="!activeSource"
+       class="citation-list">
+    <p>Select one of the below sources to apply citation information:</p>
+
+    <rvn-citation-list [sources]="project?.sources | hasCitation:!showNewSourceView"
+                       (selected)="handleSelected($event)"></rvn-citation-list>
+  </div>
+
+  <div *ngIf="activeSource"
+       class="citation-editor">
+    <rvn-citation-editor [source]="activeSource"
+                         (backClicked)="activeSource = null"></rvn-citation-editor>
+  </div>
+</div>
