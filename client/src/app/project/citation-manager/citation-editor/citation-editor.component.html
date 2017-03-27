@@ -3,6 +3,14 @@
   <md-icon>keyboard_arrow_left</md-icon>Back
 </button>
 
-<p>
-  citation-editor works!
-</p>
+<md-card>
+
+  <md-card-title>{{source.title}}</md-card-title>
+
+  <md-card-content>
+    <rvn-accordion [title]="'Content'" [maxContentHeight]="'300px'">
+      {{source.content}}
+    </rvn-accordion>
+  </md-card-content>
+
+</md-card>
