@@ -362,7 +362,10 @@ export class SourceUploaderComponent implements OnInit, SourceCreator {
    * @param $event
    */
   searchResultClicked($event: SearchResultListItem) {
-    let dialogRef = this._dialog.open(RecordViewComponent);
+    let dialogRef = this._dialog.open(RecordViewComponent, {
+      'width': '80%',
+      'height': '90%'
+    });
     dialogRef.componentInstance.record = $event;
     dialogRef.componentInstance.addEnabled = true;
 

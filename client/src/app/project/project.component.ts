@@ -164,13 +164,11 @@ export class ProjectComponent implements OnInit {
    */
   showCitationManager() {
 
-    let dialogRef = this._dialog.open(CitationManagerComponent);
-    dialogRef.componentInstance.project = this.project;
+    let dialogRef = this._dialog.open(CitationManagerComponent, {
+      'width': '80%',
+      'height': '90%'
+    });
 
-    dialogRef
-      .afterClosed()
-      .subscribe((result) => {
-        console.log('stuff');
-      });
+    dialogRef.componentInstance.project = this.project;
   }
 }

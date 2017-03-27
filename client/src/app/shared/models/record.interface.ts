@@ -2,6 +2,7 @@ export interface Record {
   id:number;
   title?:string;
   visible?:boolean;
+  citation?:string;
   result:AlchemyResult
 }
 

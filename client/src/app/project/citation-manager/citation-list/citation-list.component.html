@@ -1,0 +1,16 @@
+<ngx-datatable
+  #rvnDataTable
+  class="material fullscreen expandable"
+  [rows]="sources"
+  [columns]="columns"
+  [headerHeight]="50"
+  [footerHeight]="50"
+  [limit]="50"
+  [scrollbarH]="true"
+  [cssClasses]="cssClasses"
+  [rowHeight]="'auto'"
+  (activate)="selected.emit($event.row)">
+
+  <ngx-datatable-column name="Title"></ngx-datatable-column>
+  <ngx-datatable-column name="Type"></ngx-datatable-column>
+</ngx-datatable>

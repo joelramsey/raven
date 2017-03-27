@@ -1,8 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MdButtonModule, MdTooltipModule, MdIconModule } from '@angular/material';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { CitationManagerComponent } from './citation-manager.component';
+import { CitationListComponent } from './citation-list/citation-list.component';
+import { HasCitationPipe } from './pipes/has-citation.pipe';
+import { CitationEditorComponent } from './citation-editor/citation-editor.component';
 
 
 @NgModule({
@@ -10,10 +14,14 @@ import { CitationManagerComponent } from './citation-manager.component';
     CommonModule,
     MdButtonModule,
     MdTooltipModule,
-    MdIconModule
+    MdIconModule,
+    NgxDatatableModule,
   ],
   declarations: [
-    CitationManagerComponent
+    CitationManagerComponent,
+    CitationListComponent,
+    HasCitationPipe,
+    CitationEditorComponent
   ],
   exports: [
     CitationManagerComponent

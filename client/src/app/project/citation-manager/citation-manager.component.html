@@ -1,7 +1,7 @@
 <div class="title flex-around">
   <div class="center-header">
     <md-icon>format_quote</md-icon>
-    <h3 md-dialog-title>Citation Manager</h3>
+    <h2 md-dialog-title>Citation Manager</h2>
   </div>
 </div>
 
@@ -12,5 +12,19 @@
 
 </div>
 
+<div class="citation-manager-body">
 
-<p md-dialog-content>Select Source(s) to apply citation information <span *ngIf="project"> for {{project.name}}</span></p>
+  <div *ngIf="!activeSource"
+       class="citation-list">
+    <p>Select one of the below sources to apply citation information:</p>
+
+    <rvn-citation-list [sources]="project?.sources | hasCitation:!showNewSourceView"
+                       (selected)="handleSelected($event)"></rvn-citation-list>
+  </div>
+
+  <div *ngIf="activeSource"
+       class="citation-editor">
+    <rvn-citation-editor [source]="activeSource"
+                         (backClicked)="activeSource = null"></rvn-citation-editor>
+  </div>
+</div>
