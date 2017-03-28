@@ -22,6 +22,8 @@ gem 'progress_bar'
 
 gem 'yajl-ruby'
 
+gem 'figaro'
+
 # both for document upload support
 gem 'carrierwave'
 #gem "paperclip", "~> 5.0.0.beta1"
@@ -30,6 +32,8 @@ gem 'jbuilder', '~> 2.0'
 # authentication related gems
 gem 'devise_token_auth'
 gem 'omniauth'
+gem 'omniauth-facebook'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

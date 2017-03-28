@@ -28,3 +28,6 @@ solr/pids
 solr/development
 
 
+
+# Ignore application configuration
+/config/application.yml
