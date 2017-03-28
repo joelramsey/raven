@@ -56,13 +56,14 @@ div {
 
   &.project-composer-wrapper {
     position: absolute;
-    right: 42px;
+    right: 45px;
     z-index: 2;
     & > md-card {
       padding: 12px;
       box-shadow: none;
       background-color: #36474f;
       color: $link-color;
+      border-radius: 12px;
     }
 
   }
