@@ -2,7 +2,7 @@
 
   <md-toolbar [color]="primary">
 
-    <img src="../assets/images/raven-logo.png" alt="RAVEN-Logo" height="25px" class="rvn-logo">
+    <img src="../assets/images/raven-logo.png" alt="RAVEN-Logo" height="45px" class="rvn-logo">
 
     <span class="wide-nav"></span>
 
@@ -45,53 +45,10 @@
           </div>
 
           <button md-raised-button type="submit" color="primary">Log In</button>
+          <a [routerLink]="['/register']" class="btn btn-link">Register</a>
 
         </form>
 
-        <span>-or-</span>
-
-        <form (ngSubmit)="register()">
-
-          <h4><small>Register</small></h4>
-
-          <div>
-            <label for="register-email"><md-icon>email</md-icon>Email</label><br>
-            <md-input-container>
-              <input mdInput
-                     type="email"
-                     [(ngModel)]="registration.email"
-                     name="email"
-                     id="register-email" required>
-            </md-input-container>
-          </div>
-
-          <div>
-            <label for="password"><md-icon>lock</md-icon>Password</label><br>
-            <md-input-container>
-              <input  mdInput
-                      type="password"
-                      [(ngModel)]="registration.password"
-                      name="password"
-                      id="register-password" required>
-            </md-input-container>
-          </div>
-
-          <div>
-            <label for="register-password-confirmation">Confirm password</label><br>
-            <md-input-container>
-              <input mdInput
-                     type="password"
-                     [(ngModel)]="registration.passwordConfirmation"
-                     name="password-confirmation"
-                     id="register-password-confirmation" required>
-
-              <md-hint align="end">Must be at least eight characters.</md-hint>
-            </md-input-container>
-          </div>
-
-          <button md-raised-button type="submit" color="primary">Register</button>
-
-        </form>
       </div>
     </md-card>
   </div>
