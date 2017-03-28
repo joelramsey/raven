@@ -62,10 +62,7 @@
     <!-- Citations -->
     <div *ngSwitchCase="Views.CITATIONS" class="card-wrapper">
       <md-card-title>Citations</md-card-title>
-      <p>We're currently working on adding a drop-dead simple citation helper to Raven at the moment - in the
-        meantime, we recommend using <a href="https://www.easybib.com" target="_blank">EasyBib</a> to create
-        citations, which can be pasted into the Project Composer.
-      </p>
+      <rvn-citation-manager [project]="project"></rvn-citation-manager>
     </div>
 
     <!-- Tree Map -->

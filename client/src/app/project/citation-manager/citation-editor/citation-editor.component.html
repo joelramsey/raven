@@ -8,6 +8,8 @@
   <md-card-title>{{source.title}}</md-card-title>
 
   <md-card-content>
+    <div>Type: {{source.type}}</div>
+
     <rvn-accordion [title]="'Content'" [maxContentHeight]="'300px'">
       {{source.content}}
     </rvn-accordion>

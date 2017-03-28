@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { MdDialog } from '@angular/material';
 import 'rxjs/add/operator/switchMap';
 
 import { Project, Source } from '../shared/models/index';
@@ -12,7 +11,6 @@ import {
 } from '../shared/services/index';
 import { SourcePillClickEvent } from '../shared/models/source-pill-click-event.interface';
 import { WindowRefService } from '../shared/services/window-ref.service';
-import { CitationManagerComponent } from './citation-manager/citation-manager.component';
 
 @Component({
   selector: 'rvn-project',
@@ -44,7 +42,6 @@ export class ProjectComponent implements OnInit {
               private _router: Router,
               private _observableResultHandler: ObservableResultHandlerService,
               private _windowRef: WindowRefService,
-              private _dialog: MdDialog,
               private _projectDaoService: ProjectDaoService,
               private _projectExportService: ProjectExportService,
               private _sourceDaoService: SourceDaoService) {
@@ -157,18 +154,5 @@ export class ProjectComponent implements OnInit {
         this.exporting = false;
         this._observableResultHandler.failure(error);
       });
-  }
-
-  /**
-   * Displays the citation manager as a modal
-   */
-  showCitationManager() {
-
-    let dialogRef = this._dialog.open(CitationManagerComponent, {
-      'width': '80%',
-      'height': '90%'
-    });
-
-    dialogRef.componentInstance.project = this.project;
   }
 }

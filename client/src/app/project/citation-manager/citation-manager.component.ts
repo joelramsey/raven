@@ -15,7 +15,7 @@ export class CitationManagerComponent implements OnInit {
   showNewSourceView: boolean = false;
   activeSource: Source;
 
-  constructor(public dialogRef: MdDialogRef<CitationManagerComponent>) {
+  constructor() {
   }
 
   ngOnInit() {

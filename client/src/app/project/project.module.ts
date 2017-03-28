@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {
   MdCardModule, MdIconModule, MdTooltipModule, MdButtonModule,
-  MdProgressSpinnerModule, MdDialogModule
+  MdProgressSpinnerModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -36,7 +36,6 @@ import { CitationManagerModule } from './citation-manager/citation-manager.modul
     MdIconModule,
     MdTooltipModule,
     MdProgressSpinnerModule,
-    MdDialogModule,
     MdButtonModule,
     NgxDatatableModule,
     NgGridModule,

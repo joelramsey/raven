@@ -9,16 +9,6 @@
                       (pillClicked)="toggleVisibility($event)"
                       (addSourceClicked)="showNewSource()"></rvn-sources-list>
 
-
-    <button md-button
-            *ngIf="!exporting"
-            [mdTooltip]="'Manage Citations'"
-            mdTooltipPosition="below"
-            class="project-button"
-            type="button"
-            (click)="showCitationManager()">
-      <md-icon>format_quote</md-icon>
-    </button>
     <button md-button
             *ngIf="!exporting"
             [mdTooltip]="'Export'"
