@@ -1,0 +1,71 @@
+<md-sidenav-container>
+
+  <md-toolbar [color]="primary">
+
+    <img src="../assets/images/raven-logo.png" alt="RAVEN-Logo" height="25px" class="rvn-logo">
+
+    <span class="wide-nav"></span>
+
+  </md-toolbar>
+
+  <div class="login-wrapper">
+
+    <md-card>
+
+      <md-card-title>
+        Register for access to Raven
+      </md-card-title>
+
+      <md-card-subtitle>{{errorMessage}}</md-card-subtitle>
+
+      <div class="forms-wrapper">
+        <form (ngSubmit)="register()">
+
+          <h4><small>Register</small></h4>
+
+          <div>
+            <label for="register-email"><md-icon>email</md-icon>Email</label><br>
+            <md-input-container>
+              <input mdInput
+                     type="email"
+                     [(ngModel)]="registration.email"
+                     name="email"
+                     id="register-email" required>
+            </md-input-container>
+          </div>
+
+          <div>
+            <label for="password"><md-icon>lock</md-icon>Password</label><br>
+            <md-input-container>
+              <input  mdInput
+                      type="password"
+                      [(ngModel)]="registration.password"
+                      name="password"
+                      id="register-password" required>
+            </md-input-container>
+          </div>
+
+          <div>
+            <label for="register-password-confirmation">Confirm password</label><br>
+            <md-input-container>
+              <input mdInput
+                     type="password"
+                     [(ngModel)]="registration.passwordConfirmation"
+                     name="password-confirmation"
+                     id="register-password-confirmation" required>
+
+              <md-hint align="end">Must be at least eight characters.</md-hint>
+            </md-input-container>
+          </div>
+
+          <button md-raised-button type="submit" color="primary">Register</button>
+          <a [routerLink]="['/login']" class="btn btn-link">Back to Login</a>
+
+        </form>
+
+      </div>
+    </md-card>
+  </div>
+</md-sidenav-container>
+
+

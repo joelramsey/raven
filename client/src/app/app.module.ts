@@ -9,6 +9,7 @@ import { NotFoundModule } from './not-found/not-found.module';
 import { LoginModule } from './login/login.module';
 import { MainModule } from './main/main.module';
 import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
+import { RegisterModule } from './register/register.module'
 
 @NgModule({
   declarations: [
@@ -18,10 +19,11 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
     BrowserModule,
     AppRoutingModule,
     LoginModule,
+    RegisterModule,
     MainModule,
     SharedModule,
     NotFoundModule,
-    FroalaEditorModule.forRoot(), 
+    FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot()
   ],
   providers: [
