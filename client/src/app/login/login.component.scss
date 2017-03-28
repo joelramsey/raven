@@ -78,3 +78,52 @@ md-card-subtitle {
     background-color: darken($green, 20%);
   }
 }
+
+md-sidenav-container {
+  height: 100%;
+  width: 100%;
+  background-color: $light-gray;
+}
+
+a {
+  margin: 0 10px;
+}
+
+div {
+  &.router-outlet-wrapper {
+    margin: 25px 0px;
+    height: 100%;
+  }
+
+  &.project-open-area {
+    width: 40px;
+    height: 100%;
+    position: absolute;
+  }
+
+  &.navbar-title {
+    margin-top: 24px;
+  }
+}
+
+span {
+  &.wide-nav {
+    flex: 1 1 auto;
+  }
+
+  &.toolbar-title {
+    margin-right: 20px;
+  }
+
+  &.project-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.mat-toolbar {
+  background-color: $primary-gray;
+  color: $white;
+  font-size: 16px;
+}
+
