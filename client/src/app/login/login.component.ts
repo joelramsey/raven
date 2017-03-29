@@ -5,6 +5,7 @@ import { Angular2TokenService } from 'angular2-token';
 import { environment } from '../../environments/environment';
 import { User } from '../shared/models/index';
 import { InitialNavigationService } from '../shared/services/index';
+// import { OutputComponent } from '../shared/models/output/output.component';
 
 @Component({
   selector: 'rvn-login',
@@ -13,8 +14,10 @@ import { InitialNavigationService } from '../shared/services/index';
 })
 export class LoginComponent implements OnInit {
 
+  output: any;
+
   public errorMessage:string = '';
-  
+
   public login:User = {
     email: '',
     password: ''
@@ -39,8 +42,16 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  // Submit Data to Backend
+  onSubmit() {
+
+    this.output = null;
+
+    this._tokenService.signInOAuth('facebook');
+  }
+
   logIn() {
-    
+
     this.errorMessage = '';
 
     // Do log in

@@ -23,6 +23,22 @@
 
           <h4><small>Log In</small></h4>
 
+              <h4 class="card-title">Sign In with Facebook</h4>
+
+              <form #accessResourceForm="ngForm" (ngSubmit)="onSubmit()">
+
+                <button
+                  type="submit"
+                  class="btn btn-primary">
+                  Sign In OAuth
+                </button>
+
+              </form>
+
+          <div class="col-md-6">
+            <output [data]="output"></output>
+          </div>
+
           <div>
             <label for="email"><md-icon>email</md-icon>Email</label><br>
             <md-input-container>
