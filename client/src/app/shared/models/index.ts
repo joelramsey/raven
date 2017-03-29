@@ -1,4 +1,5 @@
 export * from './cloudconvert.interface';
+export * from './easybib.interface';
 export * from './entity-card-model.interface';
 export * from './pill.interface';
 export * from './project.interface';
