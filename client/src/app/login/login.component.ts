@@ -33,21 +33,35 @@ export class LoginComponent implements OnInit {
               private _initialNavigationService: InitialNavigationService) {
 
     this._tokenService.init({
-      registerAccountPath: environment.api + '/auth',
-      validateTokenPath: environment.api + '/auth/validate_token',
-      signInPath: environment.api + '/auth/sign_in'
+      registerAccountPath: 'http://localhost:3000/auth',
+      validateTokenPath: 'http://localhost:3000/auth/validate_token',
+      signInPath:'http://localhost:3000/auth/sign_in',
+      //Use the URL of your server. In routes.rb, all the routes are scoped with /api. I would suggest
+      //mounting everything outside the scope
+      oAuthBase: 'http://localhost:3000',
+      // oAuthPaths: {
+      //   facebook:'auth/facebook'
+      // },
     });
   }
 
   ngOnInit() {
+
   }
 
   // Submit Data to Backend
-  onSubmit() {
+  fbSignIn() {
 
     this.output = null;
-
-    this._tokenService.signInOAuth('facebook');
+    this._tokenService.signInOAuth('facebook').subscribe((res) => {
+        console.log(res);
+        //Get the login result here.
+      
+      },
+      (error) => {
+        //Get login failure here
+        console.log(error);
+      });
   }
 
   logIn() {
