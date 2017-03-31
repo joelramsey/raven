@@ -113,3 +113,7 @@ a {
 .active>md-icon {
   color: $icon-hover;
 }
+
+div.accordion-title {
+  border: none !important;
+}

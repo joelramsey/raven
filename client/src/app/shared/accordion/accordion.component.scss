@@ -1,11 +1,19 @@
+@import '../../../variables';
 div {
 
   &.accordion-title {
-    background-color: #36474f;
+    background-color: $primary-gray;
     //background-color: #F5F5F5;
-    color: #27A59B;
+    color: darken($light-gray, 15%);
     display: flex;
     align-items: center;
+    padding: 8px 5px;
+    border: 1px solid $white;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    & md-icon {
+      color: $light-gray;
+    }
 
     span {
       text-overflow: ellipsis;
