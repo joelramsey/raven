@@ -19,6 +19,7 @@ export class LinkDiagramComponent implements OnInit {
   constructor() {
   }
 
+
   ngOnInit() {
     this._svg = d3.select('#link-diagram').append('svg');
 
@@ -42,6 +43,10 @@ export class LinkDiagramComponent implements OnInit {
 
     var color = d3.scale.category20();
 
+    var legendRectSize=20;
+    var legendSpacing=7;
+    var legendHeight=legendRectSize+legendSpacing;
+
     var force = d3.layout.force()
       .charge(-100)
       .linkDistance(200)
@@ -64,7 +69,7 @@ export class LinkDiagramComponent implements OnInit {
       .call(zoom);
 
     this._container = this._svg.append('g');
-    
+
     force
       .nodes(this.data.nodes)
       .links(this.data.links)
@@ -91,7 +96,7 @@ export class LinkDiagramComponent implements OnInit {
       })
       .attr('class', 'node')
       .call(force.drag);
-    
+
     node.append('circle')
       .attr('r', 5)
       .attr('class', 'node')
@@ -108,6 +113,45 @@ export class LinkDiagramComponent implements OnInit {
       .text(function (d:any) {
         return d.name;
       });
+
+    var legendHolder = this._svg.append('g')
+    // translate the holder to the right side of the graph
+      .attr('transform', 'translate(210,100)')
+
+    var legend=legendHolder.selectAll('.legend')
+      .data(color.domain())
+      .enter()
+      .append('g')
+      .attr({
+        class:'legend',
+        transform:function(d,i){
+          //Just a calculation for x & y position
+          return 'translate(-200,' + ((i*legendHeight)-65) + ')';
+        }
+      });
+    legend.append('rect')
+      .attr({
+        width:legendRectSize,
+        height:legendRectSize,
+        rx:120,
+        ry:120
+      })
+      .style({
+        fill:color,
+        stroke:color
+      });
+
+    legend.append('text')
+      .attr({
+        x:30,
+        y:15
+      })
+      .text(function(d){
+        return d;
+      }).style({
+      fill:'#929DAF',
+      'font-size':'14px'
+    });
 
     force.on('tick', function () {
       link.attr('x1', function (d:any) {
