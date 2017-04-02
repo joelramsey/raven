@@ -7,12 +7,34 @@
 
   <md-card-title>{{source.title}}</md-card-title>
 
-  <md-card-content>
-    <div>Type: {{source.type}}</div>
+  <md-card-content class="flex-between">
 
-    <rvn-accordion [title]="'Content'" [maxContentHeight]="'300px'">
-      {{source.content}}
-    </rvn-accordion>
+    <div>
+      <div>Type: {{source.type}}</div>
+
+      <rvn-accordion [title]="'Content'" [maxContentHeight]="'300px'">
+        {{source.content}}
+      </rvn-accordion>
+    </div>
+
+    <div>
+      <md-select placeholder="Source Type" [(ngModel)]="sourceType">
+        <md-option *ngFor="let sourceType of sourceTypesList"
+                   [value]="sourceType">
+          {{ sourceType }}
+        </md-option>
+      </md-select>
+
+      <div [ngSwitch]="sourceType">
+        <rvn-book-citation-form *ngSwitchCase="SOURCE_TYPES.book"></rvn-book-citation-form>
+        <rvn-chapter-citation-form *ngSwitchCase="SOURCE_TYPES.chapter"></rvn-chapter-citation-form>
+        <rvn-journal-citation-form *ngSwitchCase="SOURCE_TYPES.journal"></rvn-journal-citation-form>
+        <rvn-magazine-citation-form *ngSwitchCase="SOURCE_TYPES.magazine"></rvn-magazine-citation-form>
+        <rvn-newspaper-citation-form *ngSwitchCase="SOURCE_TYPES.newspaper"></rvn-newspaper-citation-form>
+        <rvn-website-citation-form *ngSwitchCase="SOURCE_TYPES.website"></rvn-website-citation-form>
+      </div>
+
+    </div>
   </md-card-content>
 
 </md-card>

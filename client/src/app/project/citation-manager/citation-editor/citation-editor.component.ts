@@ -10,11 +10,24 @@ import { Source } from '../../../shared/models/index';
 export class CitationEditorComponent implements OnInit {
 
   @Input() source: Source;
+  @Input() sourceType: string = 'Book';
   @Output() backClicked: EventEmitter<any> = new EventEmitter<any>();
+  sourceTypesList = [];
+
+  SOURCE_TYPES = {
+    book: 'Book',
+    chapter: 'Chapter',
+    journal: 'Journal',
+    magazine: 'Magazine',
+    newspaper: 'Newspaper',
+    website: 'Website'
+  };
 
   constructor() { }
 
   ngOnInit() {
+    this.sourceTypesList = Object.keys(this.SOURCE_TYPES)
+      .map(sourceTypeKey => this.SOURCE_TYPES[sourceTypeKey]);
   }
 
 }

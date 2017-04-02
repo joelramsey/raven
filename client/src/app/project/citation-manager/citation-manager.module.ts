@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MdButtonModule, MdCardModule, MdTooltipModule, MdIconModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
+import { MdButtonModule, MdCardModule, MdTooltipModule, MdIconModule, MdSelectModule } from '@angular/material';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { CitationManagerComponent } from './citation-manager.component';
@@ -8,14 +9,22 @@ import { CitationListComponent } from './citation-list/citation-list.component';
 import { HasCitationPipe } from './pipes/has-citation.pipe';
 import { CitationEditorComponent } from './citation-editor/citation-editor.component';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
+import { ChapterCitationFormComponent } from './citation-forms/chapter-citation-form/chapter-citation-form.component';
+import { BookCitationFormComponent } from './citation-forms/book-citation-form/book-citation-form.component';
+import { MagazineCitationFormComponent } from './citation-forms/magazine-citation-form/magazine-citation-form.component';
+import { NewspaperCitationFormComponent } from './citation-forms/newspaper-citation-form/newspaper-citation-form.component';
+import { JournalCitationFormComponent } from './citation-forms/journal-citation-form/journal-citation-form.component';
+import { WebsiteCitationFormComponent } from './citation-forms/website-citation-form/website-citation-form.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     MdButtonModule,
     MdCardModule,
     MdTooltipModule,
     MdIconModule,
+    MdSelectModule,
     NgxDatatableModule,
     AccordionModule
   ],
@@ -23,7 +32,13 @@ import { AccordionModule } from '../../shared/accordion/accordion.module';
     CitationManagerComponent,
     CitationListComponent,
     HasCitationPipe,
-    CitationEditorComponent
+    CitationEditorComponent,
+    ChapterCitationFormComponent,
+    BookCitationFormComponent,
+    MagazineCitationFormComponent,
+    NewspaperCitationFormComponent,
+    JournalCitationFormComponent,
+    WebsiteCitationFormComponent
   ],
   exports: [
     CitationManagerComponent
@@ -32,4 +47,5 @@ import { AccordionModule } from '../../shared/accordion/accordion.module';
     CitationManagerComponent
   ]
 })
-export class CitationManagerModule { }
+export class CitationManagerModule {
+}
