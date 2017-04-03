@@ -1,6 +1,7 @@
 <button md-button
         (click)="backClicked.emit()">
-  <md-icon>keyboard_arrow_left</md-icon>Back
+  <md-icon>keyboard_arrow_left</md-icon>
+  Back
 </button>
 
 <md-card>
@@ -18,20 +19,52 @@
     </div>
 
     <div>
+      <md-select placeholder="Citation Style" [(ngModel)]="citationStyle">
+        <md-option *ngFor="let citationStyle of citationStyleList"
+                   [value]="citationStyle">
+          {{citationStyle}}
+        </md-option>
+      </md-select>
       <md-select placeholder="Source Type" [(ngModel)]="sourceType">
-        <md-option *ngFor="let sourceType of sourceTypesList"
+        <md-option *ngFor="let sourceType of sourceTypeList"
                    [value]="sourceType">
-          {{ sourceType }}
+          {{sourceType.name}}
         </md-option>
       </md-select>
 
+      <div>
+
+        <h4>Contributors:</h4>
+        <div *ngFor="let contributor of contributors">
+          <span *ngIf="contributor.first">{{contributor.first}} </span>
+          <span *ngIf="contributor.middle">{{contributor.middle}} </span>
+          <span *ngIf="contributor.last">{{contributor.last}} </span>
+          <span>({{contributor.function}})</span>
+        </div>
+
+        <button *ngIf="!showContributorForm"
+                md-button
+                color="primary"
+                (click)="showContributorForm = true">Add
+        </button>
+      </div>
+
+      <rvn-contributor-form *ngIf="showContributorForm"
+                            (publishContributor)="addContributor($event)"></rvn-contributor-form>
+
       <div [ngSwitch]="sourceType">
-        <rvn-book-citation-form *ngSwitchCase="SOURCE_TYPES.book"></rvn-book-citation-form>
-        <rvn-chapter-citation-form *ngSwitchCase="SOURCE_TYPES.chapter"></rvn-chapter-citation-form>
-        <rvn-journal-citation-form *ngSwitchCase="SOURCE_TYPES.journal"></rvn-journal-citation-form>
-        <rvn-magazine-citation-form *ngSwitchCase="SOURCE_TYPES.magazine"></rvn-magazine-citation-form>
-        <rvn-newspaper-citation-form *ngSwitchCase="SOURCE_TYPES.newspaper"></rvn-newspaper-citation-form>
-        <rvn-website-citation-form *ngSwitchCase="SOURCE_TYPES.website"></rvn-website-citation-form>
+        <rvn-book-citation-form *ngSwitchCase="sourceTypes.book"
+                                (publishData)="saveCitation($event)"></rvn-book-citation-form>
+        <rvn-chapter-citation-form *ngSwitchCase="sourceTypes.chapter"
+                                   (publishData)="saveCitation($event)"></rvn-chapter-citation-form>
+        <rvn-journal-citation-form *ngSwitchCase="sourceTypes.journal"
+                                   (publishData)="saveCitation($event)"></rvn-journal-citation-form>
+        <rvn-magazine-citation-form *ngSwitchCase="sourceTypes.magazine"
+                                    (publishData)="saveCitation($event)"></rvn-magazine-citation-form>
+        <rvn-newspaper-citation-form *ngSwitchCase="sourceTypes.newspaper"
+                                     (publishData)="saveCitation($event)"></rvn-newspaper-citation-form>
+        <rvn-website-citation-form *ngSwitchCase="sourceTypes.website"
+                                   (publishData)="saveCitation($event)"></rvn-website-citation-form>
       </div>
 
     </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'rvn-magazine-citation-form',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./magazine-citation-form.component.scss']
 })
 export class MagazineCitationFormComponent implements OnInit {
+
+  @Output() publishData: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 

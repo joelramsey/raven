@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { BookSource } from '../../../../shared/models/index';
 
 @Component({
@@ -9,10 +9,16 @@ import { BookSource } from '../../../../shared/models/index';
 export class BookCitationFormComponent implements OnInit {
 
   @Input() model: BookSource;
+  @Output() publishData: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
   ngOnInit() {
+    if (!this.model) {
+      // Initialize blank model if none is provided
+      //
+      // this.model = {};
+    }
   }
 
 }
