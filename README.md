@@ -27,6 +27,8 @@ Note for set up:
     -clone the ruby SDK into the lib folder of the application
     -the API key should be visible to the application from within the new alchemyapi_ruby directory root
     -the alchemy_parser.rb file in the services directory of the application handles the request and the parsing of the objects to the database. Serialization inbound and outbound are handled through the models and associated serializers
+    - set your YOUR_APP_ID and YOUR_APP_SECRET in 'config\initializers\koala.rb' and YOUR_APP_ID in '\client\src\app\login\login.component.ts' files to get Facebook auth works
+    - set your YOUR_APP_ID in 'client\src\index.html' file to get Google auth works
 
 Starting the backend:
 	-from root, rails s

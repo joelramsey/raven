@@ -12,5 +12,8 @@ Rails.application.routes.draw do
 	    end
 			resources :items
 			resources :records
+
+		post '/auth/facebook', to: 'sessions#facebook_login'
+		post '/auth/google', to: 'sessions#google_login'
   end
 end
