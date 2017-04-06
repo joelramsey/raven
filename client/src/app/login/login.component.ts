@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
   // Here set your Facebook app id
   ngOnInit() {
     FB.init({
-      appId      : 'YOUR_APP_ID',
+      appId      : '1817001431894719',
       status     : true,
       xfbml      : true,
       cookie     : true,
