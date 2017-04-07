@@ -170,7 +170,8 @@ export class LoginComponent implements OnInit {
     let headers = new Headers({ 'Content-Type': 'application/json' });
 
     // set here correct url in production for sending info to back end
-    return this.http.post('http://127.0.0.1:3000/' + url, body, { headers: headers })
+
+    return this.http.post('https://www.ravenanalytics.io/' + url, body, { headers: headers })
       .map(res => res.json())
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
       .subscribe(
@@ -188,7 +189,7 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('tokenType', data['data']['token-type']);
     localStorage.setItem('uid', data['data']['uid']);
     this._tokenService.validateToken();
-    location.reload();
+    location.assign("https://www.ravenanalytics.io");
   }
 
 }
