@@ -1,0 +1,125 @@
+@import '../../variables';
+
+
+div {
+  &.login-wrapper {
+    min-height: 300px;
+    display: flex;
+    justify-content: space-around;
+    margin: 0 5px;
+  }
+
+  &.forms-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    form {
+      width: 100%;
+      min-width: 200px;
+    }
+
+    span {
+      width: 20%;
+      margin: 20px 0;
+      text-align: center;
+      align-self: center;
+    }
+  }
+}
+
+@media(max-width: 540px) {
+  div {
+    &.forms-wrapper {
+      span {
+        width: 100%;
+      }
+
+      form {
+        width: 100%;
+      }
+    }
+  }
+}
+
+h4 {
+  margin-bottom: 20px;
+  font-weight:400;
+}
+
+button {
+  margin-top: 30px;
+}
+
+
+md-card {
+  min-width: 250px;
+  max-width: 450px;
+  width: 100%;
+  margin-top: 40px;
+}
+
+md-input-container {
+  width: 100%;
+}
+
+md-icon {
+  vertical-align: middle;
+  margin-right: 5px;
+  color: $primary-gray;
+}
+
+md-card-subtitle {
+  color: map-get($mat-red, 600);
+}
+
+.mat-raised-button {
+  background-color: $green;
+  &:hover{
+    background-color: darken($green, 20%);
+  }
+}
+
+md-sidenav-container {
+  height: 100%;
+  width: 100%;
+  background-color: $light-gray;
+}
+
+a {
+  margin: 0 10px;
+}
+
+div {
+  &.router-outlet-wrapper {
+    margin: 25px 0px;
+    height: 100%;
+  }
+
+  &.project-open-area {
+    width: 40px;
+    height: 100%;
+    position: absolute;
+  }
+
+  &.navbar-title {
+    margin-top: 24px;
+  }
+}
+
+span {
+  &.wide-nav {
+    flex: 1 1 auto;
+  }
+
+  &.toolbar-title {
+    margin-right: 20px;
+  }
+}
+
+.mat-toolbar {
+  background-color: $primary-gray;
+  color: $white;
+  font-size: 16px;
+}
+

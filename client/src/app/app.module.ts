@@ -9,7 +9,8 @@ import { NotFoundModule } from './not-found/not-found.module';
 import { LoginModule } from './login/login.module';
 import { MainModule } from './main/main.module';
 import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
-import { RegisterModule } from './register/register.module'
+import { RegisterModule } from './register/register.module';
+import { LandingModule } from './landing/landing.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { RegisterModule } from './register/register.module'
   imports: [
     BrowserModule,
     AppRoutingModule,
+    LandingModule,
     LoginModule,
     RegisterModule,
     MainModule,
