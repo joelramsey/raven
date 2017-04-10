@@ -13,6 +13,7 @@ import { ProjectComponent } from './project.component';
 import { ProjectViewComponent } from './project-view/project-view.component';
 import { TabulateSourcesPipe } from './pipes/tabulate-sources.pipe';
 import { TreeMapComponent } from './visualizations/tree-map/tree-map.component';
+import { DendogramComponent } from './visualizations/dendogram/dendogram.component';
 import { DataTableComponent } from './visualizations/data-table/data-table.component';
 import { LinkDiagramComponent } from './visualizations/link-diagram/link-diagram.component';
 import { LinkDiagramAdapterPipe } from './pipes/link-diagram-adapter.pipe';
@@ -56,6 +57,7 @@ import { CitationManagerModule } from './citation-manager/citation-manager.modul
     TreeMapAdapterPipe,
     TreeMapComponent,
     DataTableComponent,
+    DendogramComponent,
     LinkDiagramComponent
   ],
   exports: [

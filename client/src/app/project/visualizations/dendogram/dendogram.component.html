@@ -1,0 +1,9 @@
+
+<div class="dendogram-wrapper">
+
+  <span *ngIf="!data?.children?.length">No data to display</span>
+
+  <div id="chart" class="dendogram" [class.hidden]="!data?.children?.length">
+    
+  </div>
+</div>
