@@ -48,6 +48,8 @@ export class DendogramComponent implements OnInit, OnChanges {
     var tree = d3.layout.cluster()
       .size([height, width]);
 
+    var color = d3.scale.category20c();
+
     var diagonal = d3.svg.diagonal()
       .projection(function(d) { return [d.y, d.x]; });
 
@@ -115,7 +117,12 @@ function update(source) {
 
   nodeEnter.append("circle")
     .attr("r", 10)
-    .style("fill", "#FFF")
+    .style("fill", function (d:any) {
+        if(d.children)
+        { return color(d.name) }
+        else
+        { return color(d.parent.name)};
+      })
     .style("stroke", "steelblue")
     .style("stroke-width", 3);
 
