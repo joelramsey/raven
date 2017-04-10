@@ -82,6 +82,6 @@
 
   <button md-button
           color="primary"
-          [disabled]="!citationForm.form.valid"
+          [disabled]="saveDisabled || !citationForm.form.valid"
           type="submit">Save</button>
 </form>

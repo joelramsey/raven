@@ -19,6 +19,7 @@ import { NewspaperCitationFormComponent } from './citation-forms/newspaper-citat
 import { JournalCitationFormComponent } from './citation-forms/journal-citation-form/journal-citation-form.component';
 import { WebsiteCitationFormComponent } from './citation-forms/website-citation-form/website-citation-form.component';
 import { ContributorFormComponent } from './citation-forms/contributor-form/contributor-form.component';
+import { CitationExportService } from './services/index';
 
 @NgModule({
   imports: [
@@ -52,6 +53,9 @@ import { ContributorFormComponent } from './citation-forms/contributor-form/cont
   ],
   entryComponents: [
     CitationManagerComponent
+  ],
+  providers: [
+    CitationExportService
   ]
 })
 export class CitationManagerModule {

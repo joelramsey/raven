@@ -10,27 +10,26 @@ import { AbstractCitationFormComponent } from '../abstract-citation-form/abstrac
 export class MagazineCitationFormComponent extends AbstractCitationFormComponent implements OnInit {
 
   @Input() model: MagazinePublicationType;
+  @Input() saveDisabled: boolean;
   @Output() publishData: EventEmitter<any> = new EventEmitter<any>();
+
+  public attributes: Array<string> = [
+    'title',
+    'vol',
+    'day',
+    'month',
+    'year',
+    'start',
+    'end',
+    'nonconsecutive'
+  ];
 
   constructor() {
     super();
   }
 
   ngOnInit() {
-    if (!this.model) {
-      // Initialize blank model if none is provided
-      //
-      this.model = {
-        title: '',
-        vol: '',
-        day: '',
-        month: '',
-        year: '',
-        start: '',
-        end: '',
-        nonconsecutive: '',
-      };
-    }
+    this.setAttributes();
   }
 
 }

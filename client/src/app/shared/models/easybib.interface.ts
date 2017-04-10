@@ -43,8 +43,8 @@ export interface NonPeriodicalPublicationType {
   vol: string;
   editiontext: string;
   year: string;
-  start: string;
-  end: string
+  start?: string;
+  end?: string
 }
 
 export interface MagazinePublicationType {

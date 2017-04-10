@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Source } from '../../../shared/models/index';
+import { CitationExportService } from '../services/index';
 
 const SOURCE_TYPES = {
   book: {
@@ -60,7 +61,7 @@ export class CitationEditorComponent implements OnInit {
   citationStyleList = [];
   contributors = [];
 
-  constructor() { }
+  constructor(private _citationExportService: CitationExportService) { }
 
   ngOnInit() {
     this.sourceTypeList = Object.keys(this.sourceTypes)
@@ -73,12 +74,15 @@ export class CitationEditorComponent implements OnInit {
   saveCitation(citationData: any) {
     console.log(this.sourceType);
     console.log(citationData);
+    console.log(this.contributors);
   }
 
   addContributor($event: any) {
-    console.log($event);
-
-    // TODO: Add $event to this.contributors
+    this.contributors.push($event);
     this.showContributorForm = false;
+  }
+
+  get canSave() {
+    return this.contributors.length > 0;
   }
 }

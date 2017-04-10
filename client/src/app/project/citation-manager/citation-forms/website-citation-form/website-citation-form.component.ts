@@ -10,26 +10,27 @@ import { AbstractCitationFormComponent } from '../abstract-citation-form/abstrac
 export class WebsiteCitationFormComponent extends AbstractCitationFormComponent implements OnInit {
 
   @Input() model: OnlinePublicationType;
+  @Input() saveDisabled: boolean;
   @Output() publishData: EventEmitter<any> = new EventEmitter<any>();
+
+  public attributes: Array<string> = [
+    'title',
+    'inst',
+    'day',
+    'month',
+    'year',
+    'url',
+    'dayaccessed',
+    'monthaccessed',
+    'yearaccessed'
+  ];
 
   constructor() {
     super();
   }
 
   ngOnInit() {
-    if (!this.model) {
-      this.model = {
-        title: '',
-        inst: '',
-        day: '',
-        month: '',
-        year: '',
-        url: '',
-        dayaccessed: '',
-        monthaccessed: '',
-        yearaccessed: ''
-      }
-    }
+    this.setAttributes();
   }
 
 }

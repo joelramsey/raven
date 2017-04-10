@@ -1,3 +1,43 @@
-<button md-button
-        color="primary"
-        (click)="addContributor()">Add Contributor</button>
+<form (ngSubmit)="addContributor()" #contributorForm="ngForm">
+
+  <!-- Contributor Function -->
+  <md-select placeholder="Contributor Type"
+             name="function"
+             [(ngModel)]="contributor['function']">
+    <md-option *ngFor="let contributorType of contributorTypeList"
+               [value]="contributorType.value">
+      {{contributorType.name}}
+    </md-option>
+  </md-select>
+
+  <!-- First -->
+  <md-input-container>
+    <input mdInput
+           required
+           placeholder="First Name"
+           name="first"
+           [(ngModel)]="contributor.first">
+  </md-input-container>
+
+  <!-- Middle -->
+  <md-input-container>
+    <input mdInput
+           placeholder="Middle Name"
+           name="middle"
+           [(ngModel)]="contributor.middle">
+  </md-input-container>
+
+  <!-- Last -->
+  <md-input-container>
+    <input mdInput
+           required
+           placeholder="Last Name"
+           name="last"
+           [(ngModel)]="contributor.last">
+  </md-input-container>
+
+  <button md-button
+          color="primary"
+          [disabled]="!contributorForm.form.valid"
+          type="submit">Add Contributor</button>
+</form>
