@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MdButtonModule, MdCardModule, MdTooltipModule, MdIconModule, MdSelectModule } from '@angular/material';
+import {
+  MdButtonModule, MdCardModule, MdTooltipModule, MdIconModule, MdSelectModule,
+  MdInputModule, MdCheckboxModule
+} from '@angular/material';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { CitationManagerComponent } from './citation-manager.component';
@@ -25,6 +28,8 @@ import { ContributorFormComponent } from './citation-forms/contributor-form/cont
     MdCardModule,
     MdTooltipModule,
     MdIconModule,
+    MdInputModule,
+    MdCheckboxModule,
     MdSelectModule,
     NgxDatatableModule,
     AccordionModule

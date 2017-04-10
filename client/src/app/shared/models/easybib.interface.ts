@@ -1,3 +1,5 @@
+// http://developer.easybib.com/citation-formatting-api/citation-specification/
+
 export interface CitationRequest {
   key: string;
   source: 'book' | 'chapter' | 'magazine' | 'newspaper' | 'journal' | 'website';

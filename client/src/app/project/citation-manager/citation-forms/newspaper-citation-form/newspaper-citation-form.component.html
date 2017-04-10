@@ -1,3 +1,102 @@
-<p>
-  newspaper-citation-form works!
-</p>
+<form (ngSubmit)="publishData.emit(model)" #citationForm="ngForm">
+
+  <!-- Title -->
+  <md-input-container>
+    <input mdInput
+           placeholder="Title"
+           name="title"
+           required
+           [(ngModel)]="model.title">
+  </md-input-container>
+
+  <!-- Edition -->
+  <md-input-container>
+    <input mdInput
+           placeholder="Edition"
+           name="edition"
+           required
+           [(ngModel)]="model.edition">
+  </md-input-container>
+
+  <!-- Section -->
+  <md-input-container>
+    <input mdInput
+           placeholder="Section"
+           name="section"
+           required
+           [(ngModel)]="model.section">
+  </md-input-container>
+
+  <!-- City -->
+  <md-input-container>
+    <input mdInput
+           placeholder="City"
+           name="city"
+           required
+           [(ngModel)]="model.city">
+  </md-input-container>
+
+  <!-- Day -->
+  <md-input-container>
+    <input mdInput
+           placeholder="Day Published"
+           type="number"
+           min="1"
+           max="31"
+           required
+           name="day"
+           [(ngModel)]="model.day">
+  </md-input-container>
+
+  <!-- Month -->
+  <md-select placeholder="Month Published"
+             name="month"
+             required
+             [(ngModel)]="model.month">
+    <md-option *ngFor="let month of months" [value]="month">
+      {{ month }}
+    </md-option>
+  </md-select>
+
+  <!-- Year -->
+  <md-input-container>
+    <input mdInput
+           type="number"
+           placeholder="Year Published"
+           required
+           minlength="4"
+           maxlength="4"
+           name="year"
+           [(ngModel)]="model.year">
+  </md-input-container>
+
+  <!-- Start -->
+  <md-input-container>
+    <input mdInput
+           placeholder="Start Page of Article"
+           name="start"
+           [(ngModel)]="model.start">
+  </md-input-container>
+
+  <!-- End -->
+  <md-input-container>
+    <input mdInput
+           placeholder="End Page of Article"
+           name="end"
+           [(ngModel)]="model.end">
+  </md-input-container>
+
+  <!-- Nonconsecutive -->
+  <md-checkbox name="nonconsecutive"
+               [mdTooltip]="'Check this box if the page numbers reset for each new article.'"
+               [(ngModel)]="model.nonconsecutive">
+    Non-Consecutive
+  </md-checkbox>
+
+  <button md-button
+          color="primary"
+          type="submit"
+          [disabled]="!citationForm.form.valid">
+    Save
+  </button>
+</form>

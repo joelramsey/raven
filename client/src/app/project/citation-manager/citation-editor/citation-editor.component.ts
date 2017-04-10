@@ -26,12 +26,12 @@ const SOURCE_TYPES = {
   newspaper: {
     key: 'newspaper',
     name: 'Newspaper',
-    publicationType: ''
+    publicationType: 'pubjournal'
   },
   website: {
     key: 'website',
     name: 'Website',
-    publicationType: ''
+    publicationType: 'pubonline'
   }
 };
 

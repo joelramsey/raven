@@ -1,3 +1,87 @@
-<p>
-  chapter-citation-form works!
-</p>
+<form (ngSubmit)="publishData.emit(model)" #citationForm="ngForm">
+
+  <!-- Title -->
+  <md-input-container>
+    <input mdInput
+           placeholder="Title"
+           name="title"
+           required
+           [(ngModel)]="model.title">
+  </md-input-container>
+
+  <!-- Publisher -->
+  <md-input-container>
+    <input mdInput
+           placeholder="Publisher"
+           name="publisher"
+           required
+           [(ngModel)]="model.publisher">
+  </md-input-container>
+
+  <!-- City -->
+  <md-input-container>
+    <input mdInput
+           placeholder="Publisher City"
+           name="city"
+           required
+           [(ngModel)]="model.city">
+  </md-input-container>
+
+  <!-- State -->
+  <md-input-container>
+    <input mdInput
+           placeholder="Publisher State"
+           name="state"
+           required
+           [(ngModel)]="model.state">
+  </md-input-container>
+
+  <!-- Year -->
+  <md-input-container>
+    <input mdInput
+           placeholder="Year Published"
+           required
+           minlength="4"
+           maxlength="4"
+           name="year"
+           type="number"
+           [(ngModel)]="model.year">
+  </md-input-container>
+
+  <!-- Volume -->
+  <md-input-container>
+    <input mdInput
+           placeholder="Volume"
+           name="vol"
+           [(ngModel)]="model.vol">
+  </md-input-container>
+
+  <!-- Edition -->
+  <md-input-container>
+    <input mdInput
+           placeholder="Edition"
+           name="editiontext"
+           [(ngModel)]="model.editiontext">
+  </md-input-container>
+
+  <!-- Start -->
+  <md-input-container>
+    <input mdInput
+           placeholder="Chapter Start Page"
+           name="start"
+           [(ngModel)]="model.start">
+  </md-input-container>
+
+  <!-- End -->
+  <md-input-container>
+    <input mdInput
+           placeholder="Chapter End Page"
+           name="end"
+           [(ngModel)]="model.end">
+  </md-input-container>
+
+  <button md-button
+          color="primary"
+          [disabled]="!citationForm.form.valid"
+          type="submit">Save</button>
+</form>
