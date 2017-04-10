@@ -41,7 +41,7 @@ export class DendogramComponent implements OnInit, OnChanges {
 
     var margin = {top: 20, right: 120, bottom: 20, left: 120},
   width = 960 - margin.right - margin.left,
-  height = 500 - margin.top - margin.bottom;
+  height = 1000 - margin.top - margin.bottom;
   
     var i = 0;
 
@@ -59,7 +59,16 @@ export class DendogramComponent implements OnInit, OnChanges {
 
 
 
-    var data_rough="name,parent"+"\n"+"Level 2: A,Top Level"+"\n"+"Top Level,null"+"\n"+"Son of A,Level 2: A"+"\n"+"Daughter of A,Level 2: A"+"\n"+"Level 2: B,Top Level"+"\n";
+    var data_rough="name,parent"+"\n"+"root,null"+"\n";
+    var entities_type = this.data.children;
+    for (var i=0;i<entities_type.length;i++)
+    {
+        data_rough += entities_type[i]['name']+",root"+"\n";
+        for(var j=0;j<(entities_type[i]['children']).length;j++)
+        {
+          data_rough += entities_type[i]['children'][j]['name']+","+entities_type[i]['name']+"\n";
+        }
+    }
 
     var data = d3.csv.parse(data_rough);
     var dataMap = data.reduce(function(map:any, node:any) {
@@ -106,7 +115,9 @@ function update(source) {
 
   nodeEnter.append("circle")
     .attr("r", 10)
-    .style("fill", "#FF0000");
+    .style("fill", "#FFF")
+    .style("stroke", "steelblue")
+    .style("stroke-width", 3);
 
   nodeEnter.append("text")
     .attr("x", function(d) { 
@@ -119,13 +130,18 @@ function update(source) {
 
   // Declare the linksâ€¦
   var link = svg.selectAll("path.link")
-    .attr("stroke-width",2)
+    .style("stroke-width",2)
+    .style("stroke","#ccc")
+    .style("fill","none")
     .data(links, function(d:any) { return d.target.id; });
 
   // Enter the links.
   link.enter().insert("path", "g")
     .attr("class", "link")
-    .attr("d", diagonal);
+    .attr("d", diagonal)
+    .style("stroke-width",2)
+    .style("stroke","#ccc")
+    .style("fill","none");
 
     }
 
