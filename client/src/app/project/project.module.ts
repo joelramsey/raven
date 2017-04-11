@@ -56,8 +56,8 @@ import { CitationManagerModule } from './citation-manager/citation-manager.modul
     LinkDiagramAdapterPipe,
     TreeMapAdapterPipe,
     TreeMapComponent,
-    DataTableComponent,
     DendogramComponent,
+    DataTableComponent,
     LinkDiagramComponent
   ],
   exports: [

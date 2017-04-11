@@ -29,6 +29,12 @@
         <md-icon>view_compact</md-icon>
       </a>
     </div>
+    <div class="md-nav-item" [mdTooltip]="'Dendogram'">
+      <a [class.active]="activeView === Views.DENDROGRAM"
+         (click)="goTo(Views.DENDROGRAM)">
+        <md-icon>line_style</md-icon>
+      </a>
+    </div>
     <div class="md-nav-item" [mdTooltip]="'Search Articles'">
       <a [class.active]="activeView === Views.SEARCH"
          (click)="goTo(Views.SEARCH)">
@@ -72,6 +78,16 @@
         <rvn-tree-map
           [data]="visibleSources | toTreeMap : resolutions"
           (entityClick)="updateEntityFromTreeMap($event)"></rvn-tree-map>
+      </div>
+    </div>
+
+    <!-- Dendogram -->
+    <div *ngSwitchCase="Views.DENDROGRAM" class="card-wrapper">
+      <md-card-title>Dendrogram</md-card-title>
+      <div class="dendogram-wrapper">
+        <rvn-dendogram
+          [data]="visibleSources | toTreeMap : resolutions"
+          (entityClick)="updateEntityFromDendrogram($event)"></rvn-dendogram>
       </div>
     </div>
 

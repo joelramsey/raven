@@ -5,8 +5,8 @@ import { LinkDiagramDatum } from './link-diagram-datum.interface';
 
 @Component({
   selector: 'rvn-link-diagram',
-  templateUrl: './link-diagram.component.html',
-  styleUrls: ['./link-diagram.component.scss']
+  templateUrl: 'link-diagram.component.html',
+  styleUrls: ['link-diagram.component.scss']
 })
 export class LinkDiagramComponent implements OnInit {
 

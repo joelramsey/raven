@@ -17,8 +17,8 @@ import { InPlaceFilterService } from './in-place-filter.service';
 
 @Component({
   selector: 'rvn-source-search',
-  templateUrl: './source-search.component.html',
-  styleUrls: ['./source-search.component.scss']
+  templateUrl: 'source-search.component.html',
+  styleUrls: ['source-search.component.scss']
 })
 export class SourceSearchComponent implements OnInit {
 

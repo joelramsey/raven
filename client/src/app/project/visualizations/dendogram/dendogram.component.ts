@@ -5,8 +5,8 @@ import { DendogramDatum } from './dendogram-datum.interface';
 
 @Component({
   selector: 'rvn-dendogram',
-  templateUrl: './dendogram.component.html',
-  styleUrls: ['./dendogram.component.scss']
+  templateUrl: 'dendogram.component.html',
+  styleUrls: ['dendogram.component.scss']
 })
 export class DendogramComponent implements OnInit, OnChanges {
 
@@ -39,11 +39,15 @@ export class DendogramComponent implements OnInit, OnChanges {
 
   private _render() {
 
+  d3.select("#chart").html("");
+
     var margin = {top: 20, right: 120, bottom: 20, left: 120},
   width = 960 - margin.right - margin.left,
   height = 1000 - margin.top - margin.bottom;
-  
+
     var i = 0;
+
+    var self = this;
 
     var tree = d3.layout.cluster()
       .size([height, width]);
@@ -79,7 +83,7 @@ export class DendogramComponent implements OnInit, OnChanges {
     }, {});
 
     var treeData = [];
-data.forEach(function(node) {
+    data.forEach(function(node : any) {
   // add to parent
   var parent = dataMap[node.parent];
   if (parent) {
@@ -94,9 +98,9 @@ data.forEach(function(node) {
 });
 
   var root = treeData[0];
-  update(root);
+  update(self,root);
 
-function update(source) {
+function update(self,source) {
 
   // Compute the new tree layout.
   var nodes = tree.nodes(root).reverse(),
@@ -105,37 +109,43 @@ function update(source) {
   // Normalize for fixed-depth.
   nodes.forEach(function(d:any) { d.y = d.depth * 180; });
 
-  // Declare the nodesâ€¦
+  // Declare the nodes.
   var node = svg.selectAll("g.node")
     .data(nodes, function(d:any) { return d.id || (d.id = ++i); });
 
   // Enter the nodes.
   var nodeEnter = node.enter().append("g")
     .attr("class", "node")
-    .attr("transform", function(d) { 
-      return "translate(" + d.y + "," + d.x + ")"; });
+    .attr("transform", function(d) {
+      return "translate(" + d.y + "," + d.x + ")"; })
+    .on('click', (d:any) => {
+        self.entityClick.emit(d);
+      });
+
 
   nodeEnter.append("circle")
     .attr("r", 10)
+
     .style("fill", function (d:any) {
         if(d.children)
         { return color(d.name) }
         else
         { return color(d.parent.name)};
       })
-    .style("stroke", "steelblue")
     .style("stroke-width", 3);
 
+
   nodeEnter.append("text")
-    .attr("x", function(d) { 
+    .attr("x", function(d) {
       return d.children || d._children ? -13 : 13; })
     .attr("dy", ".35em")
-    .attr("text-anchor", function(d) { 
+    .attr("text-anchor", function(d) {
       return d.children || d._children ? "end" : "start"; })
     .text(function(d) { return d.name; })
     .style("fill-opacity", 1);
 
-  // Declare the linksâ€¦
+
+  // Declare the links.
   var link = svg.selectAll("path.link")
     .style("stroke-width",2)
     .style("stroke","#ccc")
@@ -151,6 +161,8 @@ function update(source) {
     .style("fill","none");
 
     }
+
+
 
     }
 

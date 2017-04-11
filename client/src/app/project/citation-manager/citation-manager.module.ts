@@ -1,10 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-  MdButtonModule, MdCardModule, MdTooltipModule, MdIconModule, MdSelectModule,
-  MdInputModule, MdCheckboxModule
-} from '@angular/material';
+import { MdButtonModule, MdCardModule, MdTooltipModule, MdIconModule, MdSelectModule } from '@angular/material';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { CitationManagerComponent } from './citation-manager.component';
@@ -19,7 +16,6 @@ import { NewspaperCitationFormComponent } from './citation-forms/newspaper-citat
 import { JournalCitationFormComponent } from './citation-forms/journal-citation-form/journal-citation-form.component';
 import { WebsiteCitationFormComponent } from './citation-forms/website-citation-form/website-citation-form.component';
 import { ContributorFormComponent } from './citation-forms/contributor-form/contributor-form.component';
-import { CitationExportService } from './services/index';
 
 @NgModule({
   imports: [
@@ -29,8 +25,6 @@ import { CitationExportService } from './services/index';
     MdCardModule,
     MdTooltipModule,
     MdIconModule,
-    MdInputModule,
-    MdCheckboxModule,
     MdSelectModule,
     NgxDatatableModule,
     AccordionModule
@@ -53,9 +47,6 @@ import { CitationExportService } from './services/index';
   ],
   entryComponents: [
     CitationManagerComponent
-  ],
-  providers: [
-    CitationExportService
   ]
 })
 export class CitationManagerModule {

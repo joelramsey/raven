@@ -5,8 +5,8 @@ import { SearchResultListItem, SearchConstants, SearchFacet } from '../../shared
 
 @Component({
   selector: 'rvn-record-view',
-  templateUrl: './record-view.component.html',
-  styleUrls: ['./record-view.component.scss']
+  templateUrl: 'record-view.component.html',
+  styleUrls: ['record-view.component.scss']
 })
 export class RecordViewComponent implements OnInit {
 
