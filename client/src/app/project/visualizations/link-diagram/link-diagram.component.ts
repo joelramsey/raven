@@ -39,7 +39,7 @@ export class LinkDiagramComponent implements OnInit {
     this._svg.selectAll('*').remove();
 
     var width = 500,
-      height = 500;
+      height = 800;
 
     var color = d3.scale.category20();
 

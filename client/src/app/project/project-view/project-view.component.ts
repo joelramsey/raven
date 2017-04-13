@@ -54,7 +54,8 @@ export class ProjectViewComponent implements OnInit, AfterViewChecked, OnDestroy
     DATA_TABLE: 'data-table',
     ENTITY_RELATIONSHIPS: 'entity-relationships',
     TREE_MAP: 'tree-map',
-    SEARCH: 'search'
+    SEARCH: 'search',
+    DENDROGRAM: 'dendrogram'
   };
 
   @Input() project: Project;
