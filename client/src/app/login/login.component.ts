@@ -9,6 +9,8 @@ import {Observable} from "rxjs/Observable";
 
 declare const gapi: any;
 declare const FB: any;
+declare const IN: any;
+declare const Codebird: any;
 
 @Component({
   selector: 'rvn-login',
@@ -21,6 +23,7 @@ export class LoginComponent implements OnInit {
   token: any;
   gauth: any;
   public results: any;
+  public cb: any;
 
   public errorMessage:string = '';
 
@@ -58,7 +61,10 @@ export class LoginComponent implements OnInit {
     gapi.load('auth2', () => {
         gapi.auth2.init()
       }
-    )
+    );
+
+    this.cb = new Codebird;
+    this.cb.setConsumerKey("your_consumer_key", "your_consumer_secret");
   }
 
   logIn() {
@@ -131,6 +137,55 @@ export class LoginComponent implements OnInit {
       }
 
     });
+
+  }
+
+  linkeidLogin(){
+    let _this = this;
+
+    IN.User.authorize(function(){
+      // called when thre was auth success
+
+      IN.API.Profile("me").fields("first-name", "last-name", "email-address", "picture-url", "id").result(function (res) {
+        _this.sendToBackend('api/auth/linkedin', res);
+      }).error(function (err) {
+        this.errorMessage = err;
+      });
+    }, function () {
+      // will be called anyway
+    });
+  }
+
+  twitterLogin(){
+    let _this = this;
+
+    _this.cb.__call(
+      "oauth_requestToken",
+      {
+        // specify here correct callback url
+        oauth_callback: "http://127.0.0.1:4200/your_callback_url"
+      },
+      function (reply,rate,err) {
+        if (err) {
+          console.log("error response or timeout exceeded" + err.error);
+        }
+        if (reply) {
+          // stores it
+          _this.cb.setToken(reply.oauth_token, reply.oauth_token_secret);
+          localStorage.setItem('twRequestToken', reply.oauth_token);
+          localStorage.setItem('twRequestSecret', reply.oauth_token_secret);
+
+          // gets the authorize screen URL
+          _this.cb.__call(
+            "oauth_authorize",
+            {},
+            function (auth_url) {
+              window.open(auth_url, 'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=650,height=500');
+            }
+          );
+        }
+      }
+    );
 
   }
 
