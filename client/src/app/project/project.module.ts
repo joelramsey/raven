@@ -25,6 +25,7 @@ import { DraggableDirective } from './directives/index';
 import { SourceSearchModule } from './source-search/source-search.module';
 import { RecordViewModule } from './record-view/record-view.module';
 import { CitationManagerModule } from './citation-manager/citation-manager.module';
+import { DendrogramComponent } from './visualizations/dendrogram/dendrogram.component';
 
 @NgModule({
   imports: [
@@ -56,7 +57,8 @@ import { CitationManagerModule } from './citation-manager/citation-manager.modul
     TreeMapAdapterPipe,
     TreeMapComponent,
     DataTableComponent,
-    LinkDiagramComponent
+    LinkDiagramComponent,
+    DendrogramComponent
   ],
   exports: [
     ProjectComponent
