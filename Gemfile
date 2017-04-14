@@ -20,6 +20,8 @@ gem 'sunspot_solr'
 
 gem 'progress_bar'
 
+gem 'httparty'
+
 gem 'yajl-ruby'
 
 # for get info from FB API

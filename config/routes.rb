@@ -15,5 +15,6 @@ Rails.application.routes.draw do
 
 		post '/auth/facebook', to: 'sessions#facebook_login'
 		post '/auth/google', to: 'sessions#google_login'
+    post '/cite', to: 'citations#cite'
   end
 end
