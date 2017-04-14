@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Source } from '../../../shared/models/index';
-import { CitationExportService } from '../services/index';
 
 const SOURCE_TYPES = {
   book: {
@@ -27,12 +26,12 @@ const SOURCE_TYPES = {
   newspaper: {
     key: 'newspaper',
     name: 'Newspaper',
-    publicationType: 'pubjournal'
+    publicationType: ''
   },
   website: {
     key: 'website',
     name: 'Website',
-    publicationType: 'pubonline'
+    publicationType: ''
   }
 };
 
@@ -44,8 +43,8 @@ const CITATION_STYLES = {
 
 @Component({
   selector: 'rvn-citation-editor',
-  templateUrl: './citation-editor.component.html',
-  styleUrls: ['./citation-editor.component.scss']
+  templateUrl: 'citation-editor.component.html',
+  styleUrls: ['citation-editor.component.scss']
 })
 export class CitationEditorComponent implements OnInit {
 
@@ -61,7 +60,7 @@ export class CitationEditorComponent implements OnInit {
   citationStyleList = [];
   contributors = [];
 
-  constructor(private _citationExportService: CitationExportService) { }
+  constructor() { }
 
   ngOnInit() {
     this.sourceTypeList = Object.keys(this.sourceTypes)
@@ -72,6 +71,7 @@ export class CitationEditorComponent implements OnInit {
   }
 
   saveCitation(citationData: any) {
+
     this._citationExportService.getCitation(
       this.contributors,
       citationData,
@@ -87,11 +87,9 @@ export class CitationEditorComponent implements OnInit {
   }
 
   addContributor($event: any) {
-    this.contributors.push($event);
-    this.showContributorForm = false;
-  }
+    console.log($event);
 
-  get canSave() {
-    return this.contributors.length > 0;
+    // TODO: Add $event to this.contributors
+    this.showContributorForm = false;
   }
 }

@@ -4,8 +4,8 @@ import { Source } from '../../../shared/models/index';
 
 @Component({
   selector: 'rvn-citation-list',
-  templateUrl: './citation-list.component.html',
-  styleUrls: ['./citation-list.component.scss'],
+  templateUrl: 'citation-list.component.html',
+  styleUrls: ['citation-list.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class CitationListComponent implements OnInit {

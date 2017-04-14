@@ -1,33 +1,24 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { NonPeriodicalPublicationType } from '../../../../shared/models/index';
-import { AbstractCitationFormComponent } from '../abstract-citation-form/abstract-citation-form.component';
+import { BookSource } from '../../../../shared/models/index';
 
 @Component({
   selector: 'rvn-book-citation-form',
-  templateUrl: './book-citation-form.component.html',
-  styleUrls: ['./book-citation-form.component.scss']
+  templateUrl: 'book-citation-form.component.html',
+  styleUrls: ['book-citation-form.component.scss']
 })
-export class BookCitationFormComponent extends AbstractCitationFormComponent implements OnInit {
+export class BookCitationFormComponent implements OnInit {
 
-  @Input() model: NonPeriodicalPublicationType;
-  @Input() saveDisabled: boolean;
+  @Input() model: BookSource;
   @Output() publishData: EventEmitter<any> = new EventEmitter<any>();
 
-  public attributes: Array<string> = [
-    'title',
-    'publisher',
-    'city',
-    'state',
-    'vol',
-    'editiontext',
-    'year'
-  ];
-
-  constructor() {
-    super();
-  }
+  constructor() { }
 
   ngOnInit() {
-    this.setAttributes();
+    if (!this.model) {
+      // Initialize blank model if none is provided
+      //
+      // this.model = {};
+    }
   }
+
 }

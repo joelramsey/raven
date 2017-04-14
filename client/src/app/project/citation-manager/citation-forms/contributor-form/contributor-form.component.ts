@@ -1,5 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Contributor } from '../../../../shared/models/index';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 const CONTRIBUTOR_TYPES = {
   author: 'Author',
@@ -10,41 +9,24 @@ const CONTRIBUTOR_TYPES = {
 
 @Component({
   selector: 'rvn-contributor-form',
-  templateUrl: './contributor-form.component.html',
-  styleUrls: ['./contributor-form.component.scss']
+  templateUrl: 'contributor-form.component.html',
+  styleUrls: ['contributor-form.component.scss']
 })
 export class ContributorFormComponent implements OnInit {
 
-  @Input() contributor: Contributor;
   @Output() publishContributor: EventEmitter<any> = new EventEmitter<any>();
 
   contributorTypes = CONTRIBUTOR_TYPES;
   contributorTypeList = [];
 
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit() {
-
-    if (!this.contributor) {
-      this.contributor = {
-        'function': 'author',
-        'first': '',
-        'middle': '',
-        'last': ''
-      };
-    }
-
     this.contributorTypeList = Object.keys(this.contributorTypes)
-      .map(contributorTypeKey => {
-        return {
-          value: contributorTypeKey,
-          name: this.contributorTypes[contributorTypeKey]
-        };
-      });
+      .map(contributorTypeKey => this.contributorTypes[contributorTypeKey]);
   }
 
   addContributor() {
-    this.publishContributor.emit(this.contributor);
+    this.publishContributor.emit();
   }
 }

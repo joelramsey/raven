@@ -14,8 +14,8 @@ import { WindowRefService } from '../shared/services/window-ref.service';
 
 @Component({
   selector: 'rvn-project',
-  templateUrl: './project.component.html',
-  styleUrls: ['./project.component.scss']
+  templateUrl: 'project.component.html',
+  styleUrls: ['project.component.scss']
 })
 export class ProjectComponent implements OnInit {
 

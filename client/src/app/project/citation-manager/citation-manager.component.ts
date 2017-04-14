@@ -5,8 +5,8 @@ import { Project, Source } from '../../shared/models/index';
 
 @Component({
   selector: 'rvn-citation-manager',
-  templateUrl: './citation-manager.component.html',
-  styleUrls: ['./citation-manager.component.scss']
+  templateUrl: 'citation-manager.component.html',
+  styleUrls: ['citation-manager.component.scss']
 })
 export class CitationManagerComponent implements OnInit {
 

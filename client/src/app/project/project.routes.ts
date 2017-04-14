@@ -5,6 +5,7 @@ import { ProjectSourceComponent } from './project-source/project-source.componen
 import { DataTableComponent } from './visualizations/data-table/data-table.component';
 import { LinkDiagramComponent } from './visualizations/link-diagram/link-diagram.component';
 import { TreeMapComponent } from './visualizations/tree-map/tree-map.component';
+import { DendogramComponent } from './visualizations/dendogram/dendogram.component';
 import { SourceSearchComponent } from './source-search/source-search.component';
 
 

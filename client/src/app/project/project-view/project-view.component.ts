@@ -15,8 +15,8 @@ import { RecordViewComponent } from '../record-view/record-view.component';
 
 @Component({
   selector: 'rvn-project-view',
-  templateUrl: './project-view.component.html',
-  styleUrls: ['./project-view.component.scss'],
+  templateUrl: 'project-view.component.html',
+  styleUrls: ['project-view.component.scss'],
   animations: [
     trigger('entityCardInOut', [
       state('*', style({width: '*', height: '*', opacity: 1})),
@@ -177,6 +177,15 @@ export class ProjectViewComponent implements OnInit, AfterViewChecked, OnDestroy
   showEntityCardFromTreeMap($event: any) {
     this.cardX = $event.x + 'px';
     this.cardY = $event.y + 'px';
+  }
+
+  shoeEntityCardFromDendrogram($event: any) {
+    this.cardX = $event.x + 'px';
+    this.cardY = $event.y + 'px';
+  }
+
+  updateEntityFromDendrogram($event: any) {
+    this.activeEntity = $event;
   }
 
   updateEntityFromTreeMap($event: any) {

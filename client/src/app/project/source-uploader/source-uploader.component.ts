@@ -28,8 +28,8 @@ import { RecordViewComponent } from '../record-view/record-view.component';
 
 @Component({
   selector: 'rvn-source-uploader',
-  templateUrl: './source-uploader.component.html',
-  styleUrls: ['./source-uploader.component.scss']
+  templateUrl: 'source-uploader.component.html',
+  styleUrls: ['source-uploader.component.scss']
 })
 export class SourceUploaderComponent implements OnInit, SourceCreator {
 

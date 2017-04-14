@@ -5,8 +5,8 @@ import { WindowRefService } from '../../shared/services/index';
 
 @Component({
   selector: 'rvn-available-facet',
-  templateUrl: './available-facet.component.html',
-  styleUrls: ['./available-facet.component.scss']
+  templateUrl: 'available-facet.component.html',
+  styleUrls: ['available-facet.component.scss']
 })
 export class AvailableFacetComponent implements OnInit {
 

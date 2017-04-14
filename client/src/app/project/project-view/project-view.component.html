@@ -29,6 +29,7 @@
         <md-icon>view_compact</md-icon>
       </a>
     </div>
+
     <div class="md-nav-item" [mdTooltip]="'Dendrogram'">
       <a [class.active]="activeView === Views.DENDROGRAM"
          (click)="goTo(Views.DENDROGRAM)">
@@ -80,6 +81,7 @@
           (entityClick)="updateEntityFromTreeMap($event)"></rvn-tree-map>
       </div>
     </div>
+
 
     <!-- Dendrogram -->
     <div *ngSwitchCase="Views.DENDROGRAM" class="card-wrapper">

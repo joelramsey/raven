@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/6bIDJIOKODEP/twitter_oauth.git
+  revision: 7205ab9beea77d13c811ad593c1f4871341d33b3
+  specs:
+    twitter_oauth (0.4.94)
+      json (>= 1.8.0)
+      mime-types (>= 1.16)
+      oauth (>= 0.4.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -115,6 +124,7 @@ GEM
     nio4r (2.0.0)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
+    oauth (0.5.1)
     omniauth (1.6.1)
       hashie (>= 3.4.6, < 3.6.0)
       rack (>= 1.6.2, < 3)
@@ -244,6 +254,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   sunspot_rails
   sunspot_solr
+  twitter_oauth!
   tzinfo-data
   yajl-ruby
 

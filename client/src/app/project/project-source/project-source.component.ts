@@ -5,8 +5,8 @@ import { Source, Project, SourceCreator } from '../../shared/models/index';
 
 @Component({
   selector: 'rvn-project-source',
-  templateUrl: './project-source.component.html',
-  styleUrls: ['./project-source.component.scss']
+  templateUrl: 'project-source.component.html',
+  styleUrls: ['project-source.component.scss']
 })
 export class ProjectSourceComponent implements OnInit, SourceCreator {
 
@@ -14,11 +14,11 @@ export class ProjectSourceComponent implements OnInit, SourceCreator {
   @Output() public created:EventEmitter<Source> = new EventEmitter<Source>();
   @Output() public done:EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() public cancelled:EventEmitter<any> = new EventEmitter<any>();
-  
+
   projectId: string;
-  
+
   constructor(private _activatedRoute: ActivatedRoute) {
-    
+
   }
 
   ngOnInit():void {

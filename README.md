@@ -21,14 +21,24 @@ What we're working with:
 [AlchemyAPI Ruby SDK](https://github.com/AlchemyAPI/alchemyapi_ruby) and associated [API key](http://www.alchemyapi.com/api/register.html)
 
 Note for set up:
-    -from root, run bundle install
-    -rails db:create
-    -rails db:schema:load
-    -clone the ruby SDK into the lib folder of the application
-    -the API key should be visible to the application from within the new alchemyapi_ruby directory root
-    -the alchemy_parser.rb file in the services directory of the application handles the request and the parsing of the objects to the database. Serialization inbound and outbound are handled through the models and associated serializers
-    - set your YOUR_APP_ID and YOUR_APP_SECRET in 'config\initializers\koala.rb' and YOUR_APP_ID in '\client\src\app\login\login.component.ts' files to get Facebook auth works
-    - set your YOUR_APP_ID in 'client\src\index.html' file to get Google auth works
+ - from root, run bundle install
+ - rails db:create
+ - rails db:schema:load
+ - clone the ruby SDK into the lib folder of the application
+ - the API key should be visible to the application from within the new alchemyapi_ruby directory root
+ - the alchemy_parser.rb file in the services directory of the application handles the request
+    and the parsing of the objects to the database. Serialization inbound and outbound are handled
+    through the models and associated serializers
+ - set your YOUR_APP_ID and YOUR_APP_SECRET in 'config\initializers\koala.rb' and YOUR_APP_ID in
+ 'client\src\app\login\login.component.ts' files to get Facebook auth works
+ - set your YOUR_APP_ID in 'client\src\index.html' file to get Google auth works
+ - set you api_key of your app in 'client\src\index.html' file for Linkedin script to get auth works
+ - set you consumer_key and consumer_secret in 'controllers\sessions_controller.rb' and
+ 'client\src\app\login\login.component.ts' in ngOnInit function for twitter auth
+ - set right callback url in 'client\src\app\login\login.routes.ts' and in 'client\src\app\login\login.component.ts'
+ in twitterLogin function. Callback url should lead to it on TwitterCallback component.
+ - set correct backend url in 'client\src\app\twitter-callback\twitter-callback.component.ts'
+
 
 Starting the backend:
 	-from root, rails s

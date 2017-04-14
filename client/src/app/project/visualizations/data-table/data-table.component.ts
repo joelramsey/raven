@@ -9,8 +9,8 @@ import { DataTableRow } from './data-table.interface';
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'rvn-data-table',
-  templateUrl: './data-table.component.html',
-  styleUrls: ['./data-table.component.scss'],
+  templateUrl: 'data-table.component.html',
+  styleUrls: ['data-table.component.scss'],
   animations: [
     trigger('iconExpandTransition', [
       state('collapsed', style({
@@ -28,14 +28,14 @@ export class DataTableComponent implements OnInit {
 
   @ViewChild('rvnDataTable') table: DatatableComponent;
   @Input() rows: Array<DataTableRow> = [];
-  
+
   cssClasses = {
     sortAscending: 'material-icons icon-down',
     sortDescending: 'material-icons icon-up',
     pagerLeftArrow: 'material-icons icon-left',
     pagerRightArrow: 'material-icons icon-right',
     pagerPrevious: 'material-icons icon-prev',
-    pagerNext: 'material-icons icon-skip'    
+    pagerNext: 'material-icons icon-skip'
   };
 
   constructor() {
