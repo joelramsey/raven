@@ -71,8 +71,19 @@ export class CitationEditorComponent implements OnInit {
   }
 
   saveCitation(citationData: any) {
-    console.log(this.sourceType);
-    console.log(citationData);
+
+    this._citationExportService.getCitation(
+      this.contributors,
+      citationData,
+      this.sourceType,
+      this.citationStyle
+    ).subscribe((formattedCitation: string) => {
+
+      console.log(formattedCitation);
+
+      // TODO: Update record with citation and JSON data
+      //
+    });
   }
 
   addContributor($event: any) {
