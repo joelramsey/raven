@@ -1,3 +1,5 @@
+require 'httparty'
+
 class CitationsController < ApplicationController
   before_action :set_citation, only: [:show, :update, :destroy]
 
@@ -13,6 +15,13 @@ class CitationsController < ApplicationController
   # GET /citations/1.json
   def show
     render json: @citation
+  end
+
+  # GET /cite
+  def cite
+    response = HTTParty.post("https://api.citation-api.com/2.1/rest/cite?#{params[:q]}")
+    puts response
+    render json: response.body
   end
 
   # POST /citations
@@ -51,6 +60,6 @@ class CitationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def citation_params
-      params.require(:citation).permit(:text, :record_id)
+      params.require(:citation).permit(:text, :record_id, :q)
     end
 end
