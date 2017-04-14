@@ -28,7 +28,7 @@ export class TwitterCallbackComponent implements OnInit {
     let url = '/api/auth/twitter';
 
     // set here correct url in production for sending info to back end
-    return this.http.post('http://localhost:3000' + url, body, { headers: headers })
+    return this.http.post('https://www.ravenanalytics.io/' + url, body, { headers: headers })
       .map(res => res.json())
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
       .subscribe(
@@ -51,4 +51,4 @@ export class TwitterCallbackComponent implements OnInit {
 
 }
 
-}
+

@@ -13,11 +13,6 @@ export const LoginRoutes:Routes = [
   },
   { path: 'register',
     component: RegisterComponent
-  },
-  {
-    // your twitter callback url here:
-    path: 'url_of_your_callback',
-    component: TwitterCallbackComponent
   }
 
 ];

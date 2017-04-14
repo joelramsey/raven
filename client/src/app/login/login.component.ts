@@ -163,7 +163,7 @@ export class LoginComponent implements OnInit {
       "oauth_requestToken",
       {
         // specify here correct callback url
-        oauth_callback: "http://127.0.0.1:4200/your_callback_url"
+        oauth_callback: "https://www.ravenanalytics.io"
       },
       function (reply,rate,err) {
         if (err) {
