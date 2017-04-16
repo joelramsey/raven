@@ -16,7 +16,7 @@ export const LoginRoutes:Routes = [
   },
   {
   // your twitter callback url here:
-  path: 'url_of_your_callback',
+  path: 'twitter',
   component: TwitterCallbackComponent
 }
 
