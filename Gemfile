@@ -27,6 +27,8 @@ gem 'yajl-ruby'
 # for get info from FB API
 gem 'koala'
 
+gem 'twitter_oauth'
+
 # both for document upload support
 gem 'carrierwave'
 #gem "paperclip", "~> 5.0.0.beta1"
