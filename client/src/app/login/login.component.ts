@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
     );
 
     this.cb = new Codebird;
-    this.cb.setConsumerKey("u9GsX11yptlptxvUy2jWaPhPd", "	PZNiMpBC5EcYawnpaPwlwUdrlKWELdcJgh7Nk3WIvpw7HbPPrV");
+    this.cb.setConsumerKey("iqBIJ8ZVYPwPS3fdPqzd9bQxa", "zhGwtjtww9MXSDxF5CwL03dKQJz6Y3X4EKrVGOvYlzdquuIuKf");
     this.cb.setUseProxy(false);
   }
 

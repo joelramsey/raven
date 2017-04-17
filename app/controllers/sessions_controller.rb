@@ -110,8 +110,8 @@ class SessionsController < ApplicationController
   end
 
   def twitter_login
-    consumer_key = 'u9GsX11yptlptxvUy2jWaPhPd'
-    consumer_secret = '	PZNiMpBC5EcYawnpaPwlwUdrlKWELdcJgh7Nk3WIvpw7HbPPrV'
+    consumer_key = 'iqBIJ8ZVYPwPS3fdPqzd9bQxa'
+    consumer_secret = 'zhGwtjtww9MXSDxF5CwL03dKQJz6Y3X4EKrVGOvYlzdquuIuKf'
 
     uri = URI.parse(params['currentUrl'])
     query_hash = CGI.parse(uri.query)
