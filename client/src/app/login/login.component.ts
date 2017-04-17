@@ -164,7 +164,7 @@ export class LoginComponent implements OnInit {
 
     // set here correct url in production for sending info to back end
 
-    return this.http.get('http://ravenanalytics.io/api/twitter-request-token', headers)
+    return this.http.get('https://ravenanalytics.io/api/twitter-request-token', headers)
       .map(res => res.json())
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
       .subscribe(
