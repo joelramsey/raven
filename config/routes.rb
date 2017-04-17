@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 	    end
 			resources :items
 			resources :records
-
+		get  '/twitter-request-token', to: 'sessions#twitter_token'
 		post '/auth/facebook', to: 'sessions#facebook_login'
 		post '/auth/google', to: 'sessions#google_login'
 		post '/auth/linkedin', to: 'sessions#linkedin_login'

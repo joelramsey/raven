@@ -157,39 +157,30 @@ export class LoginComponent implements OnInit {
   }
 
   twitterLogin(){
+
     let _this = this;
 
-    _this.cb.__call(
-      "oauth_requestToken",
-      {
-        // specify here correct callback url
-        oauth_callback: "https://www.ravenanalytics.io/twitter"
-      },
-      function (reply,rate,err) {
-        if (err) {
-          console.log("error response or timeout exceeded" + err.error);
-        }
-        if (reply) {
-          // stores it
-          _this.cb.setToken(reply.oauth_token, reply.oauth_token_secret);
-          localStorage.setItem('twRequestToken', reply.oauth_token);
-          localStorage.setItem('twRequestSecret', reply.oauth_token_secret);
+    let headers = new Headers({ 'Content-Type': 'application/json' });
 
-          // gets the authorize screen URL
-          _this.cb.__call(
-            "oauth_authorize",
-            {},
-            function (auth_url) {
-              window.open(auth_url, 'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=650,height=500');
-            }
-          );
-        }
-      }
-    );
+    // set here correct url in production for sending info to back end
 
+    return this.http.get('http://ravenanalytics.io/api/twitter-request-token', headers)
+      .map(res => res.json())
+      .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
+      .subscribe(
+        data => _this.openAuthWindow(data),
+        error => _this.errorMessage = error
+      );
   }
 
-  googleLogin(){
+  openAuthWindow(reply){
+  localStorage.setItem('twRequestToken', reply['data']['token']);
+  localStorage.setItem('twRequestSecret', reply['data']['secret']);
+  window.open(reply['data']['url'], 'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=650,height=500');
+}
+
+
+googleLogin(){
     if (typeof(this.gauth) == "undefined"){
       this.gauth = gapi.auth2.getAuthInstance();
     }

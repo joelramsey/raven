@@ -170,4 +170,25 @@ class SessionsController < ApplicationController
     end
   end
 
+  def twitter_token
+    consumer_key = 'iqBIJ8ZVYPwPS3fdPqzd9bQxa'
+    consumer_secret = 'zhGwtjtww9MXSDxF5CwL03dKQJz6Y3X4EKrVGOvYlzdquuIuKf'
+
+    client = TwitterOAuth::Client.new(
+        :consumer_key => consumer_key,
+        :consumer_secret => consumer_secret,
+    )
+
+    request_token = client.request_token(:oauth_callback => 'you_callback')
+
+    # request_token.authorize_url
+    render json:  {
+        data: {
+            url: request_token.authorize_url,
+            token: request_token.token,
+            secret: request_token.secret,
+        }
+    }
+  end
+
 end
