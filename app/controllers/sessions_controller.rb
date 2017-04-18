@@ -179,7 +179,7 @@ class SessionsController < ApplicationController
         :consumer_secret => consumer_secret,
     )
 
-    request_token = client.request_token(:oauth_callback => 'https://www.ravenanalytics.io/auth/twitter')
+    request_token = client.request_token(:oauth_callback => 'https://www.ravenanalytics.io/twitter')
 
     # request_token.authorize_url
     render json:  {
