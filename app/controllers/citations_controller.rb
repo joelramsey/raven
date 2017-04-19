@@ -28,7 +28,7 @@ class CitationsController < ApplicationController
   # POST /citations.json
   def create
     @record = record.find(params[:record_id])
-    @citation = @record.citations.new(citation_params)
+    @citation = @record.create_citation(citation_params)
 
     if @citation.save
       render :show, status: :created, location: @citation
