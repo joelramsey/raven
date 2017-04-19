@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170316005210) do
+ActiveRecord::Schema.define(version: 20170418231133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20170316005210) do
     t.integer  "record_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "json"
     t.index ["record_id"], name: "index_citations_on_record_id", using: :btree
   end
 
@@ -122,6 +123,7 @@ ActiveRecord::Schema.define(version: 20170316005210) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   end
 
+  add_foreign_key "citations", "records"
   add_foreign_key "documents", "items"
   add_foreign_key "items", "projects"
   add_foreign_key "items", "users"
@@ -129,5 +131,4 @@ ActiveRecord::Schema.define(version: 20170316005210) do
   add_foreign_key "projects", "users"
   add_foreign_key "records", "projects"
   add_foreign_key "resolutions", "users"
-  add_foreign_key "citations", "records"
 end

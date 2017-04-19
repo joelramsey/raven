@@ -1,3 +1,3 @@
 class CitationSerializer < ActiveModel::Serializer
-  attributes :id, :text
+  attributes :id, :text, :json
 end

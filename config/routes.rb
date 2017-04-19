@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   	mount_devise_token_auth_for 'User', at: 'auth'
 		  resources :citations
 		  resources :articles
+		  resources :citations
   	  resources :users
   	  resources :resolutions
 	    resources :projects do

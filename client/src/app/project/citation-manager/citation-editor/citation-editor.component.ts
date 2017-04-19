@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { Source } from '../../../shared/models/index';
-import { CitationExportService } from '../services/index';
+import { ObservableResultHandlerService } from '../../../shared/services/index';
+import { Source, CitationRequest } from '../../../shared/models/index';
+import { CitationDaoService } from '../services/index';
 
 const SOURCE_TYPES = {
   book: {
@@ -37,9 +38,18 @@ const SOURCE_TYPES = {
 };
 
 const CITATION_STYLES = {
-  mla7: 'MLA',
-  apa: 'APA',
-  chicagob: 'Chicago',
+  mla7: {
+    key: 'mla7',
+    name: 'MLA'
+  },
+  apa: {
+    key: 'apa',
+    name: 'APA'
+  },
+  chicagob: {
+    key: 'chicagob',
+    name: 'Chicago'
+  },
 };
 
 @Component({
@@ -51,7 +61,7 @@ export class CitationEditorComponent implements OnInit {
 
   @Input() source: Source;
   @Input() sourceType: any = SOURCE_TYPES.book;
-  @Input() citationStyle: string = CITATION_STYLES.mla7;
+  @Input() citationStyle: any = CITATION_STYLES.mla7;
   @Output() backClicked: EventEmitter<any> = new EventEmitter<any>();
 
   showContributorForm: boolean = false;
@@ -61,7 +71,9 @@ export class CitationEditorComponent implements OnInit {
   citationStyleList = [];
   contributors = [];
 
-  constructor(private _citationExportService: CitationExportService) { }
+  constructor(private _citationDao: CitationDaoService,
+              private _observableResultHandlerService: ObservableResultHandlerService) {
+  }
 
   ngOnInit() {
     this.sourceTypeList = Object.keys(this.sourceTypes)
@@ -72,18 +84,31 @@ export class CitationEditorComponent implements OnInit {
   }
 
   saveCitation(citationData: any) {
-    this._citationExportService.getCitation(
-      this.contributors,
-      citationData,
-      this.sourceType,
-      this.citationStyle
-    ).subscribe((formattedCitation: string) => {
 
-      console.log(formattedCitation);
+    let data: CitationRequest = {
+      key: '0766166f184cebd0adb65ea9dd89b4a8',
+      source: this.sourceType.key,
+      style: this.citationStyle.key,
+      pubtype: {
+        main: this.sourceType.publicationType,
+        contributors: this.contributors
+      }
+    };
 
-      // TODO: Update record with citation and JSON data
-      //
-    });
+    data.pubtype[this.sourceType.publicationType] = citationData;
+
+    // TODO Add forms for dis
+    data[this.sourceType.key] = {};
+
+    this._citationDao.getCitation(data)
+      .switchMap((formattedCitation: string) => {
+        return this._citationDao.createCitation(this.source, formattedCitation, data);
+      })
+      .subscribe(() => {
+        this._observableResultHandlerService.success('Citation saved!');
+      }, (error: any) => {
+        this._observableResultHandlerService.failure(error);
+      });
   }
 
   addContributor($event: any) {

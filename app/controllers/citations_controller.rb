@@ -1,4 +1,5 @@
 require 'httparty'
+require 'json'
 
 class CitationsController < ApplicationController
   before_action :set_citation, only: [:show, :update, :destroy]
@@ -17,9 +18,10 @@ class CitationsController < ApplicationController
     render json: @citation
   end
 
-  # GET /cite
+  # POST /cite
   def cite
-    response = HTTParty.post("https://api.citation-api.com/2.1/rest/cite?#{params[:q]}")
+    response = HTTParty.post('https://api.citation-api.com/2.1/rest/cite',
+                             body: params[:citation].to_json)
     puts response
     render json: response.body
   end
@@ -27,11 +29,12 @@ class CitationsController < ApplicationController
   # POST /citations
   # POST /citations.json
   def create
-    @record = record.find(params[:record_id])
+    @record = Record.find(params[:record_id])
     @citation = @record.create_citation(citation_params)
 
     if @citation.save
       render :show, status: :created, location: @citation
+    else
       render json: @citation.errors, status: :unprocessable_entity
     end
   end
@@ -60,6 +63,6 @@ class CitationsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def citation_params
-    params.require(:citation).permit(:text, :record_id, :q)
+    params.require(:citation).permit(:text, :json, :record_id, :q)
   end
 end
