@@ -1,6 +1,97 @@
 @import '../../variables';
 
 
+body {
+    margin: 0;
+    height: 100%;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    line-height: 1.7em;
+    color: #475053;
+
+}
+
+
+//List fade in out
+
+.fade {
+    width: 90%;
+    display: block;
+    margin: 25% auto;
+    color: white;
+    text-align: center;
+    font-size: 2.5em;
+    line-height: 1em;
+}
+
+.elementToFade {
+    margin: 0 50px;
+    -webkit-animation: fadeinout 6s linear forwards;
+    animation: fadeinout 6s linear forwards;
+    opacity: 0;
+    height: 0;
+}
+
+@-webkit-keyframes fadeinout {
+  50% { opacity: 1; display: block; visibility: visible; }
+   100% { display: none; visibility: hidden; }
+}
+
+@keyframes fadeinout {
+  50% { opacity: 1; display: block; visibility: visible;  }
+  100% { display: none; visibility: hidden; }
+}
+
+
+//Video styling
+
+
+video#bgvid { 
+    position: fixed;
+    margin-top: 200px;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    background: url(../../assets/images/RavenMovie.jpg);
+    background-size: cover;
+    transition: 1s opacity;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+
+//login Button
+
+
+.tryNow {
+    height: 25px;
+    color: $white;
+    background-color: $link-color;
+    border: none;
+    height: 60px;
+    font-size: 20px;
+    font-family: $application-font;
+    padding: 10px;
+    border-radius: 40px;
+    display: block;
+    margin: 20px auto;
+    
+    & a{
+        color: $white;
+    }
+}
+
+
+
+
+
+//login styles
 div {
   &.login-wrapper {
     min-height: 300px;
