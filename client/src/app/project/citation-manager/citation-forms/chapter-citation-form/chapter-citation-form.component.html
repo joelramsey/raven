@@ -1,12 +1,31 @@
-<form (ngSubmit)="publishData.emit(model)" #citationForm="ngForm">
+<form (ngSubmit)="handleSubmit()" #citationForm="ngForm">
 
   <!-- Title -->
   <md-input-container>
     <input mdInput
-           placeholder="Title"
-           name="title"
+           placeholder="Book Title"
+           name="book-title"
            required
            [(ngModel)]="model.title">
+  </md-input-container>
+
+  <!-- Source data type -->
+  <md-select placeholder="Type"
+             name="sourceDataType"
+             [(ngModel)]="sourceData.type">
+    <md-option *ngFor="let sourceDataType of sourceDataTypeList"
+               [value]="sourceDataType.value">
+      {{sourceDataType.name}}
+    </md-option>
+  </md-select>
+
+  <!-- Chapter/Essay title -->
+  <md-input-container>
+    <input mdInput
+           placeholder="{{capitalize(sourceData.type)}} Title"
+           name="source-data-title"
+           required
+           [(ngModel)]="sourceData.title">
   </md-input-container>
 
   <!-- Publisher -->
@@ -67,7 +86,7 @@
   <!-- Start -->
   <md-input-container>
     <input mdInput
-           placeholder="Chapter Start Page"
+           placeholder="{{capitalize(sourceData.type)}} Start Page"
            name="start"
            [(ngModel)]="model.start">
   </md-input-container>
@@ -75,7 +94,7 @@
   <!-- End -->
   <md-input-container>
     <input mdInput
-           placeholder="Chapter End Page"
+           placeholder="{{capitalize(sourceData.type)}} End Page"
            name="end"
            [(ngModel)]="model.end">
   </md-input-container>

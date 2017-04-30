@@ -3,13 +3,14 @@ Rails.application.routes.draw do
 
   scope '/api' do
   	mount_devise_token_auth_for 'User', at: 'auth'
-		  resources :citations
 		  resources :articles
 		  resources :citations
   	  resources :users
   	  resources :resolutions
 	    resources :projects do
-				resources :records
+				resources :records do
+          resources :citations
+				end
 				resources :notes
 	    end
 			resources :items

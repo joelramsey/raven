@@ -6,18 +6,21 @@ export interface CitationRequest {
   style: 'mla7' | 'apa' | 'chicagob';
   pubtype: PublicationType;
 
+  // NOTE: EasyBib's API documentation incorrectly dictates that this attribute
+  // is to be added under the PublicationType object. In reality, this attribute
+  // must be specified here, else a blank string is returned.
+  //
+  contributors: Array<Contributor>;
+
   book?: BookSource;
   chapter?: ChapterSource;
   magazine?: MagazineSource;
   newspaper?: NewspaperSource;
   journal?: JournalSource;
   website?: WebsiteSource;
-}
 
-export interface PublicationType {
-  main: 'pubnonperiodical' | 'pubmagazine' | 'pubnewspaper' | 'pubjournal' | 'pubonline';
-  contributors: Array<Contributor>;
-
+  // Again, EasyBib's API spec is out-of-date on the matter, incorrectly
+  // specifying that
   pubnonperiodical?: NonPeriodicalPublicationType;
   pubmagazine?: MagazinePublicationType;
   pubnewspaper?: NewspaperPublicationType;
@@ -25,11 +28,20 @@ export interface PublicationType {
   pubonline?: OnlinePublicationType;
 }
 
+export interface PublicationType {
+  main: 'pubnonperiodical' | 'pubmagazine' | 'pubnewspaper' | 'pubjournal' | 'pubonline';
+}
+
 export interface Contributor {
   'function': 'author' | 'editor' | 'compiler' | 'translator' | 'section_author' | 'section_editor';
   first: string;
   middle: string;
   last: string;
+}
+
+export interface SourceData {
+  title?: string;
+  type?:string;
 }
 
 /**

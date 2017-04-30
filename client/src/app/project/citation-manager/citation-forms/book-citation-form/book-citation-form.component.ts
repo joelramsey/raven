@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { NonPeriodicalPublicationType } from '../../../../shared/models/index';
+import { NonPeriodicalPublicationType, SourceData } from '../../../../shared/models/index';
 import { AbstractCitationFormComponent } from '../abstract-citation-form/abstract-citation-form.component';
 
 @Component({
@@ -10,6 +10,7 @@ import { AbstractCitationFormComponent } from '../abstract-citation-form/abstrac
 export class BookCitationFormComponent extends AbstractCitationFormComponent implements OnInit {
 
   @Input() model: NonPeriodicalPublicationType;
+  @Input() sourceData: SourceData;
   @Input() saveDisabled: boolean;
   @Output() publishData: EventEmitter<any> = new EventEmitter<any>();
 

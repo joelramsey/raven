@@ -64,7 +64,7 @@ export class CitationEditorComponent implements OnInit {
   @Input() citationStyle: any = CITATION_STYLES.mla7;
   @Output() backClicked: EventEmitter<any> = new EventEmitter<any>();
 
-  showContributorForm: boolean = false;
+  showContributorForm: boolean = true;
   sourceTypes = SOURCE_TYPES;
   citationStyles = CITATION_STYLES;
   sourceTypeList = [];
@@ -91,14 +91,12 @@ export class CitationEditorComponent implements OnInit {
       style: this.citationStyle.key,
       pubtype: {
         main: this.sourceType.publicationType,
-        contributors: this.contributors
-      }
+      },
+      contributors: this.contributors
     };
 
-    data.pubtype[this.sourceType.publicationType] = citationData;
-
-    // TODO Add forms for dis
-    data[this.sourceType.key] = {};
+    data[this.sourceType.publicationType] = citationData.model;
+    data[this.sourceType.key] = citationData.sourceData;
 
     this._citationDao.getCitation(data)
       .switchMap((formattedCitation: string) => {

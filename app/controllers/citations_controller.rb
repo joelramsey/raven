@@ -20,6 +20,7 @@ class CitationsController < ApplicationController
 
   # POST /cite
   def cite
+    puts(params[:citation].to_json)
     response = HTTParty.post('https://api.citation-api.com/2.1/rest/cite',
                              body: params[:citation].to_json)
     puts response

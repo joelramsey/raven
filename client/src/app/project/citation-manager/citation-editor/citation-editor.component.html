@@ -10,13 +10,14 @@
 
   <md-card-content class="flex-between">
 
-    <div>
-      <div>Type: {{source.type}}</div>
+    <!--TODO: Add metadata -->
+    <!--<div>-->
+      <!--<div>Type: {{source.type}}</div>-->
 
-      <rvn-accordion [title]="'Content'" [maxContentHeight]="'300px'">
-        {{source.content}}
-      </rvn-accordion>
-    </div>
+      <!--<rvn-accordion [title]="'Content'" [maxContentHeight]="'300px'">-->
+        <!--{{source.content}}-->
+      <!--</rvn-accordion>-->
+    <!--</div>-->
 
     <div>
       <md-select placeholder="Citation Style" [(ngModel)]="citationStyle">
@@ -45,13 +46,14 @@
         <button *ngIf="!showContributorForm"
                 md-button
                 color="primary"
-                (click)="showContributorForm = true">Add
+                (click)="showContributorForm = true">Add Another Contributor
         </button>
       </div>
 
       <rvn-contributor-form *ngIf="showContributorForm"
                             (publishContributor)="addContributor($event)"></rvn-contributor-form>
 
+      <h4>Publication Information:</h4>
       <div [ngSwitch]="sourceType">
         <rvn-book-citation-form *ngSwitchCase="sourceTypes.book"
                                 [saveDisabled]="!canSave"

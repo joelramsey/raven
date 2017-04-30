@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { NewspaperPublicationType } from '../../../../shared/models/index';
+import { NewspaperPublicationType, SourceData } from '../../../../shared/models/index';
 import { AbstractCitationFormComponent } from '../abstract-citation-form/abstract-citation-form.component';
 
 @Component({
@@ -10,6 +10,7 @@ import { AbstractCitationFormComponent } from '../abstract-citation-form/abstrac
 export class NewspaperCitationFormComponent extends AbstractCitationFormComponent implements OnInit {
 
   @Input() model: NewspaperPublicationType;
+  @Input() sourceData: SourceData;
   @Input() saveDisabled: boolean;
   @Output() publishData: EventEmitter<any> = new EventEmitter<any>();
 
@@ -32,6 +33,7 @@ export class NewspaperCitationFormComponent extends AbstractCitationFormComponen
 
   ngOnInit() {
     this.setAttributes();
+    this.sourceData.title = '';
   }
 
 }
