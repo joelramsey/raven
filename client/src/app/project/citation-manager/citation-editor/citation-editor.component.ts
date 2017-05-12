@@ -119,6 +119,11 @@ export class CitationEditorComponent implements OnInit {
   }
 
   addContributor($event: any) {
+
+    if (!this.contributors) {
+      this.contributors = [];
+    }
+
     this.contributors.push($event);
     this.showContributorForm = false;
   }
