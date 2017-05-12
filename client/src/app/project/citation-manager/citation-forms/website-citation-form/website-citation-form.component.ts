@@ -32,7 +32,10 @@ export class WebsiteCitationFormComponent extends AbstractCitationFormComponent 
 
   ngOnInit() {
     this.setAttributes();
-    this.sourceData.title = '';
+
+    if (!this.sourceData) {
+      this.sourceData.title = '';
+    }
   }
 
 }

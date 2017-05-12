@@ -33,7 +33,10 @@ export class NewspaperCitationFormComponent extends AbstractCitationFormComponen
 
   ngOnInit() {
     this.setAttributes();
-    this.sourceData.title = '';
+
+    if (!this.sourceData) {
+      this.sourceData.title = '';
+    }
   }
 
 }

@@ -41,8 +41,10 @@ export class ChapterCitationFormComponent extends AbstractCitationFormComponent 
   ngOnInit() {
     this.setAttributes();
 
-    this.sourceData.title = '';
-    this.sourceData.type = 'chapter';
+    if (!this.sourceData) {
+      this.sourceData.title = '';
+      this.sourceData.type = 'chapter';
+    }
 
     this.sourceDataTypeList = Object.keys(this.sourceDataTypes)
       .map(sourceDataTypeKey => {
