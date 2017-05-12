@@ -1,8 +1,10 @@
+import { Citation } from './search-result.interface';
+
 export interface Record {
   id:number;
   title?:string;
   visible?:boolean;
-  citation?:string;
+  citation?:Citation;
   result:AlchemyResult
 }
 

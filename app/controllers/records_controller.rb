@@ -6,12 +6,12 @@ class RecordsController < ApplicationController
     project_id = params[:project_id]
     @records = Record.where(:project_id => project_id) if project_id.present?
 
-    render json: @records
+    render json: @records.to_json(:include => :citation)
   end
 
   # GET /records/1
   def show
-    render json: @record
+    render json: @record.to_json(:include => :citation)
   end
 
   # POST /records

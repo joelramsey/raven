@@ -33,6 +33,7 @@ export interface SearchResultListItemAddEvent {
 
 export interface Citation {
   text: string;
+  json: string;
 }
 
 export class SearchConstants {

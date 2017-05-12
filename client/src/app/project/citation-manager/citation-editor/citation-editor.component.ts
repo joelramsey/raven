@@ -81,6 +81,16 @@ export class CitationEditorComponent implements OnInit {
 
     this.citationStyleList = Object.keys(this.citationStyles)
       .map(citationStyleKey => this.citationStyles[citationStyleKey]);
+
+    if (this.source.record.citation) {
+      let json = JSON.parse(this.source.record.citation.json);
+      this.contributors = json.contributors;
+      this.sourceType = this.sourceTypes[json.source];
+      this.citationStyle = this.citationStyles[json.style];
+
+      let citationData = json[json.pubtype.main];
+      console.log(citationData);
+    }
   }
 
   saveCitation(citationData: any) {
