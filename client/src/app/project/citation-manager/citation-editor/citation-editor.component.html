@@ -50,8 +50,10 @@
         </button>
       </div>
 
-      <rvn-contributor-form *ngIf="showContributorForm"
-                            (publishContributor)="addContributor($event)"></rvn-contributor-form>
+      <div class="contributor-form-wrapper">
+        <rvn-contributor-form *ngIf="showContributorForm"
+                              (publishContributor)="addContributor($event)"></rvn-contributor-form>
+      </div>
 
       <h4>Publication Information:</h4>
       <div [ngSwitch]="sourceType">

@@ -125,6 +125,6 @@ export class CitationEditorComponent implements OnInit {
   }
 
   get canSave() {
-    return this.contributors.length > 0;
+    return this.contributors && this.contributors.length > 0;
   }
 }
