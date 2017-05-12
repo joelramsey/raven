@@ -70,6 +70,7 @@ export class CitationEditorComponent implements OnInit {
   sourceTypeList = [];
   citationStyleList = [];
   contributors = [];
+  citationData = {};
 
   constructor(private _citationDao: CitationDaoService,
               private _observableResultHandlerService: ObservableResultHandlerService) {
@@ -87,9 +88,7 @@ export class CitationEditorComponent implements OnInit {
       this.contributors = json.contributors;
       this.sourceType = this.sourceTypes[json.source];
       this.citationStyle = this.citationStyles[json.style];
-
-      let citationData = json[json.pubtype.main];
-      console.log(citationData);
+      this.citationData = json[json.pubtype.main];
     }
   }
 

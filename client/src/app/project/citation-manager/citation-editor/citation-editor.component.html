@@ -59,21 +59,27 @@
       <div [ngSwitch]="sourceType">
         <rvn-book-citation-form *ngSwitchCase="sourceTypes.book"
                                 [saveDisabled]="!canSave"
+                                [model]="citationData"
                                 (publishData)="saveCitation($event)"></rvn-book-citation-form>
         <rvn-chapter-citation-form *ngSwitchCase="sourceTypes.chapter"
                                    [saveDisabled]="!canSave"
+                                   [model]="citationData"
                                    (publishData)="saveCitation($event)"></rvn-chapter-citation-form>
         <rvn-journal-citation-form *ngSwitchCase="sourceTypes.journal"
                                    [saveDisabled]="!canSave"
+                                   [model]="citationData"
                                    (publishData)="saveCitation($event)"></rvn-journal-citation-form>
         <rvn-magazine-citation-form *ngSwitchCase="sourceTypes.magazine"
                                     [saveDisabled]="!canSave"
+                                    [model]="citationData"
                                     (publishData)="saveCitation($event)"></rvn-magazine-citation-form>
         <rvn-newspaper-citation-form *ngSwitchCase="sourceTypes.newspaper"
                                      [saveDisabled]="!canSave"
+                                     [model]="citationData"
                                      (publishData)="saveCitation($event)"></rvn-newspaper-citation-form>
         <rvn-website-citation-form *ngSwitchCase="sourceTypes.website"
                                    [saveDisabled]="!canSave"
+                                   [model]="citationData"
                                    (publishData)="saveCitation($event)"></rvn-website-citation-form>
       </div>
 
