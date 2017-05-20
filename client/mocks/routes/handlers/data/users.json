@@ -1,0 +1,11 @@
+{
+  "getOne": {
+    "id": 1,
+    "email": "foo@bar.com",
+    "first_name": "Foo",
+    "last_name": "Bar",
+    "username": null,
+    "image": null,
+    "sign_in_count": 7
+  }
+}
