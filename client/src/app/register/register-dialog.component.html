@@ -1,0 +1,13 @@
+<div class="header-wrapper">
+
+  <span class="wide-nav"></span>
+
+  <button md-button
+          type="button"
+          (click)="dialogRef.close(false)">Close
+  </button>
+</div>
+
+<md-dialog-content>
+  <rvn-register (registered)="dialogRef.close(true)"></rvn-register>
+</md-dialog-content>

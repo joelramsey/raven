@@ -4,13 +4,16 @@ import { ProjectsRoutes } from '../projects/projects.routes';
 import { ProjectRoutes } from '../project/project.routes';
 import { ProfileRoutes } from '../profile/profile.routes';
 import { MainComponent } from './main.component';
-import { AuthGuard } from '../shared/services/auth-guard.service';
+import { AuthGuard, AuthenticationResolve } from '../shared/services/index';
 
 export const MainRoutes:Routes = [
   {
     path: '',
-    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
     component: MainComponent,
+    resolve: {
+      loggedIn: AuthenticationResolve
+    },
     children: [
       ...ProjectRoutes,
       ...ProjectsRoutes,

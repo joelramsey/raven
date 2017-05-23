@@ -1,5 +1,5 @@
 export * from './auth-guard.service';
-export * from './anti-auth-guard.service';
+export * from './authentication-resolve.service';
 export * from './html-export.service';
 export * from './initial-navigation.service';
 export * from './observable-result-handler.service';

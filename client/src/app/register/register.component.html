@@ -1,71 +1,50 @@
-<md-sidenav-container>
+<h3><small>Register for access to Raven</small></h3>
 
-  <md-toolbar [color]="primary">
+<p class="error">{{errorMessage}}</p>
 
-    <img src="../assets/images/raven-logo.png" alt="RAVEN-Logo" height="45px" class="rvn-logo">
+<div class="forms-wrapper">
+  <form (ngSubmit)="register()">
 
-    <span class="wide-nav"></span>
+    <h4><small>Register</small></h4>
 
-  </md-toolbar>
+    <div>
+      <label for="register-email"><md-icon>email</md-icon>Email</label><br>
+      <md-input-container>
+        <input mdInput
+               type="email"
+               [(ngModel)]="registration.email"
+               name="email"
+               id="register-email" required>
+      </md-input-container>
+    </div>
 
-  <div class="login-wrapper">
+    <div>
+      <label for="register-password"><md-icon>lock</md-icon>Password
+      </label><br>
+      <md-input-container>
+        <input  mdInput
+                type="password"
+                [(ngModel)]="registration.password"
+                name="password"
+                id="register-password" required>
+      </md-input-container>
+    </div>
 
-    <md-card>
+    <div>
+      <label for="register-password-confirmation">Confirm password</label><br>
+      <md-input-container>
+        <input mdInput
+               type="password"
+               [(ngModel)]="registration.passwordConfirmation"
+               name="password-confirmation"
+               id="register-password-confirmation" required>
 
-      <md-card-title>
-        Register for access to Raven
-      </md-card-title>
+        <md-hint align="end">Must be at least eight characters.</md-hint>
+      </md-input-container>
+    </div>
 
-      <md-card-subtitle>{{errorMessage}}</md-card-subtitle>
+    <button md-raised-button type="submit" color="primary">Register</button>
 
-      <div class="forms-wrapper">
-        <form (ngSubmit)="register()">
+  </form>
 
-          <h4><small>Register</small></h4>
-
-          <div>
-            <label for="register-email"><md-icon>email</md-icon>Email</label><br>
-            <md-input-container>
-              <input mdInput
-                     type="email"
-                     [(ngModel)]="registration.email"
-                     name="email"
-                     id="register-email" required>
-            </md-input-container>
-          </div>
-
-          <div>
-            <label for="password"><md-icon>lock</md-icon>Password</label><br>
-            <md-input-container>
-              <input  mdInput
-                      type="password"
-                      [(ngModel)]="registration.password"
-                      name="password"
-                      id="register-password" required>
-            </md-input-container>
-          </div>
-
-          <div>
-            <label for="register-password-confirmation">Confirm password</label><br>
-            <md-input-container>
-              <input mdInput
-                     type="password"
-                     [(ngModel)]="registration.passwordConfirmation"
-                     name="password-confirmation"
-                     id="register-password-confirmation" required>
-
-              <md-hint align="end">Must be at least eight characters.</md-hint>
-            </md-input-container>
-          </div>
-
-          <button md-raised-button type="submit" color="primary">Register</button>
-          <a [routerLink]="['/login']" class="btn btn-link">Back to Login</a>
-
-        </form>
-
-      </div>
-    </md-card>
-  </div>
-</md-sidenav-container>
-
-
+</div>

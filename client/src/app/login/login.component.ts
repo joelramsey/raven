@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Response, Http, Headers } from '@angular/http';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Http, Headers } from '@angular/http';
 import { Angular2TokenService } from 'angular2-token';
 
 import { environment } from '../../environments/environment';
 import { User } from '../shared/models/index';
-import { InitialNavigationService } from '../shared/services/index';
-import {Observable} from "rxjs/Observable";
+import { Observable } from "rxjs/Observable";
 
 declare const gapi: any;
 declare const FB: any;
@@ -19,6 +18,8 @@ declare const Codebird: any;
 })
 export class LoginComponent implements OnInit {
 
+  @Output() loggedIn: EventEmitter<any> = new EventEmitter<any>();
+
   public auth2: any;
   token: any;
   gauth: any;
@@ -26,19 +27,18 @@ export class LoginComponent implements OnInit {
   public errorMessage:string = '';
   public cb: any;
 
-  public login:User = {
+  public login: User = {
     email: '',
     password: ''
   };
 
-  public registration:User = {
+  public registration: User = {
     email: '',
     password: '',
     passwordConfirmation: ''
   };
 
-  constructor(private _tokenService:Angular2TokenService,
-              private _initialNavigationService: InitialNavigationService,
+  constructor(private _tokenService: Angular2TokenService,
               private http: Http) {
 
     this._tokenService.init({
@@ -51,11 +51,11 @@ export class LoginComponent implements OnInit {
   // Here set your Facebook app id
   ngOnInit() {
     FB.init({
-      appId      : '1817001431894719',
-      status     : true,
-      xfbml      : true,
-      cookie     : true,
-      version    : 'v2.8'
+      appId: '1817001431894719',
+      status: true,
+      xfbml: true,
+      cookie: true,
+      version: 'v2.8'
     });
     gapi.load('auth2', () => {
         gapi.auth2.init()
@@ -77,35 +77,19 @@ export class LoginComponent implements OnInit {
       email: this.login.email,
       password: this.login.password
     }).subscribe(() => {
-      this._initialNavigationService.navigate();
+      this.loggedIn.emit();
     }, (error) => {
       this.errorMessage = error.json().errors;
     });
   }
 
-  register() {
-
-    // Do registration
-    //
-    this._tokenService.registerAccount({
-      email: this.registration.email,
-      password: this.registration.password,
-      passwordConfirmation: this.registration.passwordConfirmation
-    }).subscribe(() => {
-      this._initialNavigationService.navigate();
-    }, (error: Response) => {
-      this.login.password = '';
-      this.errorMessage = error.json().errors.full_messages.join('\n');
-    });
-  }
-
-  facebookLogin(){
+  facebookLogin() {
     FB.getLoginStatus((response) => {
-      if(response.status === "connected"){
+      if (response.status === "connected") {
         FB.api('/me?fields=email', (res) => {
-          if(!res || res.error){
+          if (!res || res.error) {
             this.errorMessage = res.error;
-          }else {
+          } else {
             let userDetails = {
               email: res.email,
               uid: res.id,
@@ -118,11 +102,11 @@ export class LoginComponent implements OnInit {
       }
       else {
         FB.login((response) => {
-          if(response.status === "connected"){
+          if (response.status === "connected") {
             FB.api('/me?fields=email', (res) => {
-              if(!res || res.error){
+              if (!res || res.error) {
                 this.errorMessage = res.error
-              }else{
+              } else {
                 let userDetails = {
                   email: res.email,
                   uid: res.id,
@@ -184,18 +168,18 @@ googleLogin(){
     if (typeof(this.gauth) == "undefined"){
       this.gauth = gapi.auth2.getAuthInstance();
     }
-    if(!this.gauth.isSignedIn.get()){
+    if (!this.gauth.isSignedIn.get()) {
       this.gauth.signIn().then(() => {
         this.sendToBackend('api/auth/google', this._fetchGoogleUserDetails());
       });
-    }else{
+    } else {
       this.sendToBackend('api/auth/google', this._fetchGoogleUserDetails());
     }
 
 
   }
 
-  private _fetchGoogleUserDetails(){
+  private _fetchGoogleUserDetails() {
     let currentUser = this.gauth.currentUser.get();
     let profile = currentUser.getBasicProfile();
     let idToken = currentUser.getAuthResponse().id_token;
@@ -210,16 +194,16 @@ googleLogin(){
   }
 
   // send data from auth to back-end to get token
-  sendToBackend(url, data){
+  sendToBackend(url, data) {
     let body = JSON.stringify(data);
 
-    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let headers = new Headers({'Content-Type': 'application/json'});
 
     // set here correct url in production for sending info to back end
 
-    return this.http.post('https://www.ravenanalytics.io/' + url, body, { headers: headers })
+    return this.http.post('https://www.ravenanalytics.io/' + url, body, {headers: headers})
       .map(res => res.json())
-      .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
       .subscribe(
         data => this.setLocalItems(data),
         error => this.errorMessage = error
@@ -228,14 +212,16 @@ googleLogin(){
   }
 
   // parse response with token from back end and validate it
-  setLocalItems(data){
+  setLocalItems(data) {
     localStorage.setItem('accessToken', data['data']['access-token']);
     localStorage.setItem('client', data['data']['client']);
     localStorage.setItem('expiry', data['data']['expiry']);
     localStorage.setItem('tokenType', data['data']['token-type']);
     localStorage.setItem('uid', data['data']['uid']);
     this._tokenService.validateToken();
-    location.assign("https://www.ravenanalytics.io");
+    location.assign('https://www.ravenanalytics.io');
+
+    this.loggedIn.emit();
   }
 
 }

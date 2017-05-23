@@ -2,12 +2,6 @@
 
 
 div {
-  &.login-wrapper {
-    min-height: 300px;
-    display: flex;
-    justify-content: space-around;
-    margin: 0 5px;
-  }
 
   &.forms-wrapper {
     display: flex;
@@ -69,8 +63,10 @@ md-icon {
   color: $primary-gray;
 }
 
-md-card-subtitle {
-  color: map-get($mat-red, 600);
+p {
+  &.error {
+    color: map-get($mat-red, 600);
+  }
 }
 
 .mat-raised-button {
