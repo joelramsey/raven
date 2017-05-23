@@ -63,7 +63,10 @@ export class LandingComponent implements OnInit {
   }
 
   public register() {
-    this._dialog.open(RegisterDialogComponent)
+    this._dialog.open(RegisterDialogComponent, {
+      width: '300px',
+      // height: '90%'
+    })
       .afterClosed()
       .subscribe(success => {
         if (success) {

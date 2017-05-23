@@ -18,7 +18,10 @@ export class LoggedOutToolbarComponent implements OnInit {
   }
 
   showLogin() {
-    this._dialog.open(LoginDialogComponent)
+    this._dialog.open(LoginDialogComponent, {
+      width: '300px',
+      // height: '90%'
+    })
       .afterClosed()
       .subscribe(success => {
         if (success) {

@@ -57,7 +57,7 @@
   <rvn-landing *ngIf="!loggedIn"
                (registered)="authenticated()"></rvn-landing>
 
-  <div class="router-outlet-wrapper" [class.hide]="">
+  <div class="router-outlet-wrapper" [hidden]="!loggedIn">
     <router-outlet></router-outlet>
   </div>
 

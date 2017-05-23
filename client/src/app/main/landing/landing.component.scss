@@ -2,14 +2,18 @@
 
 div {
   &.video-wrapper {
-    background-color: rgba(0, 0, 0, .45);
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
   }
 
   &.carousel {
-    margin-top: 20%;
+    margin-top: 140px;
+    min-height: 170px;
     width: 100%;
     color: white;
-    min-height: 130px;
     text-align: center;
     font-size: 24px;
     line-height: 1em;
@@ -22,29 +26,35 @@ div {
     }
 
     p {
-      width: 90%;
       position: absolute;
+      width: 90%;
     }
+  }
+
+  &.content-wrapper {
+    z-index: -2;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    position: absolute;
   }
 }
 
 //Video styling
 .fullscreen {
-  position: fixed;
-  margin-top: 200px;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
+  position: absolute;
   min-height: 100%;
+  min-width: 100%;
   width: auto;
   height: auto;
+  top: 50%;
+  left: 50%;
   z-index: -100;
   background-size: cover;
   transition: 1s opacity;
   -ms-transform: translateX(-50%) translateY(-50%);
   -moz-transform: translateX(-50%) translateY(-50%);
   -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
 
   &.marketing-video {
     background: url(../../../assets/images/RavenMovie.jpg);
@@ -56,7 +66,6 @@ div {
   background-color: rgba(0, 0, 0, .8);
   z-index: -1;
   margin-top: 0;
-  padding-left: 1%;
 }
 
 //login Button
@@ -72,7 +81,7 @@ div {
   padding: 10px;
   border-radius: 40px;
   display: block;
-  margin: 20px auto;
+  margin: 120px auto 20px;
 
   & a {
     color: $white;
