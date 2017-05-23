@@ -1,62 +1,40 @@
-<md-sidenav-container>
+<h3><small>Welcome to Raven</small></h3>
 
-  <md-toolbar [color]="primary">
+<p class="error">{{errorMessage}}</p>
 
-    <a [routerLink]="['/landing']"><img src="../assets/images/raven-logo.png" alt="RAVEN-Logo" height="45px" class="rvn-logo"></a>
+<div class="forms-wrapper">
+  <form (ngSubmit)="logIn()">
 
-    <span class="wide-nav"></span>
+    <h4><small>Log In</small></h4>
 
-  </md-toolbar>
+    <div>
+      <label for="email"><md-icon>email</md-icon>Email</label><br>
+      <md-input-container>
+        <input mdInput  type="email"
+               [(ngModel)]="login.email"
+               name="email"
+               id="email" required autofocus>
+      </md-input-container>
+    </div>
 
-  <div class="login-wrapper">
+    <div>
+      <label for="password"><md-icon>lock</md-icon>Password</label><br>
+      <md-input-container>
+        <input mdInput
+               type="password"
+               [(ngModel)]="login.password"
+               name="password"
+               id="password" required>
+      </md-input-container>
+    </div>
 
-    <md-card>
+    <button md-raised-button type="submit" color="primary">Log In</button>
 
-      <md-card-title>
-        Welcome to Raven
-      </md-card-title>
+    <img src="../../assets/facebook.png" alt="" style="margin-top: 10px; display: block" (click)="facebookLogin()">
+    <img src="../../assets/google.png" alt="" style="margin-top: 10px; display: block" (click)="googleLogin()">
+    <img src="../../assets/linkedin.png" alt="" style="margin-top: 10px; display: block">
+    <img src="../../assets/twitter.png" alt="" style="margin-top: 10px; display: block">
 
-      <md-card-subtitle>{{errorMessage}}</md-card-subtitle>
+  </form>
 
-      <div class="forms-wrapper">
-        <form (ngSubmit)="logIn()">
-
-          <h4><small>Log In</small></h4>
-
-          <div>
-            <label for="email"><md-icon>email</md-icon>Email</label><br>
-            <md-input-container>
-              <input mdInput  type="email"
-                     [(ngModel)]="login.email"
-                     name="email"
-                     id="email" required autofocus>
-            </md-input-container>
-          </div>
-
-          <div>
-            <label for="password"><md-icon>lock</md-icon>Password</label><br>
-            <md-input-container>
-              <input mdInput
-                     type="password"
-                     [(ngModel)]="login.password"
-                     name="password"
-                     id="password" required>
-            </md-input-container>
-          </div>
-
-          <button md-raised-button type="submit" color="primary">Log In</button>
-
-          <img src="../../assets/facebook.png" alt="" style="margin-top: 10px; display: block" (click)="facebookLogin()">
-          <img src="../../assets/google.png" alt="" style="margin-top: 10px; display: block" (click)="googleLogin()">
-          <img src="../../assets/linkedin.png" alt="" style="margin-top: 10px; display: block">
-          <img src="../../assets/twitter.png" alt="" style="margin-top: 10px; display: block">
-
-        </form>
-
-      </div>
-    </md-card>
-  </div>
-
-
-</md-sidenav-container>
-
+</div>

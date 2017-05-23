@@ -2,7 +2,7 @@
 
 
 div {
-  &.login-wrapper {
+  &.register-wrapper {
     min-height: 300px;
     display: flex;
     justify-content: space-around;
@@ -51,14 +51,6 @@ button {
   margin-top: 30px;
 }
 
-
-md-card {
-  min-width: 250px;
-  max-width: 450px;
-  width: 100%;
-  margin-top: 40px;
-}
-
 md-input-container {
   width: 100%;
 }
@@ -69,8 +61,10 @@ md-icon {
   color: $primary-gray;
 }
 
-md-card-subtitle {
-  color: map-get($mat-red, 600);
+p {
+  &.error {
+    color: map-get($mat-red, 600);
+  }
 }
 
 .mat-raised-button {

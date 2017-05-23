@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Response } from '@angular/http';
 import { Angular2TokenService } from 'angular2-token';
 
 import { environment } from '../../environments/environment';
 import { User } from '../shared/models/index';
-import { InitialNavigationService } from '../shared/services/index';
 
 @Component({
   selector: 'rvn-register',
@@ -12,6 +11,8 @@ import { InitialNavigationService } from '../shared/services/index';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+
+  @Output() registered: EventEmitter<any> = new EventEmitter<any>();
 
   public errorMessage:string = '';
 
@@ -26,8 +27,7 @@ export class RegisterComponent implements OnInit {
     passwordConfirmation: ''
   };
 
-  constructor(private _tokenService:Angular2TokenService,
-              private _initialNavigationService: InitialNavigationService) {
+  constructor(private _tokenService:Angular2TokenService) {
 
     this._tokenService.init({
       registerAccountPath: environment.api + '/auth',
@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
       password: this.registration.password,
       passwordConfirmation: this.registration.passwordConfirmation
     }).subscribe(() => {
-      this._initialNavigationService.navigate();
+      this.registered.emit();
     }, (error: Response) => {
       this.login.password = '';
       this.errorMessage = error.json().errors.full_messages.join('\n');

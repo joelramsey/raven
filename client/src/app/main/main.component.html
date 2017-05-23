@@ -2,12 +2,28 @@
   <div class="project-open-area"></div>
   <!-- (mouseover)="start.open()" -->
 
-  <md-sidenav #start>
+  <md-toolbar [color]="primary">
+
+    <img src="../assets/images/raven-logo.png" alt="RAVEN-Logo" height="45px" class="rvn-logo">
+
+    <rvn-logged-in-toolbar *ngIf="loggedIn"
+                           class="toolbar"
+                           (signedOut)="signedOut()"
+                           (menuClick)="start.open()"></rvn-logged-in-toolbar>
+
+    <rvn-logged-out-toolbar *ngIf="!loggedIn"
+                            (loggedIn)="authenticated()"
+                            class="toolbar"></rvn-logged-out-toolbar>
+
+  </md-toolbar>
+
+
+  <md-sidenav *ngIf="loggedIn" #start>
     <!-- (mouseleave)="start.close()" -->
     <div class="md-nav-wrapper">
 
       <div class="md-nav-item navbar-title sm-show">
-        <a [routerLink]="['/landing']"><img src="../assets/images/raven-logo.png" alt="RAVEN-Logo" height="45px" class="rvn-logo"></a>
+        <a [routerLink]="['/']"><img src="../assets/images/raven-logo.png" alt="RAVEN-Logo" height="45px" class="rvn-logo"></a>
       </div>
 
       <div class="md-nav-item sm-show">
@@ -37,33 +53,11 @@
 
   </md-sidenav>
 
-  <md-toolbar [color]="primary">
 
-    <img src="../assets/images/raven-logo.png" alt="RAVEN-Logo" height="45px" class="rvn-logo">
+  <rvn-landing *ngIf="!loggedIn"
+               (registered)="authenticated()"></rvn-landing>
 
-    <span class="lg-show project-title" *ngIf="projectDaoService?.activeProject">CURRENT PROJECT: {{projectDaoService.activeProject.name}}</span>
-
-    <span class="wide-nav"></span>
-
-    <a class="lg-show" [routerLink]="['/sources']" routerLinkActive="active">SOURCES</a>
-    <a class="lg-show" [routerLink]="['/projects']" routerLinkActive="active">PROJECTS</a>
-
-    <button md-icon-button (click)="start.open()">
-      <md-icon>menu</md-icon>
-    </button>
-
-    <button md-icon-button [mdMenuTriggerFor]="menu">
-      <md-icon>more_vert</md-icon>
-    </button>
-
-    <md-menu #menu="mdMenu" x-position="before">
-      <button md-menu-item (click)="showProfile()">Profile</button>
-      <button md-menu-item (click)="signOut()">Sign Out</button>
-    </md-menu>
-
-  </md-toolbar>
-
-  <div class="router-outlet-wrapper">
+  <div class="router-outlet-wrapper" [class.hide]="">
     <router-outlet></router-outlet>
   </div>
 

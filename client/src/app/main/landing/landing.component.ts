@@ -1,15 +1,18 @@
 import {
-  Component, OnInit, transition, animate, style,
-  state, trigger
+  Component, OnInit, EventEmitter, transition, animate, style,
+  state, trigger, Output
 } from '@angular/core';
 
+import { MdDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
+
+import { RegisterDialogComponent } from '../../register/register-dialog.component';
 
 
 @Component({
   selector: 'rvn-landing',
-  templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.scss'],
+  templateUrl: 'landing.component.html',
+  styleUrls: ['landing.component.scss'],
   animations: [
     trigger('animateCarousel', [
       state('in', style({opacity: 1})),
@@ -25,6 +28,8 @@ import { Observable } from 'rxjs/Observable';
 })
 export class LandingComponent implements OnInit {
 
+  @Output() registered: EventEmitter<any> = new EventEmitter<any>();
+
   currentCarouselSlide = 0;
   carouselSlideTimeout = 1000 * 3; // 6 seconds
 
@@ -36,7 +41,7 @@ export class LandingComponent implements OnInit {
     "RAVEN SCHOLAR: UNLIKE ANYTHING YOU'VE EVER SEEN"
   ];
 
-  constructor() {
+  constructor(private _dialog: MdDialog) {
   }
 
   ngOnInit() {
@@ -53,6 +58,16 @@ export class LandingComponent implements OnInit {
           this.currentCarouselSlide += 1;
         } else {
           this.currentCarouselSlide = 0;
+        }
+      });
+  }
+
+  public register() {
+    this._dialog.open(RegisterDialogComponent)
+      .afterClosed()
+      .subscribe(success => {
+        if (success) {
+          this.registered.emit();
         }
       });
   }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Angular2TokenService } from 'angular2-token/angular2-token';
+import { Router, ActivatedRoute } from '@angular/router';
+
 import { Project } from '../shared/models/project.interface';
 import { ProjectDaoService } from '../shared/services/project-dao.service';
-import { environment } from '../../environments/environment';
+import { InitialNavigationService } from '../shared/services/initial-navigation.service';
 
 @Component({
   selector: 'rvn-main',
@@ -14,26 +14,31 @@ export class MainComponent implements OnInit {
 
   public projects: Array<Project> = [];
   public initialized: boolean = false;
+  public loggedIn: boolean = false;
   public options = {
     timeOut: 1500,
     lastOnBottom: true
   };
 
   constructor(public projectDaoService: ProjectDaoService,
-              private _tokenService: Angular2TokenService,
-              private _router: Router) {
-
-    this._tokenService.init({
-      validateTokenPath: environment.api + '/auth/validate_token',
-      signOutPath: environment.api + '/auth/sign_out'
-    });
-  }
+              private _router: Router,
+              private _initialNavigationService: InitialNavigationService,
+              private _route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.loggedIn = this._route.snapshot.data['loggedIn'];
+
+    if (this.loggedIn) {
+      this.loginInit();
+    }
+  }
+
+  loginInit() {
     this.projectDaoService.recentProjects(3, true).subscribe((projects: Array<Project>) => {
 
       if (projects.length) {
         this.projects = projects;
+        this._initialNavigationService.navigate();
       } else {
 
         // Create default project for user
@@ -48,16 +53,13 @@ export class MainComponent implements OnInit {
     });
   }
 
-  public signOut() {
-    this._tokenService.signOut().subscribe(() => {
-      this._router.navigate(['/landing']);
-    }, () => {
-      this._router.navigate(['/landing']);
-    });
+  authenticated() {
+    this.loggedIn = true;
+    this.loginInit();
   }
 
-  public showProfile() {
-    this._router.navigate(['/profile']);
+  signedOut() {
+    this.loggedIn = false;
   }
 
   private _createNewProject(): Project {

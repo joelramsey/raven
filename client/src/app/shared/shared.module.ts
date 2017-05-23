@@ -9,7 +9,7 @@ import { SourcePreviewModule } from './source-preview/source-preview.module';
 import { SharedPipesModule } from './pipes/shared-pipes.module';
 
 import {
-  AntiAuthGuard,
+  AuthenticationResolve,
   AuthGuard,
   HtmlExportService,
   InitialNavigationService,
@@ -42,7 +42,7 @@ import {
     SourcesListModule
   ],
   providers: [
-    AntiAuthGuard,
+    AuthenticationResolve,
     AuthGuard,
     HtmlExportService,
     InitialNavigationService,
