@@ -96,4 +96,23 @@ div {
     justify-content: space-around;
     margin: 0 5px;
   }
+
+  &.social-media-icons {
+    position: absolute;
+    bottom: 8px;
+    display: flex;
+    align-content: center;
+
+    .social-media-link {
+      margin-left: 12px;
+    }
+
+    .facebook-color-scheme {
+      color: #3b5998;
+    }
+
+    .linkedin-color-scheme {
+      color: #0077b5;
+    }
+  }
 }
