@@ -11,35 +11,35 @@ import { InitialNavigationService } from './initial-navigation.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
- 
+
   constructor(private _tokenService:Angular2TokenService,
               private _initialNavigationService: InitialNavigationService,
               private _router:Router) {
-    
+
     this._tokenService.init({
       validateTokenPath: environment.api + '/auth/validate_token',
     });
-    
+
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):Observable<boolean>|boolean {
-  
+
     this._initialNavigationService.setIntendedDestination(state);
-    
+
     return this._tokenService.validateToken()
       .map((response: Response) => {
-        
+
         // All good, carry on
         //
         return response.ok && response.json().success;
-        
+
       }).catch(() => {
-        
+
         // Redirect to login
         //
-        this._router.navigate(['/login']);
+        this._router.navigate(['/landing']);
         return Observable.of(false);
       });
-       
+
   }
 }

@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  
+
   public projects: Array<Project> = [];
   public initialized: boolean = false;
   public options = {
@@ -22,7 +22,7 @@ export class MainComponent implements OnInit {
   constructor(public projectDaoService: ProjectDaoService,
               private _tokenService: Angular2TokenService,
               private _router: Router) {
-    
+
     this._tokenService.init({
       validateTokenPath: environment.api + '/auth/validate_token',
       signOutPath: environment.api + '/auth/sign_out'
@@ -31,11 +31,11 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.projectDaoService.recentProjects(3, true).subscribe((projects: Array<Project>) => {
-      
+
       if (projects.length) {
         this.projects = projects;
       } else {
-        
+
         // Create default project for user
         //
         this.projectDaoService.createProject(this._createNewProject()).subscribe((project: Project) => {
@@ -47,15 +47,15 @@ export class MainComponent implements OnInit {
       this.initialized = true;
     });
   }
-  
+
   public signOut() {
     this._tokenService.signOut().subscribe(() => {
-      this._router.navigate(['/login']);
+      this._router.navigate(['/landing']);
     }, () => {
-      this._router.navigate(['/login']);
+      this._router.navigate(['/landing']);
     });
   }
-  
+
   public showProfile() {
     this._router.navigate(['/profile']);
   }

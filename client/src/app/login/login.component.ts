@@ -77,22 +77,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  register() {
-
-    // Do registration
-    //
-    this._tokenService.registerAccount({
-      email: this.registration.email,
-      password: this.registration.password,
-      passwordConfirmation: this.registration.passwordConfirmation
-    }).subscribe(() => {
-      this._initialNavigationService.navigate();
-    }, (error: Response) => {
-      this.login.password = '';
-      this.errorMessage = error.json().errors.full_messages.join('\n');
-    });
-  }
-
   facebookLogin(){
     FB.getLoginStatus((response) => {
       if(response.status === "connected"){

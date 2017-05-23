@@ -39,22 +39,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  logIn() {
-
-    this.errorMessage = '';
-
-    // Do log in
-    //
-    this._tokenService.signIn({
-      email: this.login.email,
-      password: this.login.password
-    }).subscribe(() => {
-      this._initialNavigationService.navigate();
-    }, (error) => {
-      this.errorMessage = error.json().errors;
-    });
-  }
-
   register() {
 
     // Do registration

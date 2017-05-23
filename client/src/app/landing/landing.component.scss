@@ -1,95 +1,92 @@
 @import '../../variables';
 
-
 body {
-    margin: 0;
-    height: 100%;
-    font-family: "Open Sans", sans-serif;
-    font-weight: 400;
-    line-height: 1.7em;
-    color: #475053;
+  margin: 0;
+  height: 100%;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  line-height: 1.7em;
+  color: #475053;
 
 }
 
+div {
+  &.video-wrapper {
+    background-color: rgba(0, 0, 0, .45);
+  }
 
-//List fade in out
-
-.fade {
-    width: 90%;
-    display: block;
-    margin: 25% auto;
+  &.carousel {
+    margin-top: 20%;
+    width: 100%;
     color: white;
+    min-height: 130px;
     text-align: center;
-    font-size: 2.5em;
+    font-size: 24px;
     line-height: 1em;
-}
+    overflow: hidden;
 
-.elementToFade {
-    margin: 0 50px;
-    -webkit-animation: fadeinout 6s linear forwards;
-    animation: fadeinout 6s linear forwards;
-    opacity: 0;
-    height: 0;
-}
+    .carousel-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-@-webkit-keyframes fadeinout {
-  50% { opacity: 1; display: block; visibility: visible; }
-   100% { display: none; visibility: hidden; }
+    p {
+      width: 90%;
+      position: absolute;
+    }
+  }
 }
-
-@keyframes fadeinout {
-  50% { opacity: 1; display: block; visibility: visible;  }
-  100% { display: none; visibility: hidden; }
-}
-
 
 //Video styling
+.fullscreen {
+  position: fixed;
+  margin-top: 200px;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  background-size: cover;
+  transition: 1s opacity;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
 
-
-video#bgvid { 
-    position: fixed;
-    margin-top: 200px;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: -100;
+  &.marketing-video {
     background: url(../../assets/images/RavenMovie.jpg);
-    background-size: cover;
-    transition: 1s opacity;
-    -ms-transform: translateX(-50%) translateY(-50%);
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
+  }
+
 }
 
+.shader {
+  background-color: rgba(0, 0, 0, .8);
+  z-index: -1;
+  margin-top: 0;
+  padding-left: 1%;
+}
 
 //login Button
 
-
 .tryNow {
-    height: 25px;
+  color: $white;
+  background-color: $link-color;
+  border: none;
+  height: 60px;
+  font-size: 20px;
+  font-family: $application-font;
+  padding: 10px;
+  border-radius: 40px;
+  display: block;
+  margin: 20px auto;
+
+  & a {
     color: $white;
-    background-color: $link-color;
-    border: none;
-    height: 60px;
-    font-size: 20px;
-    font-family: $application-font;
-    padding: 10px;
-    border-radius: 40px;
-    display: block;
-    margin: 20px auto;
-    
-    & a{
-        color: $white;
-    }
+  }
 }
-
-
-
-
 
 //login styles
 div {
@@ -135,13 +132,12 @@ div {
 
 h4 {
   margin-bottom: 20px;
-  font-weight:400;
+  font-weight: 400;
 }
 
 button {
   margin-top: 30px;
 }
-
 
 md-card {
   min-width: 250px;
@@ -166,7 +162,7 @@ md-card-subtitle {
 
 .mat-raised-button {
   background-color: $green;
-  &:hover{
+  &:hover {
     background-color: darken($green, 20%);
   }
 }

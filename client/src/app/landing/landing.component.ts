@@ -1,56 +1,59 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component, OnInit, transition, animate, style,
+  state, trigger
+} from '@angular/core';
 
-let fadeList = document.getElementById("fadeList");
-let body = document.getElementsByTagName("BODY")[0];
-let textList = ["DISCOVER source material with dynamic and constantly adaptive searches.", "EVALUATE source material quickly with interactive displays.", "UNDERSTAND source material with powerful visualizations.", "DETERMINE new or PROVE existing conclusions from source material.", "RAVEN SCHOLAR: UNLIKE ANYTHING YOU'VE EVER SEEN" ];
-let listArray = [];
-let h = 0;
+import { Observable } from 'rxjs/Observable';
+
 
 @Component({
   selector: 'rvn-landing',
   templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.scss']
+  styleUrls: ['./landing.component.scss'],
+  animations: [
+    trigger('animateCarousel', [
+      state('in', style({opacity: 1})),
+      transition(':enter', [
+        style({opacity: 0}),
+        animate('400ms 400ms')
+      ]),
+      transition(':leave', [
+        animate(400, style({opacity: 0}))
+      ])
+    ])
+  ]
 })
 export class LandingComponent implements OnInit {
 
-  constructor() { }
+  currentCarouselSlide = 0;
+  carouselSlideTimeout = 1000 * 3; // 6 seconds
 
-  ngOnInit() {this.init()}
+  carouselTextList = [
+    "DISCOVER source material with dynamic and constantly adaptive searches.",
+    "EVALUATE source material quickly with interactive displays.",
+    "UNDERSTAND source material with powerful visualizations.",
+    "DETERMINE new or PROVE existing conclusions from source material.",
+    "RAVEN SCHOLAR: UNLIKE ANYTHING YOU'VE EVER SEEN"
+  ];
 
-  init(){
-    this.createListItem();
-    this.runFade();
-    console.log(typeof fadeList);
-    console.log(typeof body);
+  constructor() {
   }
 
-  createListItem(){
+  ngOnInit() {
 
-  for (let i = 0; i < textList.length; i++) {
-    let listContainer = document.createElement("p");
-    console.log("list container is of type: " + listContainer);
-    let listItem = document.createTextNode(textList[i]);
-    listContainer.className="elementToFade";
-    listContainer.appendChild(listItem);
-    listArray.push(listContainer);
-    console.log("Creating Array " + listArray + " Length: " + listArray.length) ;
-    }
+    // Trigger carousel rotation
+    //
+    Observable
+      .interval(this.carouselSlideTimeout)
+      .subscribe(() => {
+
+        // Check if current carousel is subject to incrementing. If not, reset.
+        //
+        if (this.currentCarouselSlide + 1 < this.carouselTextList.length) {
+          this.currentCarouselSlide += 1;
+        } else {
+          this.currentCarouselSlide = 0;
+        }
+      });
   }
-
-  runFade(){
-    setTimeout(function() {
-      fadeList.appendChild(listArray[h]);
-      console.log("Fading In 1");
-      h++;
-
-      if (h < listArray.length) {
-        this.runFade();
-        console.log("Fading In 2");
-      }
-
-      if (h == listArray.length){
-        h =0;
-        this.runFade();
-      }}, 6000)
-    }
-  }
+}
