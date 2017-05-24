@@ -17,4 +17,7 @@ export class BodyPageComponent implements OnInit {
   ngOnInit() {
   }
 
+  handleSubmit() {
+    this.done.emit(this.bodyData);
+  }
 }

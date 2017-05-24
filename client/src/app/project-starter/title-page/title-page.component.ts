@@ -16,4 +16,7 @@ export class TitlePageComponent implements OnInit {
   ngOnInit() {
   }
 
+  handleSubmit() {
+    this.next.emit(this.titleData);
+  }
 }

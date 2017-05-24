@@ -1,16 +1,31 @@
-<md-card-content>
-  Body
-</md-card-content>
+<form (ngSubmit)="handleSubmit()" #bodyForm="ngForm">
 
-<md-card-actions>
-  <button md-raised-button
-          (click)="cancelled.emit()">Cancel</button>
+  <md-card-content>
 
-  <span clas="wide-nav"></span>
+    <!-- Title -->
+    <md-input-container>
+      <input mdInput
+             placeholder="Title"
+             name="title"
+             required
+             [(ngModel)]="bodyData.title">
+    </md-input-container>
 
-  <button md-raised-button
-          (click)="back.emit()">Back</button>
+  </md-card-content>
 
-  <button md-raised-button
-          (click)="done.emit()">Done</button>
-</md-card-actions>
+  <md-card-actions>
+    <button md-raised-button
+            type="button"
+            (click)="cancelled.emit()">Cancel</button>
+
+    <span clas="wide-nav"></span>
+
+    <button md-raised-button
+            type="button"
+            (click)="back.emit()">Back</button>
+
+    <button md-raised-button
+            type="submit"
+            (click)="done.emit()">Done</button>
+  </md-card-actions>
+</form>

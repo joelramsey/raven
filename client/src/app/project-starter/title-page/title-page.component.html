@@ -1,14 +1,44 @@
-<md-card-content>
-  Title
-</md-card-content>
+<form (ngSubmit)="handleSubmit()" #titleForm="ngForm">
 
-<md-card-actions>
-  <button md-raised-button
-          (click)="cancelled.emit()">Cancel</button>
+  <md-card-content>
 
-  <span clas="wide-nav"></span>
+    <!-- Title -->
+    <md-input-container>
+      <input mdInput
+             placeholder="Project Title"
+             name="project-title"
+             required
+             [(ngModel)]="titleData.title">
+    </md-input-container>
 
-  <button md-raised-button
-          (click)="next.emit()">Next</button>
+    <!-- Type -->
+    <md-input-container>
+      <input mdInput
+             placeholder="Project Type"
+             name="project-type"
+             required
+             [(ngModel)]="titleData.type">
+    </md-input-container>
 
-</md-card-actions>
+    <!-- Type -->
+    <md-input-container>
+      <input mdInput
+             placeholder="Citation Style"
+             name="citation-style"
+             required
+             [(ngModel)]="titleData.citationStyle">
+    </md-input-container>
+
+  </md-card-content>
+
+  <md-card-actions>
+    <button md-raised-button
+            (click)="cancelled.emit()">Cancel</button>
+
+    <span clas="wide-nav"></span>
+
+    <button md-raised-button
+            (click)="next.emit()">Next</button>
+
+  </md-card-actions>
+</form>
