@@ -1,0 +1,15 @@
+<md-card>
+  <md-card-title>Project Starter</md-card-title>
+
+  <rvn-title-page *ngIf="isTitlePage"
+                  [titleData]="titleData"
+                  (cancelled)="cancelled.emit()"
+                  (next)="toBody($event)"></rvn-title-page>
+
+  <rvn-body-page *ngIf="!isTitlePage"
+                 [bodyData]="bodyData"
+                 (cancelled)="cancelled.emit()"
+                 (done)="done($event)"
+                 (back)="toTitle($event)"></rvn-body-page>
+
+</md-card>

@@ -1,0 +1,16 @@
+<md-card-content>
+  Body
+</md-card-content>
+
+<md-card-actions>
+  <button md-raised-button
+          (click)="cancelled.emit()">Cancel</button>
+
+  <span clas="wide-nav"></span>
+
+  <button md-raised-button
+          (click)="back.emit()">Back</button>
+
+  <button md-raised-button
+          (click)="done.emit()">Done</button>
+</md-card-actions>
