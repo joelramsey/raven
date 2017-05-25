@@ -18,6 +18,7 @@
   <div *ngIf="activeSource"
        class="citation-editor">
     <rvn-citation-editor [source]="activeSource"
+                         [citationStyle]="project?.citation_style"
                          (backClicked)="activeSource = null"></rvn-citation-editor>
   </div>
 </div>

@@ -11,7 +11,7 @@ export class ProjectsComponent implements OnInit {
 
   public projects: Array<Project> = [];
   public newProject: Project = null;
-  
+
   constructor(private _projectDaoService: ProjectDaoService) { }
 
   /**
@@ -29,7 +29,7 @@ export class ProjectsComponent implements OnInit {
    * This ensures that project references in this array are
    * up-to-date with the latest version from the server
    * (which are returned after a successful project save).
-   * 
+   *
    * @param $project
    */
   updateProjectReference($project: Project) {
@@ -57,7 +57,7 @@ export class ProjectsComponent implements OnInit {
    */
   removeProject($project: Project) {
     let projectIdx = this.projects.indexOf($project);
-    
+
     if (projectIdx > -1) {
       this.projects.splice(projectIdx, 1);
     }
@@ -81,7 +81,8 @@ export class ProjectsComponent implements OnInit {
         id: null,
         name: 'New Project',
         description: 'Add a project description here!',
-        sources: []
+        sources: [],
+        citation_style: null
       };
     }
   }

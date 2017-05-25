@@ -6,5 +6,6 @@ export interface Project {
   description?: string;
   notes?: string;
   sources?: Array<Source>;
+  citation_style: any;
   updated_at?: string;
 }

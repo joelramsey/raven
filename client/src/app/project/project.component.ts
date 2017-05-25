@@ -28,7 +28,8 @@ export class ProjectComponent implements OnInit {
     id: null,
     name: 'New Project',
     description: 'This is a default project template.',
-    sources: []
+    sources: [],
+    citation_style: null
   };
 
   newSourceVisible: boolean;
