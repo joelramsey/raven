@@ -42,12 +42,13 @@
 
   <md-card-actions>
     <button md-raised-button
+            type="button"
             (click)="cancelled.emit()">Cancel</button>
 
-    <span clas="wide-nav"></span>
+    <span class="flex-push"></span>
 
     <button md-raised-button
-            (click)="next.emit()">Next</button>
+            type="submit">Next</button>
 
   </md-card-actions>
 </form>

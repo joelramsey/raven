@@ -16,6 +16,7 @@ import { LoginModule } from '../login/login.module';
 import { RegisterModule } from '../register/register.module';
 import { LoginDialogComponent } from '../login/login-dialog.component';
 import { RegisterDialogComponent } from '../register/register-dialog.component';
+import { ProjectStarterModule } from '../project-starter/project-starter.module';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { RegisterDialogComponent } from '../register/register-dialog.component';
     SimpleNotificationsModule.forRoot(),
     ProjectModule,
     ProjectsModule,
+    ProjectStarterModule,
     ProfileModule,
     SourcesModule,
     LoginModule,

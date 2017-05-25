@@ -8,20 +8,22 @@ import { ProjectDaoService } from './project-dao.service';
 export class InitialNavigationService {
 
   private _intendedState: RouterStateSnapshot;
-  
+
   constructor(private _projectDaoService: ProjectDaoService,
               private _router: Router) { }
 
   public navigate() {
-    
+
     if (this._intendedState && this._router.url !== this._intendedState.url) {
-      
+
       // Navigate to intended route
       //
+      debugger;
       this._router.navigateByUrl(this._intendedState.url);
-      
-    } else {
-      
+
+    } else if (!this._intendedState) {
+
+      debugger;
       // Navigate to first project if applicable; otherwise navigate to all projects.
       //
       return this._projectDaoService.recentProjects(3, true).subscribe((projects: Array<Project>) => {
@@ -40,7 +42,7 @@ export class InitialNavigationService {
       });
     }
   }
-  
+
   public setIntendedDestination(state: RouterStateSnapshot) {
     this._intendedState = state;
   }

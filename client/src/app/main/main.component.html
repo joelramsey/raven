@@ -18,7 +18,7 @@
   </md-toolbar>
 
 
-  <md-sidenav *ngIf="loggedIn" #start>
+  <md-sidenav [hidden]="loggedIn" #start>
     <!-- (mouseleave)="start.close()" -->
     <div class="md-nav-wrapper">
 

@@ -2,3 +2,9 @@ md-card-actions {
   display: flex;
   align-content: center;
 }
+
+span {
+  &.push {
+    flex: 1 1 auto;
+  }
+}

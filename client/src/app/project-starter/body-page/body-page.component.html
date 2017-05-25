@@ -20,14 +20,13 @@
             type="button"
             (click)="cancelled.emit()">Cancel</button>
 
-    <span clas="wide-nav"></span>
+    <span class="flex-push"></span>
 
     <button md-raised-button
             type="button"
-            (click)="back.emit()">Back</button>
+            (click)="back.emit(bodyData)">Back</button>
 
     <button md-raised-button
-            type="submit"
-            (click)="done.emit()">Done</button>
+            type="submit">Done</button>
   </md-card-actions>
 </form>

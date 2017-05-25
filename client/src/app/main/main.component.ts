@@ -38,17 +38,15 @@ export class MainComponent implements OnInit {
 
       if (projects.length) {
         this.projects = projects;
-        this._initialNavigationService.navigate();
       } else {
-
         // Create default project for user
         //
         this.projectDaoService.createProject(this._createNewProject()).subscribe((project: Project) => {
           this.projects = [project];
-          this._router.navigate(['project', project.id]);
-        })
+        });
       }
 
+      this._initialNavigationService.navigate();
       this.initialized = true;
     });
   }
@@ -69,6 +67,7 @@ export class MainComponent implements OnInit {
       name: 'New Project',
       description: 'Auto-generated project',
       updated_at: new Date().toDateString(),
+      citation_style: 'mla7'
     };
 
     return newProject;
