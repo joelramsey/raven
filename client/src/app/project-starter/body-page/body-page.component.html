@@ -3,15 +3,97 @@
   <md-card-content>
 
     <h4>Project Settings</h4>
+    <div class="form-wrapper">
 
-    <!-- Title -->
-    <md-input-container>
-      <input mdInput
-             placeholder="Title"
-             name="title"
-             required
-             [(ngModel)]="bodyData.title">
-    </md-input-container>
+      <!-- Line Spacing -->
+      <div class="form-input-wrapper">
+        <md-select placeholder="Font Size"
+                   class="form-input-element"
+                   name="fontSize"
+                   [(ngModel)]="bodyData.fontSize">
+
+          <md-option *ngFor="let fontSize of fontSizeOptionList"
+                     [value]="fontSize">
+            {{fontSize.name}}
+          </md-option>
+        </md-select>
+      </div>
+
+      <!-- Line Spacing -->
+      <div class="form-input-wrapper">
+        <md-select placeholder="Line Spacing"
+                   class="form-input-element"
+                   name="lineSpacing"
+                   [(ngModel)]="bodyData.lineSpacing">
+          <md-option *ngFor="let lineSpacing of lineSpacingOptionList"
+                     [value]="lineSpacing">
+            {{lineSpacing.name}}
+          </md-option>
+        </md-select>
+      </div>
+
+      <!-- Margins -->
+      <div class="form-input-wrapper">
+        <md-select placeholder="Margin"
+                   class="form-input-element"
+                   name="margin"
+                   [(ngModel)]="bodyData.margin">
+          <md-option *ngFor="let margin of marginOptionList"
+                     [value]="margin">
+            {{margin.name}}
+          </md-option>
+        </md-select>
+      </div>
+    </div>
+
+    <h4>Additional Content</h4>
+    <div class="form-wrapper">
+
+      <!-- Cover/Title Page -->
+      <div class="form-input-wrapper">
+        <md-checkbox name="titlePage"
+                     class="form-input-element"
+                     [(ngModel)]="bodyData.titlePage">
+          Cover/Title Page
+        </md-checkbox>
+      </div>
+
+      <!-- Table of Contents -->
+      <div class="form-input-wrapper">
+        <md-checkbox name="tableOfContents"
+                     class="form-input-element"
+                     [(ngModel)]="bodyData.tableOfContents">
+          Table of Contents, Figures, and Tables
+        </md-checkbox>
+      </div>
+
+      <!-- Abstract Page -->
+      <div class="form-input-wrapper">
+        <md-checkbox name="abstract"
+                     class="form-input-element"
+                     [(ngModel)]="bodyData.abstract">
+          Abstract
+        </md-checkbox>
+      </div>
+
+      <!-- Bibliography Page -->
+      <div class="form-input-wrapper">
+        <md-checkbox name="bibliography"
+                     class="form-input-element"
+                     [(ngModel)]="bodyData.bibliography">
+          Bibliography/Works Cited
+        </md-checkbox>
+      </div>
+
+      <!-- Make default for future projects -->
+      <div class="form-input-wrapper">
+        <md-checkbox name="makeDefault"
+                     class="form-input-element"
+                     [(ngModel)]="bodyData.makeDefault">
+          Make default for all new projects
+        </md-checkbox>
+      </div>
+    </div>
 
   </md-card-content>
 
@@ -27,6 +109,7 @@
             (click)="back.emit(bodyData)">Back</button>
 
     <button md-raised-button
+            color="primary"
             type="submit">Done</button>
   </md-card-actions>
 </form>

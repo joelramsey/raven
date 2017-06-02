@@ -9,24 +9,3 @@ span {
   }
 }
 
-div {
-  &.form-wrapper {
-    display: block;
-    width: 100%;
-  }
-
-  &.form-input-wrapper {
-    display: flex;
-    justify-content: space-around;
-    align-content: center;
-    margin-top: 12px;
-    margin-bottom: 12px;
-    width: 100%;
-  }
-
-}
-
-.form-input-element {
-  width: 80%;
-  min-width: 270px;
-}

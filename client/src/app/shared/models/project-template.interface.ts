@@ -28,3 +28,45 @@ export const PROJECT_TEMPLATE_TYPES = {
     name: 'Thesis'
   }
 };
+
+export const LINE_SPACING = {
+  single: {
+    name: 'Single'
+  },
+  threehalves: {
+    name: '1.5'
+  },
+  double: {
+    name: 'Double'
+  }
+};
+
+export const FONT_SIZE_PX = {
+  '9pt': {
+    name: '9 pt.'
+  },
+  '10pt': {
+    name: '10 pt.'
+  },
+  '11pt': {
+    name: '11 pt.'
+  },
+  '12pt': {
+    name: '12 pt.'
+  }
+};
+
+export const MARGINS = {
+  'normal': {
+    name: 'Normal'
+  },
+  'moderate': {
+    name: 'Moderate'
+  },
+  'narrow': {
+    name: 'Narrow'
+  },
+  'wide': {
+    name: 'Wide'
+  }
+};

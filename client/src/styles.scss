@@ -253,6 +253,25 @@ div {
     align-items: center;
     margin: 0 30px;
   }
+
+  &.form-wrapper {
+    display: block;
+    width: 100%;
+  }
+
+  &.form-input-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+}
+
+.form-input-element {
+  width: 80%;
+  min-width: 270px;
 }
 
 .mat-input-underline .mat-input-ripple {

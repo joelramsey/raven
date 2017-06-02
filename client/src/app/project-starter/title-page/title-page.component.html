@@ -12,6 +12,7 @@
     </p>
 
     <div class="form-wrapper">
+
       <!-- Title -->
       <div class="form-input-wrapper">
         <md-input-container
@@ -20,7 +21,6 @@
                  placeholder="Project Title"
                  class="form-input-element"
                  name="project-title"
-                 required
                  [(ngModel)]="titleData.title">
         </md-input-container>
       </div>
@@ -62,6 +62,7 @@
     <span class="flex-push"></span>
 
     <button md-raised-button
+            color="primary"
             type="submit">Next</button>
 
   </md-card-actions>

@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { CITATION_STYLES } from '../../shared/models/index';
-import { PROJECT_TEMPLATE_TYPES } from '../../shared/models/project-template.interface';
+import {
+  CITATION_STYLES,
+  PROJECT_TEMPLATE_TYPES
+} from '../../shared/models/index';
 
 @Component({
   selector: 'rvn-title-page',
@@ -10,7 +12,6 @@ import { PROJECT_TEMPLATE_TYPES } from '../../shared/models/project-template.int
 export class TitlePageComponent implements OnInit {
 
   @Input() titleData = {
-    citationStyle: CITATION_STYLES.mla7
   };
   @Output() cancelled: EventEmitter<any> = new EventEmitter<any>();
   @Output() next: EventEmitter<any> = new EventEmitter<any>();
@@ -25,10 +26,22 @@ export class TitlePageComponent implements OnInit {
 
   ngOnInit() {
     this.citationStyleList = Object.keys(this.citationStyles)
-      .map(citationStyleKey => this.citationStyles[citationStyleKey]);
+      .map(key => {
+        return {
+          key: key,
+          name: this.citationStyles[key].name
+        }
+      });
+    this.titleData['citationStyle'] = this.citationStyleList[0];
 
     this.projectTemplateTypeList = Object.keys(this.projectTemplateTypes)
-      .map(projectTemplateTypeKey => this.projectTemplateTypes[projectTemplateTypeKey]);
+      .map(key => {
+        return {
+          key: key,
+          name: this.projectTemplateTypes[key].name
+        };
+      });
+    this.titleData['type'] = this.projectTemplateTypeList[0];
   }
 
   handleSubmit() {
