@@ -11,32 +11,46 @@
       You can always change it later!
     </p>
 
-    <!-- Title -->
-    <md-input-container>
-      <input mdInput
-             placeholder="Project Title"
-             name="project-title"
-             required
-             [(ngModel)]="titleData.title">
-    </md-input-container>
+    <div class="form-wrapper">
+      <!-- Title -->
+      <div class="form-input-wrapper">
+        <md-input-container
+          class="form-input-element">
+          <input mdInput
+                 placeholder="Project Title"
+                 class="form-input-element"
+                 name="project-title"
+                 required
+                 [(ngModel)]="titleData.title">
+        </md-input-container>
+      </div>
 
-    <!-- Type -->
-    <md-input-container>
-      <input mdInput
-             placeholder="Project Type"
-             name="project-type"
-             required
-             [(ngModel)]="titleData.type">
-    </md-input-container>
+      <!-- Project Template Type-->
+      <div class="form-input-wrapper">
+        <md-select placeholder="Project Type"
+                   class="form-input-element"
+                   name="projectType"
+                   [(ngModel)]="titleData.type">
+          <md-option *ngFor="let projectTemplateType of projectTemplateTypeList"
+                     [value]="projectTemplateType">
+            {{projectTemplateType.name}}
+          </md-option>
+        </md-select>
+      </div>
 
-    <!-- Type -->
-    <md-input-container>
-      <input mdInput
-             placeholder="Citation Style"
-             name="citation-style"
-             required
-             [(ngModel)]="titleData.citationStyle">
-    </md-input-container>
+      <!-- Citation Style -->
+      <div class="form-input-wrapper">
+        <md-select placeholder="Citation Style"
+                   class="form-input-element"
+                   name="citationStyle"
+                   [(ngModel)]="titleData.citationStyle">
+          <md-option *ngFor="let citationStyle of citationStyleList"
+                     [value]="citationStyle">
+            {{citationStyle.name}}
+          </md-option>
+        </md-select>
+      </div>
+    </div>
 
   </md-card-content>
 

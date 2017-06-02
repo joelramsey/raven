@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import {
-  MdCardModule, MdIconModule, MdButtonModule, MdCheckboxModule, MdInputModule
+  MdCardModule, MdIconModule, MdButtonModule, MdCheckboxModule, MdInputModule,
+  MdSelectModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -20,6 +21,7 @@ import { ProjectStarterDialogComponent } from './project-starter-dialog/project-
     MdInputModule,
     MdCheckboxModule,
     MdButtonModule,
+    MdSelectModule
   ],
   declarations: [
     ProjectStarterComponent,

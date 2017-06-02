@@ -1,56 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { ObservableResultHandlerService } from '../../../shared/services/index';
-import { Source, CitationRequest } from '../../../shared/models/index';
+import {
+  Source,
+  CitationRequest,
+  CITATION_SOURCE_TYPES,
+  CITATION_STYLES
+} from '../../../shared/models/index';
 import { CitationDaoService } from '../services/index';
-
-const SOURCE_TYPES = {
-  book: {
-    key: 'book',
-    name: 'Book',
-    publicationType: 'pubnonperiodical'
-  },
-  chapter: {
-    key: 'chapter',
-    name: 'Chapter',
-    publicationType: 'pubnonperiodical'
-  },
-  journal: {
-    key: 'journal',
-    name: 'Journal',
-    publicationType: 'pubjournal'
-  },
-  magazine: {
-    key: 'magazine',
-    name: 'Magazine',
-    publicationType: 'pubmagazine'
-  },
-  newspaper: {
-    key: 'newspaper',
-    name: 'Newspaper',
-    publicationType: 'pubjournal'
-  },
-  website: {
-    key: 'website',
-    name: 'Website',
-    publicationType: 'pubonline'
-  }
-};
-
-const CITATION_STYLES = {
-  mla7: {
-    key: 'mla7',
-    name: 'MLA'
-  },
-  apa: {
-    key: 'apa',
-    name: 'APA'
-  },
-  chicagob: {
-    key: 'chicagob',
-    name: 'Chicago'
-  },
-};
 
 @Component({
   selector: 'rvn-citation-editor',
@@ -60,12 +17,12 @@ const CITATION_STYLES = {
 export class CitationEditorComponent implements OnInit {
 
   @Input() source: Source;
-  @Input() sourceType: any = SOURCE_TYPES.book;
+  @Input() sourceType: any = CITATION_SOURCE_TYPES.book;
   @Input() citationStyle: any = CITATION_STYLES.mla7;
   @Output() backClicked: EventEmitter<any> = new EventEmitter<any>();
 
   showContributorForm: boolean = true;
-  sourceTypes = SOURCE_TYPES;
+  sourceTypes = CITATION_SOURCE_TYPES;
   citationStyles = CITATION_STYLES;
   sourceTypeList = [];
   citationStyleList = [];

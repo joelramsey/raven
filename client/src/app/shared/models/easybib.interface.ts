@@ -1,5 +1,53 @@
 // http://developer.easybib.com/citation-formatting-api/citation-specification/
 
+export const CITATION_SOURCE_TYPES = {
+  book: {
+    key: 'book',
+    name: 'Book',
+    publicationType: 'pubnonperiodical'
+  },
+  chapter: {
+    key: 'chapter',
+    name: 'Chapter',
+    publicationType: 'pubnonperiodical'
+  },
+  journal: {
+    key: 'journal',
+    name: 'Journal',
+    publicationType: 'pubjournal'
+  },
+  magazine: {
+    key: 'magazine',
+    name: 'Magazine',
+    publicationType: 'pubmagazine'
+  },
+  newspaper: {
+    key: 'newspaper',
+    name: 'Newspaper',
+    publicationType: 'pubjournal'
+  },
+  website: {
+    key: 'website',
+    name: 'Website',
+    publicationType: 'pubonline'
+  }
+};
+
+export const CITATION_STYLES = {
+  mla7: {
+    key: 'mla7',
+    name: 'MLA'
+  },
+  apa: {
+    key: 'apa',
+    name: 'APA'
+  },
+  chicagob: {
+    key: 'chicagob',
+    name: 'Chicago'
+  },
+};
+
 export interface CitationRequest {
   key: string;
   source: 'book' | 'chapter' | 'magazine' | 'newspaper' | 'journal' | 'website';

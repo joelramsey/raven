@@ -3,6 +3,7 @@ export * from './easybib.interface';
 export * from './entity-card-model.interface';
 export * from './pill.interface';
 export * from './project.interface';
+export * from './project-template.interface';
 export * from './record.interface';
 export * from './resolution.interface';
 export * from './search-result.interface';
