@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170524031714) do
+ActiveRecord::Schema.define(version: 20170605224323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,10 @@ ActiveRecord::Schema.define(version: 20170524031714) do
     t.datetime "updated_at",     null: false
     t.string   "notes"
     t.string   "citation_style"
+    t.string   "line_spacing"
+    t.string   "font_size"
+    t.string   "margin"
+    t.string   "template_type"
     t.index ["user_id"], name: "index_projects_on_user_id", using: :btree
   end
 

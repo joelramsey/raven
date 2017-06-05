@@ -59,6 +59,7 @@ export class ProjectComponent implements OnInit {
           .switchMap((project: Project) => {
             this.project = project;
             this._projectDaoService.activeProject = project;
+            console.log(project);
 
             return this._sourceDaoService.getSources(project);
           })

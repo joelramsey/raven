@@ -51,6 +51,7 @@ class ProjectsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
       params.require(:project).permit(:name, :description, :notes, :sources,
-                                      :citation_style)
+                                      :margin, :font_size, :template_type,
+                                      :line_spacing, :citation_style)
     end
 end
